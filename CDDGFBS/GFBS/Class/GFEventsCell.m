@@ -23,13 +23,15 @@
 @interface GFEventsCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *bigImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *bigTitleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *peopleIcon;
 @property (weak, nonatomic) IBOutlet UILabel *smallTitleLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *placeLabel;
-@property (weak, nonatomic) IBOutlet UIButton *calendarButton;
+@property (weak, nonatomic) IBOutlet UIButton *heartButton;
+@property (weak, nonatomic) IBOutlet UITextView *textField;
+
 
 /*图片View*/
 //@property (weak ,nonatomic) GFTopicPictureView *pictureView;
@@ -92,8 +94,8 @@
     self.calendarButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 35, 5, 20, 20);
     */
     EventInList *thisEvent = event;
-    self.calendarButton.imageView.image = [UIImage imageNamed:@"ic_fa-calendar-check-o"];
-    [_calendarButton setImage:[UIImage imageNamed:@"ic_fa-calendar-check-o"] forState:UIControlStateNormal];
+    self.heartButton.imageView.image = [UIImage imageNamed:@"ic_fa-heart-o"];
+    [_heartButton setImage:[UIImage imageNamed:@"ic_fa-heart-o"] forState:UIControlStateNormal];
     
     [self downloadImageFromURL:thisEvent.listEventBanner.eventBanner.imageUrl];
     //self.peopleIcon.image = [UIImage imageNamed:@"ic_fa-user-on"];
@@ -108,8 +110,10 @@
     [_placeLabel setFont:[UIFont boldSystemFontOfSize:15]];
     [_placeLabel setTextColor:[UIColor darkGrayColor]];
     
-
-
+    self.profileImageView.image = [UIImage imageNamed:@"profile-bg-green1_02.jpg"];
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+    self.profileImageView.clipsToBounds = YES;
+    
 }
 
 -(void) downloadImageFromURL :(NSString *)imageUrl{

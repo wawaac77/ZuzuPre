@@ -10,7 +10,7 @@
 #import "GFNavigationController.h"
 
 //#import "GFMeViewController.h"
-#import "GFHomeViewController.h"
+#import "ZZHomeViewController.h"
 #import "MyZuzuViewController.h"
 #import "GFEssenceViewController.h"
 #import "GFPublishView.h"
@@ -73,19 +73,19 @@
     GFNavigationController *nav = self.childViewControllers[0];
     nav.tabBarItem.title = @"Home";
     nav.tabBarItem.image = [UIImage imageNamed:@"ic_home"];
-    nav.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_home_on"];
+    nav.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_home-o"];
     
     
     GFNavigationController *nav1 = self.childViewControllers[1];
-    nav1.tabBarItem.title = @"Social Calendar";
-    nav1.tabBarItem.image = [UIImage imageNamed:@"ic_social"];
-    nav1.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_social_on"];
+    nav1.tabBarItem.title = @"Check-in";
+    nav1.tabBarItem.image = [UIImage imageNamed:@"ic_home-check-in"];
+    nav1.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_home-check-in-o"];
     
     
     GFNavigationController *nav2 = self.childViewControllers[2];
-    nav2.tabBarItem.title = @"Restaurant";
-    nav2.tabBarItem.image = [UIImage imageNamed:@"ic_restaurant"];
-    nav2.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_restaurant_on"];
+    nav2.tabBarItem.title = @"Inbox";
+    nav2.tabBarItem.image = [UIImage imageNamed:@"ic_inbox"];
+    nav2.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_inbox-o"];
     
     
     GFNavigationController *nav3 = self.childViewControllers[3];
@@ -99,7 +99,7 @@
 -(void)setUpAllChildView
 {
     /** Home */
-    GFHomeViewController *homepage = [[GFHomeViewController alloc] init];
+    ZZHomeViewController *homepage = [[ZZHomeViewController alloc] init];
     homepage.view.frame = [UIScreen mainScreen].bounds;
     GFNavigationController *nav = [[GFNavigationController alloc]initWithRootViewController:homepage];
     [self addChildViewController:nav];

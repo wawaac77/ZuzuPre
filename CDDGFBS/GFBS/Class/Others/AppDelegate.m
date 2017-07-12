@@ -11,6 +11,7 @@
 #import "GFTabBarController.h"
 #import "GFAdViewController.h"
 #import "LoginViewController.h"
+#import "DHGuidePageHUD.h"
 
 @interface AppDelegate ()
 
@@ -35,6 +36,14 @@
 
     
     [self.window makeKeyAndVisible];
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:BOOLFORKEY]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:BOOLFORKEY];
+    }
+    
+    NSArray *imageNameArray = @[@"guide-1.jpg",@"guide-2.jpg",@"guide-3"];
+    DHGuidePageHUD *guidePage = [[DHGuidePageHUD alloc] dh_initWithFrame:self.window.frame imageNameArray:imageNameArray buttonIsHidden:YES];
+    [self.window addSubview:guidePage];
     
     //清除过期缓存
     [[SDImageCache sharedImageCache] cleanDisk];
