@@ -117,8 +117,7 @@
     [self addChildViewController:nav2];
     
     /** My Zuzu */
-    MyZuzuViewController *me = [[MyZuzuViewController alloc] initWithNibName:@"MyZuzuViewController" bundle:nil];
-
+    MyZuzuViewController *me = [[MyZuzuViewController alloc] init];
     GFNavigationController *nav3 = [[GFNavigationController alloc]initWithRootViewController:me];
     [self addChildViewController:nav3];
      

@@ -195,7 +195,6 @@
 		7800973D1ECAD9D6008F9F99 /* zuzu_App_Icon_1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 7800973B1ECAD9D6008F9F99 /* zuzu_App_Icon_1024x1024.png */; };
 		7800973F1ECADC7B008F9F99 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7800973E1ECADC7B008F9F99 /* icon.png */; };
 		7824E30B1EEFC79B00F85BFB /* MyZuzuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7824E3091EEFC79B00F85BFB /* MyZuzuViewController.m */; };
-		7824E30C1EEFC79B00F85BFB /* MyZuzuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7824E30A1EEFC79B00F85BFB /* MyZuzuViewController.xib */; };
 		7824E30E1EEFE06A00F85BFB /* user-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7824E30D1EEFE06A00F85BFB /* user-icon.png */; };
 		7824E3101EEFE07000F85BFB /* Ellipse-100%.png in Resources */ = {isa = PBXBuildFile; fileRef = 7824E30F1EEFE07000F85BFB /* Ellipse-100%.png */; };
 		7824E3121EEFE07800F85BFB /* Ellipse-25%.png in Resources */ = {isa = PBXBuildFile; fileRef = 7824E3111EEFE07800F85BFB /* Ellipse-25%.png */; };
@@ -667,7 +666,6 @@
 		7800973E1ECADC7B008F9F99 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		7824E3081EEFC79B00F85BFB /* MyZuzuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyZuzuViewController.h; sourceTree = "<group>"; };
 		7824E3091EEFC79B00F85BFB /* MyZuzuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyZuzuViewController.m; sourceTree = "<group>"; };
-		7824E30A1EEFC79B00F85BFB /* MyZuzuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyZuzuViewController.xib; sourceTree = "<group>"; };
 		7824E30D1EEFE06A00F85BFB /* user-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon.png"; sourceTree = "<group>"; };
 		7824E30F1EEFE07000F85BFB /* Ellipse-100%.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ellipse-100%.png"; sourceTree = "<group>"; };
 		7824E3111EEFE07800F85BFB /* Ellipse-25%.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ellipse-25%.png"; sourceTree = "<group>"; };
@@ -1360,7 +1358,6 @@
 			children = (
 				7824E3081EEFC79B00F85BFB /* MyZuzuViewController.h */,
 				7824E3091EEFC79B00F85BFB /* MyZuzuViewController.m */,
-				7824E30A1EEFC79B00F85BFB /* MyZuzuViewController.xib */,
 				18BE02B01DDB4C3900D27893 /* GFMeViewController.h */,
 				18BE02B11DDB4C3900D27893 /* GFMeViewController.m */,
 				1841A7711DE16C1100FB54CC /* GFMeViewController.storyboard */,
@@ -2508,7 +2505,6 @@
 				7824E32D1EF13BF700F85BFB /* profile-bg-blue_01.jpg in Resources */,
 				786069B01F15DB9B00A8AB88 /* ic_heart-o.png in Resources */,
 				7829FF7A1ED55C9B00C934C2 /* pexels-photo-313700.png in Resources */,
-				7824E30C1EEFC79B00F85BFB /* MyZuzuViewController.xib in Resources */,
 				1829A6AF1DE8550D0086AD86 /* GFTopicCell.xib in Resources */,
 				78F49F811EE6F5A900674130 /* MyEventCell.xib in Resources */,
 				786069B91F15DB9B00A8AB88 /* ic_messagefriend-top-navigation.png in Resources */,
