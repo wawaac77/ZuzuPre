@@ -6,6 +6,7 @@
 //  Copyright © 2016年 apple. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "GFPostWordViewController.h"
 
 #import "GFPlaceholderTextView.h"
@@ -66,8 +67,9 @@
 
 - (void)setUpTextView
 {
+    NSString *username = @"Alice Jin";
     GFPlaceholderTextView *textView = [[GFPlaceholderTextView alloc] init];
-    textView.placeholder = @"把好玩的图片，好笑的段子或糗事发到这里，接受千万网友膜拜吧!😁";
+    textView.placeholder = [NSString stringWithFormat:@"What's in your mind %@",username];
     textView.frame = self.view.bounds;
     textView.delegate = self;
     [self.view addSubview:textView];
@@ -77,12 +79,12 @@
 - (void)setUpBase
 {
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"发表文字";
+    //self.title = @"发表文字";
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(cancel)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"发表" style:UIBarButtonItemStyleDone target:self action:@selector(post)];
-    self.navigationItem.rightBarButtonItem.enabled = NO; //默认不能点击
-    [self.navigationController.navigationBar layoutIfNeeded]; //强制刷新
+    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(cancel)];
+    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"发表" style:UIBarButtonItemStyleDone target:self action:@selector(post)];
+    //self.navigationItem.rightBarButtonItem.enabled = NO; //默认不能点击
+    //[self.navigationController.navigationBar layoutIfNeeded]; //强制刷新
 }
 
 

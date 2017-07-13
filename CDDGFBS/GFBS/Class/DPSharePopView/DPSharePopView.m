@@ -5,8 +5,8 @@
 //  Created by dp on 17/5/26.
 //  Copyright © 2017年 dp. All rights reserved.
 //
-static const float RealSrceenHight =  667.0;
-static const float RealSrceenWidth =  375.0;
+//static const float RealSrceenHight =  667.0;
+//static const float RealSrceenWidth =  375.0;
 #define DPRGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 #define DPSCREEN_HEIGHT [[UIScreen mainScreen]bounds].size.height
 #define DPSCREEN_WIDTH [[UIScreen mainScreen]bounds].size.width
@@ -17,8 +17,10 @@ static const float RealSrceenWidth =  375.0;
 #define IOS_VERSION_10_OR_LATER (([[[UIDevice currentDevice]systemVersion]floatValue]>=10.0)? (YES):(NO))
 
 #define DPAdapationLabelFont(n) (IOS_VERSION_10_OR_LATER?((n-1)*([[UIScreen mainScreen]bounds].size.width/375.0f)):(n*([[UIScreen mainScreen]bounds].size.width/375.0f)))
+
 #import "DPSharePopView.h"
 #import "TriangleView.h"
+
 @interface DPSharePopView ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, copy) DPSharePopViewCellDidClickBlock cellDidClickBlock;
 @property (nonatomic,strong) UIButton *maskView;
@@ -181,13 +183,13 @@ static const float RealSrceenWidth =  375.0;
     cell.imageView.image=[UIImage imageNamed:[_imageNameArray objectAtIndex:indexPath.row]];
     
     cell.textLabel.text = [_nameArray objectAtIndex:indexPath.row];
-    cell.textLabel.font=[UIFont systemFontOfSize:DPAdapationLabelFont(16)];
+    cell.textLabel.font=[UIFont systemFontOfSize:DPAdapationLabelFont(14)];
     cell.textLabel.textColor=[UIColor blackColor];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 35;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

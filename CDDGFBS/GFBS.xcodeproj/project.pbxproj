@@ -194,6 +194,7 @@
 		7800973C1ECAD9D6008F9F99 /* zuzu_App_Icon_180x180.png in Resources */ = {isa = PBXBuildFile; fileRef = 7800973A1ECAD9D6008F9F99 /* zuzu_App_Icon_180x180.png */; };
 		7800973D1ECAD9D6008F9F99 /* zuzu_App_Icon_1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 7800973B1ECAD9D6008F9F99 /* zuzu_App_Icon_1024x1024.png */; };
 		7800973F1ECADC7B008F9F99 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7800973E1ECADC7B008F9F99 /* icon.png */; };
+		7817DF7E1F179EFF00B4B02A /* DropDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7817DF7D1F179EFF00B4B02A /* DropDownListView.m */; };
 		7824E30B1EEFC79B00F85BFB /* MyZuzuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7824E3091EEFC79B00F85BFB /* MyZuzuViewController.m */; };
 		7824E30E1EEFE06A00F85BFB /* user-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7824E30D1EEFE06A00F85BFB /* user-icon.png */; };
 		7824E3101EEFE07000F85BFB /* Ellipse-100%.png in Resources */ = {isa = PBXBuildFile; fileRef = 7824E30F1EEFE07000F85BFB /* Ellipse-100%.png */; };
@@ -375,6 +376,9 @@
 		789CFFA41F13C2ED00EBA772 /* LeaderboardAttendeesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789CFFA31F13C2EC00EBA772 /* LeaderboardAttendeesTableViewController.m */; };
 		789CFFA71F13C30300EBA772 /* LeaderboardHostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789CFFA61F13C30300EBA772 /* LeaderboardHostTableViewController.m */; };
 		789CFFAA1F13CE2F00EBA772 /* ZZLeaderboardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 789CFFA91F13CE2F00EBA772 /* ZZLeaderboardModel.m */; };
+		789E0D621F17DC7E00CCAAE4 /* ZZInboxTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789E0D611F17DC7E00CCAAE4 /* ZZInboxTableViewController.m */; };
+		789E0D661F17DCAE00CCAAE4 /* ZZInboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 789E0D641F17DCAE00CCAAE4 /* ZZInboxCell.m */; };
+		789E0D671F17DCAE00CCAAE4 /* ZZInboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789E0D651F17DCAE00CCAAE4 /* ZZInboxCell.xib */; };
 		78F49F721EE6F37B00674130 /* EventListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F711EE6F37B00674130 /* EventListTableViewController.m */; };
 		78F49F801EE6F5A900674130 /* MyEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F7E1EE6F5A900674130 /* MyEventCell.m */; };
 		78F49F811EE6F5A900674130 /* MyEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F49F7F1EE6F5A900674130 /* MyEventCell.xib */; };
@@ -672,6 +676,9 @@
 		7800973A1ECAD9D6008F9F99 /* zuzu_App_Icon_180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuzu_App_Icon_180x180.png; sourceTree = "<group>"; };
 		7800973B1ECAD9D6008F9F99 /* zuzu_App_Icon_1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuzu_App_Icon_1024x1024.png; sourceTree = "<group>"; };
 		7800973E1ECADC7B008F9F99 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		7817DF7B1F179EFF00B4B02A /* DropDownChooseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownChooseProtocol.h; sourceTree = "<group>"; };
+		7817DF7C1F179EFF00B4B02A /* DropDownListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownListView.h; sourceTree = "<group>"; };
+		7817DF7D1F179EFF00B4B02A /* DropDownListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownListView.m; sourceTree = "<group>"; };
 		7824E3081EEFC79B00F85BFB /* MyZuzuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyZuzuViewController.h; sourceTree = "<group>"; };
 		7824E3091EEFC79B00F85BFB /* MyZuzuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyZuzuViewController.m; sourceTree = "<group>"; };
 		7824E30D1EEFE06A00F85BFB /* user-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon.png"; sourceTree = "<group>"; };
@@ -910,6 +917,11 @@
 		789CFFA61F13C30300EBA772 /* LeaderboardHostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeaderboardHostTableViewController.m; path = "Me(我)/Controller/LeaderboardHostTableViewController.m"; sourceTree = "<group>"; };
 		789CFFA81F13CE2F00EBA772 /* ZZLeaderboardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZLeaderboardModel.h; sourceTree = "<group>"; };
 		789CFFA91F13CE2F00EBA772 /* ZZLeaderboardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZLeaderboardModel.m; sourceTree = "<group>"; };
+		789E0D601F17DC7E00CCAAE4 /* ZZInboxTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZInboxTableViewController.h; sourceTree = "<group>"; };
+		789E0D611F17DC7E00CCAAE4 /* ZZInboxTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZInboxTableViewController.m; sourceTree = "<group>"; };
+		789E0D631F17DCAE00CCAAE4 /* ZZInboxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZInboxCell.h; sourceTree = "<group>"; };
+		789E0D641F17DCAE00CCAAE4 /* ZZInboxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZInboxCell.m; sourceTree = "<group>"; };
+		789E0D651F17DCAE00CCAAE4 /* ZZInboxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZInboxCell.xib; sourceTree = "<group>"; };
 		78F49F701EE6F37B00674130 /* EventListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListTableViewController.h; sourceTree = "<group>"; };
 		78F49F711EE6F37B00674130 /* EventListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListTableViewController.m; sourceTree = "<group>"; };
 		78F49F7D1EE6F5A900674130 /* MyEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventCell.h; sourceTree = "<group>"; };
@@ -1170,6 +1182,7 @@
 				7829FF9B1ED803D000C934C2 /* Login */,
 				784D3F5D1ECC67040058C63F /* Home */,
 				788333151F17779700967337 /* Check-in */,
+				789E0D5C1F17DC0A00CCAAE4 /* Inbox */,
 				18BE02711DDB497900D27893 /* Social Calendar */,
 				78FFE5AD1ECDAD2C00F909A2 /* Restaurant */,
 				18BE027D1DDB497900D27893 /* My Zuzu */,
@@ -1744,6 +1757,16 @@
 			path = "zuzu launch images";
 			sourceTree = "<group>";
 		};
+		7817DF7F1F179F5800B4B02A /* DropDownListView */ = {
+			isa = PBXGroup;
+			children = (
+				7817DF7B1F179EFF00B4B02A /* DropDownChooseProtocol.h */,
+				7817DF7C1F179EFF00B4B02A /* DropDownListView.h */,
+				7817DF7D1F179EFF00B4B02A /* DropDownListView.m */,
+			);
+			name = DropDownListView;
+			sourceTree = "<group>";
+		};
 		7824E3071EEEE18900F85BFB /* Typical */ = {
 			isa = PBXGroup;
 			children = (
@@ -2199,6 +2222,7 @@
 		788333181F1777D100967337 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7817DF7F1F179F5800B4B02A /* DropDownListView */,
 				7883331E1F178F3000967337 /* DPSharePopView */,
 			);
 			name = View;
@@ -2243,6 +2267,43 @@
 			);
 			name = LeaderboardChildVCs;
 			path = "Me(我)/Controller";
+			sourceTree = "<group>";
+		};
+		789E0D5C1F17DC0A00CCAAE4 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				789E0D5E1F17DC2900CCAAE4 /* Controller */,
+				789E0D5D1F17DC1E00CCAAE4 /* Model */,
+				789E0D5F1F17DC3100CCAAE4 /* View */,
+				789E0D631F17DCAE00CCAAE4 /* ZZInboxCell.h */,
+				789E0D641F17DCAE00CCAAE4 /* ZZInboxCell.m */,
+				789E0D651F17DCAE00CCAAE4 /* ZZInboxCell.xib */,
+			);
+			name = Inbox;
+			path = "Essence(精华)";
+			sourceTree = "<group>";
+		};
+		789E0D5D1F17DC1E00CCAAE4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		789E0D5E1F17DC2900CCAAE4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				789E0D601F17DC7E00CCAAE4 /* ZZInboxTableViewController.h */,
+				789E0D611F17DC7E00CCAAE4 /* ZZInboxTableViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		789E0D5F1F17DC3100CCAAE4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		78FE02291EE930D200ABD5B9 /* ZBProgressView */ = {
@@ -2462,6 +2523,7 @@
 				780097001EC9C1F5008F9F99 /* ic_location.png in Resources */,
 				789CFF981F12399100EBA772 /* ZZImageCollectionCell.xib in Resources */,
 				780096B41EC9C1F5008F9F99 /* event-banner-1036x328-04.jpg in Resources */,
+				789E0D671F17DCAE00CCAAE4 /* ZZInboxCell.xib in Resources */,
 				786069C51F15DB9B00A8AB88 /* ic_fa-credit-card.png in Resources */,
 				7824E34C1EF1408E00F85BFB /* ic_badges_338x338-06.png in Resources */,
 				783F82341F176E7300491529 /* profile_image_animals.jpeg in Resources */,
@@ -2760,6 +2822,7 @@
 				786069E31F1609C500A8AB88 /* ZZHomeViewController.m in Sources */,
 				786069EB1F160A7400A8AB88 /* FriendsHomeTableViewController.m in Sources */,
 				180292421DE990C700743619 /* NSCalendar+GFExtension.m in Sources */,
+				789E0D661F17DCAE00CCAAE4 /* ZZInboxCell.m in Sources */,
 				784D3F611ECC675D0058C63F /* GFHomeViewController.m in Sources */,
 				18E8D36C1DE9D19800ED4EE1 /* GFComment.m in Sources */,
 				7829FFB11ED8139400C934C2 /* LoginButton.m in Sources */,
@@ -2825,6 +2888,7 @@
 				78F49F801EE6F5A900674130 /* MyEventCell.m in Sources */,
 				789CFF421F00E84F00EBA772 /* FilterTableViewController.m in Sources */,
 				1841A7751DE1750600FB54CC /* GFSquareItem.m in Sources */,
+				789E0D621F17DC7E00CCAAE4 /* ZZInboxTableViewController.m in Sources */,
 				7829FF961ED576F800C934C2 /* RestaurantEventViewController.m in Sources */,
 				786069EE1F160A8900A8AB88 /* MeHomeTableViewController.m in Sources */,
 				78FFE5A31ECD88F100F909A2 /* GFEventDetailViewController.m in Sources */,
@@ -2848,6 +2912,7 @@
 				789CFF7E1F0CDB7F00EBA772 /* ZZInterest.m in Sources */,
 				7824E35E1EF23D1600F85BFB /* MapNearbyEventsViewController.m in Sources */,
 				18C826381DE736C1007341E3 /* GFWordViewController.m in Sources */,
+				7817DF7E1F179EFF00B4B02A /* DropDownListView.m in Sources */,
 				786069641F15D98100A8AB88 /* DHGuidePageHUD.m in Sources */,
 				18C826291DE72630007341E3 /* GFTitleButton.m in Sources */,
 				181EF74B1E0BD27400C91928 /* GFAddToolBar.m in Sources */,

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DropDownChooseProtocol.h"
 
-@interface ZZCheckInViewController : UIViewController
+@interface ZZCheckInViewController : UIViewController <DropDownChooseDelegate,DropDownChooseDataSource>
 
 @end

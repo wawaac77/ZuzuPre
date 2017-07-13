@@ -13,6 +13,8 @@
 @interface GFAddToolBar()
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *checkinButton;
 
 /*按钮*/
 @property (weak ,nonatomic) UIButton *addButton;
@@ -37,6 +39,7 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    /*
     //添加一个加号
     UIButton *addButton = [[UIButton alloc] init];
     [addButton setImage:[UIImage imageNamed:@"tag_add_icon"] forState:UIControlStateNormal];
@@ -48,6 +51,16 @@
     [addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
     
     [self creatTags:@[@"吐槽",@"糗事"]]; //创建默认两个标签
+     */
+    
+    _cancelButton.layer.masksToBounds = YES;
+    _cancelButton.layer.cornerRadius = 4.0f;
+    _cancelButton.backgroundColor = [UIColor grayColor];
+    
+    _checkinButton.layer.masksToBounds = YES;
+    _checkinButton.layer.cornerRadius = 4.0f;
+    _checkinButton.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
+    
 }
 
 #pragma mark - 添加按钮点击
