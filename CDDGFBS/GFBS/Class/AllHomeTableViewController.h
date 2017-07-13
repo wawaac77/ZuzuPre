@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GFTopicViewController.h"
 
 @interface AllHomeTableViewController : UITableViewController
 

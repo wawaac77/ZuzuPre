@@ -24,6 +24,8 @@ UIKIT_EXTERN CGFloat const GFTabBarH;
 UIKIT_EXTERN CGFloat const GFTitleViewH;
 /*导航栏的最大Y值*/
 UIKIT_EXTERN CGFloat const GFNavMaxY;
+/*new导航栏的Height*/
+UIKIT_EXTERN CGFloat const ZZNewNavH;
 
 
 /*tabBar重复点击通知*/

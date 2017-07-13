@@ -258,6 +258,10 @@
 		7829FFB71EE16AE000C934C2 /* MinScrollMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7829FFB41EE16AE000C934C2 /* MinScrollMenu.m */; };
 		7829FFB81EE16AE000C934C2 /* MinScrollMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7829FFB61EE16AE000C934C2 /* MinScrollMenuItem.m */; };
 		7829FFBB1EE50DEB00C934C2 /* GFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7829FFBA1EE50DEB00C934C2 /* GFImage.m */; };
+		783F822D1F1713B800491529 /* LeaderboardHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 783F822C1F1713B800491529 /* LeaderboardHomeTableViewController.m */; };
+		783F82311F17149100491529 /* ZZLeaderboardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 783F822F1F17149100491529 /* ZZLeaderboardCell.m */; };
+		783F82321F17149100491529 /* ZZLeaderboardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783F82301F17149100491529 /* ZZLeaderboardCell.xib */; };
+		783F82341F176E7300491529 /* profile_image_animals.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 783F82331F176E7300491529 /* profile_image_animals.jpeg */; };
 		784D3F611ECC675D0058C63F /* GFHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 784D3F5F1ECC675D0058C63F /* GFHomeViewController.m */; };
 		784D3F691ECC79EE0058C63F /* GFEventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 784D3F671ECC79EE0058C63F /* GFEventsCell.m */; };
 		784D3F6A1ECC79EE0058C63F /* GFEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 784D3F681ECC79EE0058C63F /* GFEventsCell.xib */; };
@@ -338,6 +342,10 @@
 		788246D01ED2E7A90058B226 /* EventDiscussionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 788246CE1ED2E7A90058B226 /* EventDiscussionViewController.xib */; };
 		788246D41ED2E7BA0058B226 /* EventPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788246D21ED2E7BA0058B226 /* EventPhotoViewController.m */; };
 		788246D51ED2E7BA0058B226 /* EventPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 788246D31ED2E7BA0058B226 /* EventPhotoViewController.xib */; };
+		7883331C1F17781100967337 /* ZZCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7883331A1F17781100967337 /* ZZCheckInViewController.m */; };
+		7883331D1F17781100967337 /* ZZCheckInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7883331B1F17781100967337 /* ZZCheckInViewController.xib */; };
+		788333231F178F3000967337 /* DPSharePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 788333201F178F3000967337 /* DPSharePopView.m */; };
+		788333241F178F3000967337 /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 788333221F178F3000967337 /* TriangleView.m */; };
 		7897E1041EF3E6A00046D647 /* EventListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7897E1021EF3E6A00046D647 /* EventListCell.m */; };
 		7897E1051EF3E6A00046D647 /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7897E1031EF3E6A00046D647 /* EventListCell.xib */; };
 		7897E1081EF7766A0046D647 /* EventInList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7897E1071EF7766A0046D647 /* EventInList.m */; };
@@ -745,6 +753,12 @@
 		7829FFB61EE16AE000C934C2 /* MinScrollMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinScrollMenuItem.m; sourceTree = "<group>"; };
 		7829FFB91EE50DEB00C934C2 /* GFImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFImage.h; sourceTree = "<group>"; };
 		7829FFBA1EE50DEB00C934C2 /* GFImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFImage.m; sourceTree = "<group>"; };
+		783F822B1F1713B800491529 /* LeaderboardHomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderboardHomeTableViewController.h; sourceTree = "<group>"; };
+		783F822C1F1713B800491529 /* LeaderboardHomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderboardHomeTableViewController.m; sourceTree = "<group>"; };
+		783F822E1F17149100491529 /* ZZLeaderboardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZLeaderboardCell.h; sourceTree = "<group>"; };
+		783F822F1F17149100491529 /* ZZLeaderboardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZLeaderboardCell.m; sourceTree = "<group>"; };
+		783F82301F17149100491529 /* ZZLeaderboardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZLeaderboardCell.xib; sourceTree = "<group>"; };
+		783F82331F176E7300491529 /* profile_image_animals.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_image_animals.jpeg; sourceTree = "<group>"; };
 		784D3F5E1ECC675D0058C63F /* GFHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFHomeViewController.h; sourceTree = "<group>"; };
 		784D3F5F1ECC675D0058C63F /* GFHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFHomeViewController.m; sourceTree = "<group>"; };
 		784D3F661ECC79EE0058C63F /* GFEventsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFEventsCell.h; sourceTree = "<group>"; };
@@ -838,6 +852,13 @@
 		788246D11ED2E7BA0058B226 /* EventPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventPhotoViewController.h; sourceTree = "<group>"; };
 		788246D21ED2E7BA0058B226 /* EventPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventPhotoViewController.m; sourceTree = "<group>"; };
 		788246D31ED2E7BA0058B226 /* EventPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventPhotoViewController.xib; sourceTree = "<group>"; };
+		788333191F17781100967337 /* ZZCheckInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCheckInViewController.h; sourceTree = "<group>"; };
+		7883331A1F17781100967337 /* ZZCheckInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCheckInViewController.m; sourceTree = "<group>"; };
+		7883331B1F17781100967337 /* ZZCheckInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZCheckInViewController.xib; sourceTree = "<group>"; };
+		7883331F1F178F3000967337 /* DPSharePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPSharePopView.h; sourceTree = "<group>"; };
+		788333201F178F3000967337 /* DPSharePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPSharePopView.m; sourceTree = "<group>"; };
+		788333211F178F3000967337 /* TriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleView.h; sourceTree = "<group>"; };
+		788333221F178F3000967337 /* TriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleView.m; sourceTree = "<group>"; };
 		7897E1011EF3E6A00046D647 /* EventListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListCell.h; sourceTree = "<group>"; };
 		7897E1021EF3E6A00046D647 /* EventListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListCell.m; sourceTree = "<group>"; };
 		7897E1031EF3E6A00046D647 /* EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
@@ -1148,6 +1169,7 @@
 				184D492A1DED5D5800C7B03F /* Comment(评论) */,
 				7829FF9B1ED803D000C934C2 /* Login */,
 				784D3F5D1ECC67040058C63F /* Home */,
+				788333151F17779700967337 /* Check-in */,
 				18BE02711DDB497900D27893 /* Social Calendar */,
 				78FFE5AD1ECDAD2C00F909A2 /* Restaurant */,
 				18BE027D1DDB497900D27893 /* My Zuzu */,
@@ -1789,6 +1811,7 @@
 		7829FF6B1ED55C9B00C934C2 /* iloveimg-converted-to-png */ = {
 			isa = PBXGroup;
 			children = (
+				783F82331F176E7300491529 /* profile_image_animals.jpeg */,
 				7829FF6C1ED55C9B00C934C2 /* pexels-photo-213661.png */,
 				7829FF6D1ED55C9B00C934C2 /* pexels-photo-218844.png */,
 				7829FF6E1ED55C9B00C934C2 /* pexels-photo-260922.png */,
@@ -1997,6 +2020,9 @@
 				789CFF941F12399100EBA772 /* ZZImageCollectionCell.h */,
 				789CFF951F12399100EBA772 /* ZZImageCollectionCell.m */,
 				789CFF961F12399100EBA772 /* ZZImageCollectionCell.xib */,
+				783F822E1F17149100491529 /* ZZLeaderboardCell.h */,
+				783F822F1F17149100491529 /* ZZLeaderboardCell.m */,
+				783F82301F17149100491529 /* ZZLeaderboardCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2113,6 +2139,8 @@
 				786069EA1F160A7400A8AB88 /* FriendsHomeTableViewController.m */,
 				786069EC1F160A8900A8AB88 /* MeHomeTableViewController.h */,
 				786069ED1F160A8900A8AB88 /* MeHomeTableViewController.m */,
+				783F822B1F1713B800491529 /* LeaderboardHomeTableViewController.h */,
+				783F822C1F1713B800491529 /* LeaderboardHomeTableViewController.m */,
 				789CFF9C1F13C06500EBA772 /* LeaderboardViewController.h */,
 				789CFF9D1F13C06500EBA772 /* LeaderboardViewController.m */,
 				789CFF9E1F13C06500EBA772 /* LeaderboardViewController.xib */,
@@ -2139,6 +2167,52 @@
 				788246D31ED2E7BA0058B226 /* EventPhotoViewController.xib */,
 			);
 			name = EventDetailChildVCs;
+			sourceTree = "<group>";
+		};
+		788333151F17779700967337 /* Check-in */ = {
+			isa = PBXGroup;
+			children = (
+				788333161F1777BF00967337 /* Controller */,
+				788333171F1777C900967337 /* Model */,
+				788333181F1777D100967337 /* View */,
+			);
+			name = "Check-in";
+			sourceTree = "<group>";
+		};
+		788333161F1777BF00967337 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				788333191F17781100967337 /* ZZCheckInViewController.h */,
+				7883331A1F17781100967337 /* ZZCheckInViewController.m */,
+				7883331B1F17781100967337 /* ZZCheckInViewController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		788333171F1777C900967337 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		788333181F1777D100967337 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7883331E1F178F3000967337 /* DPSharePopView */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7883331E1F178F3000967337 /* DPSharePopView */ = {
+			isa = PBXGroup;
+			children = (
+				7883331F1F178F3000967337 /* DPSharePopView.h */,
+				788333201F178F3000967337 /* DPSharePopView.m */,
+				788333211F178F3000967337 /* TriangleView.h */,
+				788333221F178F3000967337 /* TriangleView.m */,
+			);
+			path = DPSharePopView;
 			sourceTree = "<group>";
 		};
 		789CFF4B1F02144D00EBA772 /* FilterSubVCs */ = {
@@ -2390,8 +2464,10 @@
 				780096B41EC9C1F5008F9F99 /* event-banner-1036x328-04.jpg in Resources */,
 				786069C51F15DB9B00A8AB88 /* ic_fa-credit-card.png in Resources */,
 				7824E34C1EF1408E00F85BFB /* ic_badges_338x338-06.png in Resources */,
+				783F82341F176E7300491529 /* profile_image_animals.jpeg in Resources */,
 				780096BD1EC9C1F5008F9F99 /* ic_ fa-image.png in Resources */,
 				18388AD11DFAAB1D004E1DF9 /* GFSubTagViewCell.xib in Resources */,
+				7883331D1F17781100967337 /* ZZCheckInViewController.xib in Resources */,
 				1841A77F1DE17BE400FB54CC /* GFWebViewController.xib in Resources */,
 				7800973C1ECAD9D6008F9F99 /* zuzu_App_Icon_180x180.png in Resources */,
 				7829FF781ED55C9B00C934C2 /* pexels-photo-262918.png in Resources */,
@@ -2410,6 +2486,7 @@
 				780096D61EC9C1F5008F9F99 /* ic_fa_dollar_on.png in Resources */,
 				786069CA1F15DB9B00A8AB88 /* top-navigation-profile-90x90.png in Resources */,
 				7829FF751ED55C9B00C934C2 /* pexels-photo-213661.png in Resources */,
+				783F82321F17149100491529 /* ZZLeaderboardCell.xib in Resources */,
 				7800970C1EC9C1F5008F9F99 /* ic_leaderboard.png in Resources */,
 				788246CB1ED2E7930058B226 /* EventOverviewViewController.xib in Resources */,
 				786069E41F1609C500A8AB88 /* ZZHomeViewController.xib in Resources */,
@@ -2674,6 +2751,9 @@
 				18B61AF51E0D4A7100CAC3FF /* GFTagButton.m in Sources */,
 				789CFF651F0B86A600EBA772 /* NotificationCell.m in Sources */,
 				18BE02AC1DDB4C1E00D27893 /* GFFriendTrendViewController.m in Sources */,
+				783F82311F17149100491529 /* ZZLeaderboardCell.m in Sources */,
+				783F822D1F1713B800491529 /* LeaderboardHomeTableViewController.m in Sources */,
+				788333231F178F3000967337 /* DPSharePopView.m in Sources */,
 				18BE02A21DDB4A8900D27893 /* GFTabBarController.m in Sources */,
 				7829FF871ED576AC00C934C2 /* RestaurantReviewViewController.m in Sources */,
 				189CA3251DDADBF6004D07EA /* main.m in Sources */,
@@ -2724,6 +2804,7 @@
 				1829A6A11DE818F70086AD86 /* GFRefreshHeader.m in Sources */,
 				7824E3591EF2201D00F85BFB /* BadgesSquareCell.m in Sources */,
 				18B7C72A1DE07501004BD781 /* GFLoginRegisterView.m in Sources */,
+				7883331C1F17781100967337 /* ZZCheckInViewController.m in Sources */,
 				7824E3161EF0D96700F85BFB /* CreateEventViewController.m in Sources */,
 				18E8D37F1DE9EB4100ED4EE1 /* GFTopicVoiceView.m in Sources */,
 				1829A6A41DE82DCF0086AD86 /* GFRefreshFooter.m in Sources */,
@@ -2784,6 +2865,7 @@
 				7824E33B1EF13F7600F85BFB /* BadgesCollectionViewController.m in Sources */,
 				18E8D36D1DE9D19800ED4EE1 /* GFUser.m in Sources */,
 				18E8D3751DE9EA8400ED4EE1 /* GFTopicVideoView.m in Sources */,
+				788333241F178F3000967337 /* TriangleView.m in Sources */,
 				78FFE59A1ECD40F700F909A2 /* GFEvent.m in Sources */,
 				1829A6A71DE83B9A0086AD86 /* GFHTTPSessionManager.m in Sources */,
 				7829FF821ED5768F00C934C2 /* RestaurantOverviewViewController.m in Sources */,

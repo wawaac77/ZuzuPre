@@ -11,6 +11,7 @@
 
 //#import "GFMeViewController.h"
 #import "ZZHomeViewController.h"
+#import "ZZCheckInViewController.h"
 #import "MyZuzuViewController.h"
 #import "GFEssenceViewController.h"
 #import "GFPublishView.h"
@@ -106,9 +107,9 @@
     NSLog(@"homeViewController essence width is %f", homepage.view.frame.size.width);
     NSLog(@"mainscreen width is %f", [UIScreen mainScreen].bounds.size.width);
     
-    /** Social Calendar */
-    GFEssenceViewController *social = [[GFEssenceViewController alloc] init];
-    GFNavigationController *nav1 = [[GFNavigationController alloc]initWithRootViewController:social];
+    /** Check-in */
+    ZZCheckInViewController *checkin = [[ZZCheckInViewController alloc] init];
+    GFNavigationController *nav1 = [[GFNavigationController alloc]initWithRootViewController:checkin];
     [self addChildViewController:nav1];
     
     /** Restaurants */

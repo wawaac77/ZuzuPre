@@ -6,11 +6,12 @@
 //  Copyright © 2017 apple. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "ZZHomeViewController.h"
 #import "AllHomeTableViewController.h"
 #import "FriendsHomeTableViewController.h"
 #import "MeHomeTableViewController.h"
-#import "LeaderboardViewController.h"
+#import "LeaderboardHomeTableViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -25,14 +26,36 @@
 
 @property (weak ,nonatomic) UISegmentedControl *segmentedControl;
 
+@property (strong, nonatomic) GFHTTPSessionManager *manager;
+@property (strong, nonatomic) ZZUser *myProfile;
+
+@property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UIImageView *topProfileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *topUserLabel;
+@property (weak, nonatomic) IBOutlet UILabel *topScoreLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addFriendsButton;
+@property (weak, nonatomic) IBOutlet UILabel *topLocationLabel;
+- (IBAction)addFriendsButtonClicked:(id)sender;
+
 @end
 
 @implementation ZZHomeViewController
 
+#pragma mark - 懒加载
+-(GFHTTPSessionManager *)manager
+{
+    if (!_manager) {
+        _manager = [GFHTTPSessionManager manager];
+        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    }
+    return _manager;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.frame = [UIScreen mainScreen].bounds;
-    [self setUpNavBar];
+    //[self setUpNavBar];
     [self setUpTitleView];
     [self setUpChildViewControllers];
     [self setUpScrollView];
@@ -40,9 +63,93 @@
     [self addChildViewController];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setUpNavBar];
+    [self loadNeweData];
+    //[self setUpTopView];
+}
+
 - (void)setUpNavBar {
     
+    [self preferredStatusBarStyle];
+    
+    // 1. hide the existing nav bar
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    /*
+    // 2. create a new nav bar and style it
+    UINavigationBar *newNavBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), ZZNewNavH)];
+    [newNavBar setTintColor:[UIColor whiteColor]];
+    
+    // 3. add a new navigation item w/title to the new nav bar
+    UINavigationItem *newItem = [[UINavigationItem alloc] init];
+    newItem.title = @"Paths";
+    [newNavBar setItems:@[newItem]];
+    
+    UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2;
+    profileImageView.clipsToBounds = YES;
+    profileImageView.image = [UIImage imageNamed:@"icon.png"];
+    
+    UINavigationItem *profileItem = [[UINavigationItem alloc] init];
+    
+    //UIBarButtonItem *profileItem = [[UIBarButtonItem alloc] initWithCustomView:profileImageView];
+
+    [newNavBar setItems:@[profileItem]];
+    
+    // 4. add the nav bar to the main view
+    [self.view addSubview:newNavBar];
+    */
 }
+
+- (void)setUpTopView {
+    _topProfileImageView.layer.cornerRadius = _topProfileImageView.frame.size.width / 2;
+    _topProfileImageView.clipsToBounds = YES;
+    _topProfileImageView.image = [UIImage imageNamed:@"profile_image_animals.jpeg"];
+    
+    _topUserLabel.text = _myProfile.userUserName;
+    _topScoreLabel.text = _myProfile.userOrganizingLevel;
+    //_topLocationLabel.text = _myProfile.userLocation;
+}
+
+- (void)loadNeweData {
+    
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    NSDictionary *inData = [[NSDictionary alloc] init];
+    inData = @{@"action" : @"getMyProfile", @"token" : userToken};
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    //发送请求
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+        
+        ZZUser *thisUser = [[ZZUser alloc] init];
+        thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
+        self.myProfile = thisUser;
+        [self setUpTopView];
+        NSLog(@"this user %@", thisUser);
+        NSLog(@"this user. userName %@", thisUser.usertName);
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        //[self.tableView.mj_footer endRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        
+    }];
+}
+
 
 - (void)setUpTitleView {
     
@@ -53,8 +160,11 @@
     NSArray *itemArray = [NSArray arrayWithObjects: @"All", @"Friends", @"Me", @"Leaderboard", nil];
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
     self.segmentedControl = segmentedControl;
-    segmentedControl.frame = CGRectMake(10, 5, GFScreenWidth - 20, 25);
+    segmentedControl.frame = CGRectMake(10, 5 + ZZNewNavH, GFScreenWidth - 20, 25);
     segmentedControl.tintColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
+    UIFont *font = [UIFont boldSystemFontOfSize:13.0f];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
+    [segmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
     
     segmentedControl.selectedSegmentIndex = 0;//默认选中的按钮索引
     
@@ -91,7 +201,7 @@
     [self addChildViewController:meVC];
     
     //Leaderboard
-    LeaderboardViewController *leaderboardVC = [[LeaderboardViewController alloc] init];
+    LeaderboardHomeTableViewController *leaderboardVC = [[LeaderboardHomeTableViewController alloc] init];
     [self addChildViewController:leaderboardVC];
 
 }
@@ -109,7 +219,7 @@
     self.scrollView = scrollView;
     
     scrollView.delegate = self;
-    scrollView.frame = CGRectMake(0, 30, self.view.gf_width, self.view.gf_height - 30 - GFTabBarH);
+    scrollView.frame = CGRectMake(0, 35 + ZZNewNavH, self.view.gf_width, self.view.gf_height - 35 - GFTabBarH - ZZNewNavH);
     NSLog(@"self.view.gf_width in first claim scrollView is %f", self.view.gf_width);
     scrollView.pagingEnabled = YES;
     scrollView.showsVerticalScrollIndicator = NO;
@@ -175,4 +285,6 @@
 }
 */
 
+- (IBAction)addFriendsButtonClicked:(id)sender {
+}
 @end

@@ -26,6 +26,9 @@ CGFloat const GFTabBarH = 49;
 /*导航栏的最大Y值*/
 CGFloat const GFNavMaxY = 64;
 
+/*New导航栏的Height*/
+CGFloat const ZZNewNavH = 80;
+
 /*标题栏高度*/
 CGFloat const GFTitleViewH = 35;
 
