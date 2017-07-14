@@ -10,6 +10,7 @@
 #import "ZZInboxTableViewController.h"
 #import "ZZInboxCell.h"
 #import "ZZLeaderboardModel.h"
+#import "ZZChatViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -41,6 +42,7 @@ static NSString *const ID = @"ID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUpNavBar];
     [self setupRefresh];
     [self setUpTable];
 }
@@ -122,26 +124,23 @@ static NSString *const ID = @"ID";
     return cell;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ZZChatViewController *chatVC = [[ZZChatViewController alloc] init];
+    //chatVC.view.frame = CGRectMake(0, ZZNewNavH, self.view.gf_width, self.view.gf_height - GFTabBarH - ZZNewNavH);
     
-    // Configure the cell...
-    
-    return cell;
+    [self.navigationController pushViewController:chatVC animated:YES];
 }
-*/
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
-// Override to support editing the table view.
+
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
@@ -150,7 +149,21 @@ static NSString *const ID = @"ID";
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
+- (void)setUpNavBar
+{
+    UIBarButtonItem *newMessageButton = [UIBarButtonItem ItemWithImage:[UIImage imageNamed:@"ic_new-message"] WithHighlighted:[UIImage imageNamed:@"ic_new-message"] Target:self action:@selector(newMessageClicked)];
+    [self.navigationItem setRightBarButtonItem:newMessageButton];
+    
+    //Title
+    self.navigationItem.title = @"Inbox";
+    
+}
+
+- (void)newMessageClicked {
+    NSLog(@"new message clicked");
+}
+
 
 /*
 // Override to support rearranging the table view.

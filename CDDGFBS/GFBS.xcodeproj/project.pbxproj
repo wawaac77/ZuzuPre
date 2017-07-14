@@ -347,6 +347,10 @@
 		7883331D1F17781100967337 /* ZZCheckInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7883331B1F17781100967337 /* ZZCheckInViewController.xib */; };
 		788333231F178F3000967337 /* DPSharePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 788333201F178F3000967337 /* DPSharePopView.m */; };
 		788333241F178F3000967337 /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 788333221F178F3000967337 /* TriangleView.m */; };
+		788CC2911F18801600DC4116 /* ZZChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788CC28F1F18801600DC4116 /* ZZChatViewController.m */; };
+		788CC2921F18801600DC4116 /* ZZChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 788CC2901F18801600DC4116 /* ZZChatViewController.xib */; };
+		788CC2951F18B6C300DC4116 /* ZZMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 788CC2941F18B6C300DC4116 /* ZZMessageModel.m */; };
+		788CC2981F18B76800DC4116 /* NSUserDefaults+DemoSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 788CC2971F18B76800DC4116 /* NSUserDefaults+DemoSettings.m */; };
 		7897E1041EF3E6A00046D647 /* EventListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7897E1021EF3E6A00046D647 /* EventListCell.m */; };
 		7897E1051EF3E6A00046D647 /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7897E1031EF3E6A00046D647 /* EventListCell.xib */; };
 		7897E1081EF7766A0046D647 /* EventInList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7897E1071EF7766A0046D647 /* EventInList.m */; };
@@ -866,6 +870,13 @@
 		788333201F178F3000967337 /* DPSharePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPSharePopView.m; sourceTree = "<group>"; };
 		788333211F178F3000967337 /* TriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleView.h; sourceTree = "<group>"; };
 		788333221F178F3000967337 /* TriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleView.m; sourceTree = "<group>"; };
+		788CC28E1F18801600DC4116 /* ZZChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatViewController.h; sourceTree = "<group>"; };
+		788CC28F1F18801600DC4116 /* ZZChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatViewController.m; sourceTree = "<group>"; };
+		788CC2901F18801600DC4116 /* ZZChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZChatViewController.xib; sourceTree = "<group>"; };
+		788CC2931F18B6C300DC4116 /* ZZMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZMessageModel.h; sourceTree = "<group>"; };
+		788CC2941F18B6C300DC4116 /* ZZMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZMessageModel.m; sourceTree = "<group>"; };
+		788CC2961F18B76800DC4116 /* NSUserDefaults+DemoSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+DemoSettings.h"; sourceTree = "<group>"; };
+		788CC2971F18B76800DC4116 /* NSUserDefaults+DemoSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+DemoSettings.m"; sourceTree = "<group>"; };
 		7897E1011EF3E6A00046D647 /* EventListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListCell.h; sourceTree = "<group>"; };
 		7897E1021EF3E6A00046D647 /* EventListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListCell.m; sourceTree = "<group>"; };
 		7897E1031EF3E6A00046D647 /* EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
@@ -2286,6 +2297,10 @@
 		789E0D5D1F17DC1E00CCAAE4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				788CC2931F18B6C300DC4116 /* ZZMessageModel.h */,
+				788CC2941F18B6C300DC4116 /* ZZMessageModel.m */,
+				788CC2961F18B76800DC4116 /* NSUserDefaults+DemoSettings.h */,
+				788CC2971F18B76800DC4116 /* NSUserDefaults+DemoSettings.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2295,6 +2310,9 @@
 			children = (
 				789E0D601F17DC7E00CCAAE4 /* ZZInboxTableViewController.h */,
 				789E0D611F17DC7E00CCAAE4 /* ZZInboxTableViewController.m */,
+				788CC28E1F18801600DC4116 /* ZZChatViewController.h */,
+				788CC28F1F18801600DC4116 /* ZZChatViewController.m */,
+				788CC2901F18801600DC4116 /* ZZChatViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2602,6 +2620,7 @@
 				780096C61EC9C1F5008F9F99 /* ic_fa-commenting-o.png in Resources */,
 				7829FF881ED576AC00C934C2 /* RestaurantReviewViewController.xib in Resources */,
 				780096F51EC9C1F5008F9F99 /* ic_camera_pop_up.png in Resources */,
+				788CC2921F18801600DC4116 /* ZZChatViewController.xib in Resources */,
 				786069CE1F15DB9B00A8AB88 /* zuzu-my-freinds.png in Resources */,
 				189CA3301DDADBF6004D07EA /* Assets.xcassets in Resources */,
 				786069A61F15DB9B00A8AB88 /* ic_add-friend.png in Resources */,
@@ -2829,6 +2848,7 @@
 				18A23F7B1DEBDA5D001FC558 /* UIImage+GFImage.m in Sources */,
 				789CFF7B1F0CA69A00EBA772 /* TwEn.m in Sources */,
 				7829FFB71EE16AE000C934C2 /* MinScrollMenu.m in Sources */,
+				788CC2951F18B6C300DC4116 /* ZZMessageModel.m in Sources */,
 				78FFE59E1ECD49A300F909A2 /* GFUpcomingTableViewController.m in Sources */,
 				7897E1081EF7766A0046D647 /* EventInList.m in Sources */,
 				18B3D6BF1DEC517F00474981 /* GFSeeBigImageViewController.m in Sources */,
@@ -2845,6 +2865,7 @@
 				78FFE5A81ECD898100F909A2 /* GFEventListViewController.m in Sources */,
 				789CFF551F026C6700EBA772 /* SearchEventDetail.m in Sources */,
 				788246CF1ED2E7A90058B226 /* EventDiscussionViewController.m in Sources */,
+				788CC2981F18B76800DC4116 /* NSUserDefaults+DemoSettings.m in Sources */,
 				1802923F1DE98E3800743619 /* NSDate+GFExtension.m in Sources */,
 				7829FF9F1ED8040100C934C2 /* LoginViewController.m in Sources */,
 				78FFE5BF1ECDBC7400F909A2 /* RestaurantDetailViewController.m in Sources */,
@@ -2887,6 +2908,7 @@
 				18388AD01DFAAB1D004E1DF9 /* GFSubTagViewCell.m in Sources */,
 				78F49F801EE6F5A900674130 /* MyEventCell.m in Sources */,
 				789CFF421F00E84F00EBA772 /* FilterTableViewController.m in Sources */,
+				788CC2911F18801600DC4116 /* ZZChatViewController.m in Sources */,
 				1841A7751DE1750600FB54CC /* GFSquareItem.m in Sources */,
 				789E0D621F17DC7E00CCAAE4 /* ZZInboxTableViewController.m in Sources */,
 				7829FF961ED576F800C934C2 /* RestaurantEventViewController.m in Sources */,

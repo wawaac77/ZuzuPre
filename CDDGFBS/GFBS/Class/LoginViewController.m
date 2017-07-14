@@ -57,6 +57,7 @@
     [super viewDidLoad];
     
     self.view.frame = [UIScreen mainScreen].bounds;
+    
     //设置导航条
     [self setUpBackground];
     [self setUpNavBar];
@@ -71,7 +72,6 @@
     [self addChildViewController];
     
 }
-
 
 - (void)setUpBackground
 {

@@ -12,6 +12,7 @@
 //#import "GFMeViewController.h"
 #import "ZZHomeViewController.h"
 #import "ZZCheckInViewController.h"
+#import "ZZInboxTableViewController.h"
 #import "MyZuzuViewController.h"
 #import "GFEssenceViewController.h"
 #import "GFPublishView.h"
@@ -113,8 +114,8 @@
     [self addChildViewController:nav1];
     
     /** Restaurants */
-    RestaurantViewController *restaurantVC = [[RestaurantViewController alloc] init];
-    GFNavigationController *nav2 = [[GFNavigationController alloc]initWithRootViewController:restaurantVC];
+    ZZInboxTableViewController *inbox = [[ZZInboxTableViewController alloc] init];
+    GFNavigationController *nav2 = [[GFNavigationController alloc]initWithRootViewController:inbox];
     [self addChildViewController:nav2];
     
     /** My Zuzu */

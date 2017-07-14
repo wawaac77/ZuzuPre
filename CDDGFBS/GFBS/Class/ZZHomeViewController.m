@@ -65,7 +65,7 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -81,11 +81,12 @@
     
     // 1. hide the existing nav bar
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    /*
-    // 2. create a new nav bar and style it
-    UINavigationBar *newNavBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), ZZNewNavH)];
-    [newNavBar setTintColor:[UIColor whiteColor]];
     
+    // 2. create a new nav bar and style it
+    //UINavigationBar *newNavBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 20)];
+    //[newNavBar setTintColor:[UIColor whiteColor]];
+    
+    /*
     // 3. add a new navigation item w/title to the new nav bar
     UINavigationItem *newItem = [[UINavigationItem alloc] init];
     newItem.title = @"Paths";
@@ -101,10 +102,11 @@
     //UIBarButtonItem *profileItem = [[UIBarButtonItem alloc] initWithCustomView:profileImageView];
 
     [newNavBar setItems:@[profileItem]];
+    */
     
     // 4. add the nav bar to the main view
-    [self.view addSubview:newNavBar];
-    */
+    //[self.view addSubview:newNavBar];
+    
 }
 
 - (void)setUpTopView {

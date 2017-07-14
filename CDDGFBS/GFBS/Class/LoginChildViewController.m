@@ -51,6 +51,15 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor clearColor];
     [self setupLayout];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+}
+
+-(void)dismissKeyboard {
+    [_emailTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
 }
 
 - (void)setupLayout {

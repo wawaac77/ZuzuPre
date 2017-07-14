@@ -50,6 +50,11 @@
     [self setupLayout];
 }
 
+-(void)dismissKeyboard {
+    [_emailTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
+}
+
 - (void)setupLayout {
     _signupWithFacebookButton.layer.cornerRadius = 5.0f;
     _signupWithGoogleButton.layer.cornerRadius = 5.0f;

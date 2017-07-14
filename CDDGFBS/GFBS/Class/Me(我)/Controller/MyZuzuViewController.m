@@ -7,6 +7,7 @@
 //
 
 #import "MyZuzuViewController.h"
+#import "LeaderboardHomeTableViewController.h"
 
 #import "GFWebViewController.h"
 #import "GFSettingViewController.h"
@@ -144,9 +145,11 @@ static CGFloat  const margin = 0;
     if ([item.name isEqualToString: @"My Events"]) {
         EventListTableViewController *eventVC = [[EventListTableViewController alloc] init];
         [self.navigationController pushViewController:eventVC animated:YES];
-    } else if ([item.name isEqualToString: @"Favourite Restaurants"]) {
-        RestaurantViewController *restaurantVC = [[RestaurantViewController alloc] init];
-        [self.navigationController pushViewController:restaurantVC animated:YES];
+    } else if ([item.name isEqualToString: @"Leaderboard"]) {
+        LeaderboardHomeTableViewController *leaderboardVC = [[LeaderboardHomeTableViewController alloc] init];
+        leaderboardVC.view.frame = CGRectMake(0, 0, GFScreenWidth, self.view.gf_height - GFTabBarH);
+        leaderboardVC.navigationItem.title = @"Leaderboard";
+        [self.navigationController pushViewController:leaderboardVC animated:YES];
     }
     //判断
     if (![item.url containsString:@"http"]) return;
