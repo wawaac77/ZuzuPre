@@ -7,8 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <JSQMessagesViewController.h>
+#import "JSQMessages.h"
+#import "NSUserDefaults+DemoSettings.h"
+#import "ZZMessageModel.h"
 
-@interface ZZChatViewController : JSQMessagesViewController
+@class ZZChatViewController;
+
+@protocol JSQDemoViewControllerDelegate <NSObject>
+
+- (void)didDismissJSQDemoViewController:(ZZChatViewController *)vc;
+
+@end
+
+
+@interface ZZChatViewController : JSQMessagesViewController<UIActionSheetDelegate, JSQMessagesComposerTextViewPasteDelegate>
+
+@property (weak, nonatomic) id<JSQDemoViewControllerDelegate> delegateModal;
+
+@property (strong, nonatomic) ZZMessageModel *demoData;
+
+- (void)receiveMessagePressed:(UIBarButtonItem *)sender;
+
+- (void)closePressed:(UIBarButtonItem *)sender;
 
 @end

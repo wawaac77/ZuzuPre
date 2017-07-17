@@ -17,6 +17,7 @@
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
 #import <SDImageCache.h>
+#import <FirebaseAuth/FirebaseAuth.h>
 
 @interface LoginChildViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *loginWithFacebookButton;
@@ -27,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 - (IBAction)nextButtonClicked:(id)sender;
 - (IBAction)forgetPasswordClicked:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *loginUsingFirebaseButton;
+- (IBAction)loginUsingFirebaseClicked:(id)sender;
 
 /*请求管理者*/
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
@@ -122,13 +125,30 @@
                 [SVProgressHUD dismiss];
             });
         } else {
-            [AppDelegate APP].user = [[ZZUser alloc] init];
-            [AppDelegate APP].user = thisUser;
-            
-            NSLog(@"user token = %@", thisUser.userToken);
-            
-            UIWindow *window = [UIApplication sharedApplication].keyWindow;
-            window.rootViewController = [[GFTabBarController alloc]init];
+            [[FIRAuth auth]signInWithEmail:self.emailTextField.text
+                                  password:self.passwordTextField.text
+                                completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+                                    if (error) {
+                                        NSLog(@"%@", [error localizedDescription]);
+                                        
+                                        [SVProgressHUD showWithStatus:@"Busy network, please try later"];
+                                        
+                                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                            [SVProgressHUD dismiss];
+                                        });
+                                        
+                                        
+                                    }
+                                    else{
+                                        [AppDelegate APP].user = [[ZZUser alloc] init];
+                                        [AppDelegate APP].user = thisUser;
+                                        
+                                        NSLog(@"user token = %@", thisUser.userToken);
+                                        
+                                        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+                                        window.rootViewController = [[GFTabBarController alloc]init];
+                                    }
+                                }];
         }
         
         
@@ -190,5 +210,8 @@
     }];
     
 
+}
+- (IBAction)loginUsingFirebaseClicked:(id)sender {
+    
 }
 @end

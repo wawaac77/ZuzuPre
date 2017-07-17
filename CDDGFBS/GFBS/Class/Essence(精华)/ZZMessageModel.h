@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import <JSQMessagesViewController/JSQMessages.h>
-
 #import "JSQMessages.h"
+
 
 static NSString * const kJSQDemoAvatarDisplayNameSquires = @"Jesse Squires";
 static NSString * const kJSQDemoAvatarDisplayNameCook = @"Tim Cook";

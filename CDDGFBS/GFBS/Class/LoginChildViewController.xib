@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="emailTextField" destination="PhD-sM-MZa" id="Swo-3n-3NZ"/>
                 <outlet property="forgetPasswordButton" destination="Pm4-12-mNb" id="d2b-yl-lsU"/>
+                <outlet property="loginUsingFirebaseButton" destination="glg-sD-Y9c" id="5g6-eJ-wqc"/>
                 <outlet property="loginWithFacebookButton" destination="QL2-m1-iFJ" id="l8P-LR-D58"/>
                 <outlet property="loginWithGoogleButton" destination="faM-Vi-qnf" id="6X1-zo-iPB"/>
                 <outlet property="nextButton" destination="k6e-oj-Zzm" id="btT-sX-XNx"/>
@@ -110,6 +111,17 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.94999999999999996"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glg-sD-Y9c">
+                    <rect key="frame" x="35" y="392" width="171" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.83276491119999996" green="0.73040361040000001" blue="0.091616109959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="Login using firebase">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="loginUsingFirebaseClicked:" destination="-1" eventType="touchUpInside" id="oAO-w7-ulB"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>

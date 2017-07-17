@@ -13,6 +13,7 @@
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
 #import <SDImageCache.h>
+#import <FirebaseAuth/FirebaseAuth.h>
 
 @interface SignUpChildViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *signupWithFacebookButton;
@@ -159,7 +160,31 @@
         });
     }];
     
-    }
+        
+        
+        //********** regist Firebase ***********************//
+        
+        [[FIRAuth auth]createUserWithEmail:self.emailTextField.text password:self.passwordTextField.text completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+           
+            if (error) {
+                NSLog(@"%@", [error localizedDescription]);
+                
+                [SVProgressHUD showWithStatus:@"Busy network, please try later"];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [SVProgressHUD dismiss];
+                });
 
+            }
+            else{
+                
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Hi" message:@"Firebase registed!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                [alertView show];
+                
+            }
+        }];
+    
+    }
+    
 }
 @end

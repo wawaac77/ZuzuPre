@@ -128,7 +128,10 @@ static NSString *const ID = @"ID";
 {
     ZZChatViewController *chatVC = [[ZZChatViewController alloc] init];
     //chatVC.view.frame = CGRectMake(0, ZZNewNavH, self.view.gf_width, self.view.gf_height - GFTabBarH - ZZNewNavH);
-    
+    chatVC.hidesBottomBarWhenPushed = YES;
+    ZZLeaderboardModel *thisRank = self.rankList[indexPath.row];
+    //chatVC.title = thisRank.leaderboardMember.userUserName;
+    chatVC.title = @"User Name";
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 

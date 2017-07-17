@@ -12,6 +12,7 @@
 #import "GFAdViewController.h"
 #import "LoginViewController.h"
 #import "DHGuidePageHUD.h"
+@import Firebase;
 
 @interface AppDelegate ()
 
@@ -49,7 +50,7 @@
     [[SDImageCache sharedImageCache] cleanDisk];
     
     [GFTopWindow gf_show];
-    
+    [FIRApp configure];
     return YES;
 }
 
