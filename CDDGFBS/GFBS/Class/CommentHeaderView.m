@@ -10,21 +10,16 @@
 
 @implementation CommentHeaderView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        NSString *className = NSStringFromClass([self class]);
+        self.view = [[[NSBundle mainBundle] loadNibNamed:className owner:self options:nil] firstObject];
+        [self addSubview:self.view];
+        return self;
+    }
+    return nil;
 }
-*/
-
-/*
-- (NSArray *)loadNibNamed:(NSString *)name owner:(id)owner options:(NSDictionary *)options;
-
-+(id)viewFromNibNamed:(NSString*)nibName owner:(id)owner{
-    NSArray* nibView = [[NSBundle mainBundle] loadNibNamed:@"CommentHeaderView" owner:owner options:nil];
-    return [nibView firstObject];
-}
- */
 
 @end

@@ -1,43 +1,33 @@
 //
-//  HomePostTableViewController.m
+//  ZZFriendsTableViewController.m
 //  GFBS
 //
-//  Created by Alice Jin on 17/7/2017.
+//  Created by Alice Jin on 18/7/2017.
 //  Copyright © 2017 apple. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "HomePostTableViewController.h"
-#import "GFEventsCell.h"
-#import "ZZContentModel.h"
-//#import "ZZCommentsViewController.h"
-#import "GFCommentViewController.h"
+#import "ZZFriendsTableViewController.h"
+#import "ZZFriendModel.h"
+#import "ZZFriendCell.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
-#import <SDImageCache.h>
 
 static NSString *const ID = @"ID";
-//@class ZZContentModel;
 
-@interface HomePostTableViewController ()
+@interface ZZFriendsTableViewController ()
 
 /*所有帖子数据*/
-@property (strong , nonatomic)NSMutableArray<ZZContentModel *> *contents;
+@property (strong , nonatomic)NSMutableArray<ZZFriendModel *> *friendsArray;
 /*请求管理者*/
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
 
 @end
 
-@implementation HomePostTableViewController
-
-#pragma mark - 消除警告
--(MyPublishContentType)type
-{
-    return 0;
-}
+@implementation ZZFriendsTableViewController
 
 #pragma mark - 懒加载
 -(GFHTTPSessionManager *)manager
@@ -52,8 +42,10 @@ static NSString *const ID = @"ID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setUpTable];
     [self setupRefresh];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,23 +53,41 @@ static NSString *const ID = @"ID";
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setUpNavBar];
+}
+
+- (void)setUpNavBar {
+    
+    [self preferredStatusBarStyle];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    self.navigationItem.title = @"My Friends";
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+
 -(void)setUpTable
 {
-    //self.tableView.contentInset = UIEdgeInsetsMake(33, 0, GFTabBarH, 0);
-    //[self.tableView setFrame:self.view.bounds];
     NSLog(@"table width %f",self.view.gf_width);
-    //self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
-    //self.tableView.backgroundColor = [UIColor lightGrayColor];
     self.tableView.separatorStyle = UITableViewStylePlain;
+    [self.tableView setFrame:self.view.bounds];
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GFEventsCell class]) bundle:nil] forCellReuseIdentifier:ID];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ZZFriendCell class]) bundle:nil] forCellReuseIdentifier:ID];
     
-    //[self.tableView reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 230;
+    return 60;
 }
+
 
 #pragma mark - Table view data source
 
@@ -87,38 +97,26 @@ static NSString *const ID = @"ID";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return self.contents.count;
+    return _friendsArray.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    GFEventsCell *cell = (GFEventsCell *)[tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ZZFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
     
-    ZZContentModel *thisContent = self.contents[indexPath.row];
-    NSLog(@"this content%@", thisContent);
+    ZZFriendModel *myFriend = self.friendsArray [indexPath.row];
     
-    cell.event = thisContent;
+    cell.myFriend = myFriend;
     
     return cell;
-    
-    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    //ZZCommentsTableViewController *commentVC = [[ZZCommentsTableViewController alloc] init];
-    //commentVC.content = [_contents objectAtIndex:indexPath.row];
-    //    //eventDetailVC. = self.topics[indexPath.row];
-    GFCommentViewController *commentsVC = [[GFCommentViewController alloc] init];
-    commentsVC.topic = [_contents objectAtIndex:indexPath.row];
-    commentsVC.view.frame = CGRectMake(0, ZZNewNavH, self.view.gf_width, self.view.gf_height - ZZNewNavH - GFTabBarH);
-    commentsVC.hidesBottomBarWhenPushed = YES;
-
-    [self.navigationController pushViewController:commentsVC animated:YES];
     
 }
+
 
 - (void)setupRefresh
 {
@@ -140,26 +138,13 @@ static NSString *const ID = @"ID";
     
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
-    NSLog(@"user token %@", userToken);
-    NSDictionary *inData = [[NSDictionary alloc] init];
-    if (self.type == 0) {
-        inData = @{@"action" : @"getAllCheckinList", @"token" : userToken};
-    } else if (self.type == 1) {
-        inData = @{@"action" : @"getFriendCheckinList", @"token" : userToken};
-    } else if (self.type == 2) {
-        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken};
-    }
+    NSDictionary *inData = @{@"action" : @"getFriendList", @"token" : userToken};
     NSDictionary *parameters = @{@"data" : inData};
-    
-    NSLog(@"publish content parameters %@", parameters);
     
     
     [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
         
-        NSLog(@"responseObject is %@", responseObject);
-        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
-        
-        self.contents = [ZZContentModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        self.friendsArray = [ZZFriendModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
         [self.tableView reloadData];
         

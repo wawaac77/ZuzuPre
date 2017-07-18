@@ -10,4 +10,6 @@
 
 @interface CommentHeaderView : UIView
 
+@property (nonatomic, weak) IBOutlet UIView *view;
+
 @end

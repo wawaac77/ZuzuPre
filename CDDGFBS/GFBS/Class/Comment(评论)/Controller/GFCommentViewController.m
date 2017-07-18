@@ -6,13 +6,17 @@
 //  Copyright © 2016年 apple. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "GFCommentViewController.h"
 
 #import "GFCommentHeaderFooterView.h"
 #import "GFCommentCell.h"
-#import "GFTopicCell.h"
-#import "GFTopic.h"
-#import "GFComment.h"
+//#import "GFTopicCell.h"
+#import "GFEventsCell.h"
+//#import "GFTopic.h"
+#import "ZZContentModel.h"
+//#import "GFComment.h"
+#import "ZZComment.h"
 
 #import "GFRefreshHeader.h"
 #import "GFRefreshFooter.h"
@@ -22,21 +26,25 @@
 
 static NSString *const commentID = @"commnet";
 static NSString *const headID = @"head";
-@interface GFCommentViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface GFCommentViewController () <UITableViewDelegate,UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomMargin;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 /*请求管理者*/
 @property (weak ,nonatomic) GFHTTPSessionManager *manager;
 
+@property (nonatomic, strong) NSMutableArray<ZZComment *> *comments;
+
 /** 最热评论数据 */
-@property (nonatomic, strong) NSArray<GFComment *> *hotestComments;
+//@property (nonatomic, strong) NSArray<ZZComment *> *hotestComments;
 
 /** 最新评论数据 */
-@property (nonatomic, strong) NSMutableArray<GFComment *> *latestComments;
+//@property (nonatomic, strong) NSMutableArray<ZZComment *> *latestComments;
 
 /** 最热评论 */
-@property (nonatomic, strong) GFComment *savedTopCmt;
+//@property (nonatomic, strong) ZZComment *savedTopCmt;
+
 @end
 
 @implementation GFCommentViewController
@@ -53,7 +61,7 @@ static NSString *const headID = @"head";
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self setUpBase];
     
     [self setUpTableView];
@@ -64,38 +72,59 @@ static NSString *const headID = @"head";
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setUpNavBar];
+}
+
+- (void)setUpNavBar {
+    
+    [self preferredStatusBarStyle];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 -(void)setUpHeadView
 {
     // 模型数据处理：把最热评论影藏
-    self.savedTopCmt = self.topic.top_cmt;
-    self.topic.top_cmt = nil;
-    self.topic.cellHeight = 0;
+    //self.savedTopCmt = self.topic.top_cmt;
+    //self.topic.top_cmt = nil;
+    //self.topic.cellHeight = 0;
     
     //注册
     [self.tableView registerClass:[GFCommentHeaderFooterView class] forHeaderFooterViewReuseIdentifier:headID];
     //嵌套一个View
     UIView *head = [[UIView alloc] init];
-    GFTopicCell *topicCell = [GFTopicCell gf_viewFromXib];
+    GFEventsCell *topicCell = [GFEventsCell gf_viewFromXib];
     topicCell.backgroundColor = [UIColor whiteColor];
-    topicCell.topic = self.topic;
+    topicCell.event = self.topic;
     
     topicCell.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.topic.cellHeight);
     
     // 设置header的高度
     head.gf_height = topicCell.gf_height + GFMargin * 2;
+    //head.gf_height = 230;
     
-    self.tableView.tableHeaderView = head;
     [head addSubview:topicCell];
+    self.tableView.tableHeaderView = head;
 
     //头部View高度
     self.tableView.sectionHeaderHeight = [UIFont systemFontOfSize:13].lineHeight + GFMargin;
+    //self.tableView.sectionHeaderHeight = 5.0f;
 }
 
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.tableView.contentInset = UIEdgeInsetsMake(GFNavMaxY, 0, 0, 0);
+    //self.tableView.contentInset = UIEdgeInsetsMake(GFNavMaxY, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 -(void)setUpRefresh
@@ -103,7 +132,7 @@ static NSString *const headID = @"head";
     self.tableView.mj_header = [GFRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewComment)];
     [self.tableView.mj_header beginRefreshing];
     
-    self.tableView.mj_footer = [GFRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreComment)];
+    //self.tableView.mj_footer = [GFRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreComment)];
 }
 
 #pragma mark - 加载网络数据
@@ -113,45 +142,49 @@ static NSString *const headID = @"head";
     [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
     
     // 参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"a"] = @"dataList";
-    parameters[@"c"] = @"comment";
-    parameters[@"data_id"] = self.topic.ID;
-    parameters[@"hot"] = @1; 
-    
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    NSDictionary *checkinId = @{@"checkinId" : _topic.listEventID};
+    NSDictionary *inData = @{@"action" : @"getCheckinCommentList" , @"token" : userToken, @"data" : checkinId};
+    NSDictionary *parameters = @{@"data" : inData};
     __weak typeof(self) weakSelf = self;
     
     // 发送请求
-    [self.manager GET:GFBSURL parameters:parameters progress:nil  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    [self.manager POST:GetURL parameters:parameters progress:nil  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         // 没有任何评论数据
-        if (![responseObject isKindOfClass:[NSDictionary class]]) {
+        //if (![responseObject isKindOfClass:[NSDictionary class]]) {
             // 结束刷新
-            [weakSelf.tableView.mj_header endRefreshing];
-            return;
-        }
+          //  [weakSelf.tableView.mj_header endRefreshing];
+            //return;
+        //}
         
         // 字典数组转模型数组
-        weakSelf.latestComments = [GFComment mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        weakSelf.hotestComments = [GFComment mj_objectArrayWithKeyValuesArray:responseObject[@"hot"]];
-        
+        //weakSelf.latestComments = [GFComment mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        //weakSelf.hotestComments = [GFComment mj_objectArrayWithKeyValuesArray:responseObject[@"hot"]];
+        self.comments = [ZZComment mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         // 刷新表格
-        [weakSelf.tableView reloadData];
+        [self.tableView reloadData];
         
         // 让[刷新控件]结束刷新
         [weakSelf.tableView.mj_header endRefreshing];
         
+       /*
         NSInteger total = [responseObject[@"total"] intValue];
         if (weakSelf.latestComments.count == total) { // 全部加载完毕
             // 隐藏
             weakSelf.tableView.mj_footer.hidden = YES;
         }
+        */
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         // 让[刷新控件]结束刷新
         [weakSelf.tableView.mj_header endRefreshing];
+        
     }];
+        
 
 }
 
+/*
 -(void)loadMoreComment
 {
     // 取消所有请求
@@ -196,6 +229,7 @@ static NSString *const headID = @"head";
         [weakSelf.tableView.mj_footer endRefreshing];
     }];
 }
+*/
 
 -(void)setUpTableView
 {
@@ -210,10 +244,9 @@ static NSString *const headID = @"head";
     self.tableView.estimatedRowHeight = 44;
 }
 
-
 -(void)setUpBase
 {
-    self.navigationItem.title = @"评论";
+    self.navigationItem.title = @"Comments";
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(KeyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
@@ -250,8 +283,8 @@ static NSString *const headID = @"head";
     [super viewWillDisappear:animated];
     
     //最热评论  这样返回到之前界面会出现最热评论
-    self.topic.top_cmt = self.savedTopCmt;
-    self.topic.cellHeight = 0;
+    //self.topic.top_cmt = self.savedTopCmt;
+    //self.topic.cellHeight = 0;
 }
 
 /**
@@ -269,40 +302,42 @@ static NSString *const headID = @"head";
 {
     GFCommentHeaderFooterView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headID];
     //第0组 并且 有最热评论数
-    if (section == 0 && self.hotestComments.count) {
-        headView.textLabel.text = @"最热评论";
-    }else{
-    headView.textLabel.text = @"最新评论";
-    }
+    //if (section == 0 && self.hotestComments.count) {
+    //    headView.textLabel.text = @"Comments";
+    ///}else{
+    //headView.textLabel.text = @"Comments";
+    //}
+    headView.textLabel.text = @"Comments";
     return headView;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //最热和最新评论数据判断
-    if (self.hotestComments.count) return 2;
-    if (self.latestComments.count) return 1;
-    return 0;
+    return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //第0组 并且 有最热评论数
+    /*
     if (section == 0 && self.hotestComments.count) {
        return self.hotestComments.count;
     }
-    return self.latestComments.count;
+     */
+    return self.comments.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GFCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:commentID forIndexPath:indexPath];
+    /*
     if (indexPath.section == 0 && self.hotestComments.count) {
         cell.comment = _hotestComments[indexPath.row];
     }else{
         cell.comment = _latestComments[indexPath.row];
     }
-    
+     */
+    cell.comment = _comments[indexPath.row];
     
     return cell;
 }

@@ -7,6 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GFImage.h"
+#import "ZZContentModel.h"
+
+@class GFImage;
+@class ZZContentModel;
 
 @interface ZZUser : NSObject
 
@@ -28,6 +33,8 @@
 @property (nonatomic, copy) NSString *userOrganizingLevel;
 @property (nonatomic, copy) NSString *userOrganizingExp;
 @property (nonatomic, retain) NSArray<NSString *> *userInterests;
+@property (nonatomic, strong) GFImage *userProfileImage;
+@property (nonatomic, strong) ZZContentModel *userLastCheckIn;
 
 + (NSURLSessionDataTask *)login:(NSDictionary *)paramDic
                         Success:(void (^)(NSDictionary *result))success

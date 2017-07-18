@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class GFTopic;
+@class ZZContentModel;
 @interface GFCommentViewController : UIViewController
 
 /** 帖子模型数据 */
-@property (nonatomic, strong) GFTopic *topic;
+@property (nonatomic, strong) ZZContentModel *topic;
 
 @end

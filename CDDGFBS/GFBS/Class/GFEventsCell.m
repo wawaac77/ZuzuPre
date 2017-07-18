@@ -80,9 +80,10 @@
     }
     
     [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:nil];
-    
+    NSLog(@"thisEvent.listImage.imageUrl %@", thisEvent.listImage.imageUrl);
     //[self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:nil];
-    self.profileImageView.image = [UIImage imageNamed:@"profile-bg-green1_02.jpg"];
+    //self.profileImageView.image = [UIImage imageNamed:@"profile-bg-green1_02.jpg"];
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listPublishUser.userProfileImage.imageUrl] placeholderImage:nil];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
     

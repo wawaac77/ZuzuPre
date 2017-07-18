@@ -38,4 +38,11 @@ typedef NS_ENUM(NSInteger , MyPublishContentType){
 @property (nonatomic, strong) GFImage *listImage;
 @property (nonatomic, copy) NSString *listIsLike;
 
+/*****额外增加的属性*****/
+
+/** cell高度 */
+@property (nonatomic, assign) CGFloat cellHeight;
+/** 中间内容的Frame */
+@property (nonatomic, assign) CGRect middleF;
+
 @end

@@ -14,6 +14,7 @@
 #import "BadgesCollectionViewController.h"
 #import "NotificationViewController.h"
 #import "LeaderboardViewController.h"
+#import "ZZFriendsTableViewController.h"
 
 #import "EventListTableViewController.h"
 #import "RestaurantViewController.h" //should be favourite restaurant
@@ -150,7 +151,13 @@ static CGFloat  const margin = 0;
         leaderboardVC.view.frame = CGRectMake(0, 0, GFScreenWidth, self.view.gf_height - GFTabBarH);
         leaderboardVC.navigationItem.title = @"Leaderboard";
         [self.navigationController pushViewController:leaderboardVC animated:YES];
+    } else if ([item.name isEqualToString: @"My Friends"]) {
+        ZZFriendsTableViewController *myFriendsVC = [[ZZFriendsTableViewController alloc] init];
+        //myFriendsVC.view.frame = CGRectMake(0, 0, GFScreenWidth, self.view.gf_height - GFTabBarH);
+        //myFriendsVC.navigationItem.title = @"My Friends";
+        [self.navigationController pushViewController:myFriendsVC animated:YES];
     }
+
     //判断
     if (![item.url containsString:@"http"]) return;
     

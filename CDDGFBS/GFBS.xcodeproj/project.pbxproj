@@ -262,11 +262,18 @@
 		783089311F1C85A700C31BFE /* HomePostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830892F1F1C85A700C31BFE /* HomePostTableViewController.m */; };
 		783089321F1C85A700C31BFE /* HomePostTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089301F1C85A700C31BFE /* HomePostTableViewController.xib */; };
 		783089351F1C913200C31BFE /* ZZContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089341F1C913200C31BFE /* ZZContentModel.m */; };
-		783089411F1CD29300C31BFE /* ZZCommentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830893F1F1CD29300C31BFE /* ZZCommentsTableViewController.m */; };
-		783089421F1CD29300C31BFE /* ZZCommentsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089401F1CD29300C31BFE /* ZZCommentsTableViewController.xib */; };
 		783089451F1CD66200C31BFE /* ZZComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089441F1CD66200C31BFE /* ZZComment.m */; };
 		783089481F1D039800C31BFE /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089471F1D039800C31BFE /* CommentHeaderView.m */; };
 		7830894A1F1D0C6F00C31BFE /* CommentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089491F1D0C6F00C31BFE /* CommentHeaderView.xib */; };
+		7830894E1F1D9ECC00C31BFE /* ZZCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830894C1F1D9ECC00C31BFE /* ZZCommentsViewController.m */; };
+		7830894F1F1D9ECC00C31BFE /* ZZCommentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7830894D1F1D9ECC00C31BFE /* ZZCommentsViewController.xib */; };
+		783089531F1DBE3700C31BFE /* ZZCommentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089511F1DBE3700C31BFE /* ZZCommentsCell.m */; };
+		783089541F1DBE3700C31BFE /* ZZCommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089521F1DBE3700C31BFE /* ZZCommentsCell.xib */; };
+		7830895C1F1E1E4100C31BFE /* ZZFriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830895A1F1E1E4100C31BFE /* ZZFriendsTableViewController.m */; };
+		7830895D1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7830895B1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib */; };
+		783089601F1E1E7100C31BFE /* ZZFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830895F1F1E1E7100C31BFE /* ZZFriendModel.m */; };
+		783089641F1E220000C31BFE /* ZZFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089621F1E220000C31BFE /* ZZFriendCell.m */; };
+		783089651F1E220000C31BFE /* ZZFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089631F1E220000C31BFE /* ZZFriendCell.xib */; };
 		783F822D1F1713B800491529 /* LeaderboardHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 783F822C1F1713B800491529 /* LeaderboardHomeTableViewController.m */; };
 		783F82311F17149100491529 /* ZZLeaderboardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 783F822F1F17149100491529 /* ZZLeaderboardCell.m */; };
 		783F82321F17149100491529 /* ZZLeaderboardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783F82301F17149100491529 /* ZZLeaderboardCell.xib */; };
@@ -825,14 +832,25 @@
 		783089301F1C85A700C31BFE /* HomePostTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePostTableViewController.xib; sourceTree = "<group>"; };
 		783089331F1C913200C31BFE /* ZZContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZContentModel.h; sourceTree = "<group>"; };
 		783089341F1C913200C31BFE /* ZZContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZContentModel.m; sourceTree = "<group>"; };
-		7830893E1F1CD29300C31BFE /* ZZCommentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCommentsTableViewController.h; sourceTree = "<group>"; };
-		7830893F1F1CD29300C31BFE /* ZZCommentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCommentsTableViewController.m; sourceTree = "<group>"; };
-		783089401F1CD29300C31BFE /* ZZCommentsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZCommentsTableViewController.xib; sourceTree = "<group>"; };
 		783089431F1CD66200C31BFE /* ZZComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZComment.h; sourceTree = "<group>"; };
 		783089441F1CD66200C31BFE /* ZZComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZComment.m; sourceTree = "<group>"; };
 		783089461F1D039800C31BFE /* CommentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentHeaderView.h; sourceTree = "<group>"; };
 		783089471F1D039800C31BFE /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentHeaderView.m; sourceTree = "<group>"; };
 		783089491F1D0C6F00C31BFE /* CommentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentHeaderView.xib; sourceTree = "<group>"; };
+		7830894B1F1D9ECC00C31BFE /* ZZCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCommentsViewController.h; sourceTree = "<group>"; };
+		7830894C1F1D9ECC00C31BFE /* ZZCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCommentsViewController.m; sourceTree = "<group>"; };
+		7830894D1F1D9ECC00C31BFE /* ZZCommentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZCommentsViewController.xib; sourceTree = "<group>"; };
+		783089501F1DBE3700C31BFE /* ZZCommentsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCommentsCell.h; sourceTree = "<group>"; };
+		783089511F1DBE3700C31BFE /* ZZCommentsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCommentsCell.m; sourceTree = "<group>"; };
+		783089521F1DBE3700C31BFE /* ZZCommentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZCommentsCell.xib; sourceTree = "<group>"; };
+		783089591F1E1E4100C31BFE /* ZZFriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZFriendsTableViewController.h; sourceTree = "<group>"; };
+		7830895A1F1E1E4100C31BFE /* ZZFriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZFriendsTableViewController.m; sourceTree = "<group>"; };
+		7830895B1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZFriendsTableViewController.xib; sourceTree = "<group>"; };
+		7830895E1F1E1E7100C31BFE /* ZZFriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZFriendModel.h; sourceTree = "<group>"; };
+		7830895F1F1E1E7100C31BFE /* ZZFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZFriendModel.m; sourceTree = "<group>"; };
+		783089611F1E220000C31BFE /* ZZFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZFriendCell.h; sourceTree = "<group>"; };
+		783089621F1E220000C31BFE /* ZZFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZFriendCell.m; sourceTree = "<group>"; };
+		783089631F1E220000C31BFE /* ZZFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZFriendCell.xib; sourceTree = "<group>"; };
 		783F822B1F1713B800491529 /* LeaderboardHomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderboardHomeTableViewController.h; sourceTree = "<group>"; };
 		783F822C1F1713B800491529 /* LeaderboardHomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderboardHomeTableViewController.m; sourceTree = "<group>"; };
 		783F822E1F17149100491529 /* ZZLeaderboardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZLeaderboardCell.h; sourceTree = "<group>"; };
@@ -1352,9 +1370,10 @@
 			children = (
 				18BE026D1DDB497900D27893 /* AD(广告) */,
 				18BE02791DDB497900D27893 /* Main(主要) */,
-				184D492A1DED5D5800C7B03F /* Comment(评论) */,
 				7829FF9B1ED803D000C934C2 /* Login */,
 				784D3F5D1ECC67040058C63F /* Home */,
+				184D492A1DED5D5800C7B03F /* Comment(评论) */,
+				783089551F1E1DF100C31BFE /* Friends */,
 				788333151F17779700967337 /* Check-in */,
 				789E0D5C1F17DC0A00CCAAE4 /* Inbox */,
 				18BE02711DDB497900D27893 /* Social Calendar */,
@@ -2147,6 +2166,46 @@
 			name = Previous;
 			sourceTree = "<group>";
 		};
+		783089551F1E1DF100C31BFE /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				783089561F1E1E0900C31BFE /* Controller */,
+				783089571F1E1E1800C31BFE /* Model */,
+				783089581F1E1E2600C31BFE /* View */,
+			);
+			name = Friends;
+			path = "Comment(评论)";
+			sourceTree = "<group>";
+		};
+		783089561F1E1E0900C31BFE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				783089591F1E1E4100C31BFE /* ZZFriendsTableViewController.h */,
+				7830895A1F1E1E4100C31BFE /* ZZFriendsTableViewController.m */,
+				7830895B1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		783089571F1E1E1800C31BFE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7830895E1F1E1E7100C31BFE /* ZZFriendModel.h */,
+				7830895F1F1E1E7100C31BFE /* ZZFriendModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		783089581F1E1E2600C31BFE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				783089611F1E220000C31BFE /* ZZFriendCell.h */,
+				783089621F1E220000C31BFE /* ZZFriendCell.m */,
+				783089631F1E220000C31BFE /* ZZFriendCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		783F822A1F1619C500491529 /* Previous */ = {
 			isa = PBXGroup;
 			children = (
@@ -2218,10 +2277,10 @@
 				783089341F1C913200C31BFE /* ZZContentModel.m */,
 				789CFF911F1232E500EBA772 /* ZZEventImages.h */,
 				789CFF921F1232E500EBA772 /* ZZEventImages.m */,
-				783089431F1CD66200C31BFE /* ZZComment.h */,
-				783089441F1CD66200C31BFE /* ZZComment.m */,
 				7829FFB91EE50DEB00C934C2 /* GFImage.h */,
 				7829FFBA1EE50DEB00C934C2 /* GFImage.m */,
+				783089431F1CD66200C31BFE /* ZZComment.h */,
+				783089441F1CD66200C31BFE /* ZZComment.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2236,10 +2295,10 @@
 				7830892E1F1C85A700C31BFE /* HomePostTableViewController.h */,
 				7830892F1F1C85A700C31BFE /* HomePostTableViewController.m */,
 				783089301F1C85A700C31BFE /* HomePostTableViewController.xib */,
+				7830894B1F1D9ECC00C31BFE /* ZZCommentsViewController.h */,
+				7830894C1F1D9ECC00C31BFE /* ZZCommentsViewController.m */,
+				7830894D1F1D9ECC00C31BFE /* ZZCommentsViewController.xib */,
 				786069E51F160A0100A8AB88 /* HomeChildVCs */,
-				7830893E1F1CD29300C31BFE /* ZZCommentsTableViewController.h */,
-				7830893F1F1CD29300C31BFE /* ZZCommentsTableViewController.m */,
-				783089401F1CD29300C31BFE /* ZZCommentsTableViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2261,6 +2320,9 @@
 				783089461F1D039800C31BFE /* CommentHeaderView.h */,
 				783089471F1D039800C31BFE /* CommentHeaderView.m */,
 				783089491F1D0C6F00C31BFE /* CommentHeaderView.xib */,
+				783089501F1DBE3700C31BFE /* ZZCommentsCell.h */,
+				783089511F1DBE3700C31BFE /* ZZCommentsCell.m */,
+				783089521F1DBE3700C31BFE /* ZZCommentsCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2878,6 +2940,7 @@
 				7824E3481EF1408E00F85BFB /* ic_badges_338x338-02.png in Resources */,
 				786069A81F15DB9B00A8AB88 /* ic_checkin-camera.png in Resources */,
 				786069B21F15DB9B00A8AB88 /* ic_home-check-in.png in Resources */,
+				7830894F1F1D9ECC00C31BFE /* ZZCommentsViewController.xib in Resources */,
 				780096FB1EC9C1F5008F9F99 /* ic_fa-calendar-check-o.png in Resources */,
 				7829FF791ED55C9B00C934C2 /* pexels-photo-29346.png in Resources */,
 				780096C01EC9C1F5008F9F99 /* ic_ fa-navicon.png in Resources */,
@@ -2994,13 +3057,13 @@
 				780097031EC9C1F5008F9F99 /* ic_settings.png in Resources */,
 				780096B51EC9C1F5008F9F99 /* event-banner-1036x328-05b.jpg in Resources */,
 				780096E81EC9C1F5008F9F99 /* google-plus-login.png in Resources */,
-				783089421F1CD29300C31BFE /* ZZCommentsTableViewController.xib in Resources */,
 				780096C61EC9C1F5008F9F99 /* ic_fa-commenting-o.png in Resources */,
 				7829FF881ED576AC00C934C2 /* RestaurantReviewViewController.xib in Resources */,
 				780096F51EC9C1F5008F9F99 /* ic_camera_pop_up.png in Resources */,
 				788CC3591F19EC3900DC4116 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				788CC2921F18801600DC4116 /* ZZChatViewController.xib in Resources */,
 				786069CE1F15DB9B00A8AB88 /* zuzu-my-freinds.png in Resources */,
+				783089651F1E220000C31BFE /* ZZFriendCell.xib in Resources */,
 				189CA3301DDADBF6004D07EA /* Assets.xcassets in Resources */,
 				786069A61F15DB9B00A8AB88 /* ic_add-friend.png in Resources */,
 				786069C21F15DB9B00A8AB88 /* ic_checkin-restaurant.png in Resources */,
@@ -3021,6 +3084,7 @@
 				786069C91F15DB9B00A8AB88 /* ic_tag.png in Resources */,
 				786069C81F15DB9B00A8AB88 /* ic_price.png in Resources */,
 				780097161EC9C1F5008F9F99 /* Thumbs.db in Resources */,
+				7830895D1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib in Resources */,
 				780097391ECAD956008F9F99 /* zuzu_App_Icon_167x167.png in Resources */,
 				786069C71F15DB9B00A8AB88 /* ic_phone_call.png in Resources */,
 				780096C71EC9C1F5008F9F99 /* ic_fa-credit-card.png in Resources */,
@@ -3089,6 +3153,7 @@
 				780096CA1EC9C1F5008F9F99 /* ic_fa-filter.png in Resources */,
 				780096D41EC9C1F5008F9F99 /* ic_fa-users-on.png in Resources */,
 				780096FE1EC9C1F5008F9F99 /* Ic_fa-star.png in Resources */,
+				783089541F1DBE3700C31BFE /* ZZCommentsCell.xib in Resources */,
 				780097071EC9C1F5008F9F99 /* gold_pin.png in Resources */,
 				786069AC1F15DB9B00A8AB88 /* ic_facebook-logo.png in Resources */,
 				7862274F1EF91AF8006F731F /* zuzu-login-1242x2208.png in Resources */,
@@ -3221,7 +3286,6 @@
 				783F82311F17149100491529 /* ZZLeaderboardCell.m in Sources */,
 				783F822D1F1713B800491529 /* LeaderboardHomeTableViewController.m in Sources */,
 				788333231F178F3000967337 /* DPSharePopView.m in Sources */,
-				783089411F1CD29300C31BFE /* ZZCommentsTableViewController.m in Sources */,
 				18BE02A21DDB4A8900D27893 /* GFTabBarController.m in Sources */,
 				7829FF871ED576AC00C934C2 /* RestaurantReviewViewController.m in Sources */,
 				788CC33D1F19EC3900DC4116 /* JSQMessagesBubblesSizeCalculator.m in Sources */,
@@ -3246,6 +3310,7 @@
 				18C8262F1DE7369C007341E3 /* ZZHostingViewController.m in Sources */,
 				181EF7481E0B661200C91928 /* GFPlaceholderTextView.m in Sources */,
 				1823914D1DEECDEB00B88AE0 /* GFCommentCell.m in Sources */,
+				7830895C1F1E1E4100C31BFE /* ZZFriendsTableViewController.m in Sources */,
 				786227521EFBB3DB006F731F /* KCAnnotation.m in Sources */,
 				788CC3331F19EC3900DC4116 /* UIView+JSQMessages.m in Sources */,
 				18B7C7261DE0717A004BD781 /* GFMemberViewController.m in Sources */,
@@ -3299,6 +3364,7 @@
 				1829A69E1DE7E8390086AD86 /* GFTopic.m in Sources */,
 				788CC33C1F19EC3900DC4116 /* JSQAudioMediaViewAttributes.m in Sources */,
 				78F49F841EE6F61100674130 /* MyEvent.m in Sources */,
+				7830894E1F1D9ECC00C31BFE /* ZZCommentsViewController.m in Sources */,
 				18BE02B51DDB6EB100D27893 /* GFTabBar.m in Sources */,
 				1829A6AE1DE8550D0086AD86 /* GFTopicCell.m in Sources */,
 				788CC3521F19EC3900DC4116 /* JSQMessagesLabel.m in Sources */,
@@ -3334,11 +3400,13 @@
 				1841A77E1DE17BE400FB54CC /* GFWebViewController.m in Sources */,
 				182391461DEEC70500B88AE0 /* GFCommentHeaderFooterView.m in Sources */,
 				783089451F1CD66200C31BFE /* ZZComment.m in Sources */,
+				783089641F1E220000C31BFE /* ZZFriendCell.m in Sources */,
 				185420881DF064F1004F6378 /* GFSettingViewController.m in Sources */,
 				788CC3371F19EC3900DC4116 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				788CC34A1F19EC3900DC4116 /* JSQMessagesCollectionView.m in Sources */,
 				18BE02B21DDB4C3900D27893 /* GFMeViewController.m in Sources */,
 				789CFF9F1F13C06500EBA772 /* LeaderboardViewController.m in Sources */,
+				783089601F1E1E7100C31BFE /* ZZFriendModel.m in Sources */,
 				789CFF971F12399100EBA772 /* ZZImageCollectionCell.m in Sources */,
 				788CC34C1F19EC3900DC4116 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				788CC3381F19EC3900DC4116 /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
@@ -3386,6 +3454,7 @@
 				181EF7421E0B5DA000C91928 /* GFPostWordViewController.m in Sources */,
 				788CC33A1F19EC3900DC4116 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				788CC3361F19EC3900DC4116 /* JSQMessagesAvatarImageFactory.m in Sources */,
+				783089531F1DBE3700C31BFE /* ZZCommentsCell.m in Sources */,
 				788CC3421F19EC3900DC4116 /* JSQLocationMediaItem.m in Sources */,
 				786069631F15D98100A8AB88 /* DHGifImageOperation.m in Sources */,
 			);

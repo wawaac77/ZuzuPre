@@ -12,7 +12,7 @@ CGFloat const GFTagMargin = 5;
 CGFloat const GFTagHeight = 25;
 
 /*头像高*/
-CGFloat const GFiconH = 55;
+CGFloat const GFiconH = 50;
 /*底部View(评论，分享，顶，踩) 高*/
 CGFloat const GFDcrcH = 35;
 /*最热评论label高*/

@@ -32,6 +32,8 @@
              @"userOrganizingExp" : @"organizingExp",
              @"listEventIsPrivate" : @"isPrivate",
              @"userInterests" : @"interests",
+             @"userProfileImage" : @"profilePic",
+             @"userLastCheckIn" : @"lastCheckin",
              };
 }
 

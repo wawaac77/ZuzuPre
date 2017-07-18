@@ -49,13 +49,50 @@
 - (void)setUser:(ZZLeaderboardModel *)user {
     ZZLeaderboardModel *thisUser = user;
     _numberLabel.text = [NSString stringWithFormat:@"%@", thisUser.leaderboardRank];
-    //[self.profileImageView sd_setImageWithURL:[NSURL URLWithString:nil] placeholderImage:nil];
-    _profileImageView.image = [UIImage imageNamed:@"icon.png"];
+    //[self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisUser.leaderboardMember.userProfileImage.imageUrl] placeholderImage:nil];
+    //_profileImageView.image = [UIImage imageNamed:@"icon.png"];
+    [self downloadImageFromURL:thisUser.leaderboardMember.userProfileImage.imageUrl];
     _profileImageView.layer.masksToBounds = YES;
     _profileImageView.layer.cornerRadius = _profileImageView.frame.size.width / 2;
     _usernameLabel.text = thisUser.leaderboardMember.userUserName;
     _locationLabel.text = thisUser.leaderboardMember.userEmail;
     _scoreLabel.text = [NSString stringWithFormat:@"%@",thisUser.leaderboardLevel];
 }
+
+-(void) downloadImageFromURL :(NSString *)imageUrl{
+    
+    
+    
+    NSURL  *url = [NSURL URLWithString:imageUrl];
+    
+    NSData *urlData = [NSData dataWithContentsOfURL:url];
+    NSLog(@"url %@", url);
+    NSLog(@"urlData %@", urlData);
+    
+    if ( urlData )
+        
+    {
+        
+        NSLog(@"Downloading started...");
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"dwnld_image.png"];
+        
+        NSLog(@"FILE : %@",filePath);
+        
+        [urlData writeToFile:filePath atomically:YES];
+        
+        UIImage *image1=[UIImage imageWithContentsOfFile:filePath];
+        
+        self.profileImageView.image=image1;
+        
+        NSLog(@"Completed...");
+        
+    }
+}
+
 
 @end

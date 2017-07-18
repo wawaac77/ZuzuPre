@@ -85,13 +85,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[LeaderboardViewController addChildViewController]:LeaderboardViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.scrollView.gf_width">
+            </PersistentString>
+            <PersistentString
+               value = "self.scrollView.contentOffset.x">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__48-[NSObject(MJKeyValue) mj_setKeyValues:context:]_block_invoke:NSObject+MJKeyValue.m">
       </ContextState>
       <ContextState
          contextName = "-[NSObject(MJKeyValue) mj_setKeyValues:]:NSObject+MJKeyValue.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[LoginChildViewController nextButtonClicked:]:LoginChildViewController.m">
       </ContextState>
       <ContextState
          contextName = "+[NSObject(MJKeyValue) mj_objectWithKeyValues:context:]:NSObject+MJKeyValue.m">
@@ -100,13 +108,13 @@
          contextName = "-[MyEventCell setEvent:]:MyEventCell.m">
       </ContextState>
       <ContextState
-         contextName = "-[LeaderboardViewController addChildViewController]:LeaderboardViewController.m">
+         contextName = "-[MyEventCell timeLabel]:MyEventCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ZZLeaderboardCell setUser:]:ZZLeaderboardCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.scrollView.gf_width">
-            </PersistentString>
-            <PersistentString
-               value = "self.scrollView.contentOffset.x">
+               value = "self.profileImageView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -152,7 +160,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[MyEventCell timeLabel]:MyEventCell.m">
+         contextName = "-[LoginChildViewController nextButtonClicked:]:LoginChildViewController.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 
-@class GFComment;
+@class ZZComment;
 @interface GFCommentCell : UITableViewCell
 
 /*数据*/
-@property (strong , nonatomic)GFComment *comment;
+@property (strong , nonatomic)ZZComment *comment;
 @end

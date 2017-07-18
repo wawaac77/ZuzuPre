@@ -36,6 +36,60 @@ static NSCalendar *calendar_;
             };
 }
 
+-(CGFloat)cellHeight
+{
+    //如果cell高度已经计算处理 就直接返回
+    if (_cellHeight) return _cellHeight;
+    //头像
+    _cellHeight = GFiconH;
+    
+    //文字
+    CGFloat textMaxW = [UIScreen mainScreen].bounds.size.width - 2 * GFMargin;
+    CGSize textMaxSize = CGSizeMake(textMaxW, MAXFLOAT);
+    CGSize textSize = [self.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
+    _cellHeight += textSize.height + GFMargin;
+    
+    //中间
+    /*
+    if (self.type != GFTopicTypeWord) {
+        CGFloat contentH = textMaxW * self.height / self.width;
+        
+        if (contentH >= GFScreenHeight) {//超长图片
+            contentH = GFLargImageCompressH;
+            self.is_largeImage = YES;
+        }
+        //中间内容的Frame
+        //CGRect middleF = CGRectMake(GFMargin, _cellHeight, textMaxW, contentH);
+        //self.middleF = middleF;
+        
+        _cellHeight += contentH + GFMargin;
+        
+    //}*/
+    
+    /*
+    //最热评论
+    if (self.top_cmt) {
+        _cellHeight += GFHotCommentLabel ;
+        //展示评论数据
+        NSString *content = self.top_cmt.content;
+        if(self.top_cmt.voiceuri.length)
+        {
+            content = @"语言评论''";
+        }
+        NSString *topCmtContent = [NSString stringWithFormat:@"%@ : %@", self.top_cmt.user.username, content];
+        
+        CGSize topCmtContentSize = [topCmtContent boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size;
+        _cellHeight += topCmtContentSize.height + GFMargin;
+        
+    }*/
+    //底部工具条
+    _cellHeight += GFDcrcH + GFMargin;
+    
+    //return _cellHeight;
+    return 230;
+}
+
+
 /**
  只调用一次
  */
