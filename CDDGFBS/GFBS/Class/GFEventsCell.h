@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class EventInList; //Use data model of GFTopic
+@class ZZContentModel;
+
 @interface GFEventsCell : UITableViewCell
 
 /*数据*/
-@property (strong, nonatomic) EventInList *event;
+@property (strong, nonatomic) ZZContentModel *event;
 
 @end

@@ -8,16 +8,10 @@
 
 #import "GFEventsCell.h"
 
-#import "EventInList.h"
+#import "ZZContentModel.h"
 #import "GFImage.h"
-#import "ZZInterest.h"
-
-//#import "GFTopicVideoView.h"
-//#import "GFTopicVoiceView.h"
-//#import "GFTopicPictureView.h"
 
 #import <SVProgressHUD.h>
-#import <Social/Social.h>
 #import <UIImageView+WebCache.h>
 
 @interface GFEventsCell()
@@ -75,82 +69,34 @@
 }
 */
 
--(void)setupFrameandColor {
-    
-}
-
--(void)setEvent:(EventInList *)event
+-(void)setEvent:(ZZContentModel *)event
 {
     
-    //NSString *eventImageName = thisEvent.eventBanner.imageFilename;
-    //self.bigImageView.image = [UIImage imageNamed:eventImageName];
-  
-    /*
-    self.bigImageView.frame = CGRectMake(5, 0, [UIScreen mainScreen].bounds.size.width - 10, 130);
-    self.bottomView.frame = CGRectMake(5, 130, [UIScreen mainScreen].bounds.size.width - 10, 30);
-    self.bottomView.backgroundColor = [UIColor whiteColor];
-    self.timeLabel.frame = CGRectMake(5, 0, [UIScreen mainScreen].bounds.size.width / 3, 30);
-    self.placeLabel.frame = CGRectMake([UIScreen mainScreen].bounds.size.width / 3 + 10, 0, [UIScreen mainScreen].bounds.size.width / 3 * 2 - 30 , 30);
-    self.calendarButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 35, 5, 20, 20);
-    */
-    EventInList *thisEvent = event;
-    self.heartButton.imageView.image = [UIImage imageNamed:@"ic_fa-heart-o"];
-    [_heartButton setImage:[UIImage imageNamed:@"ic_fa-heart-o"] forState:UIControlStateNormal];
+    ZZContentModel *thisEvent = event;
+    if ([thisEvent.listIsLike isEqualToString:@"true"]) {
+        [_heartButton setImage:[UIImage imageNamed:@"ic_heart-o"] forState:UIControlStateNormal];
+    } else {
+        [_heartButton setImage:[UIImage imageNamed:@"ic_heart-grey"] forState:UIControlStateNormal];
+    }
     
-    [self downloadImageFromURL:thisEvent.listEventBanner.eventBanner.imageUrl];
-    //self.peopleIcon.image = [UIImage imageNamed:@"ic_fa-user-on"];
-    self.bigTitleLabel.text = thisEvent.listEventName;
-    ZZInterest *interest = [thisEvent.listEventInterests objectAtIndex:0];
-    self.smallTitleLabel.text = [NSString stringWithFormat:@"%@ | %@/%@", interest.interestName.en, thisEvent.listEventJoinedCount,thisEvent.listEventQuota ];
+    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:nil];
     
-    
-    self.timeLabel.text = thisEvent.listEventStartDate;
-    
-    self.placeLabel.text = thisEvent.listEventRestaurant.restaurantName.en;
-    [_placeLabel setFont:[UIFont boldSystemFontOfSize:15]];
-    [_placeLabel setTextColor:[UIColor darkGrayColor]];
-    
+    //[self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:nil];
     self.profileImageView.image = [UIImage imageNamed:@"profile-bg-green1_02.jpg"];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
     
-}
-
--(void) downloadImageFromURL :(NSString *)imageUrl{
+    self.bigTitleLabel.text = thisEvent.listEventRestaurant.restaurantName.en;
     
-    NSURL  *url = [NSURL URLWithString:imageUrl];
-    NSData *urlData = [NSData dataWithContentsOfURL:url];
-    if ( urlData )
-    {
-        NSLog(@"Downloading started...");
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"dwnld_image.png"];
-        NSLog(@"FILE : %@",filePath);
-        [urlData writeToFile:filePath atomically:YES];
-        UIImage *image1=[UIImage imageWithContentsOfFile:filePath];
-        self.bigImageView.image=image1;
-        NSLog(@"Completed...");
-    }
+    self.placeLabel.text = thisEvent.listEventRestaurant.restaurantDistrict.informationName.en;
+    
+    self.smallTitleLabel.text = thisEvent.listPublishUser.userUserName;
+    
+    self.textField.text = thisEvent.listMessage;
+    
+    self.timeLabel.text = thisEvent.listEventCreatedAt;
     
 }
-
-/*
--(void)setTopic:(GFTopic *)topic
-{
-    _event = topic;
-    
-    UIImage *placeholder = [[UIImage imageNamed:@"defaultUserIcon"]gf_circleImage];
-    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:topic.profile_image] placeholderImage:placeholder completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (!image) return ;
-        self.bigImageView.image = [image gf_circleImage];
-    }];
-    self.bigTitleLabel.text = topic.name;
-    self.smallTitleLabel.text = topic.created_at;
-    self.timeLabel.text = topic.created_at;
-    self.placeLabel.text = @"Alice's restaurant";
-}
-*/
 
 - (void)awakeFromNib {
     [super awakeFromNib];

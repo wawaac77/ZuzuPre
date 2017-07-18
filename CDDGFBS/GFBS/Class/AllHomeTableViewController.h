@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GFTopicViewController.h"
+#import "HomePostTableViewController.h"
 
-@interface AllHomeTableViewController : UITableViewController
+@interface AllHomeTableViewController : HomePostTableViewController
 
 @end

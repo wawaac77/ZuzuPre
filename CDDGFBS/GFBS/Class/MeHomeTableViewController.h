@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomePostTableViewController.h"
 
-@interface MeHomeTableViewController : UITableViewController
+@interface MeHomeTableViewController : HomePostTableViewController
 
 @end

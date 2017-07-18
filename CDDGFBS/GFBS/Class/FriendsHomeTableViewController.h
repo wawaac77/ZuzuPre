@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomePostTableViewController.h"
 
-@interface FriendsHomeTableViewController : UITableViewController
+@interface FriendsHomeTableViewController : HomePostTableViewController
 
 @end
