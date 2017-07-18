@@ -212,11 +212,17 @@ static CGFloat  const margin = 0;
     alertView.backgroundColor = [UIColor clearColor];
     
     NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:facebookButton, googlePlusButton, smsButton, shareUrlButton, nil];
+    NSArray *iconArray = [[NSArray alloc] initWithObjects:@"ic_facebook-logo",@"ic_google-plus", @"ic_sms",@"",nil];
     for (int i = 0; i < buttonArray.count; i++) {
         UIButton *button = [buttonArray objectAtIndex:i];
         button.layer.cornerRadius = 5.0f;
         button.clipsToBounds = YES;
         button.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [button addSubview:imageView];
+        imageView.frame = CGRectMake(15, 10, 44 - 20, 44 - 20);
+        imageView.image = [UIImage imageNamed:[iconArray objectAtIndex:i]];
     }
 
     [alertView show];

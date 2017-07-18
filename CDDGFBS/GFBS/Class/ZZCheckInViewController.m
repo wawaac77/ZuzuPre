@@ -184,12 +184,13 @@
 - (void)keyBoardWillChageFrame:(NSNotification *)note
 {
     //键盘最终的Frame
-    CGRect keyBoadrFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey]CGRectValue];
+    CGRect keyBoadrFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     //动画
-    CGFloat animKey = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey]doubleValue];
+    CGFloat animKey = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:animKey animations:^{
-        self.toolBar.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight);
+        self.toolBar.transform = CGAffineTransformMakeTranslation(0,GFScreenHeight - keyBoadrFrame.origin.y);
     }];
+    NSLog(@"KeyboardFrame.origin.y %f", keyBoadrFrame.origin.y);
     
 }
 
@@ -239,7 +240,7 @@
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
     //发表点击判断
-    //self.navigationItem.rightBarButtonItem.enabled = textView.hasText;
+    self.navigationItem.rightBarButtonItem.enabled = textView.hasText;
 }
 
 #pragma mark - 键盘弹出和退出

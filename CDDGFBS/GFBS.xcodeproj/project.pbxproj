@@ -502,9 +502,9 @@
 		181EF7411E0B5DA000C91928 /* GFPostWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFPostWordViewController.m; sourceTree = "<group>"; };
 		181EF7461E0B661200C91928 /* GFPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFPlaceholderTextView.h; sourceTree = "<group>"; };
 		181EF7471E0B661200C91928 /* GFPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFPlaceholderTextView.m; sourceTree = "<group>"; };
-		181EF7491E0BD27400C91928 /* GFAddToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFAddToolBar.h; sourceTree = "<group>"; };
-		181EF74A1E0BD27400C91928 /* GFAddToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFAddToolBar.m; sourceTree = "<group>"; };
-		181EF74C1E0BD27B00C91928 /* GFAddToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GFAddToolBar.xib; sourceTree = "<group>"; };
+		181EF7491E0BD27400C91928 /* GFAddToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFAddToolBar.h; path = "Publish(发布)/View/GFAddToolBar.h"; sourceTree = "<group>"; };
+		181EF74A1E0BD27400C91928 /* GFAddToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFAddToolBar.m; path = "Publish(发布)/View/GFAddToolBar.m"; sourceTree = "<group>"; };
+		181EF74C1E0BD27B00C91928 /* GFAddToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GFAddToolBar.xib; path = "Publish(发布)/View/GFAddToolBar.xib"; sourceTree = "<group>"; };
 		182391441DEEC70500B88AE0 /* GFCommentHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCommentHeaderFooterView.h; sourceTree = "<group>"; };
 		182391451DEEC70500B88AE0 /* GFCommentHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFCommentHeaderFooterView.m; sourceTree = "<group>"; };
 		1823914A1DEECDEB00B88AE0 /* GFCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCommentCell.h; sourceTree = "<group>"; };
@@ -1206,9 +1206,6 @@
 				181EF73D1E0B5C8000C91928 /* GFPublishView.xib */,
 				181EF7461E0B661200C91928 /* GFPlaceholderTextView.h */,
 				181EF7471E0B661200C91928 /* GFPlaceholderTextView.m */,
-				181EF7491E0BD27400C91928 /* GFAddToolBar.h */,
-				181EF74A1E0BD27400C91928 /* GFAddToolBar.m */,
-				181EF74C1E0BD27B00C91928 /* GFAddToolBar.xib */,
 				18B61AF31E0D4A7100CAC3FF /* GFTagButton.h */,
 				18B61AF41E0D4A7100CAC3FF /* GFTagButton.m */,
 				18B61AF81E0D5DED00CAC3FF /* GFTagTextField.h */,
@@ -2477,6 +2474,9 @@
 				788333161F1777BF00967337 /* Controller */,
 				788333171F1777C900967337 /* Model */,
 				788333181F1777D100967337 /* View */,
+				181EF7491E0BD27400C91928 /* GFAddToolBar.h */,
+				181EF74A1E0BD27400C91928 /* GFAddToolBar.m */,
+				181EF74C1E0BD27B00C91928 /* GFAddToolBar.xib */,
 			);
 			name = "Check-in";
 			sourceTree = "<group>";
