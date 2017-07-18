@@ -22,6 +22,7 @@
 
 #import "GFSquareItem.h"
 #import "GFSquareCell.h"
+#import "ZGAlertView.h"
 
 #import <SVProgressHUD.h>
 #import <MJExtension.h>
@@ -146,12 +147,17 @@ static CGFloat  const margin = 0;
     if ([item.name isEqualToString: @"My Events"]) {
         EventListTableViewController *eventVC = [[EventListTableViewController alloc] init];
         [self.navigationController pushViewController:eventVC animated:YES];
-    } else if ([item.name isEqualToString: @"Leaderboard"]) {
+    }
+    else if ([item.name isEqualToString: @"Leaderboard"]) {
         LeaderboardHomeTableViewController *leaderboardVC = [[LeaderboardHomeTableViewController alloc] init];
         leaderboardVC.view.frame = CGRectMake(0, 0, GFScreenWidth, self.view.gf_height - GFTabBarH);
         leaderboardVC.navigationItem.title = @"Leaderboard";
         [self.navigationController pushViewController:leaderboardVC animated:YES];
-    } else if ([item.name isEqualToString: @"My Friends"]) {
+    }
+    else if ([item.name isEqualToString: @"Invite Friends"]) {
+        [self showShareView];
+    }
+    else if ([item.name isEqualToString: @"My Friends"]) {
         ZZFriendsTableViewController *myFriendsVC = [[ZZFriendsTableViewController alloc] init];
         //myFriendsVC.view.frame = CGRectMake(0, 0, GFScreenWidth, self.view.gf_height - GFTabBarH);
         //myFriendsVC.navigationItem.title = @"My Friends";
@@ -167,6 +173,53 @@ static CGFloat  const margin = 0;
     
     //给Url赋值
     webVc.url = url;
+    
+}
+
+- (void)showShareView {
+    /*
+    NSString *shareText = @"I'm having fun on ZUZU. Come and join me!";
+    NSArray *itemsToShare = @[shareText];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[];
+    [self presentViewController:activityVC animated:YES completion:nil];
+     */
+    
+    ZGAlertView *alertView = [[ZGAlertView alloc] initWithTitle:@"Invite Friends" message:@"" cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    
+    
+    UIButton *facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    facebookButton.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1];
+    [facebookButton setTitle:@"Find friends on Facebook" forState:UIControlStateNormal];
+    [alertView addCustomButton:facebookButton toIndex:0];
+    
+    UIButton *googlePlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    googlePlusButton.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:72.0/255.0 blue:54.0/255.0 alpha:1];
+    [googlePlusButton setTitle:@"Connect with Google+" forState:UIControlStateNormal];
+    [alertView addCustomButton:googlePlusButton toIndex:1];
+    
+    UIButton *smsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    smsButton.backgroundColor = [UIColor colorWithRed:91.0/255.0 green:194.0/255.0 blue:54.0/255.0 alpha:1];
+    [smsButton setTitle:@"SMS Your Friends" forState:UIControlStateNormal];
+    [alertView addCustomButton:smsButton toIndex:2];
+    
+    UIButton *shareUrlButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareUrlButton.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0 alpha:1];
+    [shareUrlButton setTitle:@"Share URL" forState:UIControlStateNormal];
+    [alertView addCustomButton:shareUrlButton toIndex:3];
+    
+    alertView.titleColor = [UIColor whiteColor];
+    alertView.backgroundColor = [UIColor clearColor];
+    
+    NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:facebookButton, googlePlusButton, smsButton, shareUrlButton, nil];
+    for (int i = 0; i < buttonArray.count; i++) {
+        UIButton *button = [buttonArray objectAtIndex:i];
+        button.layer.cornerRadius = 5.0f;
+        button.clipsToBounds = YES;
+        button.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+    }
+
+    [alertView show];
     
 }
 

@@ -274,6 +274,8 @@
 		783089601F1E1E7100C31BFE /* ZZFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830895F1F1E1E7100C31BFE /* ZZFriendModel.m */; };
 		783089641F1E220000C31BFE /* ZZFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089621F1E220000C31BFE /* ZZFriendCell.m */; };
 		783089651F1E220000C31BFE /* ZZFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089631F1E220000C31BFE /* ZZFriendCell.xib */; };
+		7830896A1F1E371F00C31BFE /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089671F1E371E00C31BFE /* UIView+Position.m */; };
+		7830896B1F1E371F00C31BFE /* ZGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089691F1E371F00C31BFE /* ZGAlertView.m */; };
 		783F822D1F1713B800491529 /* LeaderboardHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 783F822C1F1713B800491529 /* LeaderboardHomeTableViewController.m */; };
 		783F82311F17149100491529 /* ZZLeaderboardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 783F822F1F17149100491529 /* ZZLeaderboardCell.m */; };
 		783F82321F17149100491529 /* ZZLeaderboardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783F82301F17149100491529 /* ZZLeaderboardCell.xib */; };
@@ -851,6 +853,10 @@
 		783089611F1E220000C31BFE /* ZZFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZFriendCell.h; sourceTree = "<group>"; };
 		783089621F1E220000C31BFE /* ZZFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZFriendCell.m; sourceTree = "<group>"; };
 		783089631F1E220000C31BFE /* ZZFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZFriendCell.xib; sourceTree = "<group>"; };
+		783089661F1E371E00C31BFE /* UIView+Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Position.h"; sourceTree = "<group>"; };
+		783089671F1E371E00C31BFE /* UIView+Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Position.m"; sourceTree = "<group>"; };
+		783089681F1E371F00C31BFE /* ZGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGAlertView.h; sourceTree = "<group>"; };
+		783089691F1E371F00C31BFE /* ZGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGAlertView.m; sourceTree = "<group>"; };
 		783F822B1F1713B800491529 /* LeaderboardHomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderboardHomeTableViewController.h; sourceTree = "<group>"; };
 		783F822C1F1713B800491529 /* LeaderboardHomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderboardHomeTableViewController.m; sourceTree = "<group>"; };
 		783F822E1F17149100491529 /* ZZLeaderboardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZLeaderboardCell.h; sourceTree = "<group>"; };
@@ -1697,6 +1703,10 @@
 				180292411DE990C700743619 /* NSCalendar+GFExtension.m */,
 				18A23F791DEBDA5D001FC558 /* UIImage+GFImage.h */,
 				18A23F7A1DEBDA5D001FC558 /* UIImage+GFImage.m */,
+				783089661F1E371E00C31BFE /* UIView+Position.h */,
+				783089671F1E371E00C31BFE /* UIView+Position.m */,
+				783089681F1E371F00C31BFE /* ZGAlertView.h */,
+				783089691F1E371F00C31BFE /* ZGAlertView.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3279,6 +3289,7 @@
 				789CFFAA1F13CE2F00EBA772 /* ZZLeaderboardModel.m in Sources */,
 				18388AD81DFAAF21004E1DF9 /* GFRecommendViewController.m in Sources */,
 				78F49F721EE6F37B00674130 /* EventListTableViewController.m in Sources */,
+				7830896A1F1E371F00C31BFE /* UIView+Position.m in Sources */,
 				18B61AF51E0D4A7100CAC3FF /* GFTagButton.m in Sources */,
 				789CFF651F0B86A600EBA772 /* NotificationCell.m in Sources */,
 				788CC34E1F19EC3900DC4116 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
@@ -3294,6 +3305,7 @@
 				786069EB1F160A7400A8AB88 /* FriendsHomeTableViewController.m in Sources */,
 				180292421DE990C700743619 /* NSCalendar+GFExtension.m in Sources */,
 				789E0D661F17DCAE00CCAAE4 /* ZZInboxCell.m in Sources */,
+				7830896B1F1E371F00C31BFE /* ZGAlertView.m in Sources */,
 				784D3F611ECC675D0058C63F /* GFHomeViewController.m in Sources */,
 				18E8D36C1DE9D19800ED4EE1 /* GFComment.m in Sources */,
 				7829FFB11ED8139400C934C2 /* LoginButton.m in Sources */,
