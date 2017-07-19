@@ -285,6 +285,8 @@
 		784D3F6A1ECC79EE0058C63F /* GFEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 784D3F681ECC79EE0058C63F /* GFEventsCell.xib */; };
 		784D3F731ECC85CD0058C63F /* GFNearbyEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 784D3F711ECC85CD0058C63F /* GFNearbyEventsViewController.m */; };
 		784D3F741ECC85CD0058C63F /* GFNearbyEventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 784D3F721ECC85CD0058C63F /* GFNearbyEventsViewController.xib */; };
+		784FBB801F1F032A00014395 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 784FBB7E1F1F032A00014395 /* Fabric.framework */; };
+		784FBB811F1F032A00014395 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 784FBB7F1F1F032A00014395 /* Crashlytics.framework */; };
 		786069631F15D98100A8AB88 /* DHGifImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7860695F1F15D98100A8AB88 /* DHGifImageOperation.m */; };
 		786069641F15D98100A8AB88 /* DHGuidePageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 786069611F15D98100A8AB88 /* DHGuidePageHUD.m */; };
 		786069651F15D98100A8AB88 /* GuideImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 786069621F15D98100A8AB88 /* GuideImage.bundle */; };
@@ -871,6 +873,8 @@
 		784D3F701ECC85CD0058C63F /* GFNearbyEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFNearbyEventsViewController.h; sourceTree = "<group>"; };
 		784D3F711ECC85CD0058C63F /* GFNearbyEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFNearbyEventsViewController.m; sourceTree = "<group>"; };
 		784D3F721ECC85CD0058C63F /* GFNearbyEventsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GFNearbyEventsViewController.xib; sourceTree = "<group>"; };
+		784FBB7E1F1F032A00014395 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		784FBB7F1F1F032A00014395 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		7860695E1F15D98100A8AB88 /* DHGifImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGifImageOperation.h; sourceTree = "<group>"; };
 		7860695F1F15D98100A8AB88 /* DHGifImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHGifImageOperation.m; sourceTree = "<group>"; };
 		786069601F15D98100A8AB88 /* DHGuidePageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGuidePageHUD.h; sourceTree = "<group>"; };
@@ -1160,6 +1164,8 @@
 			files = (
 				7824E3611EF27D5300F85BFB /* MapKit.framework in Frameworks */,
 				F0DF6B9C479499B133954DC1 /* libPods-GFBS.a in Frameworks */,
+				784FBB811F1F032A00014395 /* Crashlytics.framework in Frameworks */,
+				784FBB801F1F032A00014395 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1750,6 +1756,8 @@
 		6F4DA860D03CDB4F1CA64D50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				784FBB7E1F1F032A00014395 /* Fabric.framework */,
+				784FBB7F1F1F032A00014395 /* Crashlytics.framework */,
 				7824E3601EF27D5300F85BFB /* MapKit.framework */,
 				16F7F4458D42D3C1C1286EDF /* libPods-GFBS.a */,
 			);
@@ -2832,6 +2840,7 @@
 				189CA31E1DDADBF6004D07EA /* Resources */,
 				7832944BFDD6A1BCA3C65EEF /* [CP] Embed Pods Frameworks */,
 				EF13E4F70CD6054F54CBEF09 /* [CP] Copy Pods Resources */,
+				7830896C1F1EFA4B00C31BFE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3247,6 +3256,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		7830896C1F1EFA4B00C31BFE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 8040ded33897c7f8e2b6ec01828144d7e26d1670 7a6b307a09cbd1d7194c3d36aabfa6efa08a17467ebc793a8dfd0d6ff72c1397";
+		};
 		7832944BFDD6A1BCA3C65EEF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3616,6 +3638,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GFBS/Class/Essence(精华)/JMessageDemo/JMessageDemo",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = GFBS/Class/Others/GFBS.pch;
 				INFOPLIST_FILE = GFBS/Info.plist;
@@ -3637,6 +3660,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GFBS/Class/Essence(精华)/JMessageDemo/JMessageDemo",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = GFBS/Class/Others/GFBS.pch;
 				INFOPLIST_FILE = GFBS/Info.plist;
