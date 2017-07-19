@@ -115,8 +115,9 @@ static NSString *const headID = @"head";
     self.tableView.tableHeaderView = head;
 
     //头部View高度
-    self.tableView.sectionHeaderHeight = [UIFont systemFontOfSize:13].lineHeight + GFMargin;
+    //self.tableView.sectionHeaderHeight = [UIFont systemFontOfSize:13].lineHeight + GFMargin;
     //self.tableView.sectionHeaderHeight = 5.0f;
+    self.tableView.sectionHeaderHeight = [UIFont systemFontOfSize:13].lineHeight;
 }
 
 

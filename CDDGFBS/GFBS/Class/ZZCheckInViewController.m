@@ -32,6 +32,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadNewData];
+    
+    [self setUpTopView];
+    [self setUpPostView];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -47,10 +51,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self loadNewData];
     [self setUpNavBar];
-    [self setUpTopView];
-    [self setUpPostView];
     //[self loadNeweData];
     //[self setUpTopView];
 }

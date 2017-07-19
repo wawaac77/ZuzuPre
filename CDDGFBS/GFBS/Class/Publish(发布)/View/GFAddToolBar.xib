@@ -25,6 +25,9 @@
                                 <constraint firstAttribute="height" constant="20" id="pmz-9E-eAd"/>
                             </constraints>
                             <state key="normal" image="ic_checkin-camera"/>
+                            <connections>
+                                <action selector="imagePickerButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Pl3-nS-vGI"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5C-qm-Zx6">
                             <rect key="frame" x="339" y="6" width="23" height="20"/>
@@ -106,9 +109,10 @@
             <connections>
                 <outlet property="cancelButton" destination="7Cm-nI-ycy" id="3cG-hg-Nmw"/>
                 <outlet property="checkinButton" destination="4AH-l7-rDc" id="8AP-Dz-ju8"/>
+                <outlet property="imagePickerButton" destination="91w-IK-r0a" id="Xdd-Va-cMo"/>
                 <outlet property="topView" destination="Yj1-go-B8y" id="cUr-hG-tFb"/>
             </connections>
-            <point key="canvasLocation" x="26.5" y="-101"/>
+            <point key="canvasLocation" x="204" y="-103"/>
         </view>
     </objects>
     <resources>

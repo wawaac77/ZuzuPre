@@ -9,12 +9,16 @@
 #import "GFAddToolBar.h"
 #import "GFAddTagsViewController.h"
 #import "GFNavigationController.h"
+//#import "AddLLImagePickerVC.h"
+#import "LLImagePickerView.h"
 
 @interface GFAddToolBar()
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *checkinButton;
+@property (weak, nonatomic) IBOutlet UIButton *imagePickerButton;
+- (IBAction)imagePickerButtonClicked:(id)sender;
 
 /*按钮*/
 @property (weak ,nonatomic) UIButton *addButton;
@@ -54,11 +58,11 @@
      */
     
     _cancelButton.layer.masksToBounds = YES;
-    _cancelButton.layer.cornerRadius = 4.0f;
+    _cancelButton.layer.cornerRadius = 5.0f;
     _cancelButton.backgroundColor = [UIColor grayColor];
     
     _checkinButton.layer.masksToBounds = YES;
-    _checkinButton.layer.cornerRadius = 4.0f;
+    _checkinButton.layer.cornerRadius = 5.0f;
     _checkinButton.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
     
 }
@@ -161,4 +165,34 @@
  b.presentingViewController -> a
  */
 
+- (IBAction)imagePickerButtonClicked:(id)sender {
+    NSLog(@"imagePicker Button clicked");
+    /*
+    AddLLImagePickerVC *imagePickerVC = [[AddLLImagePickerVC alloc] init];
+    imagePickerVC.view.frame = [UIScreen mainScreen].bounds;
+    //GFNavigationController *nav = [[GFNavigationController alloc]initWithRootViewController:imagePickerVC];
+    UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (root == nil) {
+        NSLog(@"root is nil");
+    } else {
+        NSLog(@"root is not nil");
+    }
+    //UINavigationController *nav = (UINavigationController *)root.presentedViewController;
+    //[root presentViewController:nav animated:YES completion:nil];
+    [root presentViewController:imagePickerVC animated:YES completion:nil];
+     */
+    
+    UIView *rootView = [[UIView alloc] init];
+    rootView = self.superview;
+    LLImagePickerView *pickerV = [[LLImagePickerView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, GFScreenHeight)];
+    pickerV.type = LLImageTypePhoto;
+    pickerV.maxImageSelected = 5;
+    pickerV.allowMultipleSelection = NO;
+    pickerV.allowPickingVideo = YES;
+    [rootView addSubview:pickerV];
+    [pickerV observeSelectedMediaArray:^(NSArray<LLImagePickerModel *> *list) {
+        NSLog(@"%@",list);
+    }];
+
+}
 @end

@@ -55,7 +55,7 @@
     _profileImageView.layer.masksToBounds = YES;
     _profileImageView.layer.cornerRadius = _profileImageView.frame.size.width / 2;
     _usernameLabel.text = thisUser.leaderboardMember.userUserName;
-    _locationLabel.text = thisUser.leaderboardMember.userEmail;
+    _locationLabel.text = thisUser.leaderboardMember.userLastCheckIn.listEventRestaurant.restaurantAddress.en;
     _scoreLabel.text = [NSString stringWithFormat:@"%@",thisUser.leaderboardLevel];
 }
 

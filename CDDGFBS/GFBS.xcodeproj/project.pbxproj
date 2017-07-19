@@ -194,6 +194,7 @@
 		7800973C1ECAD9D6008F9F99 /* zuzu_App_Icon_180x180.png in Resources */ = {isa = PBXBuildFile; fileRef = 7800973A1ECAD9D6008F9F99 /* zuzu_App_Icon_180x180.png */; };
 		7800973D1ECAD9D6008F9F99 /* zuzu_App_Icon_1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 7800973B1ECAD9D6008F9F99 /* zuzu_App_Icon_1024x1024.png */; };
 		7800973F1ECADC7B008F9F99 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7800973E1ECADC7B008F9F99 /* icon.png */; };
+		7807917E1F1F542C00D24CB6 /* AddLLImagePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7807917D1F1F542C00D24CB6 /* AddLLImagePickerVC.m */; };
 		7817DF7E1F179EFF00B4B02A /* DropDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7817DF7D1F179EFF00B4B02A /* DropDownListView.m */; };
 		7824E30B1EEFC79B00F85BFB /* MyZuzuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7824E3091EEFC79B00F85BFB /* MyZuzuViewController.m */; };
 		7824E30E1EEFE06A00F85BFB /* user-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7824E30D1EEFE06A00F85BFB /* user-icon.png */; };
@@ -265,8 +266,6 @@
 		783089451F1CD66200C31BFE /* ZZComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089441F1CD66200C31BFE /* ZZComment.m */; };
 		783089481F1D039800C31BFE /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089471F1D039800C31BFE /* CommentHeaderView.m */; };
 		7830894A1F1D0C6F00C31BFE /* CommentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089491F1D0C6F00C31BFE /* CommentHeaderView.xib */; };
-		7830894E1F1D9ECC00C31BFE /* ZZCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830894C1F1D9ECC00C31BFE /* ZZCommentsViewController.m */; };
-		7830894F1F1D9ECC00C31BFE /* ZZCommentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7830894D1F1D9ECC00C31BFE /* ZZCommentsViewController.xib */; };
 		783089531F1DBE3700C31BFE /* ZZCommentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089511F1DBE3700C31BFE /* ZZCommentsCell.m */; };
 		783089541F1DBE3700C31BFE /* ZZCommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089521F1DBE3700C31BFE /* ZZCommentsCell.xib */; };
 		7830895C1F1E1E4100C31BFE /* ZZFriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830895A1F1E1E4100C31BFE /* ZZFriendsTableViewController.m */; };
@@ -747,6 +746,8 @@
 		7800973A1ECAD9D6008F9F99 /* zuzu_App_Icon_180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuzu_App_Icon_180x180.png; sourceTree = "<group>"; };
 		7800973B1ECAD9D6008F9F99 /* zuzu_App_Icon_1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuzu_App_Icon_1024x1024.png; sourceTree = "<group>"; };
 		7800973E1ECADC7B008F9F99 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		7807917C1F1F542C00D24CB6 /* AddLLImagePickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLLImagePickerVC.h; sourceTree = "<group>"; };
+		7807917D1F1F542C00D24CB6 /* AddLLImagePickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLLImagePickerVC.m; sourceTree = "<group>"; };
 		7817DF7B1F179EFF00B4B02A /* DropDownChooseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownChooseProtocol.h; sourceTree = "<group>"; };
 		7817DF7C1F179EFF00B4B02A /* DropDownListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownListView.h; sourceTree = "<group>"; };
 		7817DF7D1F179EFF00B4B02A /* DropDownListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownListView.m; sourceTree = "<group>"; };
@@ -841,9 +842,6 @@
 		783089461F1D039800C31BFE /* CommentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentHeaderView.h; sourceTree = "<group>"; };
 		783089471F1D039800C31BFE /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentHeaderView.m; sourceTree = "<group>"; };
 		783089491F1D0C6F00C31BFE /* CommentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentHeaderView.xib; sourceTree = "<group>"; };
-		7830894B1F1D9ECC00C31BFE /* ZZCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCommentsViewController.h; sourceTree = "<group>"; };
-		7830894C1F1D9ECC00C31BFE /* ZZCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCommentsViewController.m; sourceTree = "<group>"; };
-		7830894D1F1D9ECC00C31BFE /* ZZCommentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZCommentsViewController.xib; sourceTree = "<group>"; };
 		783089501F1DBE3700C31BFE /* ZZCommentsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCommentsCell.h; sourceTree = "<group>"; };
 		783089511F1DBE3700C31BFE /* ZZCommentsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCommentsCell.m; sourceTree = "<group>"; };
 		783089521F1DBE3700C31BFE /* ZZCommentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZCommentsCell.xib; sourceTree = "<group>"; };
@@ -2304,15 +2302,12 @@
 			isa = PBXGroup;
 			children = (
 				783F822A1F1619C500491529 /* Previous */,
-				786069E01F1609C500A8AB88 /* ZZHomeViewController.h */,
 				786069E11F1609C500A8AB88 /* ZZHomeViewController.m */,
+				786069E01F1609C500A8AB88 /* ZZHomeViewController.h */,
 				786069E21F1609C500A8AB88 /* ZZHomeViewController.xib */,
 				7830892E1F1C85A700C31BFE /* HomePostTableViewController.h */,
 				7830892F1F1C85A700C31BFE /* HomePostTableViewController.m */,
 				783089301F1C85A700C31BFE /* HomePostTableViewController.xib */,
-				7830894B1F1D9ECC00C31BFE /* ZZCommentsViewController.h */,
-				7830894C1F1D9ECC00C31BFE /* ZZCommentsViewController.m */,
-				7830894D1F1D9ECC00C31BFE /* ZZCommentsViewController.xib */,
 				786069E51F160A0100A8AB88 /* HomeChildVCs */,
 			);
 			name = Controller;
@@ -2482,9 +2477,6 @@
 				788333161F1777BF00967337 /* Controller */,
 				788333171F1777C900967337 /* Model */,
 				788333181F1777D100967337 /* View */,
-				181EF7491E0BD27400C91928 /* GFAddToolBar.h */,
-				181EF74A1E0BD27400C91928 /* GFAddToolBar.m */,
-				181EF74C1E0BD27B00C91928 /* GFAddToolBar.xib */,
 			);
 			name = "Check-in";
 			sourceTree = "<group>";
@@ -2495,6 +2487,8 @@
 				788333191F17781100967337 /* ZZCheckInViewController.h */,
 				7883331A1F17781100967337 /* ZZCheckInViewController.m */,
 				7883331B1F17781100967337 /* ZZCheckInViewController.xib */,
+				7807917C1F1F542C00D24CB6 /* AddLLImagePickerVC.h */,
+				7807917D1F1F542C00D24CB6 /* AddLLImagePickerVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2511,6 +2505,9 @@
 			children = (
 				7817DF7F1F179F5800B4B02A /* DropDownListView */,
 				7883331E1F178F3000967337 /* DPSharePopView */,
+				181EF7491E0BD27400C91928 /* GFAddToolBar.h */,
+				181EF74A1E0BD27400C91928 /* GFAddToolBar.m */,
+				181EF74C1E0BD27B00C91928 /* GFAddToolBar.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2959,7 +2956,6 @@
 				7824E3481EF1408E00F85BFB /* ic_badges_338x338-02.png in Resources */,
 				786069A81F15DB9B00A8AB88 /* ic_checkin-camera.png in Resources */,
 				786069B21F15DB9B00A8AB88 /* ic_home-check-in.png in Resources */,
-				7830894F1F1D9ECC00C31BFE /* ZZCommentsViewController.xib in Resources */,
 				780096FB1EC9C1F5008F9F99 /* ic_fa-calendar-check-o.png in Resources */,
 				7829FF791ED55C9B00C934C2 /* pexels-photo-29346.png in Resources */,
 				780096C01EC9C1F5008F9F99 /* ic_ fa-navicon.png in Resources */,
@@ -3398,7 +3394,6 @@
 				1829A69E1DE7E8390086AD86 /* GFTopic.m in Sources */,
 				788CC33C1F19EC3900DC4116 /* JSQAudioMediaViewAttributes.m in Sources */,
 				78F49F841EE6F61100674130 /* MyEvent.m in Sources */,
-				7830894E1F1D9ECC00C31BFE /* ZZCommentsViewController.m in Sources */,
 				18BE02B51DDB6EB100D27893 /* GFTabBar.m in Sources */,
 				1829A6AE1DE8550D0086AD86 /* GFTopicCell.m in Sources */,
 				788CC3521F19EC3900DC4116 /* JSQMessagesLabel.m in Sources */,
@@ -3419,6 +3414,7 @@
 				1841A7751DE1750600FB54CC /* GFSquareItem.m in Sources */,
 				788CC32F1F19EC3900DC4116 /* NSBundle+JSQMessages.m in Sources */,
 				789E0D621F17DC7E00CCAAE4 /* ZZInboxTableViewController.m in Sources */,
+				7807917E1F1F542C00D24CB6 /* AddLLImagePickerVC.m in Sources */,
 				783089311F1C85A700C31BFE /* HomePostTableViewController.m in Sources */,
 				7829FF961ED576F800C934C2 /* RestaurantEventViewController.m in Sources */,
 				786069EE1F160A8900A8AB88 /* MeHomeTableViewController.m in Sources */,

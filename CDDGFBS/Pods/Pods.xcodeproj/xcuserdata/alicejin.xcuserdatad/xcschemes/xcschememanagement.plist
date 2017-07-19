@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ACAlertController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,7 +34,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>LLImagePickerView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>LTNavigationBar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -40,6 +55,16 @@
 			<false/>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MWPhotoBrowser-MWPhotoBrowser.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MWPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -69,6 +94,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TZImagePickerController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>nanopb.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -87,7 +117,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2962A517E07A39492C9D44864EA37C70</key>
+		<key>2170C5E5DAF3D0C754167A83C1810D5E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,32 +127,42 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>33A3D1AC025752525EB824999A9D8893</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4CC50A5F39EB43A05C7B14700B577F75</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>58E7450DB13C5ECCE92D3C0DF7CF0903</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7EDE867831F957B6864DC88F3B9D5E8D</key>
+		<key>60A515212596D79E02DF2EE24A63E972</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9433BCA46027CDE5B88B2CDF76C40BAB</key>
+		<key>637A4670064D475B88F09E999D132CA3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>994051D8364D2D1DFD4A06C626C67D04</key>
+		<key>6D0CA19ACCA2436B115AB25FBFF240C8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>78F2E8402C5BDF0F6BA825E424DFDDAB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9DD0507A253F1E039B75634B653928CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -133,6 +173,11 @@
 			<true/>
 		</dict>
 		<key>A316B54C67E947D23CECD230FA5BFAEF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B943E23B88B8A73E6A51791997A6B4A4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -153,6 +198,21 @@
 			<true/>
 		</dict>
 		<key>DE868725B18AE240E550C5515AE66BC4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E5053B007B687ED9F9FBC4CD0906C796</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E5BD2F282DDFD8B252B56B8FD7897693</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EE062A9865A3D8F6FB495D41DDF3F144</key>
 		<dict>
 			<key>primary</key>
 			<true/>
