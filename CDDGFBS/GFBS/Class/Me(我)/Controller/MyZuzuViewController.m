@@ -15,6 +15,7 @@
 #import "NotificationViewController.h"
 #import "LeaderboardViewController.h"
 #import "ZZFriendsTableViewController.h"
+#import "MeHomeTableViewController.h"
 
 #import "EventListTableViewController.h"
 #import "RestaurantViewController.h" //should be favourite restaurant
@@ -144,8 +145,8 @@ static CGFloat  const margin = 0;
 {
     GFSquareItem *item = _buttonItems[indexPath.item];
     
-    if ([item.name isEqualToString: @"My Events"]) {
-        EventListTableViewController *eventVC = [[EventListTableViewController alloc] init];
+    if ([item.name isEqualToString: @"Check-in"]) {
+        MeHomeTableViewController *eventVC = [[MeHomeTableViewController alloc] init];
         [self.navigationController pushViewController:eventVC animated:YES];
     }
     else if ([item.name isEqualToString: @"Leaderboard"]) {

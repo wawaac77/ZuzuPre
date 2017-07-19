@@ -11,9 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZZCheckInViewController">
             <connections>
+                <outlet property="cancelButton" destination="zf6-Gp-BM9" id="whh-zG-o0e"/>
+                <outlet property="checkinButton" destination="0ns-PH-Yl2" id="FRJ-p5-L57"/>
+                <outlet property="facebookButton" destination="cFi-vB-myB" id="AIG-bb-orO"/>
+                <outlet property="imagePickerButton" destination="lyZ-I5-0cB" id="ST3-cz-XYR"/>
                 <outlet property="locationButton" destination="OHy-0L-YXj" id="fww-y6-KGC"/>
+                <outlet property="toolBarView" destination="Rrn-wn-EQM" id="9yi-te-HKR"/>
                 <outlet property="topProfileImageView" destination="iy1-4l-cOP" id="9xt-6J-Xuu"/>
                 <outlet property="topView" destination="VWh-NI-1o9" id="Q1E-K6-81m"/>
+                <outlet property="twitterButton" destination="5Fi-U2-tDt" id="B3y-HM-veY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -114,18 +120,24 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="ic_checkin-camera"/>
                                     <connections>
-                                        <action selector="imagePickerButtonClicked:" destination="qfN-MR-EUp" eventType="touchUpInside" id="Arv-Sk-5cG"/>
+                                        <action selector="imagePickerButtonClicked:" destination="-1" eventType="touchUpInside" id="rZd-v2-7Qt"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fi-U2-tDt">
                                     <rect key="frame" x="339" y="6" width="23" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="ic_twitter"/>
+                                    <connections>
+                                        <action selector="twitterButtonClicked:" destination="-1" eventType="touchUpInside" id="yl3-Bn-bTW"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFi-vB-myB">
                                     <rect key="frame" x="303" y="6" width="16" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="ic_facebook"/>
+                                    <connections>
+                                        <action selector="facebookButtonClicked:" destination="-1" eventType="touchUpInside" id="kJz-xb-Wwx"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -141,6 +153,9 @@
                                     <state key="normal" title="Cancel">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="cancelButtonClicked:" destination="-1" eventType="touchUpInside" id="qmc-3F-SxN"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ns-PH-Yl2">
                                     <rect key="frame" x="190" y="0.0" width="180" height="30"/>
@@ -149,6 +164,9 @@
                                     <state key="normal" title="Check in">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="checkinButtonClicked:" destination="-1" eventType="touchUpInside" id="Aki-yw-d33"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -165,20 +183,6 @@
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <point key="canvasLocation" x="32.5" y="78.5"/>
-        </view>
-        <view contentMode="scaleToFill" id="qfN-MR-EUp" customClass="GFAddToolBar">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="cancelButton" destination="zf6-Gp-BM9" id="cGj-bT-3xc"/>
-                <outlet property="checkinButton" destination="0ns-PH-Yl2" id="cH5-8h-ut3"/>
-                <outlet property="imagePickerButton" destination="lyZ-I5-0cB" id="9sd-Za-YxZ"/>
-                <outlet property="topView" destination="qa8-6V-sYA" id="Ftg-Yn-cpX"/>
-            </connections>
-            <point key="canvasLocation" x="33" y="372"/>
         </view>
     </objects>
     <resources>

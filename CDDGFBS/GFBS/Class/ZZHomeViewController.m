@@ -113,11 +113,16 @@
 - (void)setUpTopView {
     _topProfileImageView.layer.cornerRadius = _topProfileImageView.frame.size.width / 2;
     _topProfileImageView.clipsToBounds = YES;
-    _topProfileImageView.image = [UIImage imageNamed:@"profile_image_animals.jpeg"];
+    //_topProfileImageView.image = [UIImage imageNamed:@"profile_image_animals.jpeg"];
+    [self.topProfileImageView sd_setImageWithURL:[NSURL URLWithString:self.myProfile.userProfileImage.imageUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (!image) return ;
+        self.topProfileImageView.image = [image gf_circleImage];
+    }];
+
     
     _topUserLabel.text = _myProfile.userUserName;
     _topScoreLabel.text = _myProfile.userOrganizingLevel;
-    //_topLocationLabel.text = _myProfile.userLocation;
+    _topLocationLabel.text = _myProfile.userLastCheckIn.listEventRestaurant.restaurantName.en;
 }
 
 - (void)loadNeweData {

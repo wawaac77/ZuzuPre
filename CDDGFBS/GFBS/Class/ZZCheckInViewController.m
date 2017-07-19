@@ -6,11 +6,18 @@
 //  Copyright © 2017 apple. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "ZZCheckInViewController.h"
 #import "DPSharePopView.h"
 #import "DropDownListView.h"
 #import "GFAddToolBar.h"
 #import "GFPlaceholderTextView.h"
+#import "AddLLImagePickerVC.h"
+
+#import <AFNetworking.h>
+#import <MJExtension.h>
+#import <SVProgressHUD.h>
+#import <UIImageView+WebCache.h>
 
 @interface ZZCheckInViewController () <UITextViewDelegate> {
     NSMutableArray *chooseArray;
@@ -20,15 +27,44 @@
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 - (IBAction)locationButtonClicked:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIView *toolBarView;
+
+@property (weak, nonatomic) IBOutlet UIButton *imagePickerButton;
+- (IBAction)imagePickerButtonClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+- (IBAction)cancelButtonClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *checkinButton;
+- (IBAction)checkinButtonClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
+- (IBAction)facebookButtonClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
+- (IBAction)twitterButtonClicked:(id)sender;
+
 /** 文本输入控件 */
 @property (nonatomic, weak) GFPlaceholderTextView *textView;
 @property (nonatomic, weak) GFAddToolBar *toolBar;
 
 @property (weak, nonatomic) NSMutableArray *locationArray;
 
+@property (strong, nonatomic) GFHTTPSessionManager *manager;
+
 @end
 
 @implementation ZZCheckInViewController
+
+#pragma mark - 懒加载
+-(GFHTTPSessionManager *)manager
+{
+    if (!_manager) {
+        _manager = [GFHTTPSessionManager manager];
+        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    }
+    return _manager;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -168,7 +204,13 @@
 - (void)setUpPostView {
     [self setUpBase];
     [self setUpTextView];
-    [self setUpToolBar];
+    [self setUpToolBarView];
+    //[self setUpToolBar];
+}
+
+- (void)setUpToolBarView {
+    self.toolBarView.frame = CGRectMake(0, GFScreenHeight - GFTabBarH - 80, GFScreenWidth, 80);
+    
 }
 
 - (void)setUpToolBar
@@ -210,7 +252,7 @@
     NSString *username = @"Alice Jin";
     GFPlaceholderTextView *textView = [[GFPlaceholderTextView alloc] init];
     textView.placeholder = [NSString stringWithFormat:@"What's in your mind, %@?",username];
-    textView.frame = CGRectMake(0, ZZNewNavH, GFScreenWidth, GFScreenHeight - ZZNewNavH - GFTabBarH);
+    textView.frame = CGRectMake(0, ZZNewNavH, GFScreenWidth, GFScreenHeight - ZZNewNavH - GFTabBarH - 80);
     //textView.backgroundColor = [UIColor yellowColor];
     textView.delegate = self;
     [self.view addSubview:textView];
@@ -267,6 +309,69 @@
     [self.view endEditing:YES];
 }
 
+
+
+- (IBAction)imagePickerButtonClicked:(id)sender {
+    
+    AddLLImagePickerVC *imagePickerVC = [[AddLLImagePickerVC alloc] init];
+    //imagePickerVC.view.frame = [UIScreen mainScreen].bounds;
+    
+    [self.navigationController pushViewController:imagePickerVC animated:YES];
+}
+
+- (IBAction)cancelButtonClicked:(id)sender {
+}
+- (IBAction)twitterButtonClicked:(id)sender {
+}
+- (IBAction)facebookButtonClicked:(id)sender {
+}
+- (IBAction)checkinButtonClicked:(id)sender {
+    NSLog(@"check in button clicked");
+    if (![self.textView.text isEqualToString:@""]) {
+        NSLog(@"Check in posted");
+        [self postCheckIn];
+        self.textView.text = nil;
+    }
+}
+
+- (void)postCheckIn {
+    
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    NSString *restaurantId = @"58d7fd7f75fe8a7b025fe7ff";
+    NSString *imageUrl = @"abcd"; //how to convert upload information to this
+    
+    NSDictionary *inSubData = @{@"restaurantId" : restaurantId,
+                                @"message" : self.textView.text,
+                                @"image": imageUrl}; //what of image?
+    
+    NSDictionary *inData = @{@"action" : @"checkin",
+                             @"token" : userToken,
+                             @"data" : inSubData};
+    
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    //发送请求
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"ZUZU" message:@"Check in successful!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertView show];
+
+        //[self textView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        //[self.tableView.mj_footer endRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        
+    }];
+}
 
 
 @end

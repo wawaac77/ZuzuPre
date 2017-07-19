@@ -2302,8 +2302,8 @@
 			isa = PBXGroup;
 			children = (
 				783F822A1F1619C500491529 /* Previous */,
-				786069E11F1609C500A8AB88 /* ZZHomeViewController.m */,
 				786069E01F1609C500A8AB88 /* ZZHomeViewController.h */,
+				786069E11F1609C500A8AB88 /* ZZHomeViewController.m */,
 				786069E21F1609C500A8AB88 /* ZZHomeViewController.xib */,
 				7830892E1F1C85A700C31BFE /* HomePostTableViewController.h */,
 				7830892F1F1C85A700C31BFE /* HomePostTableViewController.m */,
