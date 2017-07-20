@@ -10,16 +10,16 @@
 #import "ZZCheckInViewController.h"
 #import "DPSharePopView.h"
 #import "DropDownListView.h"
-#import "GFAddToolBar.h"
+//#import "GFAddToolBar.h"
 #import "GFPlaceholderTextView.h"
-#import "AddLLImagePickerVC.h"
+//#import "AddLLImagePickerVC.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
 
-@interface ZZCheckInViewController () <UITextViewDelegate> {
+@interface ZZCheckInViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     NSMutableArray *chooseArray;
 }
 @property (weak, nonatomic) IBOutlet UIView *topView;
@@ -43,12 +43,15 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 - (IBAction)twitterButtonClicked:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *pickerImageView;
+@property (weak, nonatomic) UIImage *pickedImage;
 
 /** 文本输入控件 */
 @property (nonatomic, weak) GFPlaceholderTextView *textView;
-@property (nonatomic, weak) GFAddToolBar *toolBar;
+//@property (nonatomic, weak) GFAddToolBar *toolBar;
 
 @property (weak, nonatomic) NSMutableArray *locationArray;
+//@property (strong, nonatomic) NSArray<LLImagePickerModel *> *pickedImagesArray;
 
 @property (strong, nonatomic) GFHTTPSessionManager *manager;
 
@@ -206,13 +209,17 @@
     [self setUpTextView];
     [self setUpToolBarView];
     //[self setUpToolBar];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 - (void)setUpToolBarView {
     self.toolBarView.frame = CGRectMake(0, GFScreenHeight - GFTabBarH - 80, GFScreenWidth, 80);
+    //通知
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
 }
 
+/*
 - (void)setUpToolBar
 {
     GFAddToolBar *toolBar = [GFAddToolBar gf_toolbar];
@@ -222,28 +229,16 @@
     //通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
+ */
 
-#pragma mark - 监听键盘的弹出和隐藏
-- (void)keyBoardWillChageFrame:(NSNotification *)note
-{
-    //键盘最终的Frame
-    CGRect keyBoadrFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    //动画
-    CGFloat animKey = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    [UIView animateWithDuration:animKey animations:^{
-        self.toolBar.transform = CGAffineTransformMakeTranslation(0,GFScreenHeight - keyBoadrFrame.origin.y);
-    }];
-    NSLog(@"KeyboardFrame.origin.y %f", keyBoadrFrame.origin.y);
-    
-}
 
 #pragma mark - 准确布局
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
-    _toolBar.gf_width = self.view.gf_width;
-    _toolBar.gf_y = GFScreenHeight - _toolBar.gf_height - ZZNewNavH;
+    //_toolBar.gf_width = self.view.gf_width;
+    //_toolBar.gf_y = GFScreenHeight - _toolBar.gf_height - ZZNewNavH;
     
 }
 
@@ -257,6 +252,8 @@
     textView.delegate = self;
     [self.view addSubview:textView];
     self.textView = textView;
+    
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 - (void)setUpBase
@@ -286,6 +283,7 @@
     self.navigationItem.rightBarButtonItem.enabled = textView.hasText;
 }
 
+/*
 #pragma mark - 键盘弹出和退出
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -296,6 +294,7 @@
     // 再叫出键盘
     [self.textView becomeFirstResponder];
 }
+ */
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -310,21 +309,56 @@
 }
 
 
-
+#pragma - imagePicker action
 - (IBAction)imagePickerButtonClicked:(id)sender {
     
+    /*
     AddLLImagePickerVC *imagePickerVC = [[AddLLImagePickerVC alloc] init];
     //imagePickerVC.view.frame = [UIScreen mainScreen].bounds;
     
     [self.navigationController pushViewController:imagePickerVC animated:YES];
+    NSLog(@" %@", imagePickerVC.pickedImageArray);
+    _pickedImagesArray = imagePickerVC.pickedImageArray;
+     */
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
 }
 
-- (IBAction)cancelButtonClicked:(id)sender {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    self.pickerImageView.image = chosenImage;
+    
+    self.pickedImage = chosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
 }
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+
+- (IBAction)cancelButtonClicked:(id)sender {
+    NSLog(@"Cancel Button clicked");
+    self.textView.text = nil;
+}
+
 - (IBAction)twitterButtonClicked:(id)sender {
 }
+
 - (IBAction)facebookButtonClicked:(id)sender {
 }
+
 - (IBAction)checkinButtonClicked:(id)sender {
     NSLog(@"check in button clicked");
     if (![self.textView.text isEqualToString:@""]) {
@@ -343,11 +377,13 @@
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     NSString *restaurantId = @"58d7fd7f75fe8a7b025fe7ff";
-    NSString *imageUrl = @"abcd"; //how to convert upload information to this
+    NSString *imageBase64 = [self encodeToBase64String:_pickedImage];
+    NSString *imageInfo = [NSString stringWithFormat:@"data:image/png;base64,%@", imageBase64];
+    NSLog(@"imageBase64 %@", imageBase64);
     
     NSDictionary *inSubData = @{@"restaurantId" : restaurantId,
                                 @"message" : self.textView.text,
-                                @"image": imageUrl}; //what of image?
+                                @"image": imageInfo}; //what of image?
     
     NSDictionary *inData = @{@"action" : @"checkin",
                              @"token" : userToken,
@@ -371,6 +407,31 @@
         });
         
     }];
+}
+
+- (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
+#pragma mark - 监听键盘的弹出和隐藏
+- (void)keyBoardWillChageFrame:(NSNotification *)note
+{
+    NSLog(@"keyboard changed");
+    
+    //键盘最终的Frame
+    CGRect keyBoadrFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey]CGRectValue];
+    //动画
+    CGFloat animKey = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey]doubleValue];
+    [UIView animateWithDuration:animKey animations:^{
+        NSLog(@"toolBarView.y before %f", self.toolBarView.gf_y);
+        NSLog(@"checkin button before %f", self.checkinButton.gf_y);
+        NSLog(@"keyboardframe before %f", keyBoadrFrame.origin.y);
+        self.toolBarView.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight);
+        NSLog(@"toolBarView.y after %f", self.toolBarView.gf_y);
+        NSLog(@"checkin button after %f", self.checkinButton.gf_y);
+        NSLog(@"keyboardframe after %f", keyBoadrFrame.origin.y);
+    }];
+    
 }
 
 

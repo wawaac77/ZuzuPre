@@ -16,6 +16,7 @@
                 <outlet property="facebookButton" destination="cFi-vB-myB" id="AIG-bb-orO"/>
                 <outlet property="imagePickerButton" destination="lyZ-I5-0cB" id="ST3-cz-XYR"/>
                 <outlet property="locationButton" destination="OHy-0L-YXj" id="fww-y6-KGC"/>
+                <outlet property="pickerImageView" destination="6pJ-9C-Vwp" id="JCm-bl-gy1"/>
                 <outlet property="toolBarView" destination="Rrn-wn-EQM" id="9yi-te-HKR"/>
                 <outlet property="topProfileImageView" destination="iy1-4l-cOP" id="9xt-6J-Xuu"/>
                 <outlet property="topView" destination="VWh-NI-1o9" id="Q1E-K6-81m"/>
@@ -174,6 +175,10 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6pJ-9C-Vwp">
+                    <rect key="frame" x="0.0" y="455" width="375" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>

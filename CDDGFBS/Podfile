@@ -13,6 +13,7 @@ pod "LTNavigationBar"
 pod 'LLImagePickerView'
 pod "DACircularProgress"
 pod "pop"
+pod 'Google/SignIn'
 pod 'Firebase/Storage'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'

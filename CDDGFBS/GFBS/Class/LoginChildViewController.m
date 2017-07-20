@@ -68,10 +68,20 @@
 - (void)setupLayout {
     _loginWithFacebookButton.layer.cornerRadius = 5.0f;
     _loginWithGoogleButton.layer.masksToBounds = YES;
+    
     _loginWithGoogleButton.layer.cornerRadius = 5.0f;
     [_loginWithGoogleButton setClipsToBounds:YES];
     
-    //_emailTextField.placeholder = @"Email";
+    _passwordTextField.secureTextEntry = YES;
+    /*
+    //通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+     */
+    //通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    //通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -214,4 +224,59 @@
 - (IBAction)loginUsingFirebaseClicked:(id)sender {
     
 }
+
+#pragma mark - 监听键盘的弹出和隐藏
+/*
+- (void)keyBoardWillChageFrame:(NSNotification *)note
+{
+    //键盘最终的Frame
+    CGRect keyBoadrFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    //动画
+    CGFloat animKey = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:animKey animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight);
+    }];
+    NSLog(@"KeyboardFrame.origin.y %f", keyBoadrFrame.origin.y);
+    
+}
+ */
+
+- (void)keyBoardWillHide:(NSNotification *)note
+{
+    //键盘最终的Frame
+    CGRect keyBoadrFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    //动画
+    CGFloat animKey = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:animKey animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, - keyBoadrFrame.origin.y + GFScreenHeight);
+    }];
+    NSLog(@"KeyboardFrame.origin.y %f", keyBoadrFrame.origin.y);
+}
+
+- (void)keyBoardWillShow: (NSNotification *)note
+{
+    //键盘最终的Frame
+    CGRect keyBoadrFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    //动画
+    CGFloat animKey = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:animKey animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight + 50);
+    }];
+    NSLog(@"KeyboardFrame.origin.y %f", keyBoadrFrame.origin.y);
+    
+}
+
+/*
+#pragma mark - 键盘弹出和退出
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // 先退出之前的键盘
+    [self.view endEditing:YES];
+    // 再叫出键盘
+    [self.emailTextField becomeFirstResponder];
+}
+ */
+
 @end

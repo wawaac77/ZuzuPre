@@ -45,6 +45,8 @@
 #pragma mark - 监听键盘的弹出和隐藏
 - (void)keyBoardWillChageFrame:(NSNotification *)note
 {
+    NSLog(@"keyboard changed");
+    
     //键盘最终的Frame
     CGRect keyBoadrFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey]CGRectValue];
     //动画

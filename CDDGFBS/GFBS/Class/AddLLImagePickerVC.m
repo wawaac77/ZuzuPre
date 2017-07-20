@@ -17,6 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //self.view.frame = CGRectMake(0, 100, GFScreenWidth, 100);
     //self.tableView.frame = CGRectMake(0, 100, GFScreenWidth, 100);
     self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
@@ -31,6 +33,7 @@
     //self.tableView.tableHeaderView = pickerV;
     [self.tableView addSubview:pickerV];
     [pickerV observeSelectedMediaArray:^(NSArray<LLImagePickerModel *> *list) {
+        _pickedImageArray = list;
         NSLog(@"%@",list);
     }];    
 }

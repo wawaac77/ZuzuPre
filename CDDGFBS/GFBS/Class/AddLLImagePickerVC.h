@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LLImagePickerView.h"
 
 @interface AddLLImagePickerVC : UITableViewController
+
+@property (strong, nonatomic) NSArray<LLImagePickerModel *> *pickedImageArray;
 
 @end

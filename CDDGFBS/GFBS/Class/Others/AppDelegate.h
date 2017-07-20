@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ZZUser.h"
+#import <GoogleSignIn.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, GIDSignInDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ZZUser *user;

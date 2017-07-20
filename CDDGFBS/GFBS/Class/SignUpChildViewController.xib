@@ -12,10 +12,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignUpChildViewController">
             <connections>
                 <outlet property="emailTextField" destination="a0i-cG-4Jb" id="jsM-1C-Oak"/>
+                <outlet property="googleSignInButton" destination="qza-ps-FKZ" id="sQj-oR-PrD"/>
                 <outlet property="nameTextField" destination="2hk-Q1-LhQ" id="K3P-gQ-vQp"/>
                 <outlet property="passwordTextField" destination="pk2-h2-3xj" id="zut-GJ-7aJ"/>
                 <outlet property="signupButton" destination="awT-vZ-wXJ" id="cjm-WV-hll"/>
-                <outlet property="signupWithFacebookButton" destination="dzh-Xa-ki7" id="PDD-HN-1nf"/>
                 <outlet property="signupWithGoogleButton" destination="qza-ps-FKZ" id="a8V-6W-bux"/>
                 <outlet property="userTextField" destination="d46-VV-EvP" id="FCu-nZ-DKd"/>
                 <outlet property="view" destination="PcS-Hb-JgT" id="lRS-zs-i69"/>

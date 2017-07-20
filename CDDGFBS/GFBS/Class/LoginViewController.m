@@ -114,7 +114,7 @@
     self.scrollView = scrollView;
     
     scrollView.delegate = self;
-    scrollView.frame = CGRectMake(0, 135, self.view.gf_width, 1000);
+    scrollView.frame = CGRectMake(0, 155, self.view.gf_width, self.view.gf_height - 155);
     scrollView.pagingEnabled = YES;
     scrollView.showsVerticalScrollIndicator = NO;
     scrollView.showsHorizontalScrollIndicator = NO;
@@ -131,9 +131,10 @@
     UIView *titleView = [[UIView alloc] init];
     self.titleView = titleView;
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.frame = CGRectMake(0, 135 , self.view.gf_width, 35);
+    titleView.frame = CGRectMake(0, 120 , self.view.gf_width, 35);
     //titleView.tintColor = [UIColor whiteColor];
     [self.view addSubview:titleView];
+    //[self.view insertSubview:titleView atIndex:2];
     
     //NSArray *titleContens = @[@"LOGIN",@"SIGN UP"];
     NSArray *titleContens = @[@"SIGN UP",@"LOGIN"];
@@ -160,7 +161,7 @@
     self.indicatorView = indicatorView;
     indicatorView.backgroundColor = [firstTitleButton titleColorForState:UIControlStateSelected];
     
-    indicatorView.gf_height = 4;
+    indicatorView.gf_height = 3;
     indicatorView.gf_y = titleView.gf_height - indicatorView.gf_height;
     
     [titleView addSubview:indicatorView];
@@ -197,6 +198,8 @@
     CGPoint offset = self.scrollView.contentOffset;
     offset.x = self.scrollView.gf_width * titleButton.tag;
     [self.scrollView setContentOffset:offset animated:YES];
+    
+    [self.view endEditing:YES];
 }
 
 #pragma mark - 添加子控制器View
@@ -257,15 +260,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
