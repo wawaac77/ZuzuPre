@@ -108,15 +108,15 @@
          contextName = "-[MyEventCell setEvent:]:MyEventCell.m">
       </ContextState>
       <ContextState
-         contextName = "-[MyEventCell timeLabel]:MyEventCell.m">
-      </ContextState>
-      <ContextState
          contextName = "-[ZZLeaderboardCell setUser:]:ZZLeaderboardCell.m">
          <PersistentStrings>
             <PersistentString
                value = "self.profileImageView">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LoginChildViewController nextButtonClicked:]:LoginChildViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[MapNearbyEventsViewController loadNewEvents]:MapNearbyEventsViewController.m">
@@ -149,6 +149,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[ZZCheckInViewController postCheckIn]:ZZCheckInViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_pickedImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__46-[LoginChildViewController nextButtonClicked:]_block_invoke:LoginChildViewController.m">
       </ContextState>
       <ContextState
@@ -160,7 +168,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[LoginChildViewController nextButtonClicked:]:LoginChildViewController.m">
+         contextName = "-[MyEventCell timeLabel]:MyEventCell.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
