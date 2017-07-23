@@ -12,6 +12,7 @@
 #import "ZZContentModel.h"
 //#import "ZZCommentsViewController.h"
 #import "GFCommentViewController.h"
+#import "RestaurantDetailViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -94,6 +95,12 @@ static NSString *const ID = @"ID";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GFEventsCell *cell = (GFEventsCell *)[tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+    //**** set up restaurant button **//
+    UIButton *restaurantButton = [[UIButton alloc] initWithFrame:CGRectMake(80, 16, 264, 30)];
+    restaurantButton.backgroundColor = [UIColor clearColor];
+    [restaurantButton addTarget:self action:@selector(restaurantButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    restaurantButton.tag = indexPath.row;
+    [cell.contentView addSubview:restaurantButton];
     
     ZZContentModel *thisContent = self.contents[indexPath.row];
     NSLog(@"this content%@", thisContent);
@@ -118,6 +125,13 @@ static NSString *const ID = @"ID";
 
     [self.navigationController pushViewController:commentsVC animated:YES];
     
+}
+
+- (void) restaurantButtonClicked: (UIButton *) sender {
+    ZZContentModel *thisContent = _contents[sender.tag];
+    RestaurantDetailViewController *restaurantVC = [[RestaurantDetailViewController alloc] init];
+    restaurantVC.thisRestaurant = thisContent.listEventRestaurant;
+    [self.navigationController pushViewController:restaurantVC animated:YES];
 }
 
 - (void)setupRefresh

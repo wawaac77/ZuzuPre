@@ -101,7 +101,8 @@ static NSCalendar *calendar_;
 
 
 -(NSString *)listEventCreatedAt {
-    fmt_.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.sss'Z'";
+    NSLog(@"_listEventCreatedAt %@", _listEventCreatedAt);
+    fmt_.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     NSDate *creatAtDate = [fmt_ dateFromString:_listEventCreatedAt];
     NSLog(@"createAtDate NSDate %@", creatAtDate);
     //判断

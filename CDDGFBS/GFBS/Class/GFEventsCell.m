@@ -6,6 +6,7 @@
 //  Copyright © 2017 apple. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "GFEventsCell.h"
 
 #import "ZZContentModel.h"
@@ -26,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *heartButton;
 @property (weak, nonatomic) IBOutlet UITextView *textField;
 
+@property (strong, nonatomic) ZZContentModel *thisEvent;
+@property (strong , nonatomic) GFHTTPSessionManager *manager;
 
 /*图片View*/
 //@property (weak ,nonatomic) GFTopicPictureView *pictureView;
@@ -69,15 +72,28 @@
 }
 */
 
+-(GFHTTPSessionManager *)manager
+{
+    if (!_manager) {
+        _manager = [GFHTTPSessionManager manager];
+        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    }
+    
+    return _manager;
+}
+
 -(void)setEvent:(ZZContentModel *)event
 {
     
     ZZContentModel *thisEvent = event;
+    self.thisEvent = thisEvent;
     if ([thisEvent.listIsLike isEqualToString:@"true"]) {
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-o"] forState:UIControlStateNormal];
     } else {
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-grey"] forState:UIControlStateNormal];
     }
+    
+    [_heartButton addTarget:self action:@selector(likedButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:nil];
     NSLog(@"thisEvent.listImage.imageUrl %@", thisEvent.listImage.imageUrl);
@@ -96,6 +112,59 @@
     self.textField.text = thisEvent.listMessage;
     
     self.timeLabel.text = thisEvent.listEventCreatedAt;
+    
+}
+
+- (void)likedButtonClicked: (UIButton *) sender {
+    NSLog(@"self.thisEvent.listIsLike %@", self.thisEvent.listIsLike);
+    if ([self.thisEvent.listIsLike isEqualToString:@"true"]) {
+        [_heartButton setImage:[UIImage imageNamed:@"ic_heart-grey"] forState:UIControlStateNormal];
+        [self likeCheckin:false];
+        
+    } else {
+        [_heartButton setImage:[UIImage imageNamed:@"ic_heart-o"] forState:UIControlStateNormal];
+        [self likeCheckin:true];
+    }
+}
+
+- (void)likeCheckin: (BOOL) like {
+    NSLog(@"_event %@", self.thisEvent);
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    NSNumber *likeNum = [[NSNumber alloc] initWithBool:like];
+    NSLog(@"likeNum %@", likeNum);
+    
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    //NSLog(@"user token %@", userToken);
+    
+    NSDictionary *inData = [[NSDictionary alloc] init];
+    NSString *checkinId = [[NSString alloc] initWithFormat:@"%@", self.thisEvent.listEventID];
+    //NSString *checkinId = _event.listEventID;
+    NSLog(@"checkinId %@", checkinId);
+    NSDictionary *inSubData = @{@"checkinId" : checkinId, @"isLike" : likeNum};
+    inData = @{@"action" : @"likeCheckin", @"token" : userToken, @"data" : inSubData};
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    NSLog(@"publish content parameters %@", parameters);
+    
+    
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+
     
 }
 

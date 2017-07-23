@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EventRestaurant.h"
 
 @interface RestaurantDetailViewController : UIViewController
+
+@property (nonatomic, strong) EventRestaurant *thisRestaurant;
 
 @end
