@@ -87,7 +87,7 @@
     
     ZZContentModel *thisEvent = event;
     self.thisEvent = thisEvent;
-    if ([thisEvent.listIsLike isEqualToString:@"true"]) {
+    if ([thisEvent.listIsLike isEqualToNumber:@1]) {
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-o"] forState:UIControlStateNormal];
     } else {
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-grey"] forState:UIControlStateNormal];
@@ -117,12 +117,15 @@
 
 - (void)likedButtonClicked: (UIButton *) sender {
     NSLog(@"self.thisEvent.listIsLike %@", self.thisEvent.listIsLike);
-    if ([self.thisEvent.listIsLike isEqualToString:@"true"]) {
+   
+    if ([self.thisEvent.listIsLike isEqualToNumber:@1]) {
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-grey"] forState:UIControlStateNormal];
+        self.thisEvent.listIsLike = [NSNumber numberWithBool:false];
         [self likeCheckin:false];
         
     } else {
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-o"] forState:UIControlStateNormal];
+        self.thisEvent.listIsLike = [NSNumber numberWithBool:true];
         [self likeCheckin:true];
     }
 }

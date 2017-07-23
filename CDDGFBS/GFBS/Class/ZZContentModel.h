@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger , MyPublishContentType){
 @property (nonatomic, strong) ZZUser *listPublishUser;
 @property (nonatomic, strong) EventRestaurant *listEventRestaurant;
 @property (nonatomic, strong) GFImage *listImage;
-@property (nonatomic, copy) NSString *listIsLike;
+@property (nonatomic, copy) NSNumber *listIsLike;
 
 /*****额外增加的属性*****/
 
