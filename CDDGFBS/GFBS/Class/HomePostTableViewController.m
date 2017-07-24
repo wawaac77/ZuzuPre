@@ -30,6 +30,8 @@ static NSString *const ID = @"ID";
 /*请求管理者*/
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
 
+@property (strong, nonatomic) NSIndexPath *recordIndexPath;
+
 @end
 
 @implementation HomePostTableViewController
@@ -118,13 +120,19 @@ static NSString *const ID = @"ID";
     //ZZCommentsTableViewController *commentVC = [[ZZCommentsTableViewController alloc] init];
     //commentVC.content = [_contents objectAtIndex:indexPath.row];
     //    //eventDetailVC. = self.topics[indexPath.row];
+    NSIndexPath *recordIndexPath = [[NSIndexPath alloc] init];
+    self.recordIndexPath = recordIndexPath;
+    recordIndexPath = indexPath;
+    NSLog(@"recordIndexPath %@", indexPath);
+    NSLog(@"recordIndexPath.row %ld", indexPath.row);
+    
     GFCommentViewController *commentsVC = [[GFCommentViewController alloc] init];
     commentsVC.topic = [_contents objectAtIndex:indexPath.row];
     commentsVC.view.frame = CGRectMake(0, ZZNewNavH, self.view.gf_width, self.view.gf_height - ZZNewNavH - GFTabBarH);
     commentsVC.hidesBottomBarWhenPushed = YES;
 
     [self.navigationController pushViewController:commentsVC animated:YES];
-    
+   
 }
 
 - (void) restaurantButtonClicked: (UIButton *) sender {
@@ -203,5 +211,11 @@ static NSString *const ID = @"ID";
     [SVProgressHUD dismiss];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"indexPathForSlectedRow in viewWillAppear %@", [self.tableView indexPathForSelectedRow]);
+    NSLog(@"indexPathForSlectedRow in viewWillAppear.row %ld", [self.tableView indexPathForSelectedRow].row);
+    
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];
+}
 
 @end

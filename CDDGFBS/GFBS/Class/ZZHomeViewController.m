@@ -12,7 +12,8 @@
 #import "FriendsHomeTableViewController.h"
 #import "MeHomeTableViewController.h"
 #import "LeaderboardHomeTableViewController.h"
-#import "ZZFriendsTableViewController.h"
+//#import "ZZFriendsTableViewController.h"
+#import "ZZAddFriendsViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -295,7 +296,7 @@
 */
 
 - (IBAction)addFriendsButtonClicked:(id)sender {
-    ZZFriendsTableViewController *addFriendsVC = [[ZZFriendsTableViewController alloc] init];
+    ZZAddFriendsViewController *addFriendsVC = [[ZZAddFriendsViewController alloc] init];
     [self.navigationController pushViewController:addFriendsVC animated:YES];
 }
 @end

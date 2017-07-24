@@ -21,7 +21,9 @@
 #import "GFRefreshHeader.h"
 #import "GFRefreshFooter.h"
 
+#import <AFNetworking.h>
 #import <MJExtension.h>
+#import <SVProgressHUD.h>
 
 
 static NSString *const commentID = @"commnet";
@@ -30,6 +32,8 @@ static NSString *const headID = @"head";
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomMargin;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)sendButtonClicked:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *commentTextField;
 
 /*请求管理者*/
 @property (weak ,nonatomic) GFHTTPSessionManager *manager;
@@ -105,12 +109,16 @@ static NSString *const headID = @"head";
     topicCell.backgroundColor = [UIColor whiteColor];
     topicCell.event = self.topic;
     
-    topicCell.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.topic.cellHeight);
+    //topicCell.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.topic.cellHeight);
+    topicCell.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 230);
+    NSLog(@"self.topic.cellHeight %f", self.topic.cellHeight);
     
     // 设置header的高度
-    head.gf_height = topicCell.gf_height + GFMargin * 2;
+    //head.gf_height = topicCell.gf_height + GFMargin * 2;
     //head.gf_height = 230;
-    
+    head.gf_height = topicCell.gf_height + GFMargin;
+    NSLog(@"topic cell height %f", topicCell.gf_height);
+    NSLog(@"head height = %f", head.gf_height);
     [head addSubview:topicCell];
     self.tableView.tableHeaderView = head;
 
@@ -236,6 +244,7 @@ static NSString *const headID = @"head";
 {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GFCommentCell class]) bundle:nil] forCellReuseIdentifier:commentID];
     
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = GFBgColor;
 
@@ -283,6 +292,20 @@ static NSString *const headID = @"head";
 {
     [super viewWillDisappear:animated];
     
+    
+    
+    /*
+    UITableViewController *parentViewController =  (UITableViewController*)self.navigationController.parentViewController ;
+   
+    
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:3 inSection:0];
+    [parentViewController.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+     */
+    
+    /*
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:3 inSection:0];
+    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+    */
     //最热评论  这样返回到之前界面会出现最热评论
     //self.topic.top_cmt = self.savedTopCmt;
     //self.topic.cellHeight = 0;
@@ -355,4 +378,38 @@ static NSString *const headID = @"head";
 //
 //}
 
+- (IBAction)sendButtonClicked:(id)sender {
+    
+    // 取消所有请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    // 参数
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    NSDictionary *inSubData = @{@"checkinId" : _topic.listEventID, @"message" :_commentTextField.text};
+    NSDictionary *inData = @{@"action" : @"commentCheckin" , @"token" : userToken, @"data" : inSubData};
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    // 发送请求
+    [self.manager POST:GetURL parameters:parameters progress:nil  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        
+        NSLog(@"Comment success!");
+        self.commentTextField.text = nil;
+        [self loadNewComment];
+        //[self setUpRefresh];
+        
+           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+
+        
+    }];
+    
+
+    
+}
 @end

@@ -388,19 +388,12 @@
     userToken = [AppDelegate APP].user.userToken;
     NSLog(@"userToken in checkinVC %@", userToken);
     NSString *restaurantId = @"58d7fd7f75fe8a7b025fe7ff";
-    //NSString *imageBase64 = [self encodeToBase64String:_pickedImage];
     NSString *imageBase64 = [UIImagePNGRepresentation(_pickedImage)
      base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSData *imageData = UIImagePNGRepresentation(_pickedImage);
     NSString *imageType = [self contentTypeForImageData:imageData];
     NSString *imageInfo = [NSString stringWithFormat:@"data:%@;base64,%@",imageType, imageBase64];
-    
-    //NSString *imageInfo = @"";
-    NSLog(@"data:image/jpeg;base64,%@", imageBase64);
-    
-    //NSString *imageInfo = @"data:image/jpeg;base64,%@", imageBase64;
-
-    
+      
     NSDictionary *inSubData = @{@"restaurantId" : restaurantId,
                                 @"message" : self.textView.text,
                                 @"image": imageInfo}; //what of image?
@@ -413,6 +406,7 @@
     
     //发送请求
     [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+        self.imageView.image = nil;
         
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"ZUZU" message:@"Check in successful!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];

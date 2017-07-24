@@ -34,6 +34,9 @@
 
 - (void)setMyFriend:(ZZFriendModel *)myFriend {
     ZZFriendModel *friend = myFriend;
+    
+    self.mainImageView.layer.cornerRadius = _mainImageView.frame.size.width / 2;
+    _mainImageView.clipsToBounds = YES;
     [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:friend.friendInfo.userProfileImage.imageUrl] placeholderImage:nil];
     self.nameLabel.text = friend.friendInfo.userUserName;
     

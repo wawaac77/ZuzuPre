@@ -12,7 +12,10 @@
 
 /*全局变量 */
 static NSDateFormatter *fmt_;
+static NSDateFormatter *outputFmt_;
 static NSCalendar *calendar_;
+static NSTimeZone *inputTimeZone_;
+static NSTimeZone *outputTimeZone_;
 
 + (NSDictionary *)mj_objectClassInArray {
     return @{
@@ -96,14 +99,22 @@ static NSCalendar *calendar_;
 +(void)initialize
 {
     fmt_ = [[NSDateFormatter alloc] init];
+    outputFmt_ = [[NSDateFormatter alloc] init];
     calendar_ = [NSCalendar gf_calendar];
+    inputTimeZone_ = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+    outputTimeZone_ = [NSTimeZone localTimeZone];
+
+    [fmt_ setTimeZone:inputTimeZone_];
+    [outputFmt_ setTimeZone:outputTimeZone_];
 }
 
 
 -(NSString *)listEventCreatedAt {
-    NSLog(@"_listEventCreatedAt %@", _listEventCreatedAt);
+    
     fmt_.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     NSDate *creatAtDate = [fmt_ dateFromString:_listEventCreatedAt];
+    
+    NSLog(@"_listEventCreatedAt %@", _listEventCreatedAt);
     NSLog(@"createAtDate NSDate %@", creatAtDate);
     //判断
     if (creatAtDate.isThisYear) {//今年
@@ -124,17 +135,18 @@ static NSCalendar *calendar_;
             }
             
         }else if ([calendar_ isDateInYesterday:creatAtDate]){//昨天
-            fmt_.dateFormat = @"Yesterday HH:mm";
-            return [fmt_ stringFromDate:creatAtDate];
+            outputFmt_.dateFormat = @"Yesterday HH:mm";
+            return [outputFmt_ stringFromDate:creatAtDate];
             
         }else{//其他
-            fmt_.dateFormat = @"dd MMM HH:mm";
-            return [fmt_ stringFromDate:creatAtDate];
+            outputFmt_.dateFormat = @"dd MMM HH:mm";
+            return [outputFmt_ stringFromDate:creatAtDate];
             
         }
         
     }else{//非今年
-        return _listEventCreatedAt;
+        outputFmt_.dateFormat = @"dd MMM yyyy";
+        return [outputFmt_ stringFromDate:creatAtDate];
     }
     
     return _listEventCreatedAt;
@@ -147,9 +159,8 @@ static NSCalendar *calendar_;
 -(NSString *)listEventUpdatedAt
 {
     //将服务器返回的数据进行处理
-    //[dateFormat setDateFormat:@"YYYY-MM-dd'T'HH:mm:ss'+11:00'"];
-    //[dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"Australia/Melbourne"]];
     fmt_.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.sss'Z'";
+    
     NSDate *creatAtDate = [fmt_ dateFromString:_listEventUpdatedAt];
     NSLog(@"_listEventUpdatedAt %@", _listEventUpdatedAt);
     NSLog(@"createAtDate NSDate %@", creatAtDate);
@@ -172,17 +183,18 @@ static NSCalendar *calendar_;
             }
             
         }else if ([calendar_ isDateInYesterday:creatAtDate]){//昨天
-            fmt_.dateFormat = @"Yesterday HH:mm";
-            return [fmt_ stringFromDate:creatAtDate];
+            outputFmt_.dateFormat = @"Yesterday HH:mm";
+            return [outputFmt_ stringFromDate:creatAtDate];
             
         }else{//其他
-            fmt_.dateFormat = @"dd MMM HH:mm";
-            return [fmt_ stringFromDate:creatAtDate];
+            outputFmt_.dateFormat = @"dd MMM HH:mm";
+            return [outputFmt_ stringFromDate:creatAtDate];
             
         }
         
     }else{//非今年
-        return _listEventUpdatedAt;
+        outputFmt_.dateFormat = @"dd MMM yyyy";
+        return [outputFmt_ stringFromDate:creatAtDate];
     }
     
     return _listEventUpdatedAt;

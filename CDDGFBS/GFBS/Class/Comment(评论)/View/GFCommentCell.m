@@ -28,6 +28,9 @@
 {
     _comment = comment;
     
+    _iconImageView.layer.cornerRadius = _iconImageView.frame.size.width / 2;
+    _iconImageView.clipsToBounds = YES;
+    
     UIImage *placeholder = [[UIImage imageNamed:@"defaultUserIcon"]gf_circleImage];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:comment.member.userProfileImage.imageUrl] placeholderImage:placeholder completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (!image) return ;
