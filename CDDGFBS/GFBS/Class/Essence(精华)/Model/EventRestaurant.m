@@ -20,6 +20,7 @@
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     
     return @{
+             @"restaurantId" : @"_id",
              @"phone" : @"phone",
              @"restaurantBanner" : @"banner",
              @"restaurantIcon" : @"icon",

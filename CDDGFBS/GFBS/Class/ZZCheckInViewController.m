@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "ZZCheckInViewController.h"
 #import "DPSharePopView.h"
-#import "DropDownListView.h"
+//#import "DropDownListView.h"
 //#import "GFAddToolBar.h"
 #import "GFPlaceholderTextView.h"
 //#import "AddLLImagePickerVC.h"
@@ -19,8 +19,11 @@
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
 
+@class EventRestaurant;
+
 @interface ZZCheckInViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     NSMutableArray *chooseArray;
+    NSNumber *selectedInteger;
 }
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIImageView *topProfileImageView;
@@ -53,10 +56,11 @@
 @property (nonatomic, weak) GFPlaceholderTextView *textView;
 //@property (nonatomic, weak) GFAddToolBar *toolBar;
 
-@property (weak, nonatomic) NSMutableArray *locationArray;
-//@property (strong, nonatomic) NSArray<LLImagePickerModel *> *pickedImagesArray;
+@property (strong, nonatomic) NSMutableArray *locationArray;
+@property (strong, nonatomic) NSMutableArray *restaurantIconArray;
 
 @property (strong, nonatomic) GFHTTPSessionManager *manager;
+@property (strong , nonatomic)NSMutableArray<EventRestaurant *> *restaurants;
 
 @end
 
@@ -75,15 +79,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadNewData];
-    
     [self setUpTopView];
     [self setUpPostView];
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setUpPostView {
+    [self setUpBase];
+    [self setUpTextView];
+    [self setUpToolBarView];
+    [self setUpImageView];
+ 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setUpNavBar];
+}
+
+- (void)setUpNavBar {
+    [self preferredStatusBarStyle];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -91,26 +108,22 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self setUpNavBar];
-    //[self loadNeweData];
-    //[self setUpTopView];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
-
-- (void)setUpNavBar {
-    
-    [self preferredStatusBarStyle];
-    
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
- 
-}
-
 
 - (void)setUpTopView {
     _topProfileImageView.layer.cornerRadius = _topProfileImageView.frame.size.width / 2;
     _topProfileImageView.clipsToBounds = YES;
-    _topProfileImageView.image = [UIImage imageNamed:@"profile_image_animals.jpeg"];
+    //_topProfileImageView.image = [UIImage imageNamed:@"profile_image_animals.jpeg"];
+    NSString *imageURL = [[NSString alloc] init];
+    imageURL = [AppDelegate APP].user.userProfileImage.imageUrl;
+    
+    [self.topProfileImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (!image) return ;
+        self.topProfileImageView.image = [image gf_circleImage];
+    }];
     
     _locationButton.layer.borderWidth = 1.0f;
     _locationButton.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -120,25 +133,75 @@
    
 }
 
+//*************** load locations from api *****************//
 - (void)loadNewData {
-    NSMutableArray *locationArray = [[NSMutableArray alloc] initWithObjects:@"123", @"456", @"123", @"456", @"123", @"456", nil];
-    self.locationArray = locationArray;
+    
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSArray *geoPoint = @[@114, @22];
+    NSDictionary *keyFactors = @
+    {
+        @"keyword" : @"",
+        @"address" : @"",
+        @"maxPrice" : @"",
+        @"minPrice" : @"",
+        @"landmark" : @"",
+        @"district" : @"",
+        @"cuisine" : @"",
+        @"page" : @"",
+        @"geoPoint" : geoPoint
+    };
+    NSDictionary *inData = @{
+                             @"action" : @"searchRestaurant",
+                             @"data" : keyFactors
+                             };
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    NSLog(@"search Restaurant %@", parameters);
+    
+    //发送请求
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject是接下来的%@", responseObject);
+        NSLog(@"responseObject - data 是接下来的%@", responseObject[@"data"]);
+        
+        
+        NSArray *restaurantsArray = responseObject[@"data"];
+        
+        self.restaurants = [EventRestaurant mj_objectArrayWithKeyValuesArray:restaurantsArray];
+        self.locationArray = [[NSMutableArray alloc] init];
+        self.restaurantIconArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < _restaurants.count; i++) {
+            [_locationArray addObject:_restaurants[i].restaurantName.en];
+            [_restaurantIconArray addObject:_restaurants[i].restaurantIcon.imageUrl];
+        }
+        NSLog(@"_locationArray %@", _locationArray);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//*************** select checkin location *****************//
 - (IBAction)locationButtonClicked:(id)sender {
     
     UIButton *btn=sender;
-    DPSharePopView *view=[DPSharePopView initWithSuperView:btn menuCellNameArray:@[@"restaurant A",@"Flying Chaucer",@"Flying Noodle",@"Goldielox and Onion",@"Hot Dogma",@"Juice Knowledge",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",] imageNameArray:@[@"share_qq_friend",@"share_qq_kongjian",@"share_wx_friend",@"share_wx_pengyouquan",@"share_qq_friend",@"share_qq_kongjian",@"share_wx_friend",@"share_wx_pengyouquan",@"share_qq_friend",@"share_qq_kongjian",@"share_wx_friend",@"share_wx_pengyouquan",@"share_wx_pengyouquan",@"share_qq_friend",@"share_qq_kongjian",@"share_wx_friend",@"share_wx_pengyouquan"] cellDidClickBlock:^(NSInteger index) {
+    DPSharePopView *view=[DPSharePopView initWithSuperView:btn menuCellNameArray:_locationArray imageNameArray:_restaurantIconArray cellDidClickBlock:^(NSInteger index) {
         
+        NSLog(@"cellDidClickBlock %ld", index);
+        NSNumber *selected = [[NSNumber alloc] initWithInteger:index];
+        
+        NSLog(@"self.selectedIndex = %zd", selected);
+        selectedInteger = selected;
+        _locationButton.titleLabel.text = [NSString stringWithFormat:@"        %@",_locationArray[index]];
     }];
     
     [view show];
@@ -164,6 +227,7 @@
      */
 }
 
+/*
 #pragma mark -- dropDownListDelegate
 //码率切换请求方法
 -(void) chooseAtSection:(NSInteger)section index:(NSInteger)index
@@ -206,21 +270,17 @@
 {
     return 0;
 }
+*/
 
-- (void)setUpPostView {
-    [self setUpBase];
-    [self setUpTextView];
-    [self setUpToolBarView];
-    [self setUpImageView];
-    //[self setUpToolBar];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-}
 
+#pragma -tool bar
 - (void)setUpToolBarView {
     self.toolBarView.frame = CGRectMake(0, GFScreenHeight - GFTabBarH - 80, GFScreenWidth, 80);
+    //self.cancelButton.frame = CGRectMake(5, GFScreenHeight - GFTabBarH - 50, 180, 30);
     //通知
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
+
 
 - (void)setUpImageView {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, GFScreenHeight - GFTabBarH - 80 - 120, GFScreenWidth, 120)];
@@ -251,6 +311,7 @@
     
 }
 
+//*************** setup textField *****************//
 - (void)setUpTextView
 {
     NSString *username = @"Alice Jin";
@@ -319,6 +380,7 @@
 
 
 #pragma - imagePicker action
+//*************** imagePicker *****************//
 - (IBAction)imagePickerButtonClicked:(id)sender {
     
     /*
@@ -357,7 +419,7 @@
     
 }
 
-
+//*************** cancel button *****************//
 - (IBAction)cancelButtonClicked:(id)sender {
     NSLog(@"Cancel Button clicked");
     self.textView.text = nil;
@@ -369,6 +431,8 @@
 - (IBAction)facebookButtonClicked:(id)sender {
 }
 
+
+//*************** checkin button *****************//
 - (IBAction)checkinButtonClicked:(id)sender {
     NSLog(@"check in button clicked");
     if (![self.textView.text isEqualToString:@""]) {
@@ -378,6 +442,7 @@
     }
 }
 
+//*************** post checkin *****************//
 - (void)postCheckIn {
     
     //取消请求
@@ -387,7 +452,10 @@
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     NSLog(@"userToken in checkinVC %@", userToken);
-    NSString *restaurantId = @"58d7fd7f75fe8a7b025fe7ff";
+    
+    //NSString *restaurantId = @"58d7fd7f75fe8a7b025fe7ff";
+    NSString *restaurantId = _restaurants[[selectedInteger intValue]].restaurantId;
+    
     NSString *imageBase64 = [UIImagePNGRepresentation(_pickedImage)
      base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSData *imageData = UIImagePNGRepresentation(_pickedImage);
@@ -449,6 +517,7 @@
 }
 
 #pragma mark - 监听键盘的弹出和隐藏
+//*************** keyboard *****************//
 - (void)keyBoardWillChageFrame:(NSNotification *)note
 {
     NSLog(@"keyboard changed");
@@ -462,6 +531,8 @@
         NSLog(@"checkin button before %f", self.checkinButton.gf_y);
         NSLog(@"keyboardframe before %f", keyBoadrFrame.origin.y);
         self.toolBarView.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight);
+        //self.cancelButton.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight);
+        //self.checkinButton.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight);
         NSLog(@"toolBarView.y after %f", self.toolBarView.gf_y);
         NSLog(@"checkin button after %f", self.checkinButton.gf_y);
         NSLog(@"keyboardframe after %f", keyBoadrFrame.origin.y);

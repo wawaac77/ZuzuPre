@@ -6,6 +6,7 @@
 //  Copyright © 2017 apple. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "NotificationViewController.h"
 #import "NotificationItem.h"
 #import "NotificationCell.h"
@@ -47,7 +48,7 @@ static NSString *const notificationID = @"myNotification";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor lightGrayColor];
-    [self setUpData];
+    [self loadNewData];
     [self setUpTable];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -62,7 +63,46 @@ static NSString *const notificationID = @"myNotification";
     // Dispose of any resources that can be recreated.
 }
 
+/*******Here is reloading data place*****/
+#pragma mark - 加载新数据
+-(void)loadNewData
+{
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    
+    NSDictionary *inData = @{@"action" : @"getNotificationList", @"token" : userToken};
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        
+        self.myNotifications = [NotificationItem mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        [self.tableView reloadData];
+        
+        //[self.tableView.mj_header endRefreshing];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        //[self.tableView.mj_header endRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+    
+}
+
 - (void) setUpData {
+    /*
     NSArray *textArray = [[NSArray alloc] initWithObjects:@"Reminder. You have 3 upcoming events", @"Lolo Chan wrote a review about you", @"Reminder. You have 3 upcoming events", @"Reminder. You have 3 upcoming events", @"Reminder. You have 3 upcoming events", @"Reminder. You have 3 upcoming events", @"Reminder. You have 3 upcoming events", @"Reminder. You have 3 upcoming events",  nil];
     NSArray *timeArray = [[NSArray alloc] initWithObjects:@"An hour ago", @"2 hours ago", @"2n hour ago", @"3 hour ago",  @"3 hour ago", @"3 hour ago", @"3 hour ago", @"3 hour ago",  nil ];
     NSArray *checkedArray = [[NSArray alloc] initWithObjects:@"1", @"0", @"1", @"0", @"0", @"1", @"0", @"1", nil];
@@ -76,6 +116,7 @@ static NSString *const notificationID = @"myNotification";
         thisNotification.checked = [checkedArray objectAtIndex:i];
         [_myNotifications insertObject:thisNotification atIndex:i];
     }
+     */
     NSLog(@"notification array %@", _myNotifications);
 }
 

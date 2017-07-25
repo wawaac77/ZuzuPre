@@ -109,6 +109,55 @@ static NSTimeZone *outputTimeZone_;
 }
 
 
+/**
+ 日期处理get方法
+ */
+-(NSString *)listEventUpdatedAt
+{
+    //将服务器返回的数据进行处理
+    fmt_.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    
+    NSDate *creatAtDate = [fmt_ dateFromString:_listEventUpdatedAt];
+    NSLog(@"_listEventUpdatedAt in content%@", _listEventUpdatedAt);
+    NSLog(@"createAtDate NSDate in content %@", creatAtDate);
+    //判断
+    if (creatAtDate.isThisYear) {//今年
+        if ([calendar_ isDateInToday:creatAtDate]) {//今天
+            //当前时间
+            NSDate *nowDate = [NSDate date];
+            
+            NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth |NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+            NSDateComponents *comps = [calendar_ components:unit fromDate:creatAtDate toDate:nowDate options:0];
+            
+            if (comps.hour >= 1) {
+                return [NSString stringWithFormat:@"%zd hours ago",comps.hour];
+            }else if (comps.minute >= 1){
+                return [NSString stringWithFormat:@"%zd minutes ago",comps.minute];
+            }else
+            {
+                return @"Just now";
+            }
+            
+        }else if ([calendar_ isDateInYesterday:creatAtDate]){//昨天
+            outputFmt_.dateFormat = @"'Yesterday' HH:mm";
+            return [outputFmt_ stringFromDate:creatAtDate];
+            
+        }else{//其他
+            outputFmt_.dateFormat = @"dd MMM HH:mm";
+            return [outputFmt_ stringFromDate:creatAtDate];
+            
+        }
+        
+    }else{//非今年
+        outputFmt_.dateFormat = @"dd MMM yyyy";
+        return [outputFmt_ stringFromDate:creatAtDate];
+    }
+    
+    return _listEventUpdatedAt;
+}
+
+/*
+
 -(NSString *)listEventCreatedAt {
     
     fmt_.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
@@ -135,69 +184,25 @@ static NSTimeZone *outputTimeZone_;
             }
             
         }else if ([calendar_ isDateInYesterday:creatAtDate]){//昨天
-            outputFmt_.dateFormat = @"Yesterday HH:mm";
-            return [outputFmt_ stringFromDate:creatAtDate];
+            fmt_.dateFormat = @"Yesterday HH:mm";
+            return [fmt_ stringFromDate:creatAtDate];
             
         }else{//其他
-            outputFmt_.dateFormat = @"dd MMM HH:mm";
-            return [outputFmt_ stringFromDate:creatAtDate];
+            fmt_.dateFormat = @"dd MMM HH:mm";
+            return [fmt_ stringFromDate:creatAtDate];
             
         }
         
     }else{//非今年
         outputFmt_.dateFormat = @"dd MMM yyyy";
-        return [outputFmt_ stringFromDate:creatAtDate];
+        return [fmt_ stringFromDate:creatAtDate];
     }
     
     return _listEventCreatedAt;
 
 }
-
-/**
- 日期处理get方法
  */
--(NSString *)listEventUpdatedAt
-{
-    //将服务器返回的数据进行处理
-    fmt_.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.sss'Z'";
-    
-    NSDate *creatAtDate = [fmt_ dateFromString:_listEventUpdatedAt];
-    NSLog(@"_listEventUpdatedAt %@", _listEventUpdatedAt);
-    NSLog(@"createAtDate NSDate %@", creatAtDate);
-    //判断
-    if (creatAtDate.isThisYear) {//今年
-        if ([calendar_ isDateInToday:creatAtDate]) {//今天
-            //当前时间
-            NSDate *nowDate = [NSDate date];
-            
-            NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth |NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
-            NSDateComponents *comps = [calendar_ components:unit fromDate:creatAtDate toDate:nowDate options:0];
-            
-            if (comps.hour >= 1) {
-                return [NSString stringWithFormat:@"%zd hours ago",comps.hour];
-            }else if (comps.minute >= 1){
-                return [NSString stringWithFormat:@"%zd minutes ago",comps.minute];
-            }else
-            {
-                return @"Just now";
-            }
-            
-        }else if ([calendar_ isDateInYesterday:creatAtDate]){//昨天
-            outputFmt_.dateFormat = @"Yesterday HH:mm";
-            return [outputFmt_ stringFromDate:creatAtDate];
-            
-        }else{//其他
-            outputFmt_.dateFormat = @"dd MMM HH:mm";
-            return [outputFmt_ stringFromDate:creatAtDate];
-            
-        }
-        
-    }else{//非今年
-        outputFmt_.dateFormat = @"dd MMM yyyy";
-        return [outputFmt_ stringFromDate:creatAtDate];
-    }
-    
-    return _listEventUpdatedAt;
-}
+
+
 
 @end

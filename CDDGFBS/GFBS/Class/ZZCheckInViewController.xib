@@ -55,7 +55,7 @@
                                 <constraint firstAttribute="height" constant="28" id="9VH-ZG-9mN"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="        M2 Cafe">
+                            <state key="normal" title="        Please select your check-in location">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>

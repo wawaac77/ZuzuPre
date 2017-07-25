@@ -25,8 +25,8 @@
     NotificationItem *thisNotification = notification;
     //[self downloadImageFromURL:thisEvent.eventImage.imageUrl];
     self.bigLabel.text = thisNotification.notificationText;
-    self.timeLabel.text = thisNotification.notificationTime;
-    if ([thisNotification.checked isEqualToString:@"1"]) {
+    self.timeLabel.text = thisNotification.updatedAt;
+    if ([thisNotification.isRead isEqualToNumber: @1]) {
         self.checkedSignView.backgroundColor = [UIColor darkGrayColor];
     } else {
         self.checkedSignView.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];

@@ -65,7 +65,7 @@
         _tableView.showsHorizontalScrollIndicator = NO;
         _tableView.layer.cornerRadius = 4.0;
         _tableView.backgroundColor = [UIColor whiteColor];
-        _tableView.scrollEnabled=NO;
+        _tableView.scrollEnabled=YES;
     }
     return _tableView;
 }
@@ -119,7 +119,12 @@
     }else{
         return;
     }
-    self.tableView.frame=CGRectMake(0, 12, DPSCREEN_WIDTH, 44*_nameArray.count);
+    //self.tableView.frame=CGRectMake(0, 12, DPSCREEN_WIDTH, 44*_nameArray.count);
+    float tableHeight = 44 * _nameArray.count;
+    if (tableHeight > GFScreenHeight - ZZNewNavH) {
+        tableHeight = GFScreenHeight - ZZNewNavH;
+    }
+    self.tableView.frame=CGRectMake(0, 12, DPSCREEN_WIDTH, tableHeight);
     self.myView.frame=CGRectMake(0, 0, DPSCREEN_WIDTH, 24+self.tableView.frame.size.height);
     
     _topTriangleView = [[TriangleView alloc]initWithFrame:CGRectMake(DPSCREEN_WIDTH-35, 4,8, 8)];

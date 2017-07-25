@@ -55,6 +55,9 @@ static NSString *const ID = @"ID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
     [self setUpTable];
     [self setupRefresh];
 }
@@ -79,7 +82,7 @@ static NSString *const ID = @"ID";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 230;
+    return 400;
 }
 
 #pragma mark - Table view data source
@@ -111,7 +114,6 @@ static NSString *const ID = @"ID";
     
     return cell;
     
-    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -134,6 +136,22 @@ static NSString *const ID = @"ID";
     [self.navigationController pushViewController:commentsVC animated:YES];
    
 }
+
+// Override to support conditional editing of the table view.
+// This only needs to be implemented if you are going to be returning NO
+// for some items. By default, all items are editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+    }
+}
+
 
 - (void) restaurantButtonClicked: (UIButton *) sender {
     ZZContentModel *thisContent = _contents[sender.tag];

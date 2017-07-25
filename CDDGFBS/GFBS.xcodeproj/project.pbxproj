@@ -200,6 +200,7 @@
 		7813FE961F25F18B0065D527 /* ZZAddFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7813FE941F25F18B0065D527 /* ZZAddFriendsCell.m */; };
 		7813FE971F25F18B0065D527 /* ZZAddFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7813FE951F25F18B0065D527 /* ZZAddFriendsCell.xib */; };
 		7813FE991F25F3E90065D527 /* ic_add-friend-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 7813FE981F25F3E90065D527 /* ic_add-friend-black.png */; };
+		7813FE9F1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 7813FE9E1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m */; };
 		7817DF7E1F179EFF00B4B02A /* DropDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7817DF7D1F179EFF00B4B02A /* DropDownListView.m */; };
 		7824E30B1EEFC79B00F85BFB /* MyZuzuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7824E3091EEFC79B00F85BFB /* MyZuzuViewController.m */; };
 		7824E30E1EEFE06A00F85BFB /* user-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7824E30D1EEFE06A00F85BFB /* user-icon.png */; };
@@ -760,6 +761,8 @@
 		7813FE941F25F18B0065D527 /* ZZAddFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAddFriendsCell.m; sourceTree = "<group>"; };
 		7813FE951F25F18B0065D527 /* ZZAddFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZAddFriendsCell.xib; sourceTree = "<group>"; };
 		7813FE981F25F3E90065D527 /* ic_add-friend-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_add-friend-black.png"; sourceTree = "<group>"; };
+		7813FE9D1F26FC410065D527 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
+		7813FE9E1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
 		7817DF7B1F179EFF00B4B02A /* DropDownChooseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownChooseProtocol.h; sourceTree = "<group>"; };
 		7817DF7C1F179EFF00B4B02A /* DropDownListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownListView.h; sourceTree = "<group>"; };
 		7817DF7D1F179EFF00B4B02A /* DropDownListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownListView.m; sourceTree = "<group>"; };
@@ -1720,6 +1723,8 @@
 				783089671F1E371E00C31BFE /* UIView+Position.m */,
 				783089681F1E371F00C31BFE /* ZGAlertView.h */,
 				783089691F1E371F00C31BFE /* ZGAlertView.m */,
+				7813FE9D1F26FC410065D527 /* UILabel+LabelHeightAndWidth.h */,
+				7813FE9E1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3509,6 +3514,7 @@
 				1829A6A71DE83B9A0086AD86 /* GFHTTPSessionManager.m in Sources */,
 				7829FF821ED5768F00C934C2 /* RestaurantOverviewViewController.m in Sources */,
 				788CC3581F19EC3900DC4116 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
+				7813FE9F1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				7813FE911F25EE820065D527 /* ZZAddFriendsViewController.m in Sources */,
 				788CC33E1F19EC3900DC4116 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				189980501DDBF6B4009071F4 /* GFAdViewController.m in Sources */,

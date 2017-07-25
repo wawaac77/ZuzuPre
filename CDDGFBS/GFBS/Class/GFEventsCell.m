@@ -12,6 +12,7 @@
 #import "ZZContentModel.h"
 #import "GFImage.h"
 
+#import "UILabel+LabelHeightAndWidth.h"
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
 
@@ -25,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *placeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *heartButton;
-@property (weak, nonatomic) IBOutlet UITextView *textField;
+@property (weak, nonatomic) IBOutlet UILabel *textField;
 
 @property (strong, nonatomic) ZZContentModel *thisEvent;
 @property (strong , nonatomic) GFHTTPSessionManager *manager;
@@ -110,8 +111,13 @@
     self.smallTitleLabel.text = thisEvent.listPublishUser.userUserName;
     
     self.textField.text = thisEvent.listMessage;
+    _textField.font = [UIFont systemFontOfSize:16];
+    _textField.numberOfLines = 0;
+    CGFloat height = [UILabel getHeightByWidth:_textField.frame.size.width title:_textField.text font:_textField.font];
+    _textField.frame = CGRectMake(5, 337, GFScreenWidth - 10, height);
+
     
-    self.timeLabel.text = thisEvent.listEventCreatedAt;
+    self.timeLabel.text = thisEvent.listEventUpdatedAt;
     
 }
 

@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+@class ZZUser;
 
 @interface NotificationItem : NSObject
 
 @property (nonatomic, copy) NSString *notificationText;
-@property (nonatomic, copy) NSString *notificationTime;
-@property (nonatomic, assign) NSString *checked;
+@property (nonatomic, copy) NSString *updatedAt;
+@property (nonatomic, copy) NSString *notificationType;
+@property (nonatomic, copy) NSString *memberId;
+@property (nonatomic, copy) NSNumber *isRead;
 
 @end

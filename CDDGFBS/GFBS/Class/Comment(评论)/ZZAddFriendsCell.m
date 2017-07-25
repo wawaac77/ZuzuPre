@@ -51,15 +51,15 @@
 
 -(void)setMyFriend:(ZZUser *)myFriend {
 
-    ZZUser *friend = [[ZZUser alloc] init];
+    ZZUser *friend = myFriend;
     self.friend = friend;
-    friend = myFriend;
     
     self.mainImageView.layer.cornerRadius = _mainImageView.frame.size.width / 2;
     _mainImageView.clipsToBounds = YES;
     [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:friend.userProfileImage.imageUrl] placeholderImage:nil];
     self.nameLabel.text = friend.userUserName;
     
+    //NSString *memberId = myFriend.userID;
     [_addFriendButton addTarget:self action:@selector(addFriendButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -71,7 +71,8 @@
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
    
-    NSString *memberId = _myFriend.userID;
+    NSString *memberId = self.friend.userID;
+    NSLog(@"self.friend %@", self.friend);
     NSLog(@"memberId %@", memberId);
     
     NSDictionary *inSubData = @{@"memberId" : memberId};

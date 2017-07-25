@@ -19,6 +19,7 @@
 
 
 /****** selectively used by eventRestaurant Page *****/
+@property (nonatomic, copy) NSString *restaurantId;
 @property (nonatomic, copy) NSString *phone;
 @property (nonatomic, strong) MyEventImageModel *restaurantBanner;
 @property (nonatomic, strong) MyEventImageModel *restaurantIcon;

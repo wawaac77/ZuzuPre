@@ -18,7 +18,7 @@
 
 static NSString *const ID = @"ID";
 
-@interface ZZAddFriendsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ZZAddFriendsViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -43,6 +43,7 @@ static NSString *const ID = @"ID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.searchTextField.delegate = self;
     [self setUpTableView];
     
 }
@@ -147,6 +148,12 @@ static NSString *const ID = @"ID";
     NSLog(@"searchButton clicked");
     [self loadNewData];
     [self.tableView reloadData];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    [self searchButtonClicked:nil];
+    return YES;
 }
 
 

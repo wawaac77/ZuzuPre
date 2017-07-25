@@ -293,19 +293,6 @@ static NSString *const headID = @"head";
     [super viewWillDisappear:animated];
     
     
-    
-    /*
-    UITableViewController *parentViewController =  (UITableViewController*)self.navigationController.parentViewController ;
-   
-    
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:3 inSection:0];
-    [parentViewController.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-     */
-    
-    /*
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:3 inSection:0];
-    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-    */
     //最热评论  这样返回到之前界面会出现最热评论
     //self.topic.top_cmt = self.savedTopCmt;
     //self.topic.cellHeight = 0;
@@ -365,7 +352,6 @@ static NSString *const headID = @"head";
     
     return cell;
 }
-
 
 
 //-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
