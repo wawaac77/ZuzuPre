@@ -33,55 +33,55 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="q52-99-haW"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67h-A7-114">
-                    <rect key="frame" x="16" y="91" width="343" height="101"/>
+                    <rect key="frame" x="16" y="91" width="343" height="89"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="101" id="nSb-u0-BLO"/>
+                        <constraint firstAttribute="height" constant="89" id="wSs-GR-Fe0"/>
                     </constraints>
                     <string key="text">We aim to provide you a one-stop-app that earns you benefits and points, and to eliminate useless notifications from various apps. The rewards are also very feasible with daily social activities.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please visit our website for more details:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nc-7m-ETk">
-                    <rect key="frame" x="16" y="200" width="343" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="hai-q0-0Yn"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.hawkbroz.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGb-Kp-5iu">
-                    <rect key="frame" x="16" y="229" width="343" height="21"/>
+                    <rect key="frame" x="16" y="217" width="343" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="6em-QS-XwI"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please visit our website for more details:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nc-7m-ETk">
+                    <rect key="frame" x="16" y="188" width="343" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="Wm7-zy-oj6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
                 <constraint firstItem="e9w-rj-bXW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="0eF-lI-MVA"/>
+                <constraint firstItem="1nc-7m-ETk" firstAttribute="top" secondItem="67h-A7-114" secondAttribute="bottom" constant="8" symbolic="YES" id="3HV-j2-HCG"/>
+                <constraint firstItem="1nc-7m-ETk" firstAttribute="leading" secondItem="dGb-Kp-5iu" secondAttribute="leading" id="3yi-rf-5Rp"/>
                 <constraint firstAttribute="trailing" secondItem="dGb-Kp-5iu" secondAttribute="trailing" constant="16" id="4UN-ad-ncw"/>
-                <constraint firstItem="67h-A7-114" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="9B4-F5-ZCe"/>
+                <constraint firstItem="dGb-Kp-5iu" firstAttribute="top" secondItem="1nc-7m-ETk" secondAttribute="bottom" constant="8" symbolic="YES" id="5ut-f8-iE4"/>
                 <constraint firstItem="pl1-ni-bxz" firstAttribute="top" secondItem="e9w-rj-bXW" secondAttribute="bottom" constant="8" id="DM3-az-zr2"/>
+                <constraint firstItem="1nc-7m-ETk" firstAttribute="trailing" secondItem="dGb-Kp-5iu" secondAttribute="trailing" id="FAU-u3-1Ih"/>
+                <constraint firstItem="67h-A7-114" firstAttribute="leading" secondItem="pl1-ni-bxz" secondAttribute="leading" id="H7e-d8-4Il"/>
                 <constraint firstItem="dGb-Kp-5iu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Har-ge-jnl"/>
-                <constraint firstItem="dGb-Kp-5iu" firstAttribute="top" secondItem="1nc-7m-ETk" secondAttribute="bottom" constant="8" id="Pei-8c-2Md"/>
-                <constraint firstItem="67h-A7-114" firstAttribute="top" secondItem="pl1-ni-bxz" secondAttribute="bottom" constant="8" id="VsD-LT-6BD"/>
+                <constraint firstItem="67h-A7-114" firstAttribute="trailing" secondItem="pl1-ni-bxz" secondAttribute="trailing" id="Nuh-HV-3Ir"/>
+                <constraint firstItem="67h-A7-114" firstAttribute="top" secondItem="pl1-ni-bxz" secondAttribute="bottom" constant="8" symbolic="YES" id="ZR4-Kd-G5s"/>
                 <constraint firstItem="pl1-ni-bxz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="ZSq-la-nLI"/>
-                <constraint firstItem="1nc-7m-ETk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="cs4-xl-gsv"/>
                 <constraint firstAttribute="trailing" secondItem="pl1-ni-bxz" secondAttribute="trailing" constant="16" id="ed4-yG-ZHr"/>
-                <constraint firstAttribute="trailing" secondItem="67h-A7-114" secondAttribute="trailing" constant="16" id="ee0-FV-lm2"/>
                 <constraint firstAttribute="trailing" secondItem="e9w-rj-bXW" secondAttribute="trailing" constant="16" id="gK6-oU-fwj"/>
-                <constraint firstAttribute="trailing" secondItem="1nc-7m-ETk" secondAttribute="trailing" constant="16" id="nzS-oe-IKa"/>
-                <constraint firstItem="1nc-7m-ETk" firstAttribute="top" secondItem="67h-A7-114" secondAttribute="bottom" constant="8" id="qvg-3j-2L9"/>
                 <constraint firstItem="e9w-rj-bXW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="zhL-dk-Jxg"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>

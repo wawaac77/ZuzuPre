@@ -48,7 +48,7 @@
         self.font = [UIFont systemFontOfSize:15];
         
         self.placeholderColor = [UIColor lightGrayColor];
-
+        
         //监听文字改变通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:nil];
     }

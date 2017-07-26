@@ -12,6 +12,7 @@
 #import "ZZTypicalInformationModel.h"
 
 #import "AboutZZViewController.h"
+#import "ZZMessageAdminViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -126,29 +127,22 @@
         switch (indexPath.section) {
             case 0:{
                 if (indexPath.row == 2) {
-                    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
-                                                  reuseIdentifier:cellID];
-                    
+                    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellID];
                 } else {
-                    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle
-                                                  reuseIdentifier:cellID];
-                    
+                    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:cellID];
                 }
                 break;
             }
                 
                 
             case 1:
-                cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
-                                              reuseIdentifier:cellID];
+                cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1 reuseIdentifier:cellID];
                 break;
                 
             default:
-                cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
-                                              reuseIdentifier:cellID];
+                cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1 reuseIdentifier:cellID];
                 break;
         }
-        
     }
 
     if (indexPath.section == 0) {
@@ -158,20 +152,26 @@
             //cell.detailTextLabel.text = [AppDelegate APP].user.userEmail;
             cell.detailTextLabel.text = _thisUser.userEmail;
             cell.imageView.image = [AppDelegate APP].user.userProfileImage_UIImage;
-            cell.imageView.frame = CGRectMake(0, 0, 30, 30);
-            UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+            cell.imageView.frame = CGRectMake(5, 0, 30, 30);
+            
+            UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
+            accessoryLabel.textAlignment = NSTextAlignmentRight;
+            accessoryLabel.font = [UIFont systemFontOfSize:15];
             accessoryLabel.text = @"Log Out >";
-            cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
-            cell.accessoryView = accessoryLabel;
+            [cell.contentView addSubview:accessoryLabel];
             
         } else if (indexPath.row == 1) {
             
             cell.textLabel.text = @"Login with Facebook";
             //cell.detailTextLabel.text = @"You have logined with FB";
             cell.imageView.image = [UIImage imageNamed:@"ic_facebook"];
-            UILabel *accessoryLabel = [[UILabel alloc] init];
+            cell.imageView.frame = CGRectMake(5, 0, 30, 30);
+            
+            UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
+            accessoryLabel.textAlignment = NSTextAlignmentRight;
+            accessoryLabel.font = [UIFont systemFontOfSize:15];
             accessoryLabel.text = @"Connected";
-            [cell.accessoryView addSubview:accessoryLabel];
+            [cell.contentView addSubview:accessoryLabel];
             
         } else if (indexPath.row == 2) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 20)];
@@ -181,7 +181,7 @@
             
             CGFloat btnWidth = (GFScreenWidth - 20 - 10) / 2;
             
-            UIButton *enButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 25, btnWidth, 30)];
+            UIButton *enButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, btnWidth, 30)];
             [enButton addTarget:self action:@selector(enButtonClicked) forControlEvents:UIControlEventTouchUpInside];
             [enButton setTitle:@"English" forState:UIControlStateNormal];
             [enButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -189,7 +189,7 @@
             enButton.layer.cornerRadius = 5.0f;
             enButton.layer.masksToBounds = YES;
             
-            UIButton *twButton = [[UIButton alloc] initWithFrame:CGRectMake(btnWidth + 20, 25, btnWidth, 30)];
+            UIButton *twButton = [[UIButton alloc] initWithFrame:CGRectMake(btnWidth + 20, 30, btnWidth, 30)];
             [twButton addTarget:self action:@selector(twButtonClicked) forControlEvents:UIControlEventTouchUpInside];
             [twButton setTitle:@"中文" forState:UIControlStateNormal];
             [twButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -325,7 +325,7 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 2) {
-            return 65.0f;
+            return 70.0f;
         } else {
             return 50.0f;
         }
@@ -347,6 +347,15 @@
     UITableViewCell *parentCell = (UITableViewCell *) sliderControl.superview;
     parentCell.detailTextLabel.text = [NSString stringWithFormat:@"0 - %@", priceRange];
 }
+
+- (void)enButtonClicked {
+    NSLog(@"English button clicked");
+}
+
+- (void)twButtonClicked {
+    NSLog(@"Chinese button clicked");
+}
+
 
 //********************* didSelectRowAtIndexPath **************************//
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -389,6 +398,10 @@
         if (indexPath.row == 0) {
             AboutZZViewController *aboutZZVC = [[AboutZZViewController alloc] init];
             [self.navigationController pushViewController:aboutZZVC animated:YES];
+        }
+        else if (indexPath.row == 1) {
+            ZZMessageAdminViewController *adminVC = [[ZZMessageAdminViewController alloc] init];
+            [self.navigationController pushViewController:adminVC animated:YES];
         }
     }
 }

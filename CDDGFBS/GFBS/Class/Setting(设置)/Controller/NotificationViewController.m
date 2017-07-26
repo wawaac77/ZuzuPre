@@ -9,7 +9,10 @@
 #import "AppDelegate.h"
 #import "NotificationViewController.h"
 #import "NotificationItem.h"
+#import "ZZFriendRequestModel.h"
+
 #import "NotificationCell.h"
+#import "NotificationButtonsCell.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -18,11 +21,13 @@
 #import <SDImageCache.h>
 
 static NSString *const notificationID = @"myNotification";
+static NSString *const friendRequestID = @"friendRequest";
 
 @interface NotificationViewController ()
 
 /*所有notification数据*/
 @property (strong , nonatomic)NSMutableArray<NotificationItem *> *myNotifications;
+@property (strong , nonatomic)NSMutableArray<ZZFriendRequestModel *> *myFriendsRequests;
 /*maxtime*/
 @property (strong , nonatomic)NSString *maxtime;
 
@@ -47,8 +52,8 @@ static NSString *const notificationID = @"myNotification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    [self loadNewData];
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self loadFriendsRequest];
     [self setUpTable];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -64,6 +69,43 @@ static NSString *const notificationID = @"myNotification";
 }
 
 /*******Here is reloading data place*****/
+#pragma mark - 加载新数据
+-(void)loadFriendsRequest
+{
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    
+    NSDictionary *inData = @{@"action" : @"getFriendRequestList", @"token" : userToken};
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        
+        self.myFriendsRequests = [ZZFriendRequestModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        [self loadNewData];
+        
+        //[self.tableView.mj_header endRefreshing];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        //[self.tableView.mj_header endRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+    
+}
+
 #pragma mark - 加载新数据
 -(void)loadNewData
 {
@@ -102,21 +144,6 @@ static NSString *const notificationID = @"myNotification";
 }
 
 - (void) setUpData {
-    /*
-    NSArray *textArray = [[NSArray alloc] initWithObjects:@"Reminder. You have 3 upcoming events", @"Lolo Chan wrote a review about you", @"Reminder. You have 3 upcoming events", @"Reminder. You have 3 upcoming events", @"Reminder. You have 3 upcoming events", @"Reminder. You have 3 upcoming events", @"Reminder. You have 3 upcoming events", @"Reminder. You have 3 upcoming events",  nil];
-    NSArray *timeArray = [[NSArray alloc] initWithObjects:@"An hour ago", @"2 hours ago", @"2n hour ago", @"3 hour ago",  @"3 hour ago", @"3 hour ago", @"3 hour ago", @"3 hour ago",  nil ];
-    NSArray *checkedArray = [[NSArray alloc] initWithObjects:@"1", @"0", @"1", @"0", @"0", @"1", @"0", @"1", nil];
-    
-    NSMutableArray<NotificationItem *> *myNotifications = [[NSMutableArray<NotificationItem *> alloc] init];
-    self.myNotifications = myNotifications;
-    for (int i = 0; i < 8; i++) {
-        NotificationItem *thisNotification = [[NotificationItem alloc] init];
-        thisNotification.notificationText = [textArray objectAtIndex:i];
-        thisNotification.notificationTime = [timeArray objectAtIndex:i];;
-        thisNotification.checked = [checkedArray objectAtIndex:i];
-        [_myNotifications insertObject:thisNotification atIndex:i];
-    }
-     */
     NSLog(@"notification array %@", _myNotifications);
 }
 
@@ -129,6 +156,8 @@ static NSString *const notificationID = @"myNotification";
     self.tableView.separatorStyle = UITableViewStylePlain;
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NotificationCell class]) bundle:nil] forCellReuseIdentifier:notificationID];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NotificationButtonsCell class]) bundle:nil] forCellReuseIdentifier:friendRequestID];
+    
     [self.tableView reloadData];
     
 }
@@ -141,29 +170,45 @@ static NSString *const notificationID = @"myNotification";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //GFTopic *topic = _topics[indexPath.row];
-    
-    return 60.0f;
+    if (indexPath.section == 0) {
+        return 70.0f;
+    } else {
+        return 60.0f;
+    }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _myNotifications.count;
+    if (section == 0) {
+        return _myFriendsRequests.count;
+    } else {
+        return _myNotifications.count;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:notificationID forIndexPath:indexPath];
     
-    NotificationItem *thisNotification = self.myNotifications[indexPath.row];
-    NSLog(@"thisNotification %@", thisNotification);
-    cell.notification = thisNotification;
-    
+    NotificationButtonsCell *cell = [tableView dequeueReusableCellWithIdentifier:friendRequestID];
+    if (indexPath.section == 0) {
+        NotificationButtonsCell *cell = [tableView dequeueReusableCellWithIdentifier:friendRequestID];
+        ZZFriendRequestModel *thisFriendRequest = self.myFriendsRequests[indexPath.row];
+        cell.request = thisFriendRequest;
+        return cell;
+        
+    } else if (indexPath.section == 1) {
+        NotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:notificationID];
+        NotificationItem *thisNotification = self.myNotifications[indexPath.row];
+        cell.notification = thisNotification;
+        
+        return cell;
+    }
     return cell;
-    
 }
 
 
