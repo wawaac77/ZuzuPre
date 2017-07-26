@@ -124,8 +124,39 @@
         
         ZZUser *thisUser = [[ZZUser alloc] init];
         thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        NSString *imageURL = thisUser.userProfileImage.imageUrl;
+        NSURL  *url = [NSURL URLWithString:imageURL];
+        NSData *urlData = [NSData dataWithContentsOfURL:url];
+        
+        if ( urlData )
+            
+        {
+            
+            NSLog(@"Downloading started...");
+            
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            
+            NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"dwnld_image.png"];
+            
+            NSLog(@"FILE : %@",filePath);
+            
+            [urlData writeToFile:filePath atomically:YES];
+            
+            UIImage *image1=[UIImage imageWithContentsOfFile:filePath];
+            
+            thisUser.userProfileImage_UIImage = image1;
+
+            NSLog(@"Completed...");
+            
+        }
+        
+
         NSLog(@"this user %@", thisUser);
         NSLog(@"this user. userName %@", thisUser.usertName);
+        NSLog(@"this user. memberId %@", thisUser.userID);
 
         if (thisUser == nil) {
             

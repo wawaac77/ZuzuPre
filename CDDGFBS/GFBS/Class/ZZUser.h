@@ -36,6 +36,17 @@
 @property (nonatomic, strong) GFImage *userProfileImage;
 @property (nonatomic, strong) ZZContentModel *userLastCheckIn;
 
+@property (nonatomic, assign) NSNumber *age;
+@property (nonatomic, copy) NSString *gender;
+@property (nonatomic, copy) NSString *phone;
+
+@property (nonatomic, assign) NSNumber *showOnLockScreen;
+@property (nonatomic, assign) NSNumber *sounds;
+@property (nonatomic, assign) NSNumber *emailNotification;
+@property (nonatomic, assign) NSNumber *allowNotification;
+
+@property (nonatomic, copy) UIImage *userProfileImage_UIImage;
+
 + (NSURLSessionDataTask *)login:(NSDictionary *)paramDic
                         Success:(void (^)(NSDictionary *result))success
                         Failure:(void (^)(NSError *error))failue;

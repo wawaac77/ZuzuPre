@@ -120,7 +120,7 @@
         return;
     }
     //self.tableView.frame=CGRectMake(0, 12, DPSCREEN_WIDTH, 44*_nameArray.count);
-    float tableHeight = 44 * _nameArray.count;
+    float tableHeight = 44 * (_nameArray.count - 1);
     if (tableHeight > GFScreenHeight - ZZNewNavH) {
         tableHeight = GFScreenHeight - ZZNewNavH;
     }
