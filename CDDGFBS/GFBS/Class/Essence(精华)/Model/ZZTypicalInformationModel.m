@@ -14,11 +14,11 @@
     
     return @{
              @"informationID" : @"_id",
-             @"informationUpdatedBy" : @"updatedBy",
-             @"informationUpdatedAt" : @"updatedAt",
-             @"informationCreatedBy" : @"createdBy",
-             @"informationCreatedAt" : @"createdAt",
-             @"informationV" : @"__v",
+             //@"informationUpdatedBy" : @"updatedBy",
+             //@"informationUpdatedAt" : @"updatedAt",
+             //@"informationCreatedBy" : @"createdBy",
+             //@"informationCreatedAt" : @"createdAt",
+             //@"informationV" : @"__v",
              @"informationName" : @"name",
              };
 }

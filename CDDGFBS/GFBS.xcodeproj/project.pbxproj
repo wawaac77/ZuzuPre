@@ -201,6 +201,8 @@
 		7813FE971F25F18B0065D527 /* ZZAddFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7813FE951F25F18B0065D527 /* ZZAddFriendsCell.xib */; };
 		7813FE991F25F3E90065D527 /* ic_add-friend-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 7813FE981F25F3E90065D527 /* ic_add-friend-black.png */; };
 		7813FE9F1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 7813FE9E1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m */; };
+		7813FEC91F28C14B0065D527 /* AboutZZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7813FEC71F28C14B0065D527 /* AboutZZViewController.m */; };
+		7813FECA1F28C14B0065D527 /* AboutZZViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7813FEC81F28C14B0065D527 /* AboutZZViewController.xib */; };
 		7817DF7E1F179EFF00B4B02A /* DropDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7817DF7D1F179EFF00B4B02A /* DropDownListView.m */; };
 		7824E30B1EEFC79B00F85BFB /* MyZuzuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7824E3091EEFC79B00F85BFB /* MyZuzuViewController.m */; };
 		7824E30E1EEFE06A00F85BFB /* user-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7824E30D1EEFE06A00F85BFB /* user-icon.png */; };
@@ -361,6 +363,8 @@
 		786069EE1F160A8900A8AB88 /* MeHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786069ED1F160A8900A8AB88 /* MeHomeTableViewController.m */; };
 		7862274F1EF91AF8006F731F /* zuzu-login-1242x2208.png in Resources */ = {isa = PBXBuildFile; fileRef = 7862274E1EF91AF8006F731F /* zuzu-login-1242x2208.png */; };
 		786227521EFBB3DB006F731F /* KCAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 786227511EFBB3DB006F731F /* KCAnnotation.m */; };
+		7864EB621F28C5B500AA572E /* ZZMessageAdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7864EB601F28C5B500AA572E /* ZZMessageAdminViewController.m */; };
+		7864EB631F28C5B500AA572E /* ZZMessageAdminViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7864EB611F28C5B500AA572E /* ZZMessageAdminViewController.xib */; };
 		788246CA1ED2E7930058B226 /* EventOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788246C81ED2E7930058B226 /* EventOverviewViewController.m */; };
 		788246CB1ED2E7930058B226 /* EventOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 788246C91ED2E7930058B226 /* EventOverviewViewController.xib */; };
 		788246CF1ED2E7A90058B226 /* EventDiscussionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788246CD1ED2E7A90058B226 /* EventDiscussionViewController.m */; };
@@ -763,6 +767,9 @@
 		7813FE981F25F3E90065D527 /* ic_add-friend-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_add-friend-black.png"; sourceTree = "<group>"; };
 		7813FE9D1F26FC410065D527 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
 		7813FE9E1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
+		7813FEC61F28C14B0065D527 /* AboutZZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutZZViewController.h; sourceTree = "<group>"; };
+		7813FEC71F28C14B0065D527 /* AboutZZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutZZViewController.m; sourceTree = "<group>"; };
+		7813FEC81F28C14B0065D527 /* AboutZZViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutZZViewController.xib; sourceTree = "<group>"; };
 		7817DF7B1F179EFF00B4B02A /* DropDownChooseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownChooseProtocol.h; sourceTree = "<group>"; };
 		7817DF7C1F179EFF00B4B02A /* DropDownListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownListView.h; sourceTree = "<group>"; };
 		7817DF7D1F179EFF00B4B02A /* DropDownListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownListView.m; sourceTree = "<group>"; };
@@ -964,6 +971,9 @@
 		7862274E1EF91AF8006F731F /* zuzu-login-1242x2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zuzu-login-1242x2208.png"; sourceTree = "<group>"; };
 		786227501EFBB3DB006F731F /* KCAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCAnnotation.h; sourceTree = "<group>"; };
 		786227511EFBB3DB006F731F /* KCAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCAnnotation.m; sourceTree = "<group>"; };
+		7864EB5F1F28C5B500AA572E /* ZZMessageAdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZMessageAdminViewController.h; sourceTree = "<group>"; };
+		7864EB601F28C5B500AA572E /* ZZMessageAdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZMessageAdminViewController.m; sourceTree = "<group>"; };
+		7864EB611F28C5B500AA572E /* ZZMessageAdminViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZMessageAdminViewController.xib; sourceTree = "<group>"; };
 		788246C71ED2E7930058B226 /* EventOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventOverviewViewController.h; sourceTree = "<group>"; };
 		788246C81ED2E7930058B226 /* EventOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventOverviewViewController.m; sourceTree = "<group>"; };
 		788246C91ED2E7930058B226 /* EventOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOverviewViewController.xib; sourceTree = "<group>"; };
@@ -1291,6 +1301,12 @@
 				185420851DF064F1004F6378 /* GFSettingViewController.storyboard */,
 				789CFF5D1F0B868200EBA772 /* NotificationViewController.h */,
 				789CFF5E1F0B868200EBA772 /* NotificationViewController.m */,
+				7813FEC61F28C14B0065D527 /* AboutZZViewController.h */,
+				7813FEC71F28C14B0065D527 /* AboutZZViewController.m */,
+				7813FEC81F28C14B0065D527 /* AboutZZViewController.xib */,
+				7864EB5F1F28C5B500AA572E /* ZZMessageAdminViewController.h */,
+				7864EB601F28C5B500AA572E /* ZZMessageAdminViewController.m */,
+				7864EB611F28C5B500AA572E /* ZZMessageAdminViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3013,6 +3029,7 @@
 				786069DF1F15FA3900A8AB88 /* guide-3.jpg in Resources */,
 				7824E34D1EF1408E00F85BFB /* ic_badges_338x338-07.png in Resources */,
 				786069B11F15DB9B00A8AB88 /* ic_home-check-in-o.png in Resources */,
+				7813FECA1F28C14B0065D527 /* AboutZZViewController.xib in Resources */,
 				786069D41F15DB9B00A8AB88 /* zuzu05-bg-750x1334.jpg in Resources */,
 				789CFF451F00EC3F00EBA772 /* FilterTableViewController.storyboard in Resources */,
 				189980511DDBF6B4009071F4 /* GFAdViewController.xib in Resources */,
@@ -3055,6 +3072,7 @@
 				7800970C1EC9C1F5008F9F99 /* ic_leaderboard.png in Resources */,
 				788246CB1ED2E7930058B226 /* EventOverviewViewController.xib in Resources */,
 				7830894A1F1D0C6F00C31BFE /* CommentHeaderView.xib in Resources */,
+				7864EB631F28C5B500AA572E /* ZZMessageAdminViewController.xib in Resources */,
 				786069E41F1609C500A8AB88 /* ZZHomeViewController.xib in Resources */,
 				786069C31F15DB9B00A8AB88 /* ic_clock.png in Resources */,
 				78FFE5BB1ECDB16400F909A2 /* RestaurantCell.xib in Resources */,
@@ -3371,6 +3389,7 @@
 				7897E1081EF7766A0046D647 /* EventInList.m in Sources */,
 				788CC3481F19EC3900DC4116 /* JSQVideoMediaItem.m in Sources */,
 				788CC3491F19EC3900DC4116 /* JSQMessagesCellTextView.m in Sources */,
+				7813FEC91F28C14B0065D527 /* AboutZZViewController.m in Sources */,
 				18B3D6BF1DEC517F00474981 /* GFSeeBigImageViewController.m in Sources */,
 				18C8262F1DE7369C007341E3 /* ZZHostingViewController.m in Sources */,
 				181EF7481E0B661200C91928 /* GFPlaceholderTextView.m in Sources */,
@@ -3458,6 +3477,7 @@
 				788CC35A1F19EC3900DC4116 /* JSQMessagesTypingView.m in Sources */,
 				789CFF8D1F0E65DA00EBA772 /* ZZTypicalInformationModel.m in Sources */,
 				18BE029F1DDB4A7600D27893 /* GFNavigationController.m in Sources */,
+				7864EB621F28C5B500AA572E /* ZZMessageAdminViewController.m in Sources */,
 				788CC3401F19EC3900DC4116 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
 				18B61AFA1E0D5DED00CAC3FF /* GFTagTextField.m in Sources */,
 				18C8262C1DE7368D007341E3 /* ZZAttendingViewController.m in Sources */,

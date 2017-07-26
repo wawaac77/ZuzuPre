@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "GFSettingViewController.h"
 #import "ZZUser.h"
+#import "ZZTypicalInformationModel.h"
+
+#import "AboutZZViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -25,6 +28,18 @@
 @property (strong, nonatomic) NSMutableArray<NSString *> *reuseIDArray;
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
 @property (strong, nonatomic) ZZUser *thisUser;
+
+@property (strong, nonatomic) NSMutableArray<ZZTypicalInformationModel *> *industryArray;
+@property (strong, nonatomic) NSMutableArray<ZZTypicalInformationModel *> *professionArray;
+@property (strong, nonatomic) NSMutableArray<ZZTypicalInformationModel *> *interestsArray;
+
+@property (strong, nonatomic) NSMutableArray<NSString *> *industry;
+@property (strong, nonatomic) NSMutableArray<NSString *> *profession;
+@property (strong, nonatomic) NSMutableArray<NSString *> *interests;
+
+@property (strong, nonatomic) NSMutableArray<NSString *> *selectedPickerArray;
+
+@property (strong, nonatomic) NSString *selectedItem;
 
 @end
 
@@ -43,7 +58,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNewData];
+    //[self loadNewData];
     self.navigationItem.title = @"Settings";
     _thisUser = [AppDelegate APP].user;
     //计算整个应用程序的缓存数据 --- > 沙盒（Cache）
@@ -51,16 +66,31 @@
     //attributesOfItemAtPathe:指定文件路径，获取文件属性
     //把所有文件尺寸加起来    //获取缓存尺寸字符串赋值给cell的textLabel
     //[self registerCell];
+    //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPickerView)];
     
+    //[self.view addGestureRecognizer:tap];
+
     [self setUpReuseIDArray];
     
-    /*
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"account"];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"buttons"];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"basic"];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"accessory"];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"indicator"];
-     */
+    self.industry = [[NSMutableArray alloc] init];
+    self.profession = [[NSMutableArray alloc] init];
+    self.interests = [[NSMutableArray alloc] init];
+    [self loadIndustryData];
+    //[self loadProfessionData];
+    //[self loadInterestsData];
+    [self setUpPickerView];
+    
+}
+- (void)dismissPickerView {
+    [self.picker resignFirstResponder];
+}
+
+- (void)setUpPickerView {
+    //_industryArray = [[NSMutableArray alloc] initWithObjects:@"A",@"B",@"C",@"D",@"E", nil];
+    _picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 400, GFScreenWidth, 150)];
+    _picker.dataSource = self;
+    _picker.delegate = self;
+    _picker.backgroundColor = [UIColor lightGrayColor];
 }
 
 - (void)setUpReuseIDArray {
@@ -98,11 +128,11 @@
                 if (indexPath.row == 2) {
                     cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
                                                   reuseIdentifier:cellID];
-                    NSLog(@"indexPath in setting %ld  %ld %@", indexPath.section, indexPath.row, @"UITableViewCellStyleDefault");
+                    
                 } else {
                     cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle
                                                   reuseIdentifier:cellID];
-                     NSLog(@"indexPath in setting %ld  %ld %@", indexPath.section, indexPath.row, @"UITableViewCellStyleSubtitle");
+                    
                 }
                 break;
             }
@@ -128,6 +158,7 @@
             //cell.detailTextLabel.text = [AppDelegate APP].user.userEmail;
             cell.detailTextLabel.text = _thisUser.userEmail;
             cell.imageView.image = [AppDelegate APP].user.userProfileImage_UIImage;
+            cell.imageView.frame = CGRectMake(0, 0, 30, 30);
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
             accessoryLabel.text = @"Log Out >";
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
@@ -136,7 +167,7 @@
         } else if (indexPath.row == 1) {
             
             cell.textLabel.text = @"Login with Facebook";
-            cell.detailTextLabel.text = @"You have logined with FB";
+            //cell.detailTextLabel.text = @"You have logined with FB";
             cell.imageView.image = [UIImage imageNamed:@"ic_facebook"];
             UILabel *accessoryLabel = [[UILabel alloc] init];
             accessoryLabel.text = @"Connected";
@@ -317,27 +348,52 @@
     parentCell.detailTextLabel.text = [NSString stringWithFormat:@"0 - %@", priceRange];
 }
 
+//********************* didSelectRowAtIndexPath **************************//
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    CGFloat size = [SDImageCache sharedImageCache].getSize / 1000.0 / 1000;
-    if (size != 0) {
-        if (indexPath.section == 2 && indexPath.row == 0) {
-            [[SDImageCache sharedImageCache] clearDisk];
-            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
-            [SVProgressHUD showWithStatus:@"Deleting buffer memory..."];
-            NSLog(@"Delering buffer memory selected");
+    if (indexPath.section == 1) {
+        
+        if (indexPath.row == 3) {
+            if (self.industry.count == 0) {
+                [self loadIndustryData];
+            }
+            self.selectedPickerArray = [[NSMutableArray alloc]initWithArray:self.industry];
+            NSLog(@"self.industry %@", self.industry);
+            NSLog(@"self.selectedPickerArray %@", self.selectedPickerArray);
+            NSLog(@"self.industryArray in didSelectRow %@", self.industryArray);
+            [self.view addSubview:_picker];
+            [_picker reloadAllComponents];
+        }
+        else if (indexPath.row == 4) {
+            if (self.profession.count == 0) {
+                [self loadProfessionData];
+            }
+            self.selectedPickerArray = [[NSMutableArray alloc]initWithArray:self.profession];
+            NSLog(@"self.selectedPickerArray %@", self.selectedPickerArray);
+            [self.view addSubview:_picker];
+            [_picker reloadAllComponents];
+        }
+        else if (indexPath.row == 5) {
+            if (self.interests.count == 0) {
+                [self loadInterestsData];
+            }
+            
+            self.selectedPickerArray = [[NSMutableArray alloc]initWithArray:self.interests];;
+            NSLog(@"self.selectedPickerArray %@", self.selectedPickerArray);
+            [self.view addSubview:_picker];
+            [_picker reloadAllComponents];
         }
     }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [self.tableView reloadData];
-        [SVProgressHUD dismiss];
-    });
-    
+    else if (indexPath.section == 5) {
+        if (indexPath.row == 0) {
+            AboutZZViewController *aboutZZVC = [[AboutZZViewController alloc] init];
+            [self.navigationController pushViewController:aboutZZVC animated:YES];
+        }
+    }
 }
 
+//*********************** table view data **************************//
 - (void)loadNewData {
  
     //取消请求
@@ -375,5 +431,135 @@
 
 }
 
+//*********************** picker view **************************//
+#pragma -picker data
+- (void)loadIndustryData {
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSString *userToken = [AppDelegate APP].user.userToken;
+    
+    //----------------get industry array-----------------//
+    NSDictionary *inData = @{@"action" : @"getIndustryList", @"token" : userToken};
+    
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        self.industryArray = [ZZTypicalInformationModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        NSLog(@"industry array %@", _industryArray);
+        
+        for (int i = 0; i < _industryArray.count; i++) {
+            [self.industry addObject:_industryArray[i].informationName.en];
+        }
+        NSLog(@"industry  %@", _industry);
+        [self loadProfessionData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network for industry, please try later~"];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+}
+
+- (void)loadProfessionData {
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSString *userToken = [AppDelegate APP].user.userToken;
+    
+    //----------------get profession array-----------------//
+    
+    NSDictionary *inData1 = @{@"action" : @"getProfessionList", @"token" : userToken};
+    
+    NSDictionary *parameters1 = @{@"data" : inData1};
+    
+    [_manager POST:GetURL parameters:parameters1 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        self.professionArray = [ZZTypicalInformationModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        for (int i = 0; i < _professionArray.count; i++) {
+            [self.profession addObject:_professionArray[i].informationName.en];
+        }
+        [self loadInterestsData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network for profession, please try later~"];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+}
+
+- (void)loadInterestsData {
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    //NSString *userToken = [AppDelegate APP].user.userToken;
+    
+    //----------------get interests array-----------------//
+    NSDictionary *inData2 = @{@"action" : @"getInterestList"};
+    
+    NSDictionary *parameters2 = @{@"data" : inData2};
+    
+    [_manager POST:GetURL parameters:parameters2 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        self.interestsArray = [ZZTypicalInformationModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        //self.interests = [[NSMutableArray alloc] init];
+        for (int i = 0; i < _interestsArray.count; i++) {
+            [self.interests addObject:_interestsArray[i].informationName.en];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network for interest, please try later~"];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+}
+
+
+#pragma -picke view
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView{
+   
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView*)pivkerView numberOfRowsInComponent:(NSInteger)component{
+   
+    return [_selectedPickerArray count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+   
+    return [_selectedPickerArray objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    
+    _selectedItem = [_selectedPickerArray objectAtIndex:row];
+    NSLog(@"_selectedItem %@", _selectedItem);
+    [_picker removeFromSuperview];
+}
 
 @end

@@ -3,128 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[AFHTTPSessionManager dataTaskWithHTTPMethod:URLString:parameters:uploadProgress:downloadProgress:success:failure:]:AFHTTPSessionManager.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "error">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[MapNearbyEventsViewController addAnnotation]:MapNearbyEventsViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_nearbyEvents.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[NSObject(MJKeyValue) mj_setKeyValues:context:]:NSObject+MJKeyValue.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[MyZuzuViewController setUpFunctionsCollectionView]:MyZuzuViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "margin">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[AFHTTPSessionManager POST:parameters:progress:success:failure:]:AFHTTPSessionManager.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[MJProperty setValue:forObject:]:MJProperty.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[LoginViewController viewDidAppear:]:LoginViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[AppDelegate APP].user">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[EventPhotoViewController setUpCollectionView]:EventPhotoViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "itemHW">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "+[NSObject(MJKeyValue) mj_objectArrayWithKeyValuesArray:]:NSObject+MJKeyValue.m">
-      </ContextState>
-      <ContextState
-         contextName = "__46-[MapNearbyEventsViewController loadNewEvents]_block_invoke:MapNearbyEventsViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__46-[GFUpcomingTableViewController loadNewEvents]_block_invoke:GFUpcomingTableViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "eventsArray">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__43-[EventOverviewViewController loadNeweData]_block_invoke:EventOverviewViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[MapNearbyEventsViewController viewDidLoad]:MapNearbyEventsViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_nearbyEvents">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[MapNearbyEventsViewController setUpTableView]:MapNearbyEventsViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_nearbyEvents">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[LeaderboardViewController addChildViewController]:LeaderboardViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.scrollView.gf_width">
-            </PersistentString>
-            <PersistentString
-               value = "self.scrollView.contentOffset.x">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__48-[NSObject(MJKeyValue) mj_setKeyValues:context:]_block_invoke:NSObject+MJKeyValue.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[NSObject(MJKeyValue) mj_setKeyValues:]:NSObject+MJKeyValue.m">
-      </ContextState>
-      <ContextState
-         contextName = "+[NSObject(MJKeyValue) mj_objectWithKeyValues:context:]:NSObject+MJKeyValue.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[MyEventCell setEvent:]:MyEventCell.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[ZZLeaderboardCell setUser:]:ZZLeaderboardCell.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.profileImageView">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[LoginChildViewController nextButtonClicked:]:LoginChildViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[MapNearbyEventsViewController loadNewEvents]:MapNearbyEventsViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_nearbyEvents">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "-[AFHTTPRequestSerializer requestWithMethod:URLString:parameters:error:]:AFURLRequestSerialization.m">
       </ContextState>
       <ContextState
          contextName = "+[NSObject(Property) mj_enumerateProperties:]:NSObject+MJProperty.m">
@@ -138,21 +17,34 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[AFHTTPRequestSerializer requestWithMethod:URLString:parameters:error:]:AFURLRequestSerialization.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[EventOverviewViewController setUpContent]:EventOverviewViewController.m">
+         contextName = "-[LoginViewController viewDidAppear:]:LoginViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "_thisEvent">
+               value = "[AppDelegate APP].user">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ZZCheckInViewController postCheckIn]:ZZCheckInViewController.m">
+         contextName = "-[MapNearbyEventsViewController addAnnotation]:MapNearbyEventsViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "_pickedImage">
+               value = "_nearbyEvents.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MyZuzuViewController setUpFunctionsCollectionView]:MyZuzuViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "margin">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ZZLeaderboardCell setUser:]:ZZLeaderboardCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.profileImageView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -168,7 +60,139 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[ZZCheckInViewController postCheckIn]:ZZCheckInViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_pickedImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MapNearbyEventsViewController setUpTableView]:MapNearbyEventsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_nearbyEvents">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NSObject(MJKeyValue) mj_setKeyValues:context:]:NSObject+MJKeyValue.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[LeaderboardViewController addChildViewController]:LeaderboardViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.scrollView.gf_width">
+            </PersistentString>
+            <PersistentString
+               value = "self.scrollView.contentOffset.x">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__43-[EventOverviewViewController loadNeweData]_block_invoke:EventOverviewViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "-[MyEventCell timeLabel]:MyEventCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[EventPhotoViewController setUpCollectionView]:EventPhotoViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "itemHW">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AFHTTPSessionManager dataTaskWithHTTPMethod:URLString:parameters:uploadProgress:downloadProgress:success:failure:]:AFHTTPSessionManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "error">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MJProperty setValue:forObject:]:MJProperty.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[AFHTTPSessionManager POST:parameters:progress:success:failure:]:AFHTTPSessionManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "__43-[GFSettingViewController loadIndustryData]_block_invoke:GFSettingViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.industry">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__46-[GFUpcomingTableViewController loadNewEvents]_block_invoke:GFUpcomingTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "eventsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__48-[NSObject(MJKeyValue) mj_setKeyValues:context:]_block_invoke:NSObject+MJKeyValue.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MapNearbyEventsViewController viewDidLoad]:MapNearbyEventsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_nearbyEvents">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NSObject(MJKeyValue) mj_setKeyValues:]:NSObject+MJKeyValue.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[GFSettingViewController tableView:didSelectRowAtIndexPath:]:GFSettingViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.industry">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__46-[MapNearbyEventsViewController loadNewEvents]_block_invoke:MapNearbyEventsViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "+[NSObject(MJKeyValue) mj_objectArrayWithKeyValuesArray:]:NSObject+MJKeyValue.m">
+      </ContextState>
+      <ContextState
+         contextName = "+[NSObject(MJKeyValue) mj_objectWithKeyValues:context:]:NSObject+MJKeyValue.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MyEventCell setEvent:]:MyEventCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MapNearbyEventsViewController loadNewEvents]:MapNearbyEventsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_nearbyEvents">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[EventOverviewViewController setUpContent]:EventOverviewViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_thisEvent">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LoginChildViewController nextButtonClicked:]:LoginChildViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[GFSettingViewController loadIndustryData]:GFSettingViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.industry">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>
