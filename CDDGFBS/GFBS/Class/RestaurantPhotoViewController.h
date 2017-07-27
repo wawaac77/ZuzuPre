@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyEventImageModel.h"
 
 @interface RestaurantPhotoViewController : UIViewController
+
+@property (strong, nonatomic) NSMutableArray <MyEventImageModel*> *restaurantImages;
 
 @end

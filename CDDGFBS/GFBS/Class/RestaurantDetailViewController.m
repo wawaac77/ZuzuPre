@@ -6,6 +6,7 @@
 //  Copyright © 2017 apple. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "RestaurantDetailViewController.h"
 #import "RestaurantOverviewViewController.h"
 #import "RestaurantReviewViewController.h"
@@ -13,6 +14,12 @@
 #import "RestaurantMenuViewController.h"
 #import "RestaurantEventViewController.h"
 #import "GFTitleButton.h"
+#import "EventRestaurant.h"
+
+#import <AFNetworking.h>
+#import <MJExtension.h>
+#import <SVProgressHUD.h>
+#import <UIImageView+WebCache.h>
 
 @interface RestaurantDetailViewController () <UIScrollViewDelegate>
 
@@ -29,16 +36,34 @@
 @property (weak ,nonatomic) UIScrollView *titleView;
 
 /*TopImageView*/
-@property (weak ,nonatomic) UIImageView *topImageView ;
+@property (strong ,nonatomic) UIImageView *topImageView ;
+
+/*请求管理者*/
+@property (strong , nonatomic)GFHTTPSessionManager *manager;
 
 @end
 
+
 @implementation RestaurantDetailViewController
+
+@synthesize thisRestaurant;
+
+#pragma mark - 懒加载
+-(GFHTTPSessionManager *)manager
+{
+    if (!_manager) {
+        _manager = [GFHTTPSessionManager manager];
+        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    }
+    return _manager;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.frame = [UIScreen mainScreen].bounds;
-    [self setUpNavBar];
+    
+    [self loadNeweData];
     
     [self setUpTopImageView];
     
@@ -52,6 +77,34 @@
     [self addChildViewController];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setUpNavBar];
+}
+
+- (void)setUpNavBar {
+    
+    [self preferredStatusBarStyle];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
+    self.navigationItem.title = thisRestaurant.restaurantName.en;
+    
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+- (void)setUpTopImageView {
+    self.topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, GFScreenWidth, 200)];
+    [self.topImageView sd_setImageWithURL:[NSURL URLWithString:thisRestaurant.restaurantBanner.imageUrl] placeholderImage:nil];
+    self.topImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.topImageView.clipsToBounds = YES;
+    [self.view addSubview:_topImageView];
+}
+
 -(void)setUpChildViewControllers
 {
     //Overview
@@ -59,26 +112,29 @@
     overviewVC.view.backgroundColor = [UIColor redColor];
     [self addChildViewController:overviewVC];
     
-    //Review
+    //Check-in
     RestaurantReviewViewController *reviewVC = [[RestaurantReviewViewController alloc] init];
     reviewVC.view.backgroundColor = [UIColor orangeColor];
+    
     [self addChildViewController:reviewVC];
     
     //Photo
     RestaurantPhotoViewController *photoVC = [[RestaurantPhotoViewController alloc] init];
-    photoVC.view.backgroundColor = [UIColor yellowColor];
+    photoVC.restaurantImages = thisRestaurant.restaurantImages;
+    
     [self addChildViewController:photoVC];
     
     //Menu
     RestaurantMenuViewController *menuVC = [[RestaurantMenuViewController alloc] init];
-    menuVC.view.backgroundColor = [UIColor greenColor];
+    menuVC.menuImages = thisRestaurant.menuImages;
     [self addChildViewController:menuVC];
     
+    /*
     //Event
     RestaurantEventViewController *eventVC = [[RestaurantEventViewController alloc] init];
     eventVC.view.backgroundColor = [UIColor blueColor];
     [self addChildViewController:eventVC];
-
+     */
     
 }
 
@@ -96,7 +152,8 @@
     self.scrollView = scrollView;
     
     scrollView.delegate = self;
-    scrollView.frame = CGRectMake(0, 135, self.view.gf_width, 1000);
+    //CGFloat scrollHeight = GFScreenHeight * 0.6;
+    scrollView.frame = CGRectMake(0, 235, GFScreenWidth, GFScreenHeight - 235 - GFTabBarH);
     NSLog(@"self.view.gf_width in first claim scrollView is %f", self.view.gf_width);
     scrollView.pagingEnabled = YES;
     scrollView.showsVerticalScrollIndicator = NO;
@@ -119,8 +176,9 @@
     self.titleView = titleView;
     
     titleView.delegate = self;
-    titleView.frame = CGRectMake(0, 100, self.view.gf_width, 35);
-    titleView.contentSize = CGSizeMake(self.view.gf_width + 50, 35);
+    titleView.frame = CGRectMake(0, 200, self.view.gf_width, 35);
+    //titleView.contentSize = CGSizeMake(self.view.gf_width + 50, 0);
+    titleView.contentSize = CGSizeMake(self.view.gf_width, 0);
     NSLog(@"self.view.gf_width in first claim scrollView is %f", self.view.gf_width);
     titleView.pagingEnabled = YES;
     titleView.scrollEnabled = YES;
@@ -137,7 +195,7 @@
     [self.view addSubview:titleView];
      */
     
-    NSArray *titleContens = @[@"Overview",@"Review",@"Photo",@"Menu", @"Event"];
+    NSArray *titleContens = @[@"Overview",@"Check-in",@"Photo",@"Menu"];
     NSInteger count = titleContens.count;
     NSLog(@"titlecontents count is %ld", (long)count);
     
@@ -246,15 +304,17 @@
     [self addChildViewController];
 }
 
+/*
 - (void)setUpTopImageView
 {
-    UIImageView *topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.gf_width, 100)];
+    UIImageView *topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.gf_width, 200 - GFNavMaxY)];
     self.topImageView = topImageView;
     topImageView.backgroundColor = [UIColor blackColor];
     topImageView.image = [UIImage imageNamed:@"pexels-photo-262918.png"];
     [self.view addSubview:topImageView];
 }
-
+*/
+/*
 #pragma mark - 设置导航条
 -(void)setUpNavBar
 {
@@ -273,7 +333,7 @@
     //self.navigationItem.titleView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"MainTitle"]];
     //self.navigationItem.title = @"Search Bar should be here!";
 }
-
+*/
 
 
 
@@ -281,6 +341,42 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void)loadNeweData {
+    
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    NSString *restaurantID = thisRestaurant.restaurantId;
+    
+    NSString *userToken = [AppDelegate APP].user.userToken;
+    NSDictionary *inSubData = @{@"restaurantId" : restaurantID};
+    NSDictionary *inData = @{
+                             @"action" : @"getRestaurantDetail",
+                             @"token" : userToken,
+                             @"data" : inSubData
+                             };
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    //发送请求
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+        
+        EventRestaurant *response = responseObject[@"data"];
+        NSLog(@"response in restaurant %@", response);
+        thisRestaurant = [EventRestaurant mj_objectWithKeyValues:response];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        //[self.tableView.mj_footer endRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        
+    }];
+}
+
 
 /*
 #pragma mark - Navigation

@@ -14,6 +14,7 @@
     return @{
              //@"listEventRestaurant" : @"EventRestaurant",
              @"restaurantImages" : @"MyEventImageModel",
+             @"menuImages" : @"MyEventImageModel",
              };
 }
 
@@ -33,6 +34,7 @@
              @"restaurantMinPrice" : @"minPrice",
              @"restaurantMaxPrice" : @"maxPrice",
              @"restaurantImages" : @"images",
+             @"menuImages" : @"menus",
              };
 }
 

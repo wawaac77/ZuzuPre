@@ -25,6 +25,8 @@
 
 - (void)setImageURL:(NSString *)imageURL {
     _imageURL = imageURL;
+    self.imageView.clipsToBounds = YES;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
 }
 

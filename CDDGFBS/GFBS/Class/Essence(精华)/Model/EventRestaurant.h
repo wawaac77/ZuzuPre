@@ -33,7 +33,8 @@
 @property (nonatomic, strong) ZZTypicalInformationModel *restaurantCuisine;
 @property (nonatomic, assign) NSNumber *restaurantMinPrice;
 @property (nonatomic, assign) NSNumber *restaurantMaxPrice;
-@property (nonatomic, strong) NSArray<MyEventImageModel*> *restaurantImages;
+@property (nonatomic, strong) NSMutableArray <MyEventImageModel*> *restaurantImages;
+@property (nonatomic, strong) NSMutableArray <MyEventImageModel*> *menuImages;
 
 
 @end
