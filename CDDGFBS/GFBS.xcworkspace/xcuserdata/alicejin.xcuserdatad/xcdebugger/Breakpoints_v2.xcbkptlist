@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Setting(&#x8bbe;&#x7f6e;)/Controller/GFSettingViewController.m"
-            timestampString = "522774957.249978"
+            timestampString = "522817097.707181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -864,11 +864,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/LoginChildViewController.m"
-            timestampString = "522775282.669506"
+            timestampString = "522812539.691125"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "-nextButtonClicked:"
             landmarkType = "7">
             <Locations>
@@ -912,11 +912,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/LoginChildViewController.m"
-            timestampString = "522775282.669506"
+            timestampString = "522812539.691125"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "-nextButtonClicked:"
             landmarkType = "7">
          </BreakpointContent>
@@ -928,11 +928,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/LoginChildViewController.m"
-            timestampString = "522775282.669506"
+            timestampString = "522812539.691125"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "-nextButtonClicked:"
             landmarkType = "7">
          </BreakpointContent>
@@ -960,11 +960,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/LoginChildViewController.m"
-            timestampString = "522775282.669506"
+            timestampString = "522812539.691125"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-forgetPasswordClicked:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1722,11 +1722,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/GFEventsCell.m"
-            timestampString = "522649574.340999"
+            timestampString = "522831941.834658"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "-likedButtonClicked:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1738,11 +1738,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/GFEventsCell.m"
-            timestampString = "522649574.340999"
+            timestampString = "522831941.834658"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "-likeCheckin:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1754,11 +1754,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/HomePostTableViewController.m"
-            timestampString = "522645132.194044"
+            timestampString = "522834489.195882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1770,11 +1770,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/ZZContentModel.m"
-            timestampString = "522564012.758062"
+            timestampString = "522834489.195882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "+initialize"
             landmarkType = "7">
          </BreakpointContent>
@@ -1944,11 +1944,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Setting(&#x8bbe;&#x7f6e;)/Controller/GFSettingViewController.m"
-            timestampString = "522774957.249978"
+            timestampString = "522818085.267522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "525"
-            endingLineNumber = "525"
+            startingLineNumber = "561"
+            endingLineNumber = "561"
             landmarkName = "-loadInterestsData"
             landmarkType = "7">
          </BreakpointContent>
@@ -1960,11 +1960,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Setting(&#x8bbe;&#x7f6e;)/Controller/GFSettingViewController.m"
-            timestampString = "522774957.249978"
+            timestampString = "522818085.267522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
             landmarkName = "-loadIndustryData"
             landmarkType = "7">
          </BreakpointContent>
@@ -1976,11 +1976,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Setting(&#x8bbe;&#x7f6e;)/Controller/GFSettingViewController.m"
-            timestampString = "522774957.249978"
+            timestampString = "522818085.267522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
+            startingLineNumber = "403"
+            endingLineNumber = "403"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>

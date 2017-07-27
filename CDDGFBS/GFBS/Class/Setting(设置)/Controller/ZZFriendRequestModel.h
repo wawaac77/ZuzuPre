@@ -10,7 +10,8 @@
 @class ZZUser;
 
 @interface ZZFriendRequestModel : NSObject
-
+@property (nonatomic,copy) NSString *friendshipID;
 @property (nonatomic, strong) ZZUser *friendRequest;
+@property (nonatomic, strong) ZZUser *memberRequest;
 
 @end

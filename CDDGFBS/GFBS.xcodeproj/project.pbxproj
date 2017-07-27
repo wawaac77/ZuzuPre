@@ -274,8 +274,6 @@
 		783089451F1CD66200C31BFE /* ZZComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089441F1CD66200C31BFE /* ZZComment.m */; };
 		783089481F1D039800C31BFE /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089471F1D039800C31BFE /* CommentHeaderView.m */; };
 		7830894A1F1D0C6F00C31BFE /* CommentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089491F1D0C6F00C31BFE /* CommentHeaderView.xib */; };
-		783089531F1DBE3700C31BFE /* ZZCommentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089511F1DBE3700C31BFE /* ZZCommentsCell.m */; };
-		783089541F1DBE3700C31BFE /* ZZCommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089521F1DBE3700C31BFE /* ZZCommentsCell.xib */; };
 		7830895C1F1E1E4100C31BFE /* ZZFriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830895A1F1E1E4100C31BFE /* ZZFriendsTableViewController.m */; };
 		7830895D1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7830895B1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib */; };
 		783089601F1E1E7100C31BFE /* ZZFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830895F1F1E1E7100C31BFE /* ZZFriendModel.m */; };
@@ -867,9 +865,6 @@
 		783089461F1D039800C31BFE /* CommentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentHeaderView.h; sourceTree = "<group>"; };
 		783089471F1D039800C31BFE /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentHeaderView.m; sourceTree = "<group>"; };
 		783089491F1D0C6F00C31BFE /* CommentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentHeaderView.xib; sourceTree = "<group>"; };
-		783089501F1DBE3700C31BFE /* ZZCommentsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCommentsCell.h; sourceTree = "<group>"; };
-		783089511F1DBE3700C31BFE /* ZZCommentsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCommentsCell.m; sourceTree = "<group>"; };
-		783089521F1DBE3700C31BFE /* ZZCommentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZCommentsCell.xib; sourceTree = "<group>"; };
 		783089591F1E1E4100C31BFE /* ZZFriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZFriendsTableViewController.h; sourceTree = "<group>"; };
 		7830895A1F1E1E4100C31BFE /* ZZFriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZFriendsTableViewController.m; sourceTree = "<group>"; };
 		7830895B1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZFriendsTableViewController.xib; sourceTree = "<group>"; };
@@ -2392,9 +2387,6 @@
 				783089461F1D039800C31BFE /* CommentHeaderView.h */,
 				783089471F1D039800C31BFE /* CommentHeaderView.m */,
 				783089491F1D0C6F00C31BFE /* CommentHeaderView.xib */,
-				783089501F1DBE3700C31BFE /* ZZCommentsCell.h */,
-				783089511F1DBE3700C31BFE /* ZZCommentsCell.m */,
-				783089521F1DBE3700C31BFE /* ZZCommentsCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3233,7 +3225,6 @@
 				780096CA1EC9C1F5008F9F99 /* ic_fa-filter.png in Resources */,
 				780096D41EC9C1F5008F9F99 /* ic_fa-users-on.png in Resources */,
 				780096FE1EC9C1F5008F9F99 /* Ic_fa-star.png in Resources */,
-				783089541F1DBE3700C31BFE /* ZZCommentsCell.xib in Resources */,
 				780097071EC9C1F5008F9F99 /* gold_pin.png in Resources */,
 				786069AC1F15DB9B00A8AB88 /* ic_facebook-logo.png in Resources */,
 				7862274F1EF91AF8006F731F /* zuzu-login-1242x2208.png in Resources */,
@@ -3558,7 +3549,6 @@
 				181EF7421E0B5DA000C91928 /* GFPostWordViewController.m in Sources */,
 				788CC33A1F19EC3900DC4116 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				788CC3361F19EC3900DC4116 /* JSQMessagesAvatarImageFactory.m in Sources */,
-				783089531F1DBE3700C31BFE /* ZZCommentsCell.m in Sources */,
 				788CC3421F19EC3900DC4116 /* JSQLocationMediaItem.m in Sources */,
 				786069631F15D98100A8AB88 /* DHGifImageOperation.m in Sources */,
 			);

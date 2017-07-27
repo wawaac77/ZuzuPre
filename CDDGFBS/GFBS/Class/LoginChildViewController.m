@@ -111,8 +111,11 @@
     //2.凭借请求参数
     NSString *email = _emailTextField.text;
     NSString *password = _passwordTextField.text;
-    _emailTextField.text = @"alicej@gmail.com";
-    _passwordTextField.text =@"123456";
+    if (email.length == 0) {
+        _emailTextField.text = @"alicej@gmail.com";
+        _passwordTextField.text =@"123456";
+
+    }
     
     NSDictionary *emailAndPassword = @ {@"email" : email, @"password" : password};
     NSDictionary *inData = @{

@@ -13,13 +13,14 @@
 
 #import "AboutZZViewController.h"
 #import "ZZMessageAdminViewController.h"
+#import "LoginViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
 #import <SDImageCache.h>
 #import <SVProgressHUD.h>
 
-@interface GFSettingViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface GFSettingViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate>
 
 //@property (weak, nonatomic) IBOutlet UILabel *rangeLabel;
 //@property (weak, nonatomic) NSString *priceRange;
@@ -357,10 +358,45 @@
 }
 
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        AppDelegate *appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        [appDel.window makeKeyAndVisible];
+        [appDel.window setRootViewController:loginVC];
+        
+        /*
+        id rootController = [[[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:0] nextResponder];
+        if ([rootController isKindOfClass:[LoginViewController class]]){
+            //do something
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        } else {
+            LoginViewController *loginVC = [[LoginViewController alloc] init];
+            [[UIApplication sharedApplication].keyWindow setRootViewController:loginVC];
+            
+        }
+         */
+
+        
+    }
+}
+
 //********************* didSelectRowAtIndexPath **************************//
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Hi, mate" message:@"Are you sure to log out?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+            [alertView show];
+
+        }
+        
+        
+    }
+    else if (indexPath.section == 1) {
         
         if (indexPath.row == 3) {
             if (self.industry.count == 0) {

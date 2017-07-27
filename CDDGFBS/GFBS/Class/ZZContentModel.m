@@ -49,9 +49,10 @@ static NSTimeZone *outputTimeZone_;
     //文字
     CGFloat textMaxW = [UIScreen mainScreen].bounds.size.width - 2 * GFMargin;
     CGSize textMaxSize = CGSizeMake(textMaxW, MAXFLOAT);
-    CGSize textSize = [self.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
+    CGSize textSize = [self.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
     _cellHeight += textSize.height + GFMargin;
     
+    _cellHeight += 274;
     //中间
     /*
     if (self.type != GFTopicTypeWord) {
@@ -89,7 +90,8 @@ static NSTimeZone *outputTimeZone_;
     _cellHeight += GFDcrcH + GFMargin;
     
     //return _cellHeight;
-    return 230;
+    NSLog(@"_cellHeight in model %f", _cellHeight);
+    return _cellHeight;
 }
 
 

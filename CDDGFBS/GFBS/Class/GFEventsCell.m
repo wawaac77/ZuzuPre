@@ -96,8 +96,31 @@
     
     [_heartButton addTarget:self action:@selector(likedButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:nil];
-    NSLog(@"thisEvent.listImage.imageUrl %@", thisEvent.listImage.imageUrl);
+    /*
+    if image.width > image.height {
+        imageView.contentMode = UIViewContentModeScaleAspectFit
+        //since the width > height we may fit it and we'll have bands on top/bottom
+    } else {
+        imageView.contentMode = UIViewContentModeScaleAspectFill
+        //width < height we fill it until width is taken up and clipped on top/bottom
+    }
+     */
+
+    NSURL *URL = [NSURL URLWithString:thisEvent.listImage.imageUrl];
+    NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
+    UIImage *image = [[UIImage alloc]initWithData:data];
+    
+    if (image.size.width > image.size.height) {
+        _bigImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _bigImageView.image = image;
+    } else {
+        _bigImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _bigImageView.image = image;
+    }
+
+   
+
+   
     //[self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:nil];
     //self.profileImageView.image = [UIImage imageNamed:@"profile-bg-green1_02.jpg"];
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listPublishUser.userProfileImage.imageUrl] placeholderImage:nil];

@@ -283,7 +283,7 @@
 
 
 - (void)setUpImageView {
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, GFScreenHeight - GFTabBarH - 80 - 120, GFScreenWidth, 120)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, GFScreenHeight - GFTabBarH - 80 - 274, GFScreenWidth, 274)];
     self.imageView = imageView;
     [self.view addSubview:imageView];
 }

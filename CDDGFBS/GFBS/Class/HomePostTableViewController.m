@@ -71,11 +71,11 @@ static NSString *const ID = @"ID";
 {
     //self.tableView.contentInset = UIEdgeInsetsMake(33, 0, GFTabBarH, 0);
     //[self.tableView setFrame:self.view.bounds];
-    NSLog(@"table width %f",self.view.gf_width);
+    //NSLog(@"table width %f",self.view.gf_width);
     //self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
     //self.tableView.backgroundColor = [UIColor lightGrayColor];
-    self.tableView.separatorStyle = UITableViewStylePlain;
     
+    self.tableView.separatorStyle = UITableViewStylePlain;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GFEventsCell class]) bundle:nil] forCellReuseIdentifier:ID];
     
     //[self.tableView reloadData];
@@ -108,8 +108,6 @@ static NSString *const ID = @"ID";
     [cell.contentView addSubview:restaurantButton];
     
     ZZContentModel *thisContent = self.contents[indexPath.row];
-    NSLog(@"this content%@", thisContent);
-    
     cell.event = thisContent;
     
     return cell;
@@ -119,14 +117,9 @@ static NSString *const ID = @"ID";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    //ZZCommentsTableViewController *commentVC = [[ZZCommentsTableViewController alloc] init];
-    //commentVC.content = [_contents objectAtIndex:indexPath.row];
-    //    //eventDetailVC. = self.topics[indexPath.row];
     NSIndexPath *recordIndexPath = [[NSIndexPath alloc] init];
     self.recordIndexPath = recordIndexPath;
     recordIndexPath = indexPath;
-    NSLog(@"recordIndexPath %@", indexPath);
-    NSLog(@"recordIndexPath.row %ld", indexPath.row);
     
     GFCommentViewController *commentsVC = [[GFCommentViewController alloc] init];
     commentsVC.topic = [_contents objectAtIndex:indexPath.row];
@@ -168,7 +161,7 @@ static NSString *const ID = @"ID";
     //self.tableView.mj_footer = [GFRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
-/*******Here is reloading data place*****/
+/*************************Here is reloading data place************************/
 #pragma mark - 加载新数据
 -(void)loadNewEvents
 {
@@ -229,6 +222,8 @@ static NSString *const ID = @"ID";
     [SVProgressHUD dismiss];
 }
 
+
+//************************* update cell which is hearted in commentVC ******************************//
 -(void)viewWillAppear:(BOOL)animated{
     NSLog(@"indexPathForSlectedRow in viewWillAppear %@", [self.tableView indexPathForSelectedRow]);
     NSLog(@"indexPathForSlectedRow in viewWillAppear.row %ld", [self.tableView indexPathForSelectedRow].row);

@@ -13,7 +13,9 @@
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     
     return @{
+             @"friendshipID" : @"_id",
              @"friendRequest" : @"friend",
+             @"memberRequest" : @"member",
             };
 }
 
