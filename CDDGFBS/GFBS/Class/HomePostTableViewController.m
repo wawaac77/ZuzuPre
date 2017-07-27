@@ -75,14 +75,20 @@ static NSString *const ID = @"ID";
     //self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
     //self.tableView.backgroundColor = [UIColor lightGrayColor];
     
-    self.tableView.separatorStyle = UITableViewStylePlain;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //self.tableView.rowHeight = UITableViewAutomaticDimension;
+    //self.tableView.estimatedRowHeight = 400;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GFEventsCell class]) bundle:nil] forCellReuseIdentifier:ID];
     
     //[self.tableView reloadData];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 400;
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ZZContentModel *content = _contents[indexPath.row];
+    NSLog(@"contentCellHeightInPostVC %f", content.cellHeight);
+    return content.cellHeight;
 }
 
 #pragma mark - Table view data source

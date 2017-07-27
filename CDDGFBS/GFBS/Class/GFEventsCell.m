@@ -110,19 +110,10 @@
     NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
     UIImage *image = [[UIImage alloc]initWithData:data];
     
-    if (image.size.width > image.size.height) {
-        _bigImageView.contentMode = UIViewContentModeScaleAspectFit;
-        _bigImageView.image = image;
-    } else {
-        _bigImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _bigImageView.image = image;
-    }
+    _bigImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _bigImageView.clipsToBounds = YES;
+    _bigImageView.image = image;
 
-   
-
-   
-    //[self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:nil];
-    //self.profileImageView.image = [UIImage imageNamed:@"profile-bg-green1_02.jpg"];
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listPublishUser.userProfileImage.imageUrl] placeholderImage:nil];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
@@ -133,16 +124,50 @@
     
     self.smallTitleLabel.text = thisEvent.listPublishUser.userUserName;
     
-    self.textField.text = thisEvent.listMessage;
+    /*
+    
     _textField.font = [UIFont systemFontOfSize:16];
     _textField.numberOfLines = 0;
     CGFloat height = [UILabel getHeightByWidth:_textField.frame.size.width title:_textField.text font:_textField.font];
-    _textField.frame = CGRectMake(5, 337, GFScreenWidth - 10, height);
-
+    
+    if (height > 50.0f) {
+        height = 50.0f;
+    }
+     */
+    CGFloat height;
+    height = thisEvent.cellHeight - 337 - GFMargin;
+    NSLog(@"cell not comment textField height %f", height);
+    /*
+    if (thisEvent.type == CommentContent) {
+        height = thisEvent.cellHeightForComment - 337 - GFMargin;
+        NSLog(@"cell comment textField height %f", height);
+    } else {
+        height = thisEvent.cellHeight - 337 - GFMargin;
+        NSLog(@"cell not comment textField height %f", height);
+    }
+    */
+    _textField.frame = CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, height);
+    _textField.clipsToBounds = YES;
+    _textField.lineBreakMode = NSLineBreakByTruncatingTail;
+    self.textField.text = thisEvent.listMessage;
     
     self.timeLabel.text = thisEvent.listEventUpdatedAt;
     
+    //[self layoutSubviews];
 }
+
+/*
+- (void)layoutSubviews {
+    
+    CGRect newCellSubViewsFrame = CGRectMake(0, 0, self.frame.size.width, self.textField.gf_height + 350);
+    CGRect newCellViewFrame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.textField.gf_height + 350);
+    
+    self.contentView.frame = self.contentView.bounds = self.backgroundView.frame = self.accessoryView.frame = newCellSubViewsFrame;
+    self.frame = newCellViewFrame;
+    
+    [super layoutSubviews];
+}
+ */
 
 - (void)likedButtonClicked: (UIButton *) sender {
     NSLog(@"self.thisEvent.listIsLike %@", self.thisEvent.listIsLike);

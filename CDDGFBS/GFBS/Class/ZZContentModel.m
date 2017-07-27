@@ -43,16 +43,24 @@ static NSTimeZone *outputTimeZone_;
 {
     //如果cell高度已经计算处理 就直接返回
     if (_cellHeight) return _cellHeight;
+    
+    _cellHeight = 337.0f + GFMargin;
     //头像
-    _cellHeight = GFiconH;
+    //_cellHeight = GFiconH;
     
     //文字
     CGFloat textMaxW = [UIScreen mainScreen].bounds.size.width - 2 * GFMargin;
     CGSize textMaxSize = CGSizeMake(textMaxW, MAXFLOAT);
-    CGSize textSize = [self.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-    _cellHeight += textSize.height + GFMargin;
+    CGSize textSize = [self.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:GFTextSize]} context:nil].size;
     
-    _cellHeight += 274;
+    CGFloat textHeight = textSize.height;
+    
+    if (textHeight > 50.0f) {
+        textHeight = 50.0f;
+    }
+    _cellHeight += textHeight;
+
+   
     //中间
     /*
     if (self.type != GFTopicTypeWord) {
@@ -87,13 +95,32 @@ static NSTimeZone *outputTimeZone_;
         
     }*/
     //底部工具条
-    _cellHeight += GFDcrcH + GFMargin;
+    //_cellHeight += GFDcrcH + GFMargin;
     
     //return _cellHeight;
     NSLog(@"_cellHeight in model %f", _cellHeight);
     return _cellHeight;
 }
 
+- (CGFloat)cellHeightForComment
+{
+    
+    //如果cell高度已经计算处理 就直接返回
+    if (_cellHeightForComment) return _cellHeightForComment;
+    
+    _cellHeightForComment = 365.0f;
+    
+    //文字
+    CGFloat textMaxW = [UIScreen mainScreen].bounds.size.width - 2 * GFMargin;
+    CGSize textMaxSize = CGSizeMake(textMaxW, MAXFLOAT);
+    CGSize textSize = [self.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:GFTextSize]} context:nil].size;
+    
+    CGFloat textHeight = textSize.height;
+    _cellHeightForComment += textHeight;
+    
+    NSLog(@"_cellHeightForComment in model %f", _cellHeight);
+    return _cellHeightForComment;
+}
 
 /**
  只调用一次

@@ -53,6 +53,11 @@ static NSString *const headID = @"head";
 
 @implementation GFCommentViewController
 
+-(MyPublishContentType)type
+{
+    return CommentContent;
+}
+
 #pragma mark - 懒加载
 -(GFHTTPSessionManager *)manager
 {
@@ -105,12 +110,25 @@ static NSString *const headID = @"head";
     [self.tableView registerClass:[GFCommentHeaderFooterView class] forHeaderFooterViewReuseIdentifier:headID];
     //嵌套一个View
     UIView *head = [[UIView alloc] init];
+    //head.backgroundColor = [UIColor whiteColor];
     GFEventsCell *topicCell = [GFEventsCell gf_viewFromXib];
-    topicCell.backgroundColor = [UIColor whiteColor];
-    topicCell.event = self.topic;
     
-    //topicCell.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.topic.cellHeight);
-    topicCell.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 230);
+    topicCell.backgroundColor = [UIColor whiteColor];
+    //self.topic.type = CommentContent;
+    topicCell.event = self.topic;
+    topicCell.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.topic.cellHeightForComment);
+    
+    CGFloat textMaxW = [UIScreen mainScreen].bounds.size.width - 2 * GFMargin;
+    CGSize textMaxSize = CGSizeMake(textMaxW, MAXFLOAT);
+    CGSize textSize = [self.topic.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
+    CGFloat textHeight = textSize.height;
+    UILabel *fullTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, textHeight)];
+    fullTextLabel.numberOfLines = 0;
+    fullTextLabel.font = [UIFont systemFontOfSize:GFTextSize];
+    fullTextLabel.text = self.topic.listMessage;
+    fullTextLabel.backgroundColor = [UIColor whiteColor];
+
+    //topicCell.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 400);
     NSLog(@"self.topic.cellHeight %f", self.topic.cellHeight);
     
     // 设置header的高度
@@ -120,6 +138,7 @@ static NSString *const headID = @"head";
     NSLog(@"topic cell height %f", topicCell.gf_height);
     NSLog(@"head height = %f", head.gf_height);
     [head addSubview:topicCell];
+    [head addSubview:fullTextLabel]; //cover the cell label
     self.tableView.tableHeaderView = head;
 
     //头部View高度

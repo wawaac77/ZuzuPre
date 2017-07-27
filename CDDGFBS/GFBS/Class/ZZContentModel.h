@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger , MyPublishContentType){
 
     MePublishContent = 2,
     
+    CommentContent = 3,
+    
 };
 
 @interface ZZContentModel : NSObject
@@ -42,7 +44,14 @@ typedef NS_ENUM(NSInteger , MyPublishContentType){
 
 /** cell高度 */
 @property (nonatomic, assign) CGFloat cellHeight;
+/** cell for comment高度 */
+@property (nonatomic, assign) CGFloat cellHeightForComment;
+
 /** 中间内容的Frame */
 @property (nonatomic, assign) CGRect middleF;
+
+/** 帖子类型 */
+@property (nonatomic, assign) MyPublishContentType type;
+
 
 @end

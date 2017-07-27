@@ -4,6 +4,8 @@
 #import<UIKit/UIKit.h>
 
 /*常用数*/
+UIKIT_EXTERN int const GFTextSize;
+/*常用数*/
 UIKIT_EXTERN CGFloat const GFMargin;
 /*标签间隔*/
 UIKIT_EXTERN CGFloat const GFTagMargin;

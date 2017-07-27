@@ -3,6 +3,9 @@
 #import<UIKit/UIKit.h>
 
 /*常用数*/
+int const GFTextSize = 14;
+
+/*常用数*/
 CGFloat const GFMargin = 10;
 
 /*标签间隔*/

@@ -38,6 +38,10 @@
     }];
     
     self.nameLabel.text = comment.member.userUserName;
+    if (self.nameLabel.text.length == 0) {
+        self.nameLabel.text = @"Secret user";
+    }
+    
     self.text_label.text = comment.commentMessage;
     
     //self.likeCountLabel.text = [NSString stringWithFormat:@"%zd",comment.like_count];
