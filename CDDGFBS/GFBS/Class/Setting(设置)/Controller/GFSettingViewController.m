@@ -363,6 +363,7 @@
     if (buttonIndex == 1) {
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         AppDelegate *appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        [AppDelegate APP].user = nil;
         [appDel.window makeKeyAndVisible];
         [appDel.window setRootViewController:loginVC];
         
