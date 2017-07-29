@@ -24,6 +24,8 @@
 
 @implementation AppDelegate
 
+@synthesize user;
+
 + (AppDelegate *) APP {
     return  (AppDelegate*) [[UIApplication sharedApplication] delegate];
 }
@@ -33,6 +35,27 @@
     [Fabric with:@[[Crashlytics class]]];
 
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *username = [userDefault objectForKey:@"KEY_USER_NAME"];
+    NSString *userToken = [userDefault objectForKey:@"KEY_USER_TOKEN"];
+    
+    if (userToken != nil) {
+        
+        ///UIWindow *window = [UIApplication sharedApplication].keyWindow;
+        //window.rootViewController = [[GFTabBarController alloc]init];
+        
+        user = [[ZZUser alloc] init];
+        user.userToken = userToken;
+        user.userUserName = username;
+        GFTabBarController *tabVC = [[GFTabBarController alloc] init];
+        self.window.rootViewController = tabVC;
+        
+        [self.window makeKeyAndVisible];
+        NSLog(@"userToken in default user %@", userToken);
+        
+        return YES;
+    }
     
     //广告控制器
 //    GFAdViewController *adVC = [[GFAdViewController alloc]init];
@@ -118,6 +141,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     // [END_EXCLUDE]
 }
 // [END disconnect_handler]
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

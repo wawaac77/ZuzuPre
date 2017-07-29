@@ -110,7 +110,7 @@ static NSString *const headID = @"head";
     [self.tableView registerClass:[GFCommentHeaderFooterView class] forHeaderFooterViewReuseIdentifier:headID];
     //嵌套一个View
     UIView *head = [[UIView alloc] init];
-    //head.backgroundColor = [UIColor whiteColor];
+    head.backgroundColor = [UIColor whiteColor];
     GFEventsCell *topicCell = [GFEventsCell gf_viewFromXib];
     
     topicCell.backgroundColor = [UIColor whiteColor];

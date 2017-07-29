@@ -79,7 +79,7 @@ static NSString *const ID = @"ID";
         NSMutableArray *rankArray = responseObject[@"data"];
         self.rankList = [ZZLeaderboardModel mj_objectArrayWithKeyValuesArray:rankArray];
         NSLog(@"rankList %@", self.rankList);
-        
+        [self saveUIImages];
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
         
@@ -92,6 +92,15 @@ static NSString *const ID = @"ID";
         });
         
     }];
+}
+
+- (void)saveUIImages {
+    for (int i = 0; i < _rankList.count; i++) {
+        NSURL *URL = [NSURL URLWithString:_rankList[i].leaderboardMember.userProfileImage.imageUrl];
+        NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
+        UIImage *image = [[UIImage alloc]initWithData:data];
+        _rankList[i].leaderboardMember.userProfileImage_UIImage = image;
+    }
 }
 
 -(void)setUpTable

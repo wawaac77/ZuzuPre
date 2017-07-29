@@ -14,6 +14,7 @@
 #import "LeaderboardHomeTableViewController.h"
 //#import "ZZFriendsTableViewController.h"
 #import "ZZAddFriendsViewController.h"
+#import "LoginViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -135,6 +136,7 @@
     //2.凭借请求参数
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
+    NSLog(@"first userToken %@", userToken);
     NSDictionary *inData = [[NSDictionary alloc] init];
     inData = @{@"action" : @"getMyProfile", @"token" : userToken};
     NSDictionary *parameters = @{@"data" : inData};
@@ -143,11 +145,26 @@
     [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
         
         ZZUser *thisUser = [[ZZUser alloc] init];
-        thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
-        self.myProfile = thisUser;
-        [self setUpTopView];
-        NSLog(@"this user %@", thisUser);
-        NSLog(@"this user. userName %@", thisUser.usertName);
+        NSNumber *responseStatus = [[NSNumber alloc] init];
+        responseStatus = responseObject[@"status"];
+        
+        NSLog(@"responseStatus %@", responseStatus);
+        
+        if ([responseStatus isEqualToNumber:@0]) {
+            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+            window.rootViewController = [[LoginViewController alloc]init];
+            [AppDelegate APP].user = nil;
+            NSLog(@"status is equal to 0");
+            [window makeKeyAndVisible];
+            
+        } else {
+            thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
+            self.myProfile = thisUser;
+            [AppDelegate APP].user = thisUser;
+            [self setUpTopView];
+            NSLog(@"this user %@", thisUser);
+            NSLog(@"this user. userName %@", thisUser.usertName);
+        }
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

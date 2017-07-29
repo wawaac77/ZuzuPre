@@ -106,13 +106,15 @@
     }
      */
 
+    /*
     NSURL *URL = [NSURL URLWithString:thisEvent.listImage.imageUrl];
     NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
     UIImage *image = [[UIImage alloc]initWithData:data];
+    */
     
     _bigImageView.contentMode = UIViewContentModeScaleAspectFill;
     _bigImageView.clipsToBounds = YES;
-    _bigImageView.image = image;
+    _bigImageView.image = thisEvent.listImage_UIImage;
 
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listPublishUser.userProfileImage.imageUrl] placeholderImage:nil];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;

@@ -199,6 +199,7 @@ static NSString *const ID = @"ID";
         NSLog(@"responseObject - data is %@", responseObject[@"data"]);
         
         self.contents = [ZZContentModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        [self saveUIImages];
         
         [self.tableView reloadData];
         
@@ -214,6 +215,15 @@ static NSString *const ID = @"ID";
         });
     }];
     
+}
+
+- (void)saveUIImages {
+    for (int i = 0; i < _contents.count; i++) {
+        NSURL *URL = [NSURL URLWithString:_contents[i].listImage.imageUrl];
+        NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
+        UIImage *image = [[UIImage alloc]initWithData:data];
+        _contents[i].listImage_UIImage = image;
+    }
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

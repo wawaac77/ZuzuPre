@@ -131,39 +131,7 @@
         ZZUser *thisUser = [[ZZUser alloc] init];
         thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
         
-        NSString *imageURL = thisUser.userProfileImage.imageUrl;
-        NSURL  *url = [NSURL URLWithString:imageURL];
-        NSData *urlData = [NSData dataWithContentsOfURL:url];
         
-        if ( urlData )
-            
-        {
-            
-            NSLog(@"Downloading started...");
-            
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            
-            NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"dwnld_image.png"];
-            
-            NSLog(@"FILE : %@",filePath);
-            
-            [urlData writeToFile:filePath atomically:YES];
-            
-            UIImage *image1=[UIImage imageWithContentsOfFile:filePath];
-            
-            thisUser.userProfileImage_UIImage = image1;
-
-            NSLog(@"Completed...");
-            
-        }
-        
-
-        NSLog(@"this user %@", thisUser);
-        NSLog(@"this user. userName %@", thisUser.usertName);
-        NSLog(@"this user. memberId %@", thisUser.userID);
-
         if (thisUser == nil) {
             
             [SVProgressHUD showWithStatus:@"Incorrect Email or password ><"];
@@ -172,6 +140,58 @@
                 [SVProgressHUD dismiss];
             });
         } else {
+            
+            [AppDelegate APP].user = [[ZZUser alloc] init];
+            [AppDelegate APP].user = thisUser;
+            
+            NSLog(@"user token = %@", thisUser.userToken);
+            
+            /*
+             
+            NSString *imageURL = thisUser.userProfileImage.imageUrl;
+            NSURL  *url = [NSURL URLWithString:imageURL];
+            NSData *urlData = [NSData dataWithContentsOfURL:url];
+             
+            if ( urlData )
+             
+            {
+             
+            NSLog(@"Downloading started...");
+             
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+             
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+             
+            NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"dwnld_image.png"];
+             
+            NSLog(@"FILE : %@",filePath);
+             
+            [urlData writeToFile:filePath atomically:YES];
+             
+            UIImage *image1=[UIImage imageWithContentsOfFile:filePath];
+             
+            thisUser.userProfileImage_UIImage = image1;
+             
+            NSLog(@"Completed...");
+             
+            }
+             */
+            
+            //*************** defualt user set even app is turned off *********//
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:thisUser.userUserName forKey:@"KEY_USER_NAME"];
+            [userDefaults setObject:thisUser.userToken forKey:@"KEY_USER_TOKEN"];
+            [userDefaults synchronize];
+            
+            NSLog(@"this user %@", thisUser);
+            NSLog(@"this user. userName %@", thisUser.usertName);
+            NSLog(@"this user. memberId %@", thisUser.userID);
+
+            
+            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+            window.rootViewController = [[GFTabBarController alloc]init];
+            [window makeKeyWindow];
+            /*
             [[FIRAuth auth]signInWithEmail:self.emailTextField.text
                                   password:self.passwordTextField.text
                                 completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
@@ -187,6 +207,7 @@
                                         
                                     }
                                     else{
+             
                                         [AppDelegate APP].user = [[ZZUser alloc] init];
                                         [AppDelegate APP].user = thisUser;
                                         
@@ -196,6 +217,7 @@
                                         window.rootViewController = [[GFTabBarController alloc]init];
                                     }
                                 }];
+             */
         }
         
         

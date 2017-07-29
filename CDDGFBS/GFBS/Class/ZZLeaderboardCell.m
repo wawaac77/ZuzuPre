@@ -51,9 +51,17 @@
     _numberLabel.text = [NSString stringWithFormat:@"%@", thisUser.leaderboardRank];
     //[self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisUser.leaderboardMember.userProfileImage.imageUrl] placeholderImage:nil];
     //_profileImageView.image = [UIImage imageNamed:@"icon.png"];
-    [self downloadImageFromURL:thisUser.leaderboardMember.userProfileImage.imageUrl];
+    //[self downloadImageFromURL:thisUser.leaderboardMember.userProfileImage.imageUrl];
+    
+    /*
+    NSURL *URL = [NSURL URLWithString:thisUser.leaderboardMember.userProfileImage.imageUrl];
+    NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
+    UIImage *image = [[UIImage alloc]initWithData:data];
+     */
+    _profileImageView.image = thisUser.leaderboardMember.userProfileImage_UIImage;
     _profileImageView.layer.masksToBounds = YES;
     _profileImageView.layer.cornerRadius = _profileImageView.frame.size.width / 2;
+    
     _usernameLabel.text = thisUser.leaderboardMember.userUserName;
     _locationLabel.text = thisUser.leaderboardMember.userLastCheckIn.listEventRestaurant.restaurantName.en;
     _scoreLabel.text = [NSString stringWithFormat:@"%@",thisUser.leaderboardLevel];
@@ -61,7 +69,9 @@
 
 -(void) downloadImageFromURL :(NSString *)imageUrl{
     
-    
+    if (self.user.leaderboardMember.userProfileImage_UIImage != nil) {
+        self.profileImageView.image = self.user.leaderboardMember.userProfileImage_UIImage;
+    } else {
     
     NSURL  *url = [NSURL URLWithString:imageUrl];
     
@@ -86,11 +96,12 @@
         [urlData writeToFile:filePath atomically:YES];
         
         UIImage *image1=[UIImage imageWithContentsOfFile:filePath];
-        
+        self.user.leaderboardMember.userProfileImage_UIImage = image1;
         self.profileImageView.image=image1;
         
         NSLog(@"Completed...");
         
+    }
     }
 }
 

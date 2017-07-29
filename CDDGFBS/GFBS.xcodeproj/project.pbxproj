@@ -366,6 +366,8 @@
 		7864EB671F28ED6600AA572E /* NotificationButtonsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7864EB651F28ED6600AA572E /* NotificationButtonsCell.m */; };
 		7864EB681F28ED6600AA572E /* NotificationButtonsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7864EB661F28ED6600AA572E /* NotificationButtonsCell.xib */; };
 		7864EB6B1F28F3DB00AA572E /* ZZFriendRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7864EB6A1F28F3DB00AA572E /* ZZFriendRequestModel.m */; };
+		7864EB6F1F2B424400AA572E /* OverviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7864EB6D1F2B424400AA572E /* OverviewCell.m */; };
+		7864EB701F2B424400AA572E /* OverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7864EB6E1F2B424400AA572E /* OverviewCell.xib */; };
 		788246CA1ED2E7930058B226 /* EventOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788246C81ED2E7930058B226 /* EventOverviewViewController.m */; };
 		788246CB1ED2E7930058B226 /* EventOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 788246C91ED2E7930058B226 /* EventOverviewViewController.xib */; };
 		788246CF1ED2E7A90058B226 /* EventDiscussionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788246CD1ED2E7A90058B226 /* EventDiscussionViewController.m */; };
@@ -977,6 +979,9 @@
 		7864EB661F28ED6600AA572E /* NotificationButtonsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotificationButtonsCell.xib; path = "GFBS/Class/Setting(设置)/Controller/NotificationButtonsCell.xib"; sourceTree = SOURCE_ROOT; };
 		7864EB691F28F3DB00AA572E /* ZZFriendRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZFriendRequestModel.h; path = "GFBS/Class/Setting(设置)/Controller/ZZFriendRequestModel.h"; sourceTree = SOURCE_ROOT; };
 		7864EB6A1F28F3DB00AA572E /* ZZFriendRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZFriendRequestModel.m; path = "GFBS/Class/Setting(设置)/Controller/ZZFriendRequestModel.m"; sourceTree = SOURCE_ROOT; };
+		7864EB6C1F2B424400AA572E /* OverviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewCell.h; sourceTree = "<group>"; };
+		7864EB6D1F2B424400AA572E /* OverviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewCell.m; sourceTree = "<group>"; };
+		7864EB6E1F2B424400AA572E /* OverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverviewCell.xib; sourceTree = "<group>"; };
 		788246C71ED2E7930058B226 /* EventOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventOverviewViewController.h; sourceTree = "<group>"; };
 		788246C81ED2E7930058B226 /* EventOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventOverviewViewController.m; sourceTree = "<group>"; };
 		788246C91ED2E7930058B226 /* EventOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOverviewViewController.xib; sourceTree = "<group>"; };
@@ -2873,6 +2878,9 @@
 				78FFE5B71ECDB16400F909A2 /* RestaurantCell.h */,
 				78FFE5B81ECDB16400F909A2 /* RestaurantCell.m */,
 				78FFE5B91ECDB16400F909A2 /* RestaurantCell.xib */,
+				7864EB6C1F2B424400AA572E /* OverviewCell.h */,
+				7864EB6D1F2B424400AA572E /* OverviewCell.m */,
+				7864EB6E1F2B424400AA572E /* OverviewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3184,6 +3192,7 @@
 				786069B91F15DB9B00A8AB88 /* ic_messagefriend-top-navigation.png in Resources */,
 				18E8D3721DE9EA5700ED4EE1 /* GFTopicPictureView.xib in Resources */,
 				780096EC1EC9C1F5008F9F99 /* Thumbs.db in Resources */,
+				7864EB701F2B424400AA572E /* OverviewCell.xib in Resources */,
 				7824E3331EF13BF700F85BFB /* profile-bg-green1_01.jpg in Resources */,
 				780097111EC9C1F5008F9F99 /* ic_user_profile.png in Resources */,
 				780096EE1EC9C1F5008F9F99 /* ic+facebk_messenger.png in Resources */,
@@ -3488,6 +3497,7 @@
 				788CC3401F19EC3900DC4116 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
 				18B61AFA1E0D5DED00CAC3FF /* GFTagTextField.m in Sources */,
 				18C8262C1DE7368D007341E3 /* ZZAttendingViewController.m in Sources */,
+				7864EB6F1F2B424400AA572E /* OverviewCell.m in Sources */,
 				18C8263E1DE737C9007341E3 /* GFVoiceViewController.m in Sources */,
 				189980491DDBEDA4009071F4 /* UIBarButtonItem+GFItem.m in Sources */,
 				1841A77E1DE17BE400FB54CC /* GFWebViewController.m in Sources */,

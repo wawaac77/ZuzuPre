@@ -18,6 +18,7 @@
 #import <AFNetworking.h>
 #import <MJExtension.h>
 #import <SDImageCache.h>
+#import <UIImageView+WebCache.h>    
 #import <SVProgressHUD.h>
 
 @interface GFSettingViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate>
@@ -152,8 +153,10 @@
             cell.textLabel.text = [AppDelegate APP].user.userUserName;
             //cell.detailTextLabel.text = [AppDelegate APP].user.userEmail;
             cell.detailTextLabel.text = _thisUser.userEmail;
-            cell.imageView.image = [AppDelegate APP].user.userProfileImage_UIImage;
+            //cell.imageView.image = [AppDelegate APP].user.userProfileImage_UIImage;
+            NSString *imageURL = [AppDelegate APP].user.userProfileImage.imageUrl;
             cell.imageView.frame = CGRectMake(5, 0, 30, 30);
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
             
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
@@ -364,6 +367,12 @@
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         AppDelegate *appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         [AppDelegate APP].user = nil;
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:nil forKey:@"KEY_USER_NAME"];
+        [userDefaults setObject:nil forKey:@"KEY_USER_TOKEN"];
+        [userDefaults synchronize];
+        
         [appDel.window makeKeyAndVisible];
         [appDel.window setRootViewController:loginVC];
         

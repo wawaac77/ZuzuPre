@@ -48,7 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.bounds = [UIScreen mainScreen].bounds;
     //添加子控制器
     [self setUpAllChildView];
     //添加所有按钮内容
