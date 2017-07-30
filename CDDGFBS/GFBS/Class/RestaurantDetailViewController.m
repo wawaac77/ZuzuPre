@@ -9,10 +9,13 @@
 #import "AppDelegate.h"
 #import "RestaurantDetailViewController.h"
 #import "RestaurantOverviewViewController.h"
-#import "RestaurantReviewViewController.h"
+#import "RestaurantCheckinTableViewController.h"
+//#import "RestaurantReviewViewController.h"
 #import "RestaurantPhotoViewController.h"
 #import "RestaurantMenuViewController.h"
 #import "RestaurantEventViewController.h"
+#import "ZZCheckInViewController.h"
+
 #import "GFTitleButton.h"
 #import "EventRestaurant.h"
 
@@ -103,18 +106,36 @@
     self.topImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.topImageView.clipsToBounds = YES;
     [self.view addSubview:_topImageView];
+    
+    //**************** add checkin button *****************//
+    UIButton *checkinButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topImageView.gf_width - 45, self.topImageView.gf_height - 45, 30, 30)];
+    [checkinButton setImage:[UIImage imageNamed:@"ic_checkin-restaurant"] forState:UIControlStateNormal];
+    checkinButton.contentMode = UIViewContentModeScaleAspectFit;
+    [checkinButton addTarget:self action:@selector(checkinButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:checkinButton];
+    
+    /*
+    UILabel *numOfCheckinLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 80, GFScreenWidth - 20, 40)];
+    numOfCheckinLabel.text = [NSString stringWithFormat:@"%ld Check-in", thisRestaurant.]
+     */
+}
+
+- (void)checkinButtonClicked {
+    ZZCheckInViewController *checkinVC = [[ZZCheckInViewController alloc] init];
+    [self.navigationController pushViewController:checkinVC animated:YES];
 }
 
 -(void)setUpChildViewControllers
 {
     //Overview
     RestaurantOverviewViewController *overviewVC = [[RestaurantOverviewViewController alloc] init];
-    overviewVC.view.backgroundColor = [UIColor redColor];
+    overviewVC.thisRestaurant = thisRestaurant;
     [self addChildViewController:overviewVC];
     
     //Check-in
-    RestaurantReviewViewController *reviewVC = [[RestaurantReviewViewController alloc] init];
-    reviewVC.view.backgroundColor = [UIColor orangeColor];
+    RestaurantCheckinTableViewController *reviewVC = [[RestaurantCheckinTableViewController alloc] init];
+    //reviewVC.view.backgroundColor = [UIColor orangeColor];
+    reviewVC.restaurant = thisRestaurant.restaurantId;
     
     [self addChildViewController:reviewVC];
     
@@ -153,7 +174,7 @@
     
     scrollView.delegate = self;
     //CGFloat scrollHeight = GFScreenHeight * 0.6;
-    scrollView.frame = CGRectMake(0, 235, GFScreenWidth, GFScreenHeight - 235 - GFTabBarH);
+    scrollView.frame = CGRectMake(0, 235, GFScreenWidth, GFScreenHeight - 235 - GFTabBarH - GFNavMaxY);
     NSLog(@"self.view.gf_width in first claim scrollView is %f", self.view.gf_width);
     scrollView.pagingEnabled = YES;
     scrollView.showsVerticalScrollIndicator = NO;

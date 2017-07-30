@@ -27,12 +27,14 @@ static NSString *const ID = @"ID";
 
 /*所有帖子数据*/
 @property (strong , nonatomic)NSMutableArray<ZZContentModel *> *contents;
+
 /*请求管理者*/
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
 
 @property (strong, nonatomic) NSIndexPath *recordIndexPath;
 
 @end
+
 
 @implementation HomePostTableViewController
 
@@ -41,6 +43,14 @@ static NSString *const ID = @"ID";
 {
     return 0;
 }
+
+/*
+#pragma mark - 消除警告
+-(NSString *)restaurantID
+{
+    return @"";
+}
+ */
 
 #pragma mark - 懒加载
 -(GFHTTPSessionManager *)manager
@@ -114,10 +124,15 @@ static NSString *const ID = @"ID";
     [cell.contentView addSubview:restaurantButton];
     
     ZZContentModel *thisContent = self.contents[indexPath.row];
+    if (_contents[indexPath.row].listImage_UIImage == nil) {
+        NSURL *URL = [NSURL URLWithString:_contents[indexPath.row].listImage.imageUrl];
+        NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
+        UIImage *image = [[UIImage alloc]initWithData:data];
+        _contents[indexPath.row].listImage_UIImage = image;
+    }
     cell.event = thisContent;
     
     return cell;
-    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -187,6 +202,9 @@ static NSString *const ID = @"ID";
         inData = @{@"action" : @"getFriendCheckinList", @"token" : userToken};
     } else if (self.type == 2) {
         inData = @{@"action" : @"getMyCheckinList", @"token" : userToken};
+    } else if (self.type == 4) {
+        NSDictionary *inSubData = @{@"restaurantId" : self.restaurantID};
+        inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"data":inSubData};
     }
     NSDictionary *parameters = @{@"data" : inData};
     
@@ -199,7 +217,7 @@ static NSString *const ID = @"ID";
         NSLog(@"responseObject - data is %@", responseObject[@"data"]);
         
         self.contents = [ZZContentModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        [self saveUIImages];
+        //[self saveUIImages];
         
         [self.tableView reloadData];
         

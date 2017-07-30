@@ -115,6 +115,17 @@
          contextName = "-[MJProperty setValue:forObject:]:MJProperty.m">
       </ContextState>
       <ContextState
+         contextName = "-[RestaurantOverviewViewController tableView:cellForRowAtIndexPath:]:RestaurantOverviewViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "thisRestaurant.phone">
+            </PersistentString>
+            <PersistentString
+               value = "thisRestaurant.restaurantCuisines">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[AFHTTPSessionManager POST:parameters:progress:success:failure:]:AFHTTPSessionManager.m">
       </ContextState>
       <ContextState
@@ -168,6 +179,9 @@
          contextName = "-[MyEventCell setEvent:]:MyEventCell.m">
       </ContextState>
       <ContextState
+         contextName = "-[LoginChildViewController nextButtonClicked:]:LoginChildViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "-[MapNearbyEventsViewController loadNewEvents]:MapNearbyEventsViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -182,9 +196,6 @@
                value = "_thisEvent">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[LoginChildViewController nextButtonClicked:]:LoginChildViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[GFSettingViewController loadIndustryData]:GFSettingViewController.m">

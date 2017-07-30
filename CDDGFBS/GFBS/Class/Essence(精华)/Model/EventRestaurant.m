@@ -15,6 +15,9 @@
              //@"listEventRestaurant" : @"EventRestaurant",
              @"restaurantImages" : @"MyEventImageModel",
              @"menuImages" : @"MyEventImageModel",
+             @"restaurantCuisines" : @"ZZTypicalInformationModel",
+             @"phone" : @"NSNumber",
+
              };
 }
 
@@ -30,7 +33,7 @@
              
              @"restaurantDistance" : @"distance",
              @"restaurantDistrict" : @"district",
-             @"restaurantCuisine" : @"cuisine",
+             @"restaurantCuisines" : @"cuisine",
              @"restaurantMinPrice" : @"minPrice",
              @"restaurantMaxPrice" : @"maxPrice",
              @"restaurantImages" : @"images",

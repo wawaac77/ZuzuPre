@@ -12,5 +12,7 @@
 @interface HomePostTableViewController : UITableViewController
 
 -(MyPublishContentType)type;
+-(NSString *)restaurantID;
+//@property (nonatomic, copy) NSString *restaurantID;
 
 @end

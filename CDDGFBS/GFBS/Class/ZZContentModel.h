@@ -25,6 +25,8 @@ typedef NS_ENUM(NSInteger , MyPublishContentType){
     
     CommentContent = 3,
     
+    RestaurantReview = 4,
+    
 };
 
 @interface ZZContentModel : NSObject

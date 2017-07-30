@@ -115,6 +115,8 @@
     _bigImageView.contentMode = UIViewContentModeScaleAspectFill;
     _bigImageView.clipsToBounds = YES;
     _bigImageView.image = thisEvent.listImage_UIImage;
+    //[self.bigImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:nil];
+
 
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listPublishUser.userProfileImage.imageUrl] placeholderImage:nil];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;

@@ -10,4 +10,7 @@
 
 @interface OverviewCell : UITableViewCell
 
+@property (nonatomic, copy) NSString *info;
+@property (nonatomic, copy) NSString *iconImageName;
+
 @end

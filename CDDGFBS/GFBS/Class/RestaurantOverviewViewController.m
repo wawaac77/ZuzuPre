@@ -15,12 +15,15 @@
 #import <MJExtension.h>
 #import <SVProgressHUD.h>
 
+static NSString *const ID = @"ID";
 static NSString *const basicID = @"basicID";
 static NSString *const highLabelID = @"highLabelID";
 
-@interface RestaurantOverviewViewController ()
+@interface RestaurantOverviewViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray <NSString *> *iconImageArray;
+
 
 @end
 
@@ -31,6 +34,9 @@ static NSString *const highLabelID = @"highLabelID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _iconImageArray = [[NSArray alloc] initWithObjects:@"ic_location", @"ic_phone_call", @"ic_tag.png",@"ic_fa_dollar_on",@"ic_clock", @"ic_dishes",@"ic_fa-navicon", nil];
+    //[self getCellHeight];
+    [self setUpTable];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,23 +47,42 @@ static NSString *const highLabelID = @"highLabelID";
 #pragma mark - tableView
 - (void)setUpTable
 {
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, GFTabBarH, 0);
-    self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
-    self.tableView.backgroundColor = [UIColor greenColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    //[self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([OverviewCell class]) bundle:nil] forCellReuseIdentifier:ID];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:basicID];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:highLabelID];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, GFTabBarH, 0);
+    //self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([OverviewCell class]) bundle:nil] forCellReuseIdentifier:ID];
+    //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:basicID];
+    //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:highLabelID];
+    self.tableView.tintColor = [UIColor darkGrayColor];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    //self.tableView.rowHeight = UITableViewAutomaticDimension;
+    //self.tableView.estimatedRowHeight = 44;
+    
+    [self.view addSubview:self.tableView];
 }
 
+/*
+- (void)getCellHeight {
+    cellHeight1 = [UILabel getHeightByWidth:GFScreenWidth - 45 - 10 title:thisRestaurant.restaurantAddress.en font:[UIFont systemFontOfSize:14]];
+}
+ */
+
 #pragma mark - 代理方法
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        return 50.0f;
-    }
     
-    return 44.0f;
+    /*
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return cellHeight1 + 20;
+    }
+     */
+    
+    return 50.0f;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -69,12 +94,77 @@ static NSString *const highLabelID = @"highLabelID";
     if (section == 0) {
         return 4;
     } else {
-        return 3;
+        return 2;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
+    OverviewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            cell.iconImageName = _iconImageArray[indexPath.row];
+            cell.info = thisRestaurant.restaurantAddress.en;
+            //cell.height = cellHeight1;
+            //cellHeight1 = [UILabel getHeightByWidth:GFScreenWidth - 45 - 10 title:thisRestaurant.restaurantAddress.en font:[UIFont systemFontOfSize:14]];
+        }
+        
+        else if (indexPath.row == 1) {
+            cell.iconImageName = _iconImageArray[indexPath.row];
+            
+            NSString *phones = @"";
+            for (int i = 0; i < thisRestaurant.phone.count; i++) {
+                phones = [phones stringByAppendingString:[NSString stringWithFormat:@"%@",thisRestaurant.phone[i]]];
+                NSLog(@"restaurant phone %zd", i);
+                if (i != thisRestaurant.phone.count - 1) {
+                    phones = [phones stringByAppendingString:@" / "];
+                }
+            }
+            //phones = [phones stringByAppendingString:[NSString stringWithFormat:@"%@",thisRestaurant.phone[thisRestaurant.phone.count]]];
+            
+            cell.info = phones;
+        }
+        
+        else if (indexPath.row == 2) {
+            cell.iconImageName = _iconImageArray [indexPath.row];
+            NSLog(@"thisRestaurant.restaurantCuisines %@", thisRestaurant.restaurantCuisines);
+            NSLog(@"thisRestuarnat.cuisine.count %ld", thisRestaurant.restaurantCuisines.count);
+            NSString *cuisines = @"";
+            for (int i = 0; i < thisRestaurant.restaurantCuisines.count; i++) {
+                NSLog(@"restaurant cuisine %zd", i);
+                ZZTypicalInformationModel *cuisineModel = thisRestaurant.restaurantCuisines[i];
+                NSLog(@"thisRestaurant.restaurantCuisines[i].informationName.en %@", cuisineModel.informationName.en);
+                
+                cuisines = [cuisines stringByAppendingString:thisRestaurant.restaurantCuisines[i].informationName.en];
+                if (i != thisRestaurant.restaurantCuisines.count - 1) {
+                cuisines = [cuisines stringByAppendingString:@", "];
+                }
+            }
+            
+            cell.info = cuisines;
+            
+            NSLog(@"thisRestaurant.restaurantCuisine.en %@", cuisines);
+        }
+        
+        else if (indexPath.row == 3) {
+            cell.iconImageName = _iconImageArray [indexPath.row];
+            cell.info = [NSString stringWithFormat:@"HKD %@ - %@", thisRestaurant.restaurantMinPrice, thisRestaurant.restaurantMaxPrice];
+        }
+    }
+    
+    else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            cell.iconImageName = _iconImageArray[indexPath.row + 4];
+            cell.info = thisRestaurant.operationHour;
+        }
+        
+        else if (indexPath.row == 1) {
+            cell.iconImageName = _iconImageArray[indexPath.row + 4];
+            cell.info = thisRestaurant.features;
+        }
+        
+    }
+    /*
     if (indexPath.section == 0 && indexPath.row == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:basicID];
         if (cell == nil) {
@@ -123,19 +213,13 @@ static NSString *const highLabelID = @"highLabelID";
     }
     EventRestaurant *thisRestaurant = self.restaurants[indexPath.row];
     cell.restaurant = thisRestaurant;
+     */
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RestaurantDetailViewController *restaurantDetailVC = [[RestaurantDetailViewController alloc] init];
-    //restaurantDetailVC.topic = self.tableView[indexPath.row];
-    [self.navigationController pushViewController:restaurantDetailVC animated:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 
