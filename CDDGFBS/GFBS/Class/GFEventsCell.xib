@@ -101,6 +101,13 @@
                                     <constraint firstAttribute="height" constant="21" id="e08-wQ-tl8"/>
                                 </constraints>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2R6-cu-mxx">
+                                <rect key="frame" x="8" y="4" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2Fr-ey-Jc9"/>
+                                    <constraint firstAttribute="width" constant="50" id="KKF-d6-5Dw"/>
+                                </constraints>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -114,7 +121,9 @@
                             <constraint firstAttribute="height" constant="60" id="SJr-NK-XNY"/>
                             <constraint firstItem="ID9-T7-fAQ" firstAttribute="leading" secondItem="Q3p-fr-XpF" secondAttribute="trailing" constant="22" id="Svk-5X-Mfj"/>
                             <constraint firstItem="Q3p-fr-XpF" firstAttribute="top" secondItem="fc8-bp-aTW" secondAttribute="top" constant="4" id="Th3-Vh-ggj"/>
+                            <constraint firstItem="2R6-cu-mxx" firstAttribute="leading" secondItem="fc8-bp-aTW" secondAttribute="leading" constant="8" id="Tqs-jM-X2s"/>
                             <constraint firstItem="nu7-bQ-TSd" firstAttribute="leading" secondItem="gOs-eH-eif" secondAttribute="trailing" constant="36" id="UZt-cy-JGA"/>
+                            <constraint firstItem="2R6-cu-mxx" firstAttribute="top" secondItem="fc8-bp-aTW" secondAttribute="top" constant="4" id="Wnu-6S-nKd"/>
                             <constraint firstItem="nu7-bQ-TSd" firstAttribute="leading" secondItem="ID9-T7-fAQ" secondAttribute="trailing" constant="17" id="XVA-JC-tAI"/>
                             <constraint firstItem="JaW-NH-5ma" firstAttribute="top" secondItem="nu7-bQ-TSd" secondAttribute="bottom" constant="11" id="dP3-Qd-Baq"/>
                             <constraint firstItem="gOs-eH-eif" firstAttribute="leading" secondItem="Q3p-fr-XpF" secondAttribute="trailing" constant="22" id="dhd-jP-vdr"/>

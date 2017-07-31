@@ -9,7 +9,8 @@
 #import "AppDelegate.h"
 #import "RestaurantDetailViewController.h"
 #import "RestaurantOverviewViewController.h"
-#import "RestaurantCheckinTableViewController.h"
+#import "RestaurantCheckinViewController.h"
+//#import "RestaurantCheckinTableViewController.h"
 //#import "RestaurantReviewViewController.h"
 #import "RestaurantPhotoViewController.h"
 #import "RestaurantMenuViewController.h"
@@ -44,6 +45,9 @@
 /*请求管理者*/
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
 
+/*所有帖子数据*/
+@property (strong , nonatomic)NSMutableArray<ZZContentModel *> *contents;
+
 @end
 
 
@@ -65,17 +69,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.frame = [UIScreen mainScreen].bounds;
-    
+    _contents = [[NSMutableArray alloc] init];
+    [self setUpTopImageView];
     [self loadNeweData];
     
-    [self setUpTopImageView];
+}
+
+
+- (void)setUpAfterLoadData {
+    
+    UILabel *numOfCheckinLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 80, GFScreenWidth - 20, 40)];
+    numOfCheckinLabel.textAlignment = NSTextAlignmentCenter;
+    numOfCheckinLabel.text = [NSString stringWithFormat:@"%ld Check-in", _contents.count];
+    numOfCheckinLabel.textColor = [UIColor whiteColor]; // pay attention to text color
+    [self.view addSubview:numOfCheckinLabel];
     
     [self setUpChildViewControllers];
-    
     [self setUpScrollView];
-    
     [self setUpTitleView];
-    
     //添加默认自控制器View
     [self addChildViewController];
 }
@@ -114,10 +125,9 @@
     [checkinButton addTarget:self action:@selector(checkinButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:checkinButton];
     
-    /*
-    UILabel *numOfCheckinLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 80, GFScreenWidth - 20, 40)];
-    numOfCheckinLabel.text = [NSString stringWithFormat:@"%ld Check-in", thisRestaurant.]
-     */
+    
+    
+    
 }
 
 - (void)checkinButtonClicked {
@@ -133,10 +143,15 @@
     [self addChildViewController:overviewVC];
     
     //Check-in
+    /*
     RestaurantCheckinTableViewController *reviewVC = [[RestaurantCheckinTableViewController alloc] init];
     //reviewVC.view.backgroundColor = [UIColor orangeColor];
     reviewVC.restaurant = thisRestaurant.restaurantId;
+    */
     
+    RestaurantCheckinViewController *reviewVC = [[RestaurantCheckinViewController alloc] init];
+    reviewVC.contents = self.contents;
+     NSLog(@"selfContentsinRestaurantDetail in setupChildVC %@", self.contents);
     [self addChildViewController:reviewVC];
     
     //Photo
@@ -388,6 +403,8 @@
         NSLog(@"response in restaurant %@", response);
         thisRestaurant = [EventRestaurant mj_objectWithKeyValues:response];
         
+        [self loadCheckins];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
         //[self.tableView.mj_footer endRefreshing];
@@ -398,15 +415,48 @@
     }];
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - 加载新数据
+-(void)loadCheckins
+{
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    
+    NSDictionary *inData = [[NSDictionary alloc] init];
+    
+    NSDictionary *inSubData = @{@"restaurantId" : thisRestaurant.restaurantId};
+    inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"data":inSubData};
+    
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    NSLog(@"publish content parameters %@", parameters);
+    
+    
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        
+        self.contents = [ZZContentModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        //reviewVC.contents = self.contents;
+        NSLog(@"selfContentsinRestaurantDetail %@", self.contents);
+        //[self saveUIImages];
+        [self setUpAfterLoadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+    
 }
-*/
+
 
 @end

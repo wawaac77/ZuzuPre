@@ -369,6 +369,9 @@
 		786B38171F2DC9AE0098A12F /* RestaurantCheckinTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786B38161F2DC9AE0098A12F /* RestaurantCheckinTableViewController.m */; };
 		786B381C1F2DDC780098A12F /* UserProfileCheckinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786B381A1F2DDC780098A12F /* UserProfileCheckinViewController.m */; };
 		786B381D1F2DDC780098A12F /* UserProfileCheckinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 786B381B1F2DDC780098A12F /* UserProfileCheckinViewController.xib */; };
+		786B38211F2ECFEB0098A12F /* RestaurantCheckinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786B381F1F2ECFEB0098A12F /* RestaurantCheckinViewController.m */; };
+		786B38221F2ECFEB0098A12F /* RestaurantCheckinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 786B38201F2ECFEB0098A12F /* RestaurantCheckinViewController.xib */; };
+		786B38251F2F13AF0098A12F /* UserCheckinListChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786B38241F2F13AF0098A12F /* UserCheckinListChildTableViewController.m */; };
 		788246CA1ED2E7930058B226 /* EventOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788246C81ED2E7930058B226 /* EventOverviewViewController.m */; };
 		788246CB1ED2E7930058B226 /* EventOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 788246C91ED2E7930058B226 /* EventOverviewViewController.xib */; };
 		788246CF1ED2E7A90058B226 /* EventDiscussionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788246CD1ED2E7A90058B226 /* EventDiscussionViewController.m */; };
@@ -985,6 +988,11 @@
 		786B38191F2DDC780098A12F /* UserProfileCheckinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileCheckinViewController.h; sourceTree = "<group>"; };
 		786B381A1F2DDC780098A12F /* UserProfileCheckinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileCheckinViewController.m; sourceTree = "<group>"; };
 		786B381B1F2DDC780098A12F /* UserProfileCheckinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileCheckinViewController.xib; sourceTree = "<group>"; };
+		786B381E1F2ECFEB0098A12F /* RestaurantCheckinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantCheckinViewController.h; sourceTree = "<group>"; };
+		786B381F1F2ECFEB0098A12F /* RestaurantCheckinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantCheckinViewController.m; sourceTree = "<group>"; };
+		786B38201F2ECFEB0098A12F /* RestaurantCheckinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RestaurantCheckinViewController.xib; sourceTree = "<group>"; };
+		786B38231F2F13AF0098A12F /* UserCheckinListChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCheckinListChildTableViewController.h; sourceTree = "<group>"; };
+		786B38241F2F13AF0098A12F /* UserCheckinListChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCheckinListChildTableViewController.m; sourceTree = "<group>"; };
 		788246C71ED2E7930058B226 /* EventOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventOverviewViewController.h; sourceTree = "<group>"; };
 		788246C81ED2E7930058B226 /* EventOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventOverviewViewController.m; sourceTree = "<group>"; };
 		788246C91ED2E7930058B226 /* EventOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOverviewViewController.xib; sourceTree = "<group>"; };
@@ -2121,9 +2129,9 @@
 				7829FF7F1ED5768F00C934C2 /* RestaurantOverviewViewController.h */,
 				7829FF801ED5768F00C934C2 /* RestaurantOverviewViewController.m */,
 				7829FF811ED5768F00C934C2 /* RestaurantOverviewViewController.xib */,
-				786B38151F2DC9AE0098A12F /* RestaurantCheckinTableViewController.h */,
-				786B38161F2DC9AE0098A12F /* RestaurantCheckinTableViewController.m */,
-				7829FF891ED576C100C934C2 /* RestaurantPhotoViewController.h */,
+				786B381E1F2ECFEB0098A12F /* RestaurantCheckinViewController.h */,
+				786B381F1F2ECFEB0098A12F /* RestaurantCheckinViewController.m */,
+				786B38201F2ECFEB0098A12F /* RestaurantCheckinViewController.xib */,
 				7829FF8A1ED576C100C934C2 /* RestaurantPhotoViewController.m */,
 				7829FF8B1ED576C100C934C2 /* RestaurantPhotoViewController.xib */,
 				7829FF8E1ED576D700C934C2 /* RestaurantMenuViewController.h */,
@@ -2132,6 +2140,9 @@
 				7829FF931ED576F800C934C2 /* RestaurantEventViewController.h */,
 				7829FF941ED576F800C934C2 /* RestaurantEventViewController.m */,
 				7829FF951ED576F800C934C2 /* RestaurantEventViewController.xib */,
+				786B38151F2DC9AE0098A12F /* RestaurantCheckinTableViewController.h */,
+				786B38161F2DC9AE0098A12F /* RestaurantCheckinTableViewController.m */,
+				7829FF891ED576C100C934C2 /* RestaurantPhotoViewController.h */,
 			);
 			name = RestaurantDetailChildVCs;
 			sourceTree = "<group>";
@@ -2524,6 +2535,8 @@
 				786B38191F2DDC780098A12F /* UserProfileCheckinViewController.h */,
 				786B381A1F2DDC780098A12F /* UserProfileCheckinViewController.m */,
 				786B381B1F2DDC780098A12F /* UserProfileCheckinViewController.xib */,
+				786B38231F2F13AF0098A12F /* UserCheckinListChildTableViewController.h */,
+				786B38241F2F13AF0098A12F /* UserCheckinListChildTableViewController.m */,
 			);
 			name = "User Profile";
 			path = "Me(我)";
@@ -3182,6 +3195,7 @@
 				780097391ECAD956008F9F99 /* zuzu_App_Icon_167x167.png in Resources */,
 				786069C71F15DB9B00A8AB88 /* ic_phone_call.png in Resources */,
 				780096C71EC9C1F5008F9F99 /* ic_fa-credit-card.png in Resources */,
+				786B38221F2ECFEB0098A12F /* RestaurantCheckinViewController.xib in Resources */,
 				78FFE59F1ECD49A300F909A2 /* GFUpcomingTableViewController.xib in Resources */,
 				786069A51F15DB9B00A8AB88 /* homepage-profile-check-in-115x115.png in Resources */,
 				780096E91EC9C1F5008F9F99 /* homescreen-welcome-image.png in Resources */,
@@ -3448,6 +3462,7 @@
 				183E9CEB1E8E585000B13C75 /* GFConst.m in Sources */,
 				789CFF491F02115800EBA772 /* SliderCell.m in Sources */,
 				18B7C7371DE081BA004BD781 /* GFMemberField.m in Sources */,
+				786B38251F2F13AF0098A12F /* UserCheckinListChildTableViewController.m in Sources */,
 				1841A7791DE1752E00FB54CC /* GFSquareCell.m in Sources */,
 				7829FFA51ED807D900C934C2 /* LoginChildViewController.m in Sources */,
 				788CC33B1F19EC3900DC4116 /* JSQMessagesVideoThumbnailFactory.m in Sources */,
@@ -3574,6 +3589,7 @@
 				181EF7421E0B5DA000C91928 /* GFPostWordViewController.m in Sources */,
 				788CC33A1F19EC3900DC4116 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				788CC3361F19EC3900DC4116 /* JSQMessagesAvatarImageFactory.m in Sources */,
+				786B38211F2ECFEB0098A12F /* RestaurantCheckinViewController.m in Sources */,
 				788CC3421F19EC3900DC4116 /* JSQLocationMediaItem.m in Sources */,
 				786069631F15D98100A8AB88 /* DHGifImageOperation.m in Sources */,
 			);

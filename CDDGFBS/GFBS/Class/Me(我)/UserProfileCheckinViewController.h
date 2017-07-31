@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomePostTableViewController.h"
 
-@interface UserProfileCheckinViewController : UIViewController
+@interface UserProfileCheckinViewController : UIViewController <ChildViewControllerDelegate>
+
+@property (strong, nonatomic) ZZUser *myProfile;
 
 @end

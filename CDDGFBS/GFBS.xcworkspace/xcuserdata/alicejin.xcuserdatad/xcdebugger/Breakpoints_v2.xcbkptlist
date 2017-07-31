@@ -1562,27 +1562,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/HomePostTableViewController.m"
-            timestampString = "523094773.348454"
+            timestampString = "523182876.231953"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GFBS/Class/HomePostTableViewController.m"
-            timestampString = "523094773.348454"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "-setUpTable"
             landmarkType = "7">
          </BreakpointContent>
@@ -1722,11 +1706,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/GFEventsCell.m"
-            timestampString = "523086451.780511"
+            timestampString = "523173751.476965"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "-likedButtonClicked:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1738,11 +1722,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/GFEventsCell.m"
-            timestampString = "523086451.780511"
+            timestampString = "523173751.476965"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "-likeCheckin:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1754,11 +1738,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/HomePostTableViewController.m"
-            timestampString = "523094773.348454"
+            timestampString = "523186631.695122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2030,6 +2014,38 @@
             startingLineNumber = "116"
             endingLineNumber = "116"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GFBS/Class/Me(&#x6211;)/UserProfileCheckinViewController.m"
+            timestampString = "523189765.720554"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "-setUpChildVC"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GFBS/Class/Me(&#x6211;)/UserProfileCheckinViewController.m"
+            timestampString = "523189765.720554"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "-setUpChildVC"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -11,6 +11,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserProfileCheckinViewController">
             <connections>
+                <outlet property="addFriendsButton" destination="S24-8E-w9M" id="L6A-S2-peo"/>
+                <outlet property="messageButton" destination="atj-ne-RMv" id="LgY-5Q-8Dy"/>
+                <outlet property="topLocationLabel" destination="cRL-Et-EpF" id="u38-bE-H4y"/>
+                <outlet property="topProfileImageView" destination="DuN-O0-bgL" id="fnc-Ke-WMe"/>
+                <outlet property="topScoreLabel" destination="Xlq-Yv-OU9" id="GjY-hc-SRt"/>
+                <outlet property="topUserLabel" destination="AVr-7L-PDl" id="fsz-St-MCn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

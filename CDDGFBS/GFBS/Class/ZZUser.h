@@ -30,8 +30,13 @@
 @property (nonatomic, copy) NSString *userFacebookID;
 @property (nonatomic, copy) NSString *userForgetPasswordKey;
 @property (nonatomic, copy) NSString *userGoogleID;
+
 @property (nonatomic, copy) NSString *userOrganizingLevel;
 @property (nonatomic, copy) NSString *userOrganizingExp;
+@property (nonatomic, copy) NSString *socialLevel;
+@property (nonatomic, copy) NSString *socialExp;
+@property (nonatomic, assign) NSNumber *checkinPoint;
+
 @property (nonatomic, retain) NSArray<NSString *> *userInterests;
 @property (nonatomic, strong) GFImage *userProfileImage;
 @property (nonatomic, strong) ZZContentModel *userLastCheckIn;

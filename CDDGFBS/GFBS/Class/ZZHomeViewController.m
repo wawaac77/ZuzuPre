@@ -123,7 +123,7 @@
 
     
     _topUserLabel.text = _myProfile.userUserName;
-    _topScoreLabel.text = _myProfile.userOrganizingLevel;
+    _topScoreLabel.text = [NSString stringWithFormat:@"%@", _myProfile.checkinPoint];
     _topLocationLabel.text = _myProfile.userLastCheckIn.listEventRestaurant.restaurantName.en;
     NSLog(@"listEventRestaurant.restaurantName  %@",_myProfile.userLastCheckIn.listEventRestaurant.restaurantName.en );
 }

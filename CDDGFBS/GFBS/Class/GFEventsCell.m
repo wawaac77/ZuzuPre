@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *placeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *heartButton;
 @property (weak, nonatomic) IBOutlet UILabel *textField;
+//@property (weak, nonatomic) IBOutlet UIButton *profileImageButton;
 
 @property (strong, nonatomic) ZZContentModel *thisEvent;
 @property (strong , nonatomic) GFHTTPSessionManager *manager;
@@ -157,7 +158,13 @@
     
     self.timeLabel.text = thisEvent.listEventUpdatedAt;
     
+    //[self.profileImageButton addTarget:self action:@selector(profileImageButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    
     //[self layoutSubviews];
+}
+
+- (void)profileImageButtonClicked {
+    
 }
 
 /*
