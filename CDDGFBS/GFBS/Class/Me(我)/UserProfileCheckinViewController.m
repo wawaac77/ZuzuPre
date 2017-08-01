@@ -11,6 +11,7 @@
 #import "HomePostTableViewController.h"
 #import "UserCheckinListChildTableViewController.h"
 #import "ZZUser.h"
+#import "ZZChatViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -23,9 +24,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *topUserLabel;
 @property (weak, nonatomic) IBOutlet UILabel *topScoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *topLocationLabel;
+- (IBAction)messageButtonClicked:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *messageButton;
 @property (weak, nonatomic) IBOutlet UIButton *addFriendsButton;
+- (IBAction)addFriendButtonClicked:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIView *checkinListView;
 
@@ -210,4 +213,46 @@
 }
 */
 
+- (IBAction)messageButtonClicked:(id)sender {
+    ZZChatViewController *chatVC = [[ZZChatViewController alloc] init];
+    chatVC.hidesBottomBarWhenPushed = YES;
+    chatVC.title = _myProfile.userUserName;
+    [self.navigationController pushViewController:chatVC animated:YES];
+}
+- (IBAction)addFriendButtonClicked:(id)sender {
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    
+    NSString *memberId = self.myProfile.userID;
+    //NSLog(@"self.friend %@", self.friend);
+    NSLog(@"memberId %@", memberId);
+    
+    NSDictionary *inSubData = @{@"memberId" : memberId};
+    
+    NSDictionary *inData = @{@"action" : @"addFriend",
+                             @"token" : userToken,
+                             @"data" : inSubData};
+    
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    //发送请求
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+        //self.imageView.image = nil;
+        
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"ZUZU" message:@"Friend request is sent!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertView show];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        
+    }];
+    
+}
 @end

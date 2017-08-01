@@ -131,7 +131,7 @@ static NSString *const ID = @"ID";
     chatVC.hidesBottomBarWhenPushed = YES;
     ZZLeaderboardModel *thisRank = self.rankList[indexPath.row];
     //chatVC.title = thisRank.leaderboardMember.userUserName;
-    chatVC.title = @"User Name";
+    chatVC.title = thisRank.leaderboardMember.userUserName;
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
