@@ -24,6 +24,9 @@
 @interface ZZCheckInViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     NSMutableArray *chooseArray;
     NSNumber *selectedInteger;
+    
+    float longitude;
+    float latitude;
 }
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIImageView *topProfileImageView;
@@ -64,7 +67,7 @@
 
 @end
 
-@implementation ZZCheckInViewController
+@implementation ZZCheckInViewController 
 
 #pragma mark - 懒加载
 -(GFHTTPSessionManager *)manager
@@ -78,7 +81,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadNewData];
+    if (self.locationManager == nil) {
+        self.locationManager = [[CLLocationManager alloc] init];
+    }
+    self.locationManager.delegate = self;
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+    
+    
     [self setUpTopView];
     [self setUpPostView];
     // Do any additional setup after loading the view from its nib.
@@ -113,6 +126,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *newLocation = [locations lastObject];
+    NSLog(@"开始定位:%@",newLocation);
+    [manager stopUpdatingHeading];
+    //if (self.data == nil) {
+    longitude = newLocation.coordinate.longitude;
+    latitude =  newLocation.coordinate.latitude;
+    [self loadNewData];
+    NSLog(@"longtitude %f", longitude);
+    NSLog(@"latitude %f", latitude);
+    //}
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"定位错误");
+}
+
 - (void)setUpTopView {
     _topProfileImageView.layer.cornerRadius = _topProfileImageView.frame.size.width / 2;
     _topProfileImageView.clipsToBounds = YES;
@@ -141,7 +171,16 @@
     
     //2.凭借请求参数
     
-    NSArray *geoPoint = @[@114, @22];
+    NSArray *geoPoint = [[NSArray alloc] init];
+    //if (longitude) {
+        NSNumber *longtitudeNS = [NSNumber numberWithFloat:longitude];
+        NSNumber *latitudeNS = [NSNumber numberWithFloat:latitude];
+        geoPoint = [[NSArray alloc] initWithObjects:longtitudeNS, latitudeNS, nil];
+        NSLog(@"longtitudeNS & latitudeNS %@,  %@", longtitudeNS, latitudeNS);
+    //} else {
+     //   geoPoint = @[@114, @22];
+    //}
+    
     NSDictionary *keyFactors = @
     {
         @"keyword" : @"",
@@ -276,6 +315,14 @@
 #pragma -tool bar
 - (void)setUpToolBarView {
     self.toolBarView.frame = CGRectMake(0, GFScreenHeight - GFTabBarH - 80, GFScreenWidth, 80);
+    [_twitterButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_facebookButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_imagePickerButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    
+    _cancelButton.layer.cornerRadius = 4.0f;
+    _cancelButton.clipsToBounds = YES;
+    _checkinButton.layer.cornerRadius = 4.0f;
+    _checkinButton.clipsToBounds = YES;
     //self.cancelButton.frame = CGRectMake(5, GFScreenHeight - GFTabBarH - 50, 180, 30);
     //通知
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -284,6 +331,7 @@
 
 - (void)setUpImageView {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, GFScreenHeight - GFTabBarH - 80 - 274, GFScreenWidth, 274)];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.imageView = imageView;
     [self.view addSubview:imageView];
 }
@@ -395,6 +443,7 @@
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
+    
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentViewController:picker animated:YES completion:NULL];
@@ -435,11 +484,17 @@
 //*************** checkin button *****************//
 - (IBAction)checkinButtonClicked:(id)sender {
     NSLog(@"check in button clicked");
-    if (![self.textView.text isEqualToString:@""]) {
+    if (_pickedImage == nil) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"ZUZU" message:@"Please select a image from your album ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
+    else {
         NSLog(@"Check in posted");
         [self postCheckIn];
         self.textView.text = nil;
     }
+    
+    // if (![self.textView.text isEqualToString:@""])
 }
 
 //*************** post checkin *****************//

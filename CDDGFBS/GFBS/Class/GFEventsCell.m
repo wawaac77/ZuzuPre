@@ -12,6 +12,7 @@
 #import "ZZContentModel.h"
 #import "GFImage.h"
 
+#import <AFNetworking.h>
 #import "UILabel+LabelHeightAndWidth.h"
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
@@ -192,6 +193,20 @@
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-o"] forState:UIControlStateNormal];
         self.thisEvent.listIsLike = [NSNumber numberWithBool:true];
         [self likeCheckin:true];
+    }
+}
+
+- (void)setType:(NSString *)type {
+    if ([type isEqualToString:@"comment"]) {
+        _bigImageView.contentMode = UIViewContentModeScaleAspectFit;
+        /*
+        //图片
+        CGFloat imageViewH = _thisEvent.listImage_UIImage.size.height / _thisEvent.listImage_UIImage.size.width * GFScreenWidth;
+        NSLog(@"imageViewH %f", imageViewH);
+        _bigImageView.frame = CGRectMake(
+                   _bigImageView.frame.origin.x,
+                   _bigImageView.frame.origin.y, GFScreenWidth, imageViewH);
+        */
     }
 }
 

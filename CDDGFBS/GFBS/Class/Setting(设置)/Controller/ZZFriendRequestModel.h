@@ -13,5 +13,9 @@
 @property (nonatomic,copy) NSString *friendshipID;
 @property (nonatomic, strong) ZZUser *friendRequest;
 @property (nonatomic, strong) ZZUser *memberRequest;
+@property (nonatomic, strong) NSString *status;
+
+//******** other property ***************//
+@property (nonatomic, strong) NSNumber *isRead;
 
 @end

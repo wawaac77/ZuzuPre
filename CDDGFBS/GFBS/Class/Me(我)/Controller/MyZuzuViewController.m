@@ -7,7 +7,10 @@
 //
 
 #import "MyZuzuViewController.h"
+#import "AppDelegate.h"
 #import "LeaderboardHomeTableViewController.h"
+#import "NotificationItem.h"
+#import "ZZFriendRequestModel.h"
 
 #import "GFWebViewController.h"
 #import "GFSettingViewController.h"
@@ -44,9 +47,29 @@ static CGFloat  const margin = 0;
 /**collectionView*/
 @property (weak ,nonatomic) UICollectionView *functionsCollectionView;
 
+/*请求管理者*/
+@property (strong , nonatomic)GFHTTPSessionManager *manager;
+@property (strong , nonatomic)NSMutableArray<NotificationItem *> *myNotifications;
+@property (strong , nonatomic)NSMutableArray<ZZFriendRequestModel *> *myFriendsRequests;
+
+@property (strong , nonatomic) UIBarButtonItem *notificationBtn;
+
+@property (assign , nonatomic) NSInteger *notificationNum;
+
 @end
 
 @implementation MyZuzuViewController
+
+#pragma mark - 懒加载
+-(GFHTTPSessionManager *)manager
+{
+    if (!_manager) {
+        _manager = [GFHTTPSessionManager manager];
+        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    }
+    return _manager;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,6 +77,10 @@ static CGFloat  const margin = 0;
     [self setUpNavBar];
     [self setUpCollectionItemsData];
     [self setUpFunctionsCollectionView];
+    if (_notificationNum == 0) {
+         [self loadFriendsRequest];
+    }
+    NSLog(@"_notificationNum = %zd", _notificationNum);
 }
 
 
@@ -130,7 +157,8 @@ static CGFloat  const margin = 0;
     UIBarButtonItem *fixedButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFixedSpace target: nil action: nil];
     fixedButton.width = 20;
     UIBarButtonItem *notificationBtn = [UIBarButtonItem ItemWithImage:[UIImage imageNamed:@"ic_fa-bell-o"] WithHighlighted:[UIImage imageNamed:@"ic_fa-bell-o"] Target:self action:@selector(notificationClicked)];
-    notificationBtn.badgeValue = @"2"; // I need the number of not checked through API
+    self.notificationBtn = notificationBtn;
+    notificationBtn.badgeValue = @"0"; // I need the number of not checked through API
     //notificationBtn.badgePadding = 0;
     //notificationBtn.badgeMinSize = 0; //I changed their default value in category
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects: settingBtn, fixedButton, notificationBtn, nil]];
@@ -240,6 +268,9 @@ static CGFloat  const margin = 0;
 - (void)notificationClicked
 {
     NotificationViewController *notificationVC = [[NotificationViewController alloc] init];
+    notificationVC.delegate = self;
+    notificationVC.myNotifications = self.myNotifications;
+    notificationVC.myFriendsRequests = self.myFriendsRequests;
     [self.navigationController pushViewController:notificationVC animated:YES];
 }
 
@@ -257,9 +288,108 @@ static CGFloat  const margin = 0;
     // Pass the selected object to the new view controller.
 }
 */
+/*******Here is reloading data place*****/
+#pragma mark - 加载新数据
+-(void)loadFriendsRequest
+{
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    
+    NSDictionary *inData = @{@"action" : @"getFriendRequestList", @"token" : userToken};
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        
+        self.myFriendsRequests = [ZZFriendRequestModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        [self loadNewData];
+        
+        //[self.tableView.mj_header endRefreshing];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        //[self.tableView.mj_header endRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+    
+}
+
+#pragma mark - 加载新数据
+-(void)loadNewData
+{
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    
+    NSDictionary *inData = @{@"action" : @"getNotificationList", @"token" : userToken};
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        
+        self.myNotifications = [NotificationItem mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        self.notificationBtn.badgeValue = [NSString stringWithFormat:@"%zd", self.myFriendsRequests.count + self.myNotifications.count];
+        [self countNotReadNum];
+        //[self.tableView reloadData];
+        
+        //[self.tableView.mj_header endRefreshing];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        //[self.tableView.mj_header endRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+    
+}
+
+- (void)countNotReadNum {
+    NSInteger *num = 0;
+    for (int i = 0; i < self.myNotifications.count; i++) {
+        if (! self.myNotifications[i].isRead) {
+            num ++;
+        }
+    }
+    for (int i = 0; i < self.myFriendsRequests.count; i++) {
+        if (! self.myFriendsRequests[i].isRead) {
+            num ++;
+        }
+    }
+    
+    self.notificationNum = num;
+    self.notificationBtn.badgeValue = [NSString stringWithFormat:@"%zd", num];
+}
+
 
 - (IBAction)leaderboardButtonClicked:(id)sender {
     LeaderboardViewController *leaderboardVC = [[LeaderboardViewController alloc] init];
     [self.navigationController pushViewController:leaderboardVC animated:YES];
+}
+
+- (void)passValue:(NSInteger *)theValue {
+    NSLog(@"passValueDelegate %zd", theValue);
+    self.notificationNum = theValue;
+    self.notificationBtn.badgeValue = [NSString stringWithFormat:@"%zd", theValue];
 }
 @end

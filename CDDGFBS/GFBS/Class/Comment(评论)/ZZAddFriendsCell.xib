@@ -16,10 +16,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7aR-oR-0aO">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7aR-oR-0aO">
                         <rect key="frame" x="10" y="5" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="1QH-56-hpa"/>
@@ -33,7 +33,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zE7-7Q-waB">
-                        <rect key="frame" x="349" y="14" width="18" height="18"/>
+                        <rect key="frame" x="336" y="14" width="18" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="18" id="Qzm-1g-cE1"/>
                         </constraints>
@@ -48,7 +48,7 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="zE7-7Q-waB" firstAttribute="leading" secondItem="R90-gx-gYQ" secondAttribute="trailing" constant="25" id="3Wl-iZ-hUW"/>
+                    <constraint firstItem="zE7-7Q-waB" firstAttribute="leading" secondItem="R90-gx-gYQ" secondAttribute="trailing" constant="12" id="3Wl-iZ-hUW"/>
                     <constraint firstItem="7aR-oR-0aO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="599-on-HVg"/>
                     <constraint firstItem="zE7-7Q-waB" firstAttribute="top" secondItem="R90-gx-gYQ" secondAttribute="top" id="6S3-3p-U4R"/>
                     <constraint firstAttribute="bottom" secondItem="eRn-9m-8Uf" secondAttribute="bottom" id="6t7-m1-rO9"/>
@@ -56,7 +56,7 @@
                     <constraint firstItem="zE7-7Q-waB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="BRK-Mf-bF0"/>
                     <constraint firstAttribute="trailing" secondItem="eRn-9m-8Uf" secondAttribute="trailing" id="Dbb-0s-LY8"/>
                     <constraint firstItem="R90-gx-gYQ" firstAttribute="leading" secondItem="7aR-oR-0aO" secondAttribute="trailing" constant="8" symbolic="YES" id="R3z-Sq-ixh"/>
-                    <constraint firstItem="zE7-7Q-waB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="W2M-zP-Yzc"/>
+                    <constraint firstItem="zE7-7Q-waB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-13" id="W2M-zP-Yzc"/>
                     <constraint firstItem="7aR-oR-0aO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="YB1-Ov-80Z"/>
                     <constraint firstItem="eRn-9m-8Uf" firstAttribute="top" secondItem="R90-gx-gYQ" secondAttribute="bottom" constant="14" id="bMN-EL-ELA"/>
                     <constraint firstItem="eRn-9m-8Uf" firstAttribute="top" secondItem="zE7-7Q-waB" secondAttribute="bottom" constant="17" id="jKY-fk-6Og"/>

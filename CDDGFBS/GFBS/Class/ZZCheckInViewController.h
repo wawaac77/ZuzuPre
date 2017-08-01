@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DropDownChooseProtocol.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface ZZCheckInViewController : UIViewController <DropDownChooseDelegate,DropDownChooseDataSource>
+@interface ZZCheckInViewController : UIViewController <CLLocationManagerDelegate, DropDownChooseDelegate,DropDownChooseDataSource>
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end

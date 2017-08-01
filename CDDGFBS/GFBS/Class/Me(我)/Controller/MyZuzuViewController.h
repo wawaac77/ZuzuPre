@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NotificationViewController.h"
 
-@interface MyZuzuViewController : UIViewController
+@interface MyZuzuViewController : UIViewController <ChildViewControllerDelegate>
 
 @end

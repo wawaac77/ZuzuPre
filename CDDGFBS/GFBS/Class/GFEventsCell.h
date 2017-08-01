@@ -14,5 +14,6 @@
 
 /*数据*/
 @property (strong, nonatomic) ZZContentModel *event;
+@property (strong, nonatomic) NSString *type;
 
 @end

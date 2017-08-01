@@ -70,7 +70,7 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCq-je-wll">
-                            <rect key="frame" x="345" y="10" width="20" height="20"/>
+                            <rect key="frame" x="338" y="12" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="Shc-kz-8fr"/>
                                 <constraint firstAttribute="height" constant="20" id="a7L-bX-qF2"/>
@@ -97,17 +97,17 @@
                         <constraint firstItem="BqI-5N-2tD" firstAttribute="top" secondItem="1Yq-jZ-7RS" secondAttribute="bottom" constant="4" id="BVS-nM-0qT"/>
                         <constraint firstAttribute="trailing" secondItem="nx5-nZ-e1D" secondAttribute="trailing" id="CJV-SA-CPc"/>
                         <constraint firstItem="BqI-5N-2tD" firstAttribute="leading" secondItem="tqG-pH-kEE" secondAttribute="trailing" constant="5" id="CuF-t2-YLm"/>
-                        <constraint firstAttribute="trailing" secondItem="PCq-je-wll" secondAttribute="trailing" constant="10" id="Exb-kS-258"/>
+                        <constraint firstAttribute="trailing" secondItem="PCq-je-wll" secondAttribute="trailing" constant="17" id="Exb-kS-258"/>
                         <constraint firstItem="nx5-nZ-e1D" firstAttribute="leading" secondItem="fN2-RP-WDs" secondAttribute="leading" id="HvA-9a-q70"/>
                         <constraint firstItem="tqG-pH-kEE" firstAttribute="leading" secondItem="Y3C-HR-q0i" secondAttribute="trailing" constant="8" symbolic="YES" id="OqH-xs-dG9"/>
                         <constraint firstItem="BqI-5N-2tD" firstAttribute="centerY" secondItem="tqG-pH-kEE" secondAttribute="centerY" id="Pg5-29-cDe"/>
-                        <constraint firstItem="PCq-je-wll" firstAttribute="leading" secondItem="1Yq-jZ-7RS" secondAttribute="trailing" constant="19" id="RmS-jk-cwK"/>
+                        <constraint firstItem="PCq-je-wll" firstAttribute="leading" secondItem="1Yq-jZ-7RS" secondAttribute="trailing" constant="12" id="RmS-jk-cwK"/>
                         <constraint firstItem="Y3C-HR-q0i" firstAttribute="leading" secondItem="M2n-qu-dKC" secondAttribute="trailing" constant="5" id="Vdd-fR-MRg"/>
                         <constraint firstAttribute="height" constant="60" id="Z1Q-q7-1bh"/>
                         <constraint firstAttribute="bottom" secondItem="mNe-NN-oCD" secondAttribute="bottom" constant="10" id="lTK-qH-z3E"/>
                         <constraint firstItem="tqG-pH-kEE" firstAttribute="centerY" secondItem="M2n-qu-dKC" secondAttribute="centerY" id="mCX-aZ-8PZ"/>
                         <constraint firstItem="tqG-pH-kEE" firstAttribute="top" secondItem="1Yq-jZ-7RS" secondAttribute="bottom" constant="8" symbolic="YES" id="puO-Jw-n2e"/>
-                        <constraint firstItem="PCq-je-wll" firstAttribute="top" secondItem="fN2-RP-WDs" secondAttribute="top" constant="10" id="q9C-f0-8ak"/>
+                        <constraint firstItem="PCq-je-wll" firstAttribute="top" secondItem="fN2-RP-WDs" secondAttribute="top" constant="12" id="q9C-f0-8ak"/>
                         <constraint firstItem="1Yq-jZ-7RS" firstAttribute="leading" secondItem="mNe-NN-oCD" secondAttribute="trailing" constant="10" id="rEj-hQ-gCg"/>
                         <constraint firstItem="mNe-NN-oCD" firstAttribute="top" secondItem="fN2-RP-WDs" secondAttribute="top" constant="10" id="sgj-jx-Edx"/>
                         <constraint firstItem="nx5-nZ-e1D" firstAttribute="top" secondItem="fN2-RP-WDs" secondAttribute="top" constant="-20" id="tqo-2L-1jz"/>

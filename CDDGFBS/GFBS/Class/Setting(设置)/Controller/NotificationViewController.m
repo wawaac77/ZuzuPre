@@ -25,11 +25,7 @@ static NSString *const friendRequestID = @"friendRequest";
 
 @interface NotificationViewController ()
 
-/*所有notification数据*/
-@property (strong , nonatomic)NSMutableArray<NotificationItem *> *myNotifications;
-@property (strong , nonatomic)NSMutableArray<ZZFriendRequestModel *> *myFriendsRequests;
-/*maxtime*/
-@property (strong , nonatomic)NSString *maxtime;
+@property (assign , nonatomic)NSInteger *notificationNum;
 
 /*请求管理者*/
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
@@ -126,7 +122,7 @@ static NSString *const friendRequestID = @"friendRequest";
         NSLog(@"responseObject - data is %@", responseObject[@"data"]);
         
         self.myNotifications = [NotificationItem mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        
+        [self passValueMethod];
         [self.tableView reloadData];
         
         //[self.tableView.mj_header endRefreshing];
@@ -205,10 +201,71 @@ static NSString *const friendRequestID = @"friendRequest";
         NotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:notificationID];
         NotificationItem *thisNotification = self.myNotifications[indexPath.row];
         cell.notification = thisNotification;
-        
+        NSLog(@"cell.notification.isRead%@",cell.notification.isRead);
         return cell;
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        self.myFriendsRequests[indexPath.row].isRead = [NSNumber numberWithBool:true];
+        //[self markNotificatinIsRead:_myFriendsRequests[indexPath.row].friendshipID];
+    }
+    else if (indexPath.section == 1) {
+       self.myNotifications[indexPath.row].isRead = [NSNumber numberWithBool:true];
+        [self markNotificatinIsRead:_myNotifications[indexPath.row]._id];
+    }
+}
+
+- (void)markNotificatinIsRead: (NSString *) notificationID {
+    
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    
+    NSDictionary *inSubData = @{@"notificationId" : notificationID};
+    NSDictionary *inData = @{@"action" : @"markNotificationIsRead", @"token" : userToken, @"data" : inSubData};
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        
+        //[self.tableView.mj_header endRefreshing];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        //[self.tableView.mj_header endRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+}
+
+
+- (void)passValueMethod {
+    NSInteger *num = 0;
+    for (int i = 0; i < self.myNotifications.count; i++) {
+        if (! self.myNotifications[i].isRead) {
+            num ++;
+        }
+    }
+    for (int i = 0; i < self.myFriendsRequests.count; i++) {
+        if (! self.myFriendsRequests[i].isRead) {
+            num ++;
+        }
+    }
+
+    self.notificationNum = num;
+    NSLog(@"passValueMethod in notificationVC %zd  %zd", self.notificationNum, num);
+    [_delegate passValue:self.notificationNum];
 }
 
 
@@ -250,16 +307,6 @@ static NSString *const friendRequestID = @"friendRequest";
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
 */
 
 /*

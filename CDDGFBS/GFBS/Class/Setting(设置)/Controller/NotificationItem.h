@@ -11,6 +11,7 @@
 
 @interface NotificationItem : NSObject
 
+@property (nonatomic, copy) NSString *_id;
 @property (nonatomic, copy) NSString *notificationText;
 @property (nonatomic, copy) NSString *updatedAt;
 @property (nonatomic, copy) NSString *notificationType;

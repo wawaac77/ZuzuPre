@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NotificationItem.h"
+#import "ZZFriendRequestModel.h"
+
+@protocol ChildViewControllerDelegate <NSObject>
+
+- (void) passValue: (NSInteger *)theValue;
+
+@end
+
+@protocol ChildViewControllerDelegate;
 
 @interface NotificationViewController : UITableViewController
+/*所有notification数据*/
+@property (strong , nonatomic)NSMutableArray<NotificationItem *> *myNotifications;
+@property (strong , nonatomic)NSMutableArray<ZZFriendRequestModel *> *myFriendsRequests;
+
+@property (weak)id <ChildViewControllerDelegate> delegate;
 
 @end

@@ -116,6 +116,7 @@ static NSString *const headID = @"head";
     topicCell.backgroundColor = [UIColor whiteColor];
     //self.topic.type = CommentContent;
     topicCell.event = self.topic;
+    topicCell.type = @"comment";
     topicCell.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.topic.cellHeightForComment);
     
     CGFloat textMaxW = [UIScreen mainScreen].bounds.size.width - 2 * GFMargin;

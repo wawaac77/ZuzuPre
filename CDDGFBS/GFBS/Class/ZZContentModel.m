@@ -117,6 +117,11 @@ static NSTimeZone *outputTimeZone_;
     
     CGFloat textHeight = textSize.height;
     _cellHeightForComment += textHeight;
+    /*
+    //图片
+    CGFloat imageViewH = _listImage_UIImage.size.height / _listImage_UIImage.size.width * GFScreenWidth;
+    _cellHeightForComment = _cellHeightForComment + imageViewH - 274;
+    */
     
     NSLog(@"_cellHeightForComment in model %f", _cellHeight);
     return _cellHeightForComment;
