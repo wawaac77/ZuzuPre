@@ -10,6 +10,12 @@
 
 @implementation ZZUser
 
++ (NSDictionary *)mj_objectClassInArray {
+    return @{
+             @"userInterests" : @"ZZTypicalInformationModel",
+            };
+}
+
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     
     return @{
@@ -34,6 +40,9 @@
              @"userInterests" : @"interests",
              @"userProfileImage" : @"profilePic",
              @"userLastCheckIn" : @"lastCheckin",
+             
+             @"userIndustry" : @"industry",
+             @"userProfession" : @"profession",
              };
 }
 

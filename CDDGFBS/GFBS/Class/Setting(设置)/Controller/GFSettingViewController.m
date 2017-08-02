@@ -42,7 +42,7 @@
 
 @property (strong, nonatomic) NSMutableArray<NSString *> *selectedPickerArray;
 
-@property (strong, nonatomic) NSString *selectedItem;
+@property (strong, nonatomic) ZZTypicalInformationModel *selectedItem;
 
 @end
 
@@ -154,9 +154,15 @@
             //cell.detailTextLabel.text = [AppDelegate APP].user.userEmail;
             cell.detailTextLabel.text = _thisUser.userEmail;
             //cell.imageView.image = [AppDelegate APP].user.userProfileImage_UIImage;
+            
             NSString *imageURL = [AppDelegate APP].user.userProfileImage.imageUrl;
-            cell.imageView.frame = CGRectMake(5, 0, 30, 30);
+            UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 30, 30)];
+            //cell.imageView.frame = CGRectMake(5, 0, 30, 30);
+            myImageView.layer.cornerRadius = 15;
+            myImageView.clipsToBounds = YES;
+            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
+            [cell.contentView addSubview:myImageView];
             
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
@@ -168,7 +174,8 @@
             
             cell.textLabel.text = @"Login with Facebook";
             //cell.detailTextLabel.text = @"You have logined with FB";
-            cell.imageView.image = [UIImage imageNamed:@"ic_facebook"];
+            cell.imageView.image = [UIImage imageNamed:@"square-facebook-69x69"];
+            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
             cell.imageView.frame = CGRectMake(5, 0, 30, 30);
             
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
@@ -222,13 +229,20 @@
             
         } else if (indexPath.row == 3) {
             cell.textLabel.text = @"Industry";
+            cell.detailTextLabel.text = _thisUser.userIndustry.informationName.en;
             
         } else if (indexPath.row == 4) {
             cell.textLabel.text = @"Profession";
+            cell.detailTextLabel.text = _thisUser.userProfession.informationName.en;
             
         } else if (indexPath.row == 5) {
-           cell.textLabel.text = @"Interests";
-        
+            cell.textLabel.text = @"Interests";
+            NSString *myInterests = @"";
+            for (int i = 0; i < _thisUser.userInterests.count; i++) {
+                myInterests = [[NSString stringWithFormat:@"%@ ", _thisUser.userInterests[i].informationName.en] stringByAppendingString: myInterests];
+            }
+            NSLog(@"myInterests %@", myInterests);
+            cell.detailTextLabel.text = myInterests;
         } 
     }
     
@@ -416,7 +430,7 @@
             NSLog(@"self.industry %@", self.industry);
             NSLog(@"self.selectedPickerArray %@", self.selectedPickerArray);
             NSLog(@"self.industryArray in didSelectRow %@", self.industryArray);
-            [self.view addSubview:_picker];
+            [self.view insertSubview:_picker belowSubview:self.tableView];
             [_picker reloadAllComponents];
         }
         else if (indexPath.row == 4) {
@@ -425,7 +439,7 @@
             }
             self.selectedPickerArray = [[NSMutableArray alloc]initWithArray:self.profession];
             NSLog(@"self.selectedPickerArray %@", self.selectedPickerArray);
-            [self.view addSubview:_picker];
+             [self.view insertSubview:_picker belowSubview:self.tableView];
             [_picker reloadAllComponents];
         }
         else if (indexPath.row == 5) {
@@ -617,8 +631,89 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     
     _selectedItem = [_selectedPickerArray objectAtIndex:row];
+    if ([self.tableView indexPathForSelectedRow].row == 3) {
+        _thisUser.userIndustry = [_industryArray objectAtIndex:row];
+    }
+    else if ([self.tableView indexPathForSelectedRow].row == 4) {
+        _thisUser.userProfession = [_professionArray objectAtIndex:row];
+    }
+    else if (([self.tableView indexPathForSelectedRow].row == 5)) {
+        if (![_thisUser.userInterests containsObject:[_interestsArray objectAtIndex:row]]) {
+            [_thisUser.userInterests addObject:[_interestsArray objectAtIndex:row]];
+        } else {
+            [_picker removeFromSuperview];
+        }
+        NSLog(@"_thisUser.userInterests %@", _thisUser.userInterests);
+    }
+    
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];
     NSLog(@"_selectedItem %@", _selectedItem);
+    
+    //[self updateProfile];
     [_picker removeFromSuperview];
+   
 }
+
+- (void)updateProfile {
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSString *userToken = [AppDelegate APP].user.userToken;
+    
+    //----------------get profession array-----------------//
+    
+    
+    NSDictionary *inSubData2 = @{
+                                //@"name" : _thisUser.usertName,
+                                //@"interests" : _thisUser.userInterests,
+                                //@"maxPrice" : _thisUser.maxPrice,
+                                //@"minPrice" : _thisUser.minPrice,
+                                //@"allowNotification" : _thisUser.allowNotification,
+                                //@"emailNotification" : _thisUser.emailNotification,
+                                //@"allowNotification" : _thisUser.allowNotification,
+                                //@"sounds" : _thisUser.sounds,
+                                //@"showOnLockScreen" : _thisUser.showOnLockScreen,
+                                //@"industry" : _thisUser.userIndustry.informationID,
+                                //@"profession" : _thisUser.profession.informationID,
+                                @"age" : _thisUser.age,
+                                //@"phone" : _thisUser.phone,
+                                //@"gender" :_thisUser.gender
+                                };
+    NSDictionary *inData2 = @{@"action" : @"updateProfile", @"token" : userToken, @"data" : inSubData2,
+                             @"canSeeMyProfile" : _thisUser.canSeeMyProfile,
+                             @"canMessageMe" : _thisUser.canMessageMe,
+                             @"canMyFriendSeeMyEmail" : _thisUser.canMyFriendSeeMyEmail};
+    NSDictionary *parameters2 = @{@"data" : inData2};
+    
+    [_manager POST:GetURL parameters:parameters2 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network for profession, please try later~"];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    //[self updateProfile];
+}
+
+/*
+-(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"indexPathForSlectedRow in viewWillAppear %@", [self.tableView indexPathForSelectedRow]);
+    NSLog(@"indexPathForSlectedRow in viewWillAppear.row %ld", [self.tableView indexPathForSelectedRow].row);
+    
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];
+}
+ */
 
 @end

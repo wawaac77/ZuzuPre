@@ -372,6 +372,7 @@
 		786B38211F2ECFEB0098A12F /* RestaurantCheckinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786B381F1F2ECFEB0098A12F /* RestaurantCheckinViewController.m */; };
 		786B38221F2ECFEB0098A12F /* RestaurantCheckinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 786B38201F2ECFEB0098A12F /* RestaurantCheckinViewController.xib */; };
 		786B38251F2F13AF0098A12F /* UserCheckinListChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786B38241F2F13AF0098A12F /* UserCheckinListChildTableViewController.m */; };
+		786B38271F317C520098A12F /* square-facebook-69x69.png in Resources */ = {isa = PBXBuildFile; fileRef = 786B38261F317C520098A12F /* square-facebook-69x69.png */; };
 		788246CA1ED2E7930058B226 /* EventOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788246C81ED2E7930058B226 /* EventOverviewViewController.m */; };
 		788246CB1ED2E7930058B226 /* EventOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 788246C91ED2E7930058B226 /* EventOverviewViewController.xib */; };
 		788246CF1ED2E7A90058B226 /* EventDiscussionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 788246CD1ED2E7A90058B226 /* EventDiscussionViewController.m */; };
@@ -993,6 +994,7 @@
 		786B38201F2ECFEB0098A12F /* RestaurantCheckinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RestaurantCheckinViewController.xib; sourceTree = "<group>"; };
 		786B38231F2F13AF0098A12F /* UserCheckinListChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCheckinListChildTableViewController.h; sourceTree = "<group>"; };
 		786B38241F2F13AF0098A12F /* UserCheckinListChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCheckinListChildTableViewController.m; sourceTree = "<group>"; };
+		786B38261F317C520098A12F /* square-facebook-69x69.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square-facebook-69x69.png"; sourceTree = "<group>"; };
 		788246C71ED2E7930058B226 /* EventOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventOverviewViewController.h; sourceTree = "<group>"; };
 		788246C81ED2E7930058B226 /* EventOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventOverviewViewController.m; sourceTree = "<group>"; };
 		788246C91ED2E7930058B226 /* EventOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOverviewViewController.xib; sourceTree = "<group>"; };
@@ -2435,6 +2437,7 @@
 		786069671F15DB9B00A8AB88 /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				786B38261F317C520098A12F /* square-facebook-69x69.png */,
 				786069681F15DB9B00A8AB88 /* arrow-back.png */,
 				786069691F15DB9B00A8AB88 /* check-o.png */,
 				7860696A1F15DB9B00A8AB88 /* check.png */,
@@ -3086,6 +3089,7 @@
 				786069C51F15DB9B00A8AB88 /* ic_fa-credit-card.png in Resources */,
 				7824E34C1EF1408E00F85BFB /* ic_badges_338x338-06.png in Resources */,
 				783F82341F176E7300491529 /* profile_image_animals.jpeg in Resources */,
+				786B38271F317C520098A12F /* square-facebook-69x69.png in Resources */,
 				780096BD1EC9C1F5008F9F99 /* ic_ fa-image.png in Resources */,
 				18388AD11DFAAB1D004E1DF9 /* GFSubTagViewCell.xib in Resources */,
 				7883331D1F17781100967337 /* ZZCheckInViewController.xib in Resources */,

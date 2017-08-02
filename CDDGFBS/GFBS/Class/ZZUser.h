@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "GFImage.h"
 #import "ZZContentModel.h"
+#import "ZZTypicalInformationModel.h"
+#import "GFImage.h"
 
 @class GFImage;
 @class ZZContentModel;
+@class ZZTypicalInformationModel;
 
 @interface ZZUser : NSObject
 
@@ -37,18 +40,28 @@
 @property (nonatomic, copy) NSString *socialExp;
 @property (nonatomic, assign) NSNumber *checkinPoint;
 
-@property (nonatomic, retain) NSArray<NSString *> *userInterests;
+@property (nonatomic, strong) NSMutableArray<ZZTypicalInformationModel *> *userInterests;
 @property (nonatomic, strong) GFImage *userProfileImage;
 @property (nonatomic, strong) ZZContentModel *userLastCheckIn;
 
 @property (nonatomic, assign) NSNumber *age;
 @property (nonatomic, copy) NSString *gender;
 @property (nonatomic, copy) NSString *phone;
+@property (nonatomic, strong) ZZTypicalInformationModel *userIndustry;
+@property (nonatomic, strong) ZZTypicalInformationModel *userProfession;
+
+@property (nonatomic, assign) NSNumber *maxPrice;
+@property (nonatomic, assign) NSNumber *minPrice;
 
 @property (nonatomic, assign) NSNumber *showOnLockScreen;
 @property (nonatomic, assign) NSNumber *sounds;
 @property (nonatomic, assign) NSNumber *emailNotification;
 @property (nonatomic, assign) NSNumber *allowNotification;
+
+@property (nonatomic, assign) NSNumber *canSeeMyProfile;
+@property (nonatomic, assign) NSNumber *canMessageMe;
+@property (nonatomic, assign) NSNumber *canMyFriendSeeMyEmail;
+
 
 @property (nonatomic, copy) UIImage *userProfileImage_UIImage;
 
