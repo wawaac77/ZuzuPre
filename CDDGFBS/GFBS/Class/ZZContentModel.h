@@ -43,10 +43,11 @@ typedef NS_ENUM(NSInteger , MyPublishContentType){
 @property (nonatomic, strong) EventRestaurant *listEventRestaurant;
 @property (nonatomic, strong) GFImage *listImage;
 
-@property (nonatomic, copy) NSNumber *listIsLike;
+@property (nonatomic, strong) NSNumber *listIsLike;
 
 /*****额外增加的属性*****/
 @property (nonatomic, strong) UIImage *listImage_UIImage;
+@property (nonatomic, strong) NSNumber *withImage;
 
 /** cell高度 */
 @property (nonatomic, assign) CGFloat cellHeight;

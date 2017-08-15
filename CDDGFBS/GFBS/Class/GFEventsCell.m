@@ -114,12 +114,15 @@
     UIImage *image = [[UIImage alloc]initWithData:data];
     */
     
-    _bigImageView.contentMode = UIViewContentModeScaleAspectFill;
-    _bigImageView.clipsToBounds = YES;
-    _bigImageView.image = thisEvent.listImage_UIImage;
-    //[self.bigImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:nil];
-
-
+    if (event.listImage_UIImage == NULL) {
+        _bigImageView.hidden = YES;
+    } else {
+        _bigImageView.hidden = NO;
+        _bigImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _bigImageView.clipsToBounds = YES;
+        _bigImageView.image = event.listImage_UIImage;
+    }
+    
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listPublishUser.userProfileImage.imageUrl] placeholderImage:nil];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
@@ -143,16 +146,13 @@
     CGFloat height;
     height = thisEvent.cellHeight - 337 - GFMargin;
     NSLog(@"cell not comment textField height %f", height);
-    /*
-    if (thisEvent.type == CommentContent) {
-        height = thisEvent.cellHeightForComment - 337 - GFMargin;
-        NSLog(@"cell comment textField height %f", height);
+    
+    if (thisEvent.listImage_UIImage == nil) {
+        _textField.frame = CGRectMake(GFMargin, 337 - 274, GFScreenWidth - 2 * GFMargin, height);
     } else {
-        height = thisEvent.cellHeight - 337 - GFMargin;
-        NSLog(@"cell not comment textField height %f", height);
+        _textField.frame = CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, height);
     }
-    */
-    _textField.frame = CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, height);
+    
     _textField.clipsToBounds = YES;
     _textField.lineBreakMode = NSLineBreakByTruncatingTail;
     self.textField.text = thisEvent.listMessage;

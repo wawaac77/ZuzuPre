@@ -44,7 +44,16 @@ static NSTimeZone *outputTimeZone_;
     //如果cell高度已经计算处理 就直接返回
     if (_cellHeight) return _cellHeight;
     
-    _cellHeight = 337.0f + GFMargin;
+    //_cellHeight = 337.0f + GFMargin;
+    _cellHeight = 337.0f + GFMargin * 2;
+    
+    /*
+    if (self.listImage_UIImage == NULL) {
+        _cellHeight -= 274.0f;
+        NSLog(@"can detect _listImage is nil");
+    }
+     */
+    
     //头像
     //_cellHeight = GFiconH;
     
@@ -55,8 +64,8 @@ static NSTimeZone *outputTimeZone_;
     
     CGFloat textHeight = textSize.height;
     
-    if (textHeight > 50.0f) {
-        textHeight = 50.0f;
+    if (textHeight > 80.0f) {
+        textHeight = 80.0f;
     }
     _cellHeight += textHeight;
 
@@ -108,7 +117,11 @@ static NSTimeZone *outputTimeZone_;
     //如果cell高度已经计算处理 就直接返回
     if (_cellHeightForComment) return _cellHeightForComment;
     
-    _cellHeightForComment = 365.0f;
+     _cellHeight = 337.0f + GFMargin * 2;
+    //_cellHeightForComment = 365.0f;
+    if (self.listImage_UIImage == NULL) {
+        _cellHeightForComment -= 274.0f;
+    }
     
     //文字
     CGFloat textMaxW = [UIScreen mainScreen].bounds.size.width - 2 * GFMargin;
@@ -152,8 +165,8 @@ static NSTimeZone *outputTimeZone_;
     fmt_.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     
     NSDate *creatAtDate = [fmt_ dateFromString:_listEventUpdatedAt];
-    NSLog(@"_listEventUpdatedAt in content%@", _listEventUpdatedAt);
-    NSLog(@"createAtDate NSDate in content %@", creatAtDate);
+    //NSLog(@"_listEventUpdatedAt in content%@", _listEventUpdatedAt);
+    //NSLog(@"createAtDate NSDate in content %@", creatAtDate);
     //判断
     if (creatAtDate.isThisYear) {//今年
         if ([calendar_ isDateInToday:creatAtDate]) {//今天

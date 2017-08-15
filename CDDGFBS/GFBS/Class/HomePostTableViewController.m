@@ -24,7 +24,9 @@
 static NSString *const ID = @"ID";
 //@class ZZContentModel;
 
-@interface HomePostTableViewController ()
+@interface HomePostTableViewController () {
+    int contentCellHeightCount;
+}
 
 /*所有帖子数据*/
 @property (strong , nonatomic)NSMutableArray<ZZContentModel *> *contents;
@@ -72,7 +74,7 @@ static NSString *const ID = @"ID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    contentCellHeightCount = 0;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
     [self setUpTable];
@@ -92,7 +94,15 @@ static NSString *const ID = @"ID";
     //self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
     //self.tableView.backgroundColor = [UIColor lightGrayColor];
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        // 如果tableView响应了setSeparatorInset: 这个方法,我们就将tableView分割线的内边距设为0.
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        // 如果tableView响应了setLayoutMargins: 这个方法,我们就将tableView分割线的间距距设为0.
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
     //self.tableView.rowHeight = UITableViewAutomaticDimension;
     //self.tableView.estimatedRowHeight = 400;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GFEventsCell class]) bundle:nil] forCellReuseIdentifier:ID];
@@ -104,6 +114,12 @@ static NSString *const ID = @"ID";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ZZContentModel *content = _contents[indexPath.row];
+    contentCellHeightCount ++;
+    NSLog(@"contentCellHeightCount%zd", contentCellHeightCount);
+    if (content.listImage_UIImage == NULL || content.listImage_UIImage == nil) {
+        NSLog(@"contentCellHeightInPostVC without Image %f", content.cellHeight - 274.0f);
+        return content.cellHeight - 274.0f;
+    }
     NSLog(@"contentCellHeightInPostVC %f", content.cellHeight);
     return content.cellHeight;
 }
@@ -122,7 +138,7 @@ static NSString *const ID = @"ID";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GFEventsCell *cell = (GFEventsCell *)[tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+    GFEventsCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     //**** set up restaurant button **//
     UIButton *restaurantButton = [[UIButton alloc] initWithFrame:CGRectMake(80, 16, 264, 30)];
     restaurantButton.backgroundColor = [UIColor clearColor];
@@ -137,14 +153,21 @@ static NSString *const ID = @"ID";
     [cell.contentView addSubview:profileImageButton];
 
     
-    ZZContentModel *thisContent = self.contents[indexPath.row];
-    if (_contents[indexPath.row].listImage_UIImage == nil) {
+    //ZZContentModel *thisContent = self.contents[indexPath.row];
+    if (_contents[indexPath.row].listImage_UIImage == NULL) {
         NSURL *URL = [NSURL URLWithString:_contents[indexPath.row].listImage.imageUrl];
         NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
+        NSLog(@"imageData %@", data);
         UIImage *image = [[UIImage alloc]initWithData:data];
+        NSLog(@"UIImage %@", image);
+        if (image == NULL) {
+            _contents[indexPath.row].withImage = [NSNumber numberWithBool:@0];
+        } else {
+            _contents[indexPath.row].withImage = [NSNumber numberWithBool:@1];
+        }
         _contents[indexPath.row].listImage_UIImage = image;
     }
-    cell.event = thisContent;
+    cell.event = self.contents[indexPath.row];
     
     return cell;
 }
@@ -180,6 +203,15 @@ static NSString *const ID = @"ID";
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // 这两句的含义跟上面两句代码相同,就不做解释了
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 
 - (void) restaurantButtonClicked: (UIButton *) sender {
     ZZContentModel *thisContent = _contents[sender.tag];
@@ -252,6 +284,13 @@ static NSString *const ID = @"ID";
         
         self.contents = [ZZContentModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         //[self saveUIImages];
+        
+        for (int i = 0; i < self.contents.count; i++) {
+            NSLog(@"contents imageURL %@", _contents[i].listImage.imageUrl);
+            NSLog(@"contents imageMimetype %@", _contents[i].listImage.imageMimetype);
+            NSLog(@"contents imageID %@", _contents[i].listImage.imageID);
+            NSLog(@"contents imageSize %@", _contents[i].listImage.imageSize);
+        }
         
         self.selectedContents = [[NSMutableArray alloc] init];
         if (self.type == 5) {

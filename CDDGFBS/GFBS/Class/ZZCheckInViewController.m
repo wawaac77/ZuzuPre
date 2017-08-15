@@ -484,15 +484,18 @@
 //*************** checkin button *****************//
 - (IBAction)checkinButtonClicked:(id)sender {
     NSLog(@"check in button clicked");
+    /*
     if (_pickedImage == nil) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"ZUZU" message:@"Please select a image from your album ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];
     }
     else {
+     */
         NSLog(@"Check in posted");
         [self postCheckIn];
         self.textView.text = nil;
-    }
+    self.imageView.image = nil;
+    //}
     
     // if (![self.textView.text isEqualToString:@""])
 }

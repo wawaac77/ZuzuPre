@@ -123,7 +123,13 @@ static NSString *const headID = @"head";
     CGSize textMaxSize = CGSizeMake(textMaxW, MAXFLOAT);
     CGSize textSize = [self.topic.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
     CGFloat textHeight = textSize.height;
-    UILabel *fullTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, textHeight)];
+    
+    UILabel *fullTextLabel = [[UILabel alloc] init];
+    if (self.topic.listImage_UIImage == NULL) {
+        fullTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFMargin, 337 - 250, GFScreenWidth - 2 * GFMargin, textHeight)];
+    } else {
+        fullTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, textHeight)];
+    }
     fullTextLabel.numberOfLines = 0;
     fullTextLabel.font = [UIFont systemFontOfSize:GFTextSize];
     fullTextLabel.text = self.topic.listMessage;

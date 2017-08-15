@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ZZContentModel.h"
 @class ZZContentModel;
 
 @interface GFEventsCell : UITableViewCell
