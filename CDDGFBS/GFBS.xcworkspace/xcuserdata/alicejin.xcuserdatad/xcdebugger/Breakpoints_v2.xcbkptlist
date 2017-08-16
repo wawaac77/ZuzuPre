@@ -1562,11 +1562,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/HomePostTableViewController.m"
-            timestampString = "524482286.142823"
+            timestampString = "524570045.700695"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-setUpTable"
             landmarkType = "7">
          </BreakpointContent>
@@ -1610,11 +1610,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/ZZLeaderboardCell.m"
-            timestampString = "522063434.0299"
+            timestampString = "524577606.952175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "-setUser:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1626,12 +1626,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/ZZLeaderboardCell.m"
-            timestampString = "522926866.273788"
+            timestampString = "524577606.952175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "-downloadImageFromURL:"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-setUser:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1642,12 +1642,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/ZZLeaderboardCell.m"
-            timestampString = "522926866.273788"
+            timestampString = "524577606.952175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "-downloadImageFromURL:"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-setUser:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1658,11 +1658,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/ZZLeaderboardCell.m"
-            timestampString = "522926866.273788"
+            timestampString = "524577606.952175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "-setUser:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1706,11 +1706,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/GFEventsCell.m"
-            timestampString = "524483771.090921"
+            timestampString = "524576318.156344"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "-likedButtonClicked:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1722,11 +1722,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/GFEventsCell.m"
-            timestampString = "524483771.090921"
+            timestampString = "524576732.415719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "-likeCheckin:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1738,11 +1738,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/HomePostTableViewController.m"
-            timestampString = "524485070.237771"
+            timestampString = "524573595.683426"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
+            startingLineNumber = "426"
+            endingLineNumber = "426"
             landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1754,7 +1754,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/ZZContentModel.m"
-            timestampString = "524485070.237771"
+            timestampString = "524574716.055072"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "151"

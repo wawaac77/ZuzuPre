@@ -121,12 +121,12 @@ static NSString *const headID = @"head";
     
     CGFloat textMaxW = [UIScreen mainScreen].bounds.size.width - 2 * GFMargin;
     CGSize textMaxSize = CGSizeMake(textMaxW, MAXFLOAT);
-    CGSize textSize = [self.topic.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
+    CGSize textSize = [self.topic.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:GFTextSize]} context:nil].size;
     CGFloat textHeight = textSize.height;
     
     UILabel *fullTextLabel = [[UILabel alloc] init];
     if (self.topic.listImage_UIImage == NULL) {
-        fullTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFMargin, 337 - 250, GFScreenWidth - 2 * GFMargin, textHeight)];
+        fullTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFMargin, 60, GFScreenWidth - 2 * GFMargin, textHeight)];
     } else {
         fullTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, textHeight)];
     }
@@ -141,7 +141,7 @@ static NSString *const headID = @"head";
     // 设置header的高度
     //head.gf_height = topicCell.gf_height + GFMargin * 2;
     //head.gf_height = 230;
-    head.gf_height = topicCell.gf_height + GFMargin;
+    head.gf_height = self.topic.cellHeightForComment + GFMargin;
     NSLog(@"topic cell height %f", topicCell.gf_height);
     NSLog(@"head height = %f", head.gf_height);
     [head addSubview:topicCell];

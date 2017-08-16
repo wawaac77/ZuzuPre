@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *pointImageView;
+@property (weak, nonatomic) IBOutlet UILabel *followersNumLabel;
 
 
 @end
@@ -58,13 +59,20 @@
     NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
     UIImage *image = [[UIImage alloc]initWithData:data];
      */
-    _profileImageView.image = thisUser.leaderboardMember.userProfileImage_UIImage;
+    if (thisUser.leaderboardMember.userProfileImage_UIImage == NULL) {
+        _profileImageView.image = [UIImage imageNamed:@"defaultUserIcon"];
+    } else {
+        _profileImageView.image = thisUser.leaderboardMember.userProfileImage_UIImage;
+    }
     _profileImageView.layer.masksToBounds = YES;
     _profileImageView.layer.cornerRadius = _profileImageView.frame.size.width / 2;
     
     _usernameLabel.text = thisUser.leaderboardMember.userUserName;
     _locationLabel.text = thisUser.leaderboardMember.userLastCheckIn.listEventRestaurant.restaurantName.en;
     _scoreLabel.text = [NSString stringWithFormat:@"%@",thisUser.leaderboardLevel];
+    if (thisUser.leaderboardMember.numOfFollower != NULL) {
+        _followersNumLabel.text = [NSString stringWithFormat:@"%@ followers", thisUser.leaderboardMember.numOfFollower];
+    }
 }
 
 -(void) downloadImageFromURL :(NSString *)imageUrl{

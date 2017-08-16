@@ -26,6 +26,7 @@ static NSString *const ID = @"ID";
 
 @interface HomePostTableViewController () {
     int contentCellHeightCount;
+    int deleteIndex;
 }
 
 /*所有帖子数据*/
@@ -75,6 +76,7 @@ static NSString *const ID = @"ID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     contentCellHeightCount = 0;
+    deleteIndex = -1;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
     [self setUpTable];
@@ -151,7 +153,15 @@ static NSString *const ID = @"ID";
     [profileImageButton addTarget:self action:@selector(profileImageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     profileImageButton.tag = indexPath.row;
     [cell.contentView addSubview:profileImageButton];
-
+    
+    if (self.type == 2) {
+        UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(GFScreenWidth - 60, 8, 20, 20)];
+        [deleteButton setImage:[UIImage imageNamed:@"ic_select_grey.png"] forState:UIControlStateNormal];
+        [deleteButton addTarget:self action:@selector(deleteButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        deleteButton.tag = indexPath.row;
+        [cell.contentView addSubview:deleteButton];
+    }
+    
     
     //ZZContentModel *thisContent = self.contents[indexPath.row];
     if (_contents[indexPath.row].listImage_UIImage == NULL) {
@@ -181,6 +191,11 @@ static NSString *const ID = @"ID";
     
     GFCommentViewController *commentsVC = [[GFCommentViewController alloc] init];
     commentsVC.topic = [_contents objectAtIndex:indexPath.row];
+    NSLog(@" topic cell height in postList %f", self.contents[indexPath.row].cellHeightForComment);
+    NSLog(@" topic cell height in postList %f", self.contents[indexPath.row].cellHeight);
+    if (self.contents[indexPath.row].listImage_UIImage == NULL) {
+        NSLog(@"UIImage is null");
+    }
     commentsVC.view.frame = CGRectMake(0, ZZNewNavH, self.view.gf_width, self.view.gf_height - ZZNewNavH - GFTabBarH);
     commentsVC.hidesBottomBarWhenPushed = YES;
 
@@ -225,6 +240,59 @@ static NSString *const ID = @"ID";
     UserProfileCheckinViewController *userVC = [[UserProfileCheckinViewController alloc] init];
     userVC.myProfile = thisContent.listPublishUser;
     [self.navigationController pushViewController:userVC animated:YES];
+}
+
+- (void) deleteButtonClicked: (UIButton *) sender {
+    //ZZContentModel *thisContent = _contents[sender.tag];
+    deleteIndex = sender.tag;
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    //[actionSheet addButtonWithTitle:@"Some Action"];
+    [actionSheet addButtonWithTitle:@"Delete"];
+    //actionSheet.cancelButtonIndex = actionSheet.numberOfButtons -1;
+
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    //**** delete function is buttonIndex == 1 *****//
+    if (buttonIndex == 1) {
+        ZZContentModel *thisContent = _contents[deleteIndex];
+        [self.contents removeObjectAtIndex:deleteIndex];
+        [self.tableView reloadData];
+        
+        NSLog(@"loadNewEvents工作了");
+        //NSLog(@"receivingType %@",receivingType);
+        //NSLog(@"userID in HomePostVC %@", userID);
+        
+        //取消请求
+        [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+        
+        //2.凭借请求参数
+        
+        NSString *userToken = [AppDelegate APP].user.userToken;
+        NSDictionary *inSubData = @{@"checkinId" : thisContent.listEventID};
+        NSDictionary *inData = @{@"action" : @"deleteMyCheckinPost", @"token" : userToken, @"data" : inSubData};
+        
+        NSDictionary *parameters = @{@"data" : inData};
+        
+        [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+            
+            NSLog(@"responseObject is %@", responseObject);
+            NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+            //[self.tableView reloadData];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@", [error localizedDescription]);
+            
+            [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+            [self.tableView.mj_header endRefreshing];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+        }];
+        
+    }
 }
 
 
@@ -286,10 +354,9 @@ static NSString *const ID = @"ID";
         //[self saveUIImages];
         
         for (int i = 0; i < self.contents.count; i++) {
-            NSLog(@"contents imageURL %@", _contents[i].listImage.imageUrl);
-            NSLog(@"contents imageMimetype %@", _contents[i].listImage.imageMimetype);
-            NSLog(@"contents imageID %@", _contents[i].listImage.imageID);
-            NSLog(@"contents imageSize %@", _contents[i].listImage.imageSize);
+            if (self.contents[i].numOfLike == NULL) {
+                self.contents[i].numOfLike = 0;
+            }
         }
         
         self.selectedContents = [[NSMutableArray alloc] init];

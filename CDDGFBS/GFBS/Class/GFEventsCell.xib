@@ -58,7 +58,7 @@
                                     <constraint firstAttribute="height" constant="18" id="B3x-Ph-Mr9"/>
                                     <constraint firstAttribute="width" constant="114" id="UyO-Vw-PFq"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -108,6 +108,13 @@
                                     <constraint firstAttribute="width" constant="50" id="KKF-d6-5Dw"/>
                                 </constraints>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="192" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDK-iD-Xeu">
+                                <rect key="frame" x="312" y="25" width="55" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -156,6 +163,7 @@
                 <outlet property="bigTitleLabel" destination="aPI-Ob-bQ4" id="RLY-oG-qtn"/>
                 <outlet property="bottomView" destination="fc8-bp-aTW" id="SL5-57-rZn"/>
                 <outlet property="heartButton" destination="nu7-bQ-TSd" id="h3q-Cu-eOP"/>
+                <outlet property="likeNumLabel" destination="QDK-iD-Xeu" id="Bpy-jD-kQc"/>
                 <outlet property="placeLabel" destination="qQn-kg-eCm" id="XpX-cs-6VK"/>
                 <outlet property="profileImageView" destination="Q3p-fr-XpF" id="nNs-d3-lS5"/>
                 <outlet property="smallTitleLabel" destination="gOs-eH-eif" id="hoS-YL-Nuc"/>

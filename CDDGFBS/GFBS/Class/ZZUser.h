@@ -53,6 +53,8 @@
 @property (nonatomic, assign) NSNumber *maxPrice;
 @property (nonatomic, assign) NSNumber *minPrice;
 
+@property (nonatomic, strong) NSNumber *numOfFollower;
+
 @property (nonatomic, assign) NSNumber *showOnLockScreen;
 @property (nonatomic, assign) NSNumber *sounds;
 @property (nonatomic, assign) NSNumber *emailNotification;

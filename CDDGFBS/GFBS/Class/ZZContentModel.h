@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger , MyPublishContentType){
 @property (nonatomic, strong) GFImage *listImage;
 
 @property (nonatomic, strong) NSNumber *listIsLike;
+@property (nonatomic, strong) NSNumber *numOfLike;
 
 /*****额外增加的属性*****/
 @property (nonatomic, strong) UIImage *listImage_UIImage;

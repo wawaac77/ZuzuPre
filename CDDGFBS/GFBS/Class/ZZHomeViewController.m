@@ -184,7 +184,7 @@
     //scroll.contentSize = CGSizeMake(320, 700);
     //scroll.showsHorizontalScrollIndicator = YES;
     
-    NSArray *itemArray = [NSArray arrayWithObjects: @"All", @"Friends", @"Me", @"Leaderboard", nil];
+    NSArray *itemArray = [NSArray arrayWithObjects: @"All", @"Following", @"Me", @"Leaderboard", nil];
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
     self.segmentedControl = segmentedControl;
     segmentedControl.frame = CGRectMake(10, 5 + ZZNewNavH, GFScreenWidth - 20, 25);

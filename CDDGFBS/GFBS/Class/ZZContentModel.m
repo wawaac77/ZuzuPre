@@ -113,30 +113,30 @@ static NSTimeZone *outputTimeZone_;
 
 - (CGFloat)cellHeightForComment
 {
-    
     //如果cell高度已经计算处理 就直接返回
     if (_cellHeightForComment) return _cellHeightForComment;
     
-     _cellHeight = 337.0f + GFMargin * 2;
-    //_cellHeightForComment = 365.0f;
+     _cellHeightForComment = 337.0f + GFMargin * 2;
+    
     if (self.listImage_UIImage == NULL) {
-        _cellHeightForComment -= 274.0f;
+        _cellHeightForComment = _cellHeightForComment - 274.0f;
+        NSLog(@"UIImage is null in calculating commentHeight");
     }
     
     //文字
     CGFloat textMaxW = [UIScreen mainScreen].bounds.size.width - 2 * GFMargin;
     CGSize textMaxSize = CGSizeMake(textMaxW, MAXFLOAT);
     CGSize textSize = [self.listMessage boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:GFTextSize]} context:nil].size;
-    
+    NSLog(@"textSize.height %f", textSize.height);
     CGFloat textHeight = textSize.height;
-    _cellHeightForComment += textHeight;
+    _cellHeightForComment = _cellHeightForComment + textHeight;
     /*
     //图片
     CGFloat imageViewH = _listImage_UIImage.size.height / _listImage_UIImage.size.width * GFScreenWidth;
     _cellHeightForComment = _cellHeightForComment + imageViewH - 274;
     */
     
-    NSLog(@"_cellHeightForComment in model %f", _cellHeight);
+    NSLog(@"_cellHeightForComment in model %f", _cellHeightForComment);
     return _cellHeightForComment;
 }
 

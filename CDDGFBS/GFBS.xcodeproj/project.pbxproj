@@ -467,6 +467,7 @@
 		789E0D621F17DC7E00CCAAE4 /* ZZInboxTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789E0D611F17DC7E00CCAAE4 /* ZZInboxTableViewController.m */; };
 		789E0D661F17DCAE00CCAAE4 /* ZZInboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 789E0D641F17DCAE00CCAAE4 /* ZZInboxCell.m */; };
 		789E0D671F17DCAE00CCAAE4 /* ZZInboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789E0D651F17DCAE00CCAAE4 /* ZZInboxCell.xib */; };
+		78D85BDE1F444875007E8112 /* ic_select_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 78D85BDD1F444875007E8112 /* ic_select_grey.png */; };
 		78F49F721EE6F37B00674130 /* EventListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F711EE6F37B00674130 /* EventListTableViewController.m */; };
 		78F49F801EE6F5A900674130 /* MyEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F7E1EE6F5A900674130 /* MyEventCell.m */; };
 		78F49F811EE6F5A900674130 /* MyEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78F49F7F1EE6F5A900674130 /* MyEventCell.xib */; };
@@ -1167,6 +1168,7 @@
 		789E0D631F17DCAE00CCAAE4 /* ZZInboxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZInboxCell.h; sourceTree = "<group>"; };
 		789E0D641F17DCAE00CCAAE4 /* ZZInboxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZInboxCell.m; sourceTree = "<group>"; };
 		789E0D651F17DCAE00CCAAE4 /* ZZInboxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZInboxCell.xib; sourceTree = "<group>"; };
+		78D85BDD1F444875007E8112 /* ic_select_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_select_grey.png; sourceTree = "<group>"; };
 		78F49F701EE6F37B00674130 /* EventListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListTableViewController.h; sourceTree = "<group>"; };
 		78F49F711EE6F37B00674130 /* EventListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListTableViewController.m; sourceTree = "<group>"; };
 		78F49F7D1EE6F5A900674130 /* MyEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventCell.h; sourceTree = "<group>"; };
@@ -2437,6 +2439,7 @@
 		786069671F15DB9B00A8AB88 /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				78D85BDD1F444875007E8112 /* ic_select_grey.png */,
 				786B38261F317C520098A12F /* square-facebook-69x69.png */,
 				786069681F15DB9B00A8AB88 /* arrow-back.png */,
 				786069691F15DB9B00A8AB88 /* check-o.png */,
@@ -3149,6 +3152,7 @@
 				780096FA1EC9C1F5008F9F99 /* ic_fa-calendar-check-o-on.png in Resources */,
 				1823914E1DEECDEB00B88AE0 /* GFCommentCell.xib in Resources */,
 				780096C91EC9C1F5008F9F99 /* ic_fa-ellipsis-h.png in Resources */,
+				78D85BDE1F444875007E8112 /* ic_select_grey.png in Resources */,
 				7829FFA01ED8040100C934C2 /* LoginViewController.xib in Resources */,
 				7824E3101EEFE07000F85BFB /* Ellipse-100%.png in Resources */,
 				1841A77A1DE1752E00FB54CC /* GFSquareCell.xib in Resources */,

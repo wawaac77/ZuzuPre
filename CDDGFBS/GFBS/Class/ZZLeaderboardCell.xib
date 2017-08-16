@@ -68,6 +68,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="xxx followers" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3J-4d-AWg">
+                        <rect key="frame" x="248" y="45" width="119" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="rwO-7m-i0m" firstAttribute="leading" secondItem="se6-ch-tgr" secondAttribute="trailing" constant="10" id="636-dJ-gv7"/>
@@ -88,6 +95,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="followersNumLabel" destination="W3J-4d-AWg" id="kmX-BI-reM"/>
                 <outlet property="locationLabel" destination="osQ-xh-CRJ" id="Tzt-XS-JYi"/>
                 <outlet property="numberLabel" destination="ona-ma-5Di" id="gSc-2s-F5c"/>
                 <outlet property="pointImageView" destination="mDl-b0-Kfx" id="E4Q-rc-vZB"/>

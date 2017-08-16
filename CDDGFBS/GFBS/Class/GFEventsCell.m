@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *textField;
 //@property (weak, nonatomic) IBOutlet UIButton *profileImageButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *likeNumLabel;
 @property (strong, nonatomic) ZZContentModel *thisEvent;
 @property (strong , nonatomic) GFHTTPSessionManager *manager;
 
@@ -123,7 +124,18 @@
         _bigImageView.image = event.listImage_UIImage;
     }
     
+    UIImage *placeholder = [UIImage imageNamed:@"defaultUserIcon"];
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listPublishUser.userProfileImage.imageUrl] placeholderImage:placeholder completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (!image) {
+            self.profileImageView.image = placeholder;
+            return ;
+        }
+            }];
+    
+    /*
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listPublishUser.userProfileImage.imageUrl] placeholderImage:nil];
+     */
+    
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
     
@@ -132,6 +144,11 @@
     self.placeLabel.text = thisEvent.listEventRestaurant.restaurantDistrict.informationName.en;
     
     self.smallTitleLabel.text = thisEvent.listPublishUser.userUserName;
+    if (thisEvent.numOfLike == NULL) {
+        self.likeNumLabel.text = [NSString stringWithFormat:@" "] ;
+    } else {
+        self.likeNumLabel.text = [NSString stringWithFormat:@"%@ likes",thisEvent.numOfLike] ;
+    }
     
     /*
     
@@ -144,11 +161,12 @@
     }
      */
     CGFloat height;
-    height = thisEvent.cellHeight - 337 - GFMargin;
+    //height = thisEvent.cellHeight - 337 - GFMargin;
+    height = thisEvent.cellHeight - 334 - GFMargin;
     NSLog(@"cell not comment textField height %f", height);
     
     if (thisEvent.listImage_UIImage == nil) {
-        _textField.frame = CGRectMake(GFMargin, 337 - 274, GFScreenWidth - 2 * GFMargin, height);
+        _textField.frame = CGRectMake(GFMargin, 60, GFScreenWidth - 2 * GFMargin, height);
     } else {
         _textField.frame = CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, height);
     }
@@ -187,11 +205,17 @@
     if ([self.thisEvent.listIsLike isEqualToNumber:@1]) {
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-grey"] forState:UIControlStateNormal];
         self.thisEvent.listIsLike = [NSNumber numberWithBool:false];
+        
+        self.thisEvent.numOfLike = [NSNumber numberWithInt:[self.thisEvent.numOfLike intValue] - 1];
+        self.likeNumLabel.text = [NSString stringWithFormat:@"%zd likes", [self.thisEvent.numOfLike intValue]];
         [self likeCheckin:false];
         
     } else {
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-o"] forState:UIControlStateNormal];
         self.thisEvent.listIsLike = [NSNumber numberWithBool:true];
+        self.thisEvent.numOfLike = [NSNumber numberWithInt:[self.thisEvent.numOfLike intValue] + 1];
+        self.likeNumLabel.text = [NSString stringWithFormat:@"%zd likes", [self.thisEvent.numOfLike intValue]];
+
         [self likeCheckin:true];
     }
 }
@@ -199,6 +223,7 @@
 - (void)setType:(NSString *)type {
     if ([type isEqualToString:@"comment"]) {
         _bigImageView.contentMode = UIViewContentModeScaleAspectFit;
+        self.textField.text = @"";
         /*
         //图片
         CGFloat imageViewH = _thisEvent.listImage_UIImage.size.height / _thisEvent.listImage_UIImage.size.width * GFScreenWidth;
