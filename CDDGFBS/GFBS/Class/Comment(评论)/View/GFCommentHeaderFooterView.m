@@ -15,7 +15,7 @@
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         
         self.textLabel.textColor = [UIColor darkGrayColor];
-        self.contentView.backgroundColor = GFBgColor;
+        self.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
     }
     return self;

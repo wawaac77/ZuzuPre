@@ -33,13 +33,16 @@
 #import <AFNetworking.h>
 #import "UIBarButtonItem+Badge.h"
 
+#import <MessageUI/MFMessageComposeViewController.h>
+#import <MessageUI/MessageUI.h>
+
 static NSString *const ID = @"ID";
 static NSInteger const cols = 2;
 static CGFloat  const margin = 0;
 
 #define itemHW  (GFScreenWidth - (cols - 1) * margin ) / cols
 
-@interface MyZuzuViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
+@interface MyZuzuViewController () <UICollectionViewDataSource,UICollectionViewDelegate,MFMessageComposeViewControllerDelegate>
 
 /*所有button内容*/
 @property (strong , nonatomic)NSMutableArray<GFSquareItem *> *buttonItems;
@@ -55,6 +58,7 @@ static CGFloat  const margin = 0;
 @property (strong , nonatomic) UIBarButtonItem *notificationBtn;
 
 @property (assign , nonatomic) NSInteger *notificationNum;
+@property (strong, nonatomic) ZGAlertView *alertView;
 
 @end
 
@@ -80,7 +84,12 @@ static CGFloat  const margin = 0;
     if (_notificationNum == 0) {
          [self loadFriendsRequest];
     }
-    NSLog(@"_notificationNum = %zd", _notificationNum);
+    
+    /*
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissViews)];
+    [self.view addGestureRecognizer:tap];
+     */
+    
 }
 
 
@@ -215,7 +224,7 @@ static CGFloat  const margin = 0;
      */
     
     ZGAlertView *alertView = [[ZGAlertView alloc] initWithTitle:@"Invite Friends" message:@"" cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    
+    self.alertView = alertView;
     
     UIButton *facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
     facebookButton.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1];
@@ -230,11 +239,13 @@ static CGFloat  const margin = 0;
     UIButton *smsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     smsButton.backgroundColor = [UIColor colorWithRed:91.0/255.0 green:194.0/255.0 blue:54.0/255.0 alpha:1];
     [smsButton setTitle:@"SMS Your Friends" forState:UIControlStateNormal];
+    [smsButton addTarget:self action:@selector(showMessageView) forControlEvents:UIControlEventTouchUpInside];
     [alertView addCustomButton:smsButton toIndex:2];
     
     UIButton *shareUrlButton = [UIButton buttonWithType:UIButtonTypeCustom];
     shareUrlButton.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0 alpha:1];
     [shareUrlButton setTitle:@"Share URL" forState:UIControlStateNormal];
+    [shareUrlButton addTarget:self action:@selector(shareURLButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [alertView addCustomButton:shareUrlButton toIndex:3];
     
     alertView.titleColor = [UIColor whiteColor];
@@ -251,6 +262,7 @@ static CGFloat  const margin = 0;
         UIImageView *imageView = [[UIImageView alloc] init];
         [button addSubview:imageView];
         imageView.frame = CGRectMake(15, 10, 44 - 20, 44 - 20);
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = [UIImage imageNamed:[iconArray objectAtIndex:i]];
     }
 
@@ -272,6 +284,16 @@ static CGFloat  const margin = 0;
     notificationVC.myNotifications = self.myNotifications;
     notificationVC.myFriendsRequests = self.myFriendsRequests;
     [self.navigationController pushViewController:notificationVC animated:YES];
+}
+
+- (void)smsButtonClicked {
+    NSLog(@"smsButtonClicked!");
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"sms://"]];//发短信
+}
+
+- (void)shareURLButtonClicked {
+    NSLog(@"shareURLButtonClicked!");
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"mailto://"]];//发email
 }
 
 - (void)didReceiveMemoryWarning {
@@ -387,9 +409,71 @@ static CGFloat  const margin = 0;
     [self.navigationController pushViewController:leaderboardVC animated:YES];
 }
 
+- (void)dismissViews {
+    [self.alertView resignFirstResponder];
+}
+
 - (void)passValue:(NSInteger *)theValue {
     NSLog(@"passValueDelegate %zd", theValue);
     self.notificationNum = theValue;
     self.notificationBtn.badgeValue = [NSString stringWithFormat:@"%zd", theValue];
+}
+
+- (void)showMessageView
+{
+    
+    if( [MFMessageComposeViewController canSendText] ){
+        
+        MFMessageComposeViewController * controller = [[MFMessageComposeViewController alloc]init]; //autorelease];
+        
+        controller.recipients = [NSArray arrayWithObject:@""];
+        controller.body = @"测试发短信";
+        controller.messageComposeDelegate = self;
+        
+        [self presentModalViewController:controller animated:YES];
+        
+        [[[[controller viewControllers] lastObject] navigationItem] setTitle:@"测试短信"];//修改短信界面标题
+    }else{
+        
+        [self alertWithTitle:@"提示信息" msg:@"设备没有短信功能"];
+    }
+}
+
+
+//MFMessageComposeViewControllerDelegate
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    
+    [controller dismissModalViewControllerAnimated:NO];//关键的一句   不能为YES
+    
+    switch ( result ) {
+            
+        case MessageComposeResultCancelled:
+            
+            [self alertWithTitle:@"提示信息" msg:@"发送取消"];
+            break;
+        case MessageComposeResultFailed:// send failed
+            [self alertWithTitle:@"提示信息" msg:@"发送成功"];
+            break;
+        case MessageComposeResultSent:
+            [self alertWithTitle:@"提示信息" msg:@"发送失败"];
+            break;
+        default:
+            break;
+    }
+}
+
+
+- (void) alertWithTitle:(NSString *)title msg:(NSString *)msg {
+    
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:msg
+                                                   delegate:self
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:@"确定", nil];
+    
+    [alert show];
+    
 }
 @end

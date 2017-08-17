@@ -272,7 +272,7 @@ static NSString *const headID = @"head";
     
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = GFBgColor;
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
     
     //cell的高度

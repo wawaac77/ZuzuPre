@@ -148,20 +148,19 @@
     }
 
     if (indexPath.section == 0) {
+        
         if (indexPath.row == 0) {
 
             cell.textLabel.text = [AppDelegate APP].user.userUserName;
-            //cell.detailTextLabel.text = [AppDelegate APP].user.userEmail;
             cell.detailTextLabel.text = _thisUser.userEmail;
-            //cell.imageView.image = [AppDelegate APP].user.userProfileImage_UIImage;
+            cell.imageView.image = [UIImage imageNamed:@"Ic_fa-star"];
             
             NSString *imageURL = [AppDelegate APP].user.userProfileImage.imageUrl;
-            UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 30, 30)];
-            //cell.imageView.frame = CGRectMake(5, 0, 30, 30);
-            myImageView.layer.cornerRadius = 15;
+            UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 8, 34, 34)];
+            myImageView.layer.cornerRadius = myImageView.gf_width / 2;
             myImageView.clipsToBounds = YES;
-            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
+            myImageView.contentMode = UIViewContentModeScaleAspectFill;
+            [myImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
             [cell.contentView addSubview:myImageView];
             
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
@@ -173,10 +172,14 @@
         } else if (indexPath.row == 1) {
             
             cell.textLabel.text = @"Login with Facebook";
-            //cell.detailTextLabel.text = @"You have logined with FB";
-            cell.imageView.image = [UIImage imageNamed:@"square-facebook-69x69"];
-            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-            cell.imageView.frame = CGRectMake(5, 0, 30, 30);
+            cell.imageView.image = [UIImage imageNamed:@"Ic_fa-star"];
+            
+            UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 8, 34, 34)];
+            myImageView.image =[UIImage imageNamed:@"square-facebook-69x69"];
+            myImageView.layer.cornerRadius = 5.0f;
+            myImageView.clipsToBounds = YES;
+            myImageView.contentMode = UIViewContentModeScaleAspectFit;
+            [cell.contentView addSubview:myImageView];
             
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
@@ -250,15 +253,27 @@
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Anyone can view my profile.";
-            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
+            if ([self.thisUser.canSeeMyProfile isEqualToValue:@1]) {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
+            } else {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
+            }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else if (indexPath.row == 1) {
             cell.textLabel.text = @"Anyone can message me.";
-            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
+            if ([self.thisUser.canMessageMe isEqualToValue:@1]) {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
+            } else {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
+            }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else {
             cell.textLabel.text = @"Let me friends see my email address.";
-            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
+            if ([self.thisUser.canMyFriendSeeMyEmail isEqualToValue:@1]) {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
+            } else {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
+            }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         }
     }
@@ -268,6 +283,7 @@
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Allow Notification";
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
+            switchView.tag = indexPath.row;
             cell.accessoryView = switchView;
             
             if ([_thisUser.allowNotification isEqualToNumber:[NSNumber numberWithBool:true]]) {
@@ -275,6 +291,7 @@
             } else {
                 [switchView setOn:NO animated:NO];
             }
+            switchView.tag = indexPath.row + 10 * indexPath.section;
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         
         }
@@ -290,7 +307,7 @@
             } else {
                 [switchView setOn:NO animated:NO];
             }
-            
+            switchView.tag = indexPath.row;
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             //[switchView release];
         } else if (indexPath.row == 1) {
@@ -303,7 +320,7 @@
             } else {
                 [switchView setOn:NO animated:NO];
             }
-            
+            switchView.tag = indexPath.row;
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             
         } else if (indexPath.row == 2) {
@@ -316,7 +333,7 @@
             } else {
                 [switchView setOn:NO animated:NO];
             }
-            
+            switchView.tag = indexPath.row;
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         }
     }
@@ -354,6 +371,7 @@
 
 - (void)switchChanged:(id)sender {
     UISwitch *switchControl = sender;
+    NSLog(@"sender.tag %@", switchControl.tag);
     NSLog(@"This switch is %@", switchControl.on ? @"ON" : @"OFF");
 }
 
@@ -453,7 +471,42 @@
             [_picker reloadAllComponents];
         }
     }
-    
+    else if (indexPath.section == 2) {
+        //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if (indexPath.row == 0) {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            if ([self.thisUser.canSeeMyProfile isEqualToValue:@1]) {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
+                self.thisUser.canSeeMyProfile = @0;
+            } else {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
+                self.thisUser.canSeeMyProfile = @1;
+            }
+            cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
+        } else if (indexPath.row == 1) {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            if ([self.thisUser.canMessageMe isEqualToValue:@1]) {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
+                self.thisUser.canMessageMe = @0;
+            } else {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
+                self.thisUser.canMessageMe = @1;
+            }
+            cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
+        } else {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            if ([self.thisUser.canMyFriendSeeMyEmail isEqualToValue:@1]) {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
+                self.thisUser.canMyFriendSeeMyEmail = @0;
+            } else {
+                cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
+                self.thisUser.canMyFriendSeeMyEmail = @1;
+            }
+            cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
+
+        }
+    }
+
     else if (indexPath.section == 5) {
         if (indexPath.row == 0) {
             AboutZZViewController *aboutZZVC = [[AboutZZViewController alloc] init];
