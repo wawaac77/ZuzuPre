@@ -130,6 +130,7 @@
         
         ZZUser *thisUser = [[ZZUser alloc] init];
         thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
+        //thisUser = [ZZUser mj_objectWithKeyValues:responseObject];
         
         
         if (thisUser == nil) {

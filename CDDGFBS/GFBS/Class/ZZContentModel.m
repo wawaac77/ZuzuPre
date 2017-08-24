@@ -47,12 +47,12 @@ static NSTimeZone *outputTimeZone_;
     //_cellHeight = 337.0f + GFMargin;
     _cellHeight = 337.0f + GFMargin * 2;
     
-    /*
-    if (self.listImage_UIImage == NULL) {
+    
+    if ([self.withImage isEqual:@0]) {
         _cellHeight -= 274.0f;
         NSLog(@"can detect _listImage is nil");
     }
-     */
+    
     
     //头像
     //_cellHeight = GFiconH;
@@ -118,7 +118,7 @@ static NSTimeZone *outputTimeZone_;
     
      _cellHeightForComment = 337.0f + GFMargin * 2;
     
-    if (self.listImage_UIImage == NULL) {
+    if ([self.withImage isEqual:@0]) {
         _cellHeightForComment = _cellHeightForComment - 274.0f;
         NSLog(@"UIImage is null in calculating commentHeight");
     }

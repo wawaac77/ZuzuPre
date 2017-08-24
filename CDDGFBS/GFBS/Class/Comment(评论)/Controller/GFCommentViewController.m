@@ -125,7 +125,7 @@ static NSString *const headID = @"head";
     CGFloat textHeight = textSize.height;
     
     UILabel *fullTextLabel = [[UILabel alloc] init];
-    if (self.topic.listImage_UIImage == NULL) {
+    if ([self.topic.withImage isEqual:@0]) {
         fullTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFMargin, 60, GFScreenWidth - 2 * GFMargin, textHeight)];
     } else {
         fullTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, textHeight)];

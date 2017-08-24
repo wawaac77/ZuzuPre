@@ -115,15 +115,29 @@ static NSString *const ID = @"ID";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //GFEventsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
     ZZContentModel *content = _contents[indexPath.row];
+    NSLog(@"content.cellHeight %f", content.cellHeight);
+    return content.cellHeight;
+    
+    /*
+    if ([content.withImage isEqual:@1]) {
+        return content.cellHeight;
+    } else {
+        return content.cellHeight - 274.0f;
+    }
+     */
+    /*
     contentCellHeightCount ++;
     NSLog(@"contentCellHeightCount%zd", contentCellHeightCount);
     if (content.listImage_UIImage == NULL || content.listImage_UIImage == nil) {
         NSLog(@"contentCellHeightInPostVC without Image %f", content.cellHeight - 274.0f);
         return content.cellHeight - 274.0f;
     }
-    NSLog(@"contentCellHeightInPostVC %f", content.cellHeight);
-    return content.cellHeight;
+     */
+    //NSLog(@"contentCellHeightInPostVC %f", content.cellHeight);
+    
 }
 
 #pragma mark - Table view data source
@@ -163,7 +177,20 @@ static NSString *const ID = @"ID";
     }
     
     
-    //ZZContentModel *thisContent = self.contents[indexPath.row];
+    ZZContentModel *thisContent = self.contents[indexPath.row];
+    
+    /*
+    NSString *str = [thisContent.listImage.imageUrl pathExtension];
+    NSLog(@"str of pathExtension %@", str);
+
+    if ([str isEqualToString:@"png"] || [str isEqualToString:@"jpg"] || [str isEqualToString:@"jpeg"]) {
+        self.contents[indexPath.row].withImage = @1;
+    } else {
+        self.contents[indexPath.row].withImage = @0;
+    }
+     */
+    
+    /*
     if (_contents[indexPath.row].listImage_UIImage == NULL) {
         NSURL *URL = [NSURL URLWithString:_contents[indexPath.row].listImage.imageUrl];
         NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
@@ -177,6 +204,7 @@ static NSString *const ID = @"ID";
         }
         _contents[indexPath.row].listImage_UIImage = image;
     }
+     */
     cell.event = self.contents[indexPath.row];
     
     return cell;
@@ -356,6 +384,14 @@ static NSString *const ID = @"ID";
         for (int i = 0; i < self.contents.count; i++) {
             if (self.contents[i].numOfLike == NULL) {
                 self.contents[i].numOfLike = 0;
+            }
+            NSString *str = [self.contents[i].listImage.imageUrl pathExtension];
+            NSLog(@"str of pathExtension %@", str);
+            
+            if ([str isEqualToString:@"undefined"]) {
+                self.contents[i].withImage = @0;
+            } else {
+                self.contents[i].withImage = @1;
             }
         }
         

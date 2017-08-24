@@ -138,7 +138,7 @@
     userToken = [AppDelegate APP].user.userToken;
     NSLog(@"first userToken %@", userToken);
     NSDictionary *inData = [[NSDictionary alloc] init];
-    inData = @{@"action" : @"getMyProfile", @"token" : userToken};
+    inData = @{@"action" : @"getMyProfile", @"token" : userToken, @"lang": @"en"};
     NSDictionary *parameters = @{@"data" : inData};
     
     //发送请求

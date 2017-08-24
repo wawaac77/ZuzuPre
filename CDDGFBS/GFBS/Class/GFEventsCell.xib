@@ -26,7 +26,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccv-RA-VIh">
                         <rect key="frame" x="0.0" y="60" width="375" height="274"/>
                         <subviews>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pexels-photo-213661.png" translatesAutoresizingMaskIntoConstraints="NO" id="NGy-jU-4sP" customClass="eventImageView">
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pexels-photo-213661.png" translatesAutoresizingMaskIntoConstraints="NO" id="NGy-jU-4sP" customClass="eventImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="274"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

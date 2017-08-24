@@ -114,7 +114,7 @@
     NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
     UIImage *image = [[UIImage alloc]initWithData:data];
     */
-    
+    /*
     if (event.listImage_UIImage == NULL) {
         _bigImageView.hidden = YES;
     } else {
@@ -123,8 +123,28 @@
         _bigImageView.clipsToBounds = YES;
         _bigImageView.image = event.listImage_UIImage;
     }
+     */
+    UIImage *placeholder = [[UIImage alloc] init];
+    if ([thisEvent.withImage isEqual:@1]) {
+        self.bigImageView.hidden = NO;
+        _bigImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _bigImageView.clipsToBounds = YES;
+        placeholder = [UIImage imageNamed:@"imageplaceholder.png"];
+        //thisEvent.withImage = @1;
+        [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listImage.imageUrl] placeholderImage:placeholder completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (!image) {
+                //self.bigImageView.hidden = YES;
+                //thisEvent.withImage = @0;
+                self.bigImageView.image = placeholder;
+                return ;
+            }
+        }];
+    } else {
+        self.bigImageView.hidden = YES;
+    }
     
-    UIImage *placeholder = [UIImage imageNamed:@"defaultUserIcon"];
+    //UIImage *placeholder = [UIImage imageNamed:@"defaultUserIcon"];
+    placeholder = [UIImage imageNamed:@"defaultUserIcon"];
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisEvent.listPublishUser.userProfileImage.imageUrl] placeholderImage:placeholder completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (!image) {
             self.profileImageView.image = placeholder;
@@ -146,6 +166,8 @@
     self.smallTitleLabel.text = thisEvent.listPublishUser.userUserName;
     if (thisEvent.numOfLike == NULL) {
         self.likeNumLabel.text = [NSString stringWithFormat:@" "] ;
+    } else if ([thisEvent.numOfLike isEqual:@1]) {
+        self.likeNumLabel.text = [NSString stringWithFormat:@"%@ like",thisEvent.numOfLike] ;
     } else {
         self.likeNumLabel.text = [NSString stringWithFormat:@"%@ likes",thisEvent.numOfLike] ;
     }
@@ -162,12 +184,23 @@
      */
     CGFloat height;
     //height = thisEvent.cellHeight - 337 - GFMargin;
-    height = thisEvent.cellHeight - 334 - GFMargin;
+    //height = thisEvent.cellHeight - 334 - GFMargin;
+    //height = 30;
     NSLog(@"cell not comment textField height %f", height);
     
+    /*
     if (thisEvent.listImage_UIImage == nil) {
         _textField.frame = CGRectMake(GFMargin, 60, GFScreenWidth - 2 * GFMargin, height);
     } else {
+        _textField.frame = CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, height);
+    }
+     */
+    
+    if ([thisEvent.withImage isEqual: @0]) {
+        height = thisEvent.cellHeight - 60 - GFMargin;
+        _textField.frame = CGRectMake(GFMargin, 60, GFScreenWidth - 2 * GFMargin, height);
+    } else {
+        height = thisEvent.cellHeight - 334 - GFMargin;
         _textField.frame = CGRectMake(GFMargin, 337, GFScreenWidth - 2 * GFMargin, height);
     }
     
@@ -178,8 +211,13 @@
     self.timeLabel.text = thisEvent.listEventUpdatedAt;
     
     //[self.profileImageButton addTarget:self action:@selector(profileImageButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
     
-    //[self layoutSubviews];
+    
 }
 
 - (void)profileImageButtonClicked {
