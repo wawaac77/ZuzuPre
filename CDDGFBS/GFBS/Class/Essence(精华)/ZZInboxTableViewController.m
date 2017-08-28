@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZBLocalized.h"
 #import "ZZInboxTableViewController.h"
 #import "ZZInboxCell.h"
 #import "ZZLeaderboardModel.h"
@@ -159,7 +160,7 @@ static NSString *const ID = @"ID";
     [self.navigationItem setRightBarButtonItem:newMessageButton];
     
     //Title
-    self.navigationItem.title = NSLocalizedString(@"Inbox", nil);
+    self.navigationItem.title = ZBLocalized(@"Inbox", nil);
     
 }
 

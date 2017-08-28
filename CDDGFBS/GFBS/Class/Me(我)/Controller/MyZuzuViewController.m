@@ -7,6 +7,7 @@
 //
 
 #import "MyZuzuViewController.h"
+#import "ZBLocalized.h"
 #import "AppDelegate.h"
 #import "LeaderboardHomeTableViewController.h"
 #import "NotificationItem.h"
@@ -127,7 +128,7 @@ static CGFloat  const margin = 0;
 #pragma mark - Setup UICollectionView Data
 -(void)setUpCollectionItemsData {
     NSArray *buttonIcons = [NSArray arrayWithObjects:@"zuzu-checkin", @"zuzu-leaderboard", @"invite-friends", @"my-friends", nil];
-    NSArray *buttonTitles = [NSArray arrayWithObjects: NSLocalizedString(@"Check-in", nil), NSLocalizedString(@"Leaderboard", nil), NSLocalizedString(@"Invite Friends", nil),NSLocalizedString(@"My Friends", nil), nil];
+    NSArray *buttonTitles = [NSArray arrayWithObjects: ZBLocalized(@"Check-in", nil), ZBLocalized(@"Leaderboard", nil), ZBLocalized(@"Invite Friends", nil),ZBLocalized(@"My Friends", nil), nil];
     //NSArray *buttonTitles = [NSArray arrayWithObjects:@"Check-in", @"Leaderboard", @"Invite Friends", @"My Friends", nil];
     //NSMutableArray<GFSquareItem *> *buttonItems =[[NSMutableArray<GFSquareItem *> alloc]init];
     //self.buttonItems = buttonItems;
@@ -174,7 +175,7 @@ static CGFloat  const margin = 0;
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects: settingBtn, fixedButton, notificationBtn, nil]];
     
     //Title
-    self.navigationItem.title = NSLocalizedString(@"My Zuzu", nil);
+    self.navigationItem.title = ZBLocalized(@"My Zuzu", nil);
     
 }
 
@@ -192,7 +193,7 @@ static CGFloat  const margin = 0;
     else if (indexPath.row == 1) {
         LeaderboardHomeTableViewController *leaderboardVC = [[LeaderboardHomeTableViewController alloc] init];
         leaderboardVC.view.frame = CGRectMake(0, 0, GFScreenWidth, self.view.gf_height - GFTabBarH);
-        leaderboardVC.navigationItem.title = NSLocalizedString(@"Leaderboard", nil);
+        leaderboardVC.navigationItem.title = ZBLocalized(@"Leaderboard", nil);
         [self.navigationController pushViewController:leaderboardVC animated:YES];
     }
     //else if ([item.name isEqualToString: @"Invite Friends"]) {
@@ -228,28 +229,28 @@ static CGFloat  const margin = 0;
     [self presentViewController:activityVC animated:YES completion:nil];
      */
     
-    ZGAlertView *alertView = [[ZGAlertView alloc] initWithTitle: NSLocalizedString(@"Invite Friends", nil) message:@"" cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    ZGAlertView *alertView = [[ZGAlertView alloc] initWithTitle: ZBLocalized(@"Invite Friends", nil) message:@"" cancelButtonTitle:nil otherButtonTitles:nil, nil];
     self.alertView = alertView;
     
     UIButton *facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
     facebookButton.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1];
-    [facebookButton setTitle:NSLocalizedString(@"Find friends on Facebook", nil) forState:UIControlStateNormal];
+    [facebookButton setTitle:ZBLocalized(@"Find friends on Facebook", nil) forState:UIControlStateNormal];
     [alertView addCustomButton:facebookButton toIndex:0];
     
     UIButton *googlePlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
     googlePlusButton.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:72.0/255.0 blue:54.0/255.0 alpha:1];
-    [googlePlusButton setTitle:NSLocalizedString(@"Connect with Google+", nil) forState:UIControlStateNormal];
+    [googlePlusButton setTitle:ZBLocalized(@"Connect with Google+", nil) forState:UIControlStateNormal];
     [alertView addCustomButton:googlePlusButton toIndex:1];
     
     UIButton *smsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     smsButton.backgroundColor = [UIColor colorWithRed:91.0/255.0 green:194.0/255.0 blue:54.0/255.0 alpha:1];
-    [smsButton setTitle:NSLocalizedString(@"SMS Your Friends", nil) forState:UIControlStateNormal];
+    [smsButton setTitle:ZBLocalized(@"SMS Your Friends", nil) forState:UIControlStateNormal];
     [smsButton addTarget:self action:@selector(showMessageView) forControlEvents:UIControlEventTouchUpInside];
     [alertView addCustomButton:smsButton toIndex:2];
     
     UIButton *shareUrlButton = [UIButton buttonWithType:UIButtonTypeCustom];
     shareUrlButton.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0 alpha:1];
-    [shareUrlButton setTitle:NSLocalizedString(@"Share URL", nil) forState:UIControlStateNormal];
+    [shareUrlButton setTitle:ZBLocalized(@"Share URL", nil) forState:UIControlStateNormal];
     [shareUrlButton addTarget:self action:@selector(shareURLButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [alertView addCustomButton:shareUrlButton toIndex:3];
     
@@ -415,7 +416,10 @@ static CGFloat  const margin = 0;
 }
 
 - (void)dismissViews {
-    [self.alertView resignFirstResponder];
+    if ([self.alertView isFirstResponder]) {
+        [self.alertView resignFirstResponder];
+    }
+    
 }
 
 - (void)passValue:(NSInteger *)theValue {

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZBLocalized.h"
 #import "GFEventsCell.h"
 
 #import "ZZContentModel.h"
@@ -165,13 +166,13 @@
     
     self.smallTitleLabel.text = thisEvent.listPublishUser.userUserName;
     
-    NSString *likeString = NSLocalizedString(@"like", nil);
+    NSString *likeString = ZBLocalized(@"like", nil);
     if (thisEvent.numOfLike == NULL) {
         self.likeNumLabel.text = [NSString stringWithFormat:@" "] ;
     } else if ([thisEvent.numOfLike isEqual:@1]) {
-        self.likeNumLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", nil),thisEvent.numOfLike, likeString] ;
+        self.likeNumLabel.text = [NSString stringWithFormat:ZBLocalized(@"%@ %@", nil),thisEvent.numOfLike, likeString] ;
     } else {
-        self.likeNumLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", nil),thisEvent.numOfLike, likeString] ;
+        self.likeNumLabel.text = [NSString stringWithFormat:ZBLocalized(@"%@ %@", nil),thisEvent.numOfLike, likeString] ;
     }
     
     /*

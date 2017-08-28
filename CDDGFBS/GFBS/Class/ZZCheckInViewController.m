@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZBLocalized.h"
 #import "ZZCheckInViewController.h"
 #import "DPSharePopView.h"
 //#import "DropDownListView.h"
@@ -116,10 +117,10 @@
     [self preferredStatusBarStyle];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
-    NSString *str = NSLocalizedString(@"Please select your check-in location", nil);
+    NSString *str = ZBLocalized(@"Please select your check-in location", nil);
     _locationButton.titleLabel.text = [NSString stringWithFormat:@"        %@", str];
     
-    _checkinLabel.text = NSLocalizedString(@"Check-in", nil);
+    _checkinLabel.text = ZBLocalized(@"Check-in", nil);
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -328,12 +329,12 @@
     
     _cancelButton.layer.cornerRadius = 4.0f;
     _cancelButton.clipsToBounds = YES;
-    [_cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
+    [_cancelButton setTitle:ZBLocalized(@"Cancel", nil) forState:UIControlStateNormal];
     
     _checkinButton.layer.cornerRadius = 4.0f;
     _checkinButton.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
     _checkinButton.clipsToBounds = YES;
-    [_checkinButton setTitle:NSLocalizedString(@"Check in", nil) forState:UIControlStateNormal];
+    [_checkinButton setTitle:ZBLocalized(@"Check in", nil) forState:UIControlStateNormal];
     
     //self.cancelButton.frame = CGRectMake(5, GFScreenHeight - GFTabBarH - 50, 180, 30);
     //通知
@@ -376,7 +377,7 @@
 {
     NSString *username = [AppDelegate APP].user.userUserName;
     GFPlaceholderTextView *textView = [[GFPlaceholderTextView alloc] init];
-    NSString *str = NSLocalizedString(@"What's in your mind", nil);
+    NSString *str = ZBLocalized(@"What's in your mind", nil);
     textView.placeholder = [NSString stringWithFormat:@"%@, %@?", str, username];
     textView.frame = CGRectMake(0, ZZNewNavH, GFScreenWidth, GFScreenHeight - ZZNewNavH - GFTabBarH - 80);
     //textView.backgroundColor = [UIColor yellowColor];

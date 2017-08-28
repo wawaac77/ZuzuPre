@@ -8,6 +8,7 @@
 
 #import "BadgesCollectionViewController.h"
 #import "GFWebViewController.h"
+#import "ZBLocalized.h"
 
 #import "GFSquareItem.h"
 #import "BadgesSquareCell.h"
@@ -120,7 +121,7 @@ static CGFloat  const margin = 0;
     
     
     //Title
-    self.navigationItem.title = NSLocalizedString(@"Badges Collection", nil);
+    self.navigationItem.title = ZBLocalized(@"Badges Collection", nil);
     
 }
 

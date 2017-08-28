@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+//#import "InternationalControl.h"
+#import "ZBLocalized.h"
 #import <SDImageCache.h>
 #import "GFTabBarController.h"
 #import "GFAdViewController.h"
@@ -41,6 +43,8 @@
     NSString *userToken = [userDefault objectForKey:@"KEY_USER_TOKEN"];
     NSString *userlang = [userDefault objectForKey:@"KEY_USER_LANG"];
     
+    //[[InternationalControl sharedInstance]
+    
     if (userToken != nil) {
         
         ///UIWindow *window = [UIApplication sharedApplication].keyWindow;
@@ -50,6 +54,16 @@
         user.userToken = userToken;
         user.userUserName = username;
         user.preferredLanguage = userlang;
+        
+        //初始化语言
+        if ([userlang isEqualToString:@"en"]) {
+            [[ZBLocalized sharedInstance]setLanguage:@"en"];
+        } else if ([userlang isEqualToString:@"tw"]) {
+            [[ZBLocalized sharedInstance]setLanguage:@"zh-Hant"];
+        } else {
+            [[ZBLocalized sharedInstance]initLanguage];
+        }
+        
         GFTabBarController *tabVC = [[GFTabBarController alloc] init];
         self.window.rootViewController = tabVC;
         

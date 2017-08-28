@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZBLocalized.h"
 #import "ZZHomeViewController.h"
 #import "AllHomeTableViewController.h"
 #import "FriendsHomeTableViewController.h"
@@ -186,12 +187,12 @@
     NSArray *itemArray = [[NSArray alloc] init];
     
     NSString *userLang = [AppDelegate APP].user.preferredLanguage;
-    itemArray = [NSArray arrayWithObjects: NSLocalizedString(@"All", nil), NSLocalizedString(@"Following", nil), NSLocalizedString(@"Me", nil), NSLocalizedString(@"Leaderboard", nil), nil];
+    itemArray = [NSArray arrayWithObjects: ZBLocalized(@"All", nil), ZBLocalized(@"Following", nil), ZBLocalized(@"Me", nil), ZBLocalized(@"Leaderboard", nil), nil];
 
     
     /*
     if ([userLang isEqualToString:@"en"]) {
-        itemArray = [NSArray arrayWithObjects: NSLocalizedString(@"All", nil), @"Following", @"Me", @"Leaderboard", nil];
+        itemArray = [NSArray arrayWithObjects: ZBLocalized(@"All", nil), @"Following", @"Me", @"Leaderboard", nil];
     } else if ([userLang isEqualToString:@"tw"]) {
         itemArray = [NSArray arrayWithObjects: @"全部", @"關注", @"我", @"排行榜", nil];
     }

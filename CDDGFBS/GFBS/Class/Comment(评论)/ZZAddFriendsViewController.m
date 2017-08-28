@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZBLocalized.h"
 #import "ZZAddFriendsViewController.h"
 #import "ZZAddFriendsCell.h"
 #import "ZZFriendModel.h"
@@ -44,7 +45,7 @@ static NSString *const ID = @"ID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.searchTextField.delegate = self;
-    self.searchTextField.placeholder = NSLocalizedString(@"Enter keyword", nil);
+    self.searchTextField.placeholder = ZBLocalized(@"Enter keyword", nil);
     [self setUpTableView];
     
 }
@@ -60,7 +61,7 @@ static NSString *const ID = @"ID";
     
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
-    self.navigationItem.title = NSLocalizedString(@"Add Friends", nil);
+    self.navigationItem.title = ZBLocalized(@"Add Friends", nil);
     
 }
 

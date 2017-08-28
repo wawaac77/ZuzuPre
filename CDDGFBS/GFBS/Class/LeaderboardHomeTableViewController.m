@@ -70,7 +70,7 @@ static NSString *const ID = @"ID";
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     NSDictionary *inData = [[NSDictionary alloc] init];
-    inData = @{@"action" : @"getLeaderboardAttendees", @"token" : userToken};
+    inData = @{@"action" : @"getLeaderboardHost", @"token" : userToken};
     NSDictionary *parameters = @{@"data" : inData};
     
     //发送请求

@@ -68,18 +68,22 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="xxx followers" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3J-4d-AWg">
-                        <rect key="frame" x="248" y="45" width="119" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxx followers" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3J-4d-AWg">
+                        <rect key="frame" x="239" y="45" width="119" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="119" id="oyH-1d-2Id"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="W3J-4d-AWg" firstAttribute="baseline" secondItem="osQ-xh-CRJ" secondAttribute="baseline" id="4cH-uf-zH6"/>
                     <constraint firstItem="rwO-7m-i0m" firstAttribute="leading" secondItem="se6-ch-tgr" secondAttribute="trailing" constant="10" id="636-dJ-gv7"/>
                     <constraint firstAttribute="trailingMargin" secondItem="osQ-xh-CRJ" secondAttribute="trailing" constant="55" id="KnQ-ax-PIu"/>
                     <constraint firstItem="se6-ch-tgr" firstAttribute="leading" secondItem="ona-ma-5Di" secondAttribute="trailing" constant="4" id="Oww-0u-iIJ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="W3J-4d-AWg" secondAttribute="trailing" constant="9" id="SR3-BO-Oxm"/>
                     <constraint firstItem="ona-ma-5Di" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="Tic-tF-9OG"/>
                     <constraint firstItem="osQ-xh-CRJ" firstAttribute="top" secondItem="rwO-7m-i0m" secondAttribute="bottom" constant="5" id="XTy-dy-pQ5"/>
                     <constraint firstItem="ona-ma-5Di" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="Zii-un-hvY"/>
@@ -91,6 +95,7 @@
                     <constraint firstItem="osQ-xh-CRJ" firstAttribute="leading" secondItem="rwO-7m-i0m" secondAttribute="leading" id="qEe-8M-VIX"/>
                     <constraint firstItem="gQc-e2-j5B" firstAttribute="leading" secondItem="mDl-b0-Kfx" secondAttribute="trailing" constant="5" id="qnp-Qe-Gaf"/>
                     <constraint firstItem="se6-ch-tgr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="rQQ-hn-ZaR"/>
+                    <constraint firstItem="W3J-4d-AWg" firstAttribute="top" secondItem="osQ-xh-CRJ" secondAttribute="top" id="svb-na-KWp"/>
                     <constraint firstItem="mDl-b0-Kfx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="wsM-8U-hSp"/>
                 </constraints>
             </tableViewCellContentView>

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZBLocalized.h"
 #import "ZZChatViewController.h"
 
 #import "JSQMessagesViewAccessoryButtonDelegate.h"
@@ -372,11 +373,11 @@
 {
     [self.inputToolbar.contentView.textView resignFirstResponder];
     
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Media messages", nil)
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:ZBLocalized(@"Media messages", nil)
                                                        delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                              cancelButtonTitle:ZBLocalized(@"Cancel", nil)
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:NSLocalizedString(@"Send photo", nil), NSLocalizedString(@"Send location", nil), NSLocalizedString(@"Send video", nil), NSLocalizedString(@"Send video thumbnail", nil), NSLocalizedString(@"Send audio", nil), nil];
+                                              otherButtonTitles:ZBLocalized(@"Send photo", nil), ZBLocalized(@"Send location", nil), ZBLocalized(@"Send video", nil), ZBLocalized(@"Send video thumbnail", nil), ZBLocalized(@"Send audio", nil), nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -626,10 +627,10 @@
 {
     NSLog(@"Custom action received! Sender: %@", sender);
     
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Custom Action", nil)
+    [[[UIAlertView alloc] initWithTitle:ZBLocalized(@"Custom Action", nil)
                                 message:nil
                                delegate:nil
-                      cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                      cancelButtonTitle:ZBLocalized(@"OK", nil)
                       otherButtonTitles:nil]
      show];
 }

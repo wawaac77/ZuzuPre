@@ -69,7 +69,7 @@
     
     _usernameLabel.text = thisUser.leaderboardMember.userUserName;
     _locationLabel.text = thisUser.leaderboardMember.userLastCheckIn.listEventRestaurant.restaurantName;
-    _scoreLabel.text = [NSString stringWithFormat:@"%@",thisUser.leaderboardLevel];
+    _scoreLabel.text = [NSString stringWithFormat:@"%@",thisUser.leaderboardMember.checkinPoint];
     if (thisUser.leaderboardMember.numOfFollower != NULL) {
         _followersNumLabel.text = [NSString stringWithFormat:@"%@ followers", thisUser.leaderboardMember.numOfFollower];
     }

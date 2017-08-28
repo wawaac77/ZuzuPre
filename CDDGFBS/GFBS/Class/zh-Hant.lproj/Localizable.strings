@@ -52,7 +52,9 @@
 
 "Hi, mate" = "哈嘍";
 "Are you sure to log out?" = "你確定要退出嗎？";
+"Log Out >" = "退出 >";
 
+"Language" = "語言";
 "Age" = "年齡";
 "Gender" = "性別";
 "Phone" = "電話";

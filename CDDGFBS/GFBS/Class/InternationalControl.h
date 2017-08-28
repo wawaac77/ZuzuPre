@@ -11,6 +11,8 @@
 
 @interface InternationalControl : NSObject
 
++ (InternationalControl *)sharedInstance;
+
 +(NSBundle *)bundle;//获取当前资源文件
 
 +(void)initUserLanguage;//初始化语言文件

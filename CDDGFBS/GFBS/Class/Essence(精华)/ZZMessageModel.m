@@ -7,6 +7,7 @@
 //
 
 #import "ZZMessageModel.h"
+#import "ZBLocalized.h"
 
 #import "NSUserDefaults+DemoSettings.h"
 
@@ -83,32 +84,32 @@
                      [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
                                         senderDisplayName:kJSQDemoAvatarDisplayNameSquires
                                                      date:[NSDate distantPast]
-                                                     text:NSLocalizedString(@"Welcome to JSQMessages: A messaging UI framework for iOS.", nil)],
+                                                     text:ZBLocalized(@"Welcome to JSQMessages: A messaging UI framework for iOS.", nil)],
                      
                      [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdWoz
                                         senderDisplayName:kJSQDemoAvatarDisplayNameWoz
                                                      date:[NSDate distantPast]
-                                                     text:NSLocalizedString(@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy.", nil)],
+                                                     text:ZBLocalized(@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy.", nil)],
                      
                      [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
                                         senderDisplayName:kJSQDemoAvatarDisplayNameSquires
                                                      date:[NSDate distantPast]
-                                                     text:NSLocalizedString(@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com.", nil)],
+                                                     text:ZBLocalized(@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com.", nil)],
                      
                      [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdJobs
                                         senderDisplayName:kJSQDemoAvatarDisplayNameJobs
                                                      date:[NSDate date]
-                                                     text:NSLocalizedString(@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better.", nil)],
+                                                     text:ZBLocalized(@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better.", nil)],
                      
                      [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdCook
                                         senderDisplayName:kJSQDemoAvatarDisplayNameCook
                                                      date:[NSDate date]
-                                                     text:NSLocalizedString(@"It is unit-tested, free, open-source, and documented.", nil)],
+                                                     text:ZBLocalized(@"It is unit-tested, free, open-source, and documented.", nil)],
                      
                      [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
                                         senderDisplayName:kJSQDemoAvatarDisplayNameSquires
                                                      date:[NSDate date]
-                                                     text:NSLocalizedString(@"Now with media messages!", nil)],
+                                                     text:ZBLocalized(@"Now with media messages!", nil)],
                      nil];
     
     [self addPhotoMediaMessage];

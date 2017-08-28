@@ -19,6 +19,15 @@ static NSBundle *bundle = nil;
     return bundle;
 }
 
++ (InternationalControl *)sharedInstance{
+    static InternationalControl *language=nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        language = [[InternationalControl alloc] init];
+    });
+    return language;
+}
+
 +(void)initUserLanguage{
     
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
@@ -32,6 +41,8 @@ static NSBundle *bundle = nil;
         NSArray* languages = [def objectForKey:@"AppleLanguages"];
         
         NSString *current = [languages objectAtIndex:0];
+        
+        NSLog(@"current language %@", current);
         
         string = current;
         

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZBLocalized.h"
 #import "RestaurantDetailViewController.h"
 #import "RestaurantOverviewViewController.h"
 #import "RestaurantCheckinViewController.h"
@@ -231,7 +232,7 @@
     [self.view addSubview:titleView];
      */
     
-    NSArray *titleContens = [NSArray arrayWithObjects: NSLocalizedString(@"Overview", nil), NSLocalizedString(@"Check-in", nil), NSLocalizedString(@"Photo", nil),NSLocalizedString(@"Menu", nil), nil];
+    NSArray *titleContens = [NSArray arrayWithObjects: ZBLocalized(@"Overview", nil), ZBLocalized(@"Check-in", nil), ZBLocalized(@"Photo", nil),ZBLocalized(@"Menu", nil), nil];
     
     //NSArray *titleContens = @[@"Overview",@"Check-in",@"Photo",@"Menu"];
     NSInteger count = titleContens.count;

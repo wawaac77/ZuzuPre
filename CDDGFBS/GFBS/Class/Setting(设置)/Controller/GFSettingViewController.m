@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "InternationalControl.h"
+//#import "InternationalControl.h"
+
+#import "GFTabBarController.h"
+#import "ZBLocalized.h"
 #import "GFSettingViewController.h"
 #import "ZZUser.h"
 #import "ZZTypicalInformationModel.h"
@@ -45,6 +48,8 @@
 
 @property (strong, nonatomic) ZZTypicalInformationModel *selectedItem;
 
+@property (strong, nonatomic) NSBundle *bundle;
+
 @end
 
 @implementation GFSettingViewController
@@ -62,15 +67,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"changeLanguage viewDidLoad");
     //[self loadNewData];
-    self.navigationItem.title = NSLocalizedString(@"Settings", nil);
+    self.navigationItem.title = ZBLocalized(@"Settings", nil);
     _thisUser = [AppDelegate APP].user;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLanguageInVC) name:@"changeLanguageInVC" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLanguage) name:@"changeLanguage" object:nil];
     
-    [InternationalControl initUserLanguage];//初始化应用语言
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLanguageInVC) name:@"changeLanguageInVC" object:nil];
     
-    NSBundle *bundle = [InternationalControl bundle];
+    //[InternationalControl initUserLanguage];//初始化应用语言
+    
+    //NSBundle *bundle = [InternationalControl bundle];
+    //self.bundle = bundle;
     
     
     //计算整个应用程序的缓存数据 --- > 沙盒（Cache）
@@ -122,13 +131,13 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return NSLocalizedString(@"Your Account", nil);
+        return ZBLocalized(@"Your Account", nil);
     } else if (section == 1) {
-        return NSLocalizedString(@"Personal Information", nil);
+        return ZBLocalized(@"Personal Information", nil);
     } else if (section == 2) {
-        return NSLocalizedString(@"Visibility", nil);
+        return ZBLocalized(@"Visibility", nil);
     } else if (section == 3) {
-        return NSLocalizedString(@"System", nil);
+        return ZBLocalized(@"System", nil);
     }
     
     return NULL;
@@ -189,7 +198,7 @@
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
             accessoryLabel.font = [UIFont systemFontOfSize:15];
-            accessoryLabel.text = NSLocalizedString(@"Log Out >", nil);
+            accessoryLabel.text = ZBLocalized(@"Log Out >", nil);
             [cell.contentView addSubview:accessoryLabel];
             
         } else if (indexPath.row == 1) {
@@ -207,7 +216,7 @@
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
             accessoryLabel.font = [UIFont systemFontOfSize:15];
-            accessoryLabel.text = NSLocalizedString(@"Connected", nil);
+            accessoryLabel.text = ZBLocalized(@"Connected", nil);
             [cell.contentView addSubview:accessoryLabel];
             
         } else if (indexPath.row == 2) {
@@ -219,7 +228,7 @@
             CGFloat btnWidth = (GFScreenWidth - 20 - 10) / 2;
             
             UIButton *enButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, btnWidth, 30)];
-            [enButton addTarget:self action:@selector(changeLanguage:) forControlEvents:UIControlEventTouchUpInside];
+            [enButton addTarget:self action:@selector(enButtonClicked) forControlEvents:UIControlEventTouchUpInside];
             [enButton setTitle:@"English" forState:UIControlStateNormal];
             [enButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             enButton.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
@@ -242,27 +251,30 @@
     else if (indexPath.section == 1) {
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString(@"Age", nil);
+            cell.textLabel.text = ZBLocalized(@"Age", nil);
+            //NSString *ageStr = [_bundle localizedStringForKey:@"Age" value:nil table:@"hello"];
+            //NSLog(@"ageStr = %@", ageStr);
+            //cell.textLabel.text = ageStr;
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",_thisUser.age] ;
         
         } else if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"Gender", nil);
+            cell.textLabel.text = ZBLocalized(@"Gender", nil);
             cell.detailTextLabel.text = _thisUser.gender;
             
         } else if (indexPath.row == 2) {
-            cell.textLabel.text = NSLocalizedString(@"Phone", nil) ;
+            cell.textLabel.text = ZBLocalized(@"Phone", nil) ;
             cell.detailTextLabel.text = _thisUser.phone;
             
         } else if (indexPath.row == 3) {
-            cell.textLabel.text = NSLocalizedString(@"Industry", nil);
+            cell.textLabel.text = ZBLocalized(@"Industry", nil);
             cell.detailTextLabel.text = _thisUser.userIndustry.informationName;
             
         } else if (indexPath.row == 4) {
-            cell.textLabel.text = NSLocalizedString(@"Profession", nil);
+            cell.textLabel.text = ZBLocalized(@"Profession", nil);
             cell.detailTextLabel.text = _thisUser.userProfession.informationName;
             
         } else if (indexPath.row == 5) {
-            cell.textLabel.text = NSLocalizedString(@"Interests", nil);
+            cell.textLabel.text = ZBLocalized(@"Interests", nil);
             NSString *myInterests = @"";
             for (int i = 0; i < _thisUser.userInterests.count; i++) {
                 myInterests = [[NSString stringWithFormat:@"%@ ", _thisUser.userInterests[i].informationName] stringByAppendingString: myInterests];
@@ -275,7 +287,7 @@
     else if (indexPath.section == 2) {
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString(@"Anyone can view my profile.", nil);
+            cell.textLabel.text = ZBLocalized(@"Anyone can view my profile.", nil);
             if ([self.thisUser.canSeeMyProfile isEqualToValue:@1]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
@@ -283,7 +295,7 @@
             }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"Anyone can message me.", nil);
+            cell.textLabel.text = ZBLocalized(@"Anyone can message me.", nil);
             if ([self.thisUser.canMessageMe isEqualToValue:@1]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
@@ -291,7 +303,7 @@
             }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else {
-            cell.textLabel.text = NSLocalizedString(@"Let my friends see my email address.", nil);
+            cell.textLabel.text = ZBLocalized(@"Let my friends see my email address.", nil);
             if ([self.thisUser.canMyFriendSeeMyEmail isEqualToValue:@1]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
@@ -304,7 +316,7 @@
     else if (indexPath.section == 3) {
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString( @"Allow Notification", nil);
+            cell.textLabel.text = ZBLocalized( @"Allow Notification", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             switchView.tag = indexPath.row;
             cell.accessoryView = switchView;
@@ -322,7 +334,7 @@
     
     else if (indexPath.section == 4) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString( @"Email Notification", nil);
+            cell.textLabel.text = ZBLocalized( @"Email Notification", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
             if ([_thisUser.emailNotification isEqualToNumber:[NSNumber numberWithBool:true]]) {
@@ -334,7 +346,7 @@
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             //[switchView release];
         } else if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"Sounds", nil);
+            cell.textLabel.text = ZBLocalized(@"Sounds", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
             
@@ -347,7 +359,7 @@
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             
         } else if (indexPath.row == 2) {
-            cell.textLabel.text = NSLocalizedString(@"Show on Lock Screen", nil);
+            cell.textLabel.text = ZBLocalized(@"Show on Lock Screen", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
             
@@ -364,13 +376,13 @@
     else if (indexPath.section == 5) {
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString( @"About Zuzu", nil);
+            cell.textLabel.text = ZBLocalized( @"About Zuzu", nil);
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"Message Admin", nil) ;
+            cell.textLabel.text = ZBLocalized(@"Message Admin", nil) ;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else {
-            cell.textLabel.text = NSLocalizedString(@"Version 1.0", nil) ;
+            cell.textLabel.text = ZBLocalized(@"Version 1.0", nil) ;
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
 
@@ -408,9 +420,11 @@
 }
 
 - (void)changeLanguage:(id)sender {
+    /*
     NSLog(@"Change language button clicked");
     NSString *lan = [InternationalControl userLanguage];
     [InternationalControl setUserlanguage:@"zh-Hant"];
+     */
     
     /*
     if([lan isEqualToString:@"en"]){//判断当前的语言，进行改变
@@ -424,7 +438,10 @@
      */
     
     //改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguageInVC" object:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguage" object:nil];
+    
+    NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
+    NSLog(@"切换后的语言:%@",language);
 }
 
 -(void)changeLanguageInVC{
@@ -434,7 +451,9 @@
 
 - (void)enButtonClicked {
     NSLog(@"English button clicked");
+    
     //*************** defualt user set even app is turned off *********//
+    /*
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:@"en" forKey:@"KEY_USER_LANG"];
     [userDefaults synchronize];
@@ -446,11 +465,21 @@
     [InternationalControl setUserlanguage:@"en"];
     
     //改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguageInVC" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguage" object:nil];
+    */
+    
+    [[ZBLocalized sharedInstance]setLanguage:@"en"];
+    //[self.tableView reloadData];
+    //[self viewDidLoad];
+    [self initRootVC];
+    
+    NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
+    NSLog(@"切换后的语言:%@",language);
 }
 
 - (void)twButtonClicked {
     NSLog(@"Chinese button clicked");
+    /*
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:@"tw" forKey:@"KEY_USER_LANG"];
     [userDefaults synchronize];
@@ -461,8 +490,36 @@
     [InternationalControl setUserlanguage:@"zh-Hant"];
     
     //改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguageInVC" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguage" object:nil];
+     */
+    
+    [[ZBLocalized sharedInstance]setLanguage:@"zh-Hant"];
+    [self initRootVC];
+    
+    NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
+    NSLog(@"切换后的语言:%@",language);
 
+}
+
+- (void)initRootVC{
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    window.rootViewController = [[GFTabBarController alloc]init];
+    [window makeKeyWindow];
+    
+    /*
+    GFTabBarController *tab=[[GFTabBarController alloc]init];
+    tab.selectedIndex = 0;
+    /*
+     LanguageViewController*LanguageVC=[[LanguageViewController alloc]init];
+     LanguageVC=tab.selectedViewController;
+     */
+    /*
+    [self dismissViewControllerAnimated:YES completion:^{
+        [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+    }];
+    */
+    
+    
 }
 
 
@@ -504,7 +561,7 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Hi, mate", nil)  message:NSLocalizedString(@"Are you sure to log out?", nil)  delegate:self cancelButtonTitle: NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:ZBLocalized(@"Hi, mate", nil)  message:ZBLocalized(@"Are you sure to log out?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
             [alertView show];
 
         }
@@ -621,7 +678,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", [error localizedDescription]);
         
-        [SVProgressHUD showWithStatus:NSLocalizedString(@"Busy network, please try later~" , nil)];
+        [SVProgressHUD showWithStatus:ZBLocalized(@"Busy network, please try later~" , nil)];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
@@ -836,6 +893,14 @@
     //[self updateProfile];
 }
 
+- (void)changeLanguage {
+    NSLog(@"changeLanguage");
+    
+    //[[InternationalControl sharedInstance]
+    //[self viewDidLoad];
+    [self.tableView reloadData];
+    
+}
 /*
 -(void)viewWillAppear:(BOOL)animated{
     NSLog(@"indexPathForSlectedRow in viewWillAppear %@", [self.tableView indexPathForSelectedRow]);

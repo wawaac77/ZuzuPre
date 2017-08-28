@@ -471,6 +471,7 @@
 		78C126B61F501EE80087CCF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78C126B81F501EE80087CCF6 /* Localizable.strings */; };
 		78C126BD1F5047440087CCF6 /* HomePostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830892F1F1C85A700C31BFE /* HomePostTableViewController.m */; };
 		78C126C01F505C0E0087CCF6 /* InternationalControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C126BF1F505C0E0087CCF6 /* InternationalControl.m */; };
+		78C126CD1F5409000087CCF6 /* ZBLocalized.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C126CC1F5408FF0087CCF6 /* ZBLocalized.m */; };
 		78D85BDE1F444875007E8112 /* ic_select_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 78D85BDD1F444875007E8112 /* ic_select_grey.png */; };
 		78F49F721EE6F37B00674130 /* EventListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F711EE6F37B00674130 /* EventListTableViewController.m */; };
 		78F49F801EE6F5A900674130 /* MyEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F7E1EE6F5A900674130 /* MyEventCell.m */; };
@@ -1180,6 +1181,8 @@
 		78C126BC1F501F650087CCF6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		78C126BE1F505C0E0087CCF6 /* InternationalControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InternationalControl.h; path = GFBS/Class/InternationalControl.h; sourceTree = SOURCE_ROOT; };
 		78C126BF1F505C0E0087CCF6 /* InternationalControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InternationalControl.m; path = GFBS/Class/InternationalControl.m; sourceTree = SOURCE_ROOT; };
+		78C126CB1F5408FF0087CCF6 /* ZBLocalized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBLocalized.h; sourceTree = "<group>"; };
+		78C126CC1F5408FF0087CCF6 /* ZBLocalized.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBLocalized.m; sourceTree = "<group>"; };
 		78D85BDD1F444875007E8112 /* ic_select_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_select_grey.png; sourceTree = "<group>"; };
 		78F49F701EE6F37B00674130 /* EventListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListTableViewController.h; sourceTree = "<group>"; };
 		78F49F711EE6F37B00674130 /* EventListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListTableViewController.m; sourceTree = "<group>"; };
@@ -1411,6 +1414,7 @@
 		189CA3231DDADBF6004D07EA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				78C126CA1F5408FF0087CCF6 /* ZBLocalized */,
 				78C126B81F501EE80087CCF6 /* Localizable.strings */,
 				7800971C1EC9C3A9008F9F99 /* launch_image_zuzu.png */,
 				786069661F15DB9B00A8AB88 /* zuzu0.5 output */,
@@ -2882,6 +2886,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		78C126CA1F5408FF0087CCF6 /* ZBLocalized */ = {
+			isa = PBXGroup;
+			children = (
+				78C126CB1F5408FF0087CCF6 /* ZBLocalized.h */,
+				78C126CC1F5408FF0087CCF6 /* ZBLocalized.m */,
+			);
+			path = ZBLocalized;
+			sourceTree = "<group>";
+		};
 		78FE02291EE930D200ABD5B9 /* ZBProgressView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3531,6 +3544,7 @@
 				183E9CEC1E8E585000B13C75 /* GFTopViewController.m in Sources */,
 				788CC3321F19EC3900DC4116 /* UIImage+JSQMessages.m in Sources */,
 				18C6FEA91DFBD99200ED1195 /* GFRecommendUser.m in Sources */,
+				78C126CD1F5409000087CCF6 /* ZBLocalized.m in Sources */,
 				18B7C7341DE07FE7004BD781 /* GFFastButton.m in Sources */,
 				788CC3461F19EC3900DC4116 /* JSQMessagesBubbleImage.m in Sources */,
 				18BE02911DDB497A00D27893 /* AppDelegate.m in Sources */,

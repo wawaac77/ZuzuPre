@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZBLocalized.h"
 #import "HomePostTableViewController.h"
 #import "GFEventsCell.h"
 #import "ZZContentModel.h"
@@ -275,9 +276,9 @@ static NSString *const ID = @"ID";
 - (void) deleteButtonClicked: (UIButton *) sender {
     //ZZContentModel *thisContent = _contents[sender.tag];
     deleteIndex = sender.tag;
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ZBLocalized(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     //[actionSheet addButtonWithTitle:@"Some Action"];
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"Delete", nil)];
+    [actionSheet addButtonWithTitle:ZBLocalized(@"Delete", nil)];
     //actionSheet.cancelButtonIndex = actionSheet.numberOfButtons -1;
 
     [actionSheet showInView:self.view];
@@ -348,7 +349,13 @@ static NSString *const ID = @"ID";
     //2.凭借请求参数
     
     NSString *userToken = [AppDelegate APP].user.userToken;
-    NSString *userLang = [AppDelegate APP].user.preferredLanguage;
+    //NSString *userLang = [AppDelegate APP].user.preferredLanguage;
+    
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
+    NSLog(@"preferred language [AppDelegate APP].user.preferredLanguage %@", userLang);
     
     NSLog(@"user token %@", userToken);
     NSDictionary *inData = [[NSDictionary alloc] init];
@@ -464,10 +471,12 @@ static NSString *const ID = @"ID";
     
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];
 }
-
+/*
 -(void)changeLanguage{
+    NSLog(@"changeLanguage");
     [self.view reloadInputViews];
 }
+ */
 
 
 @end
