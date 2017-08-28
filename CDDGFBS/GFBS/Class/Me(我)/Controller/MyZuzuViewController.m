@@ -127,7 +127,8 @@ static CGFloat  const margin = 0;
 #pragma mark - Setup UICollectionView Data
 -(void)setUpCollectionItemsData {
     NSArray *buttonIcons = [NSArray arrayWithObjects:@"zuzu-checkin", @"zuzu-leaderboard", @"invite-friends", @"my-friends", nil];
-    NSArray *buttonTitles = [NSArray arrayWithObjects:@"Check-in", @"Leaderboard", @"Invite Friends", @"My Friends", nil];
+    NSArray *buttonTitles = [NSArray arrayWithObjects: NSLocalizedString(@"Check-in", nil), NSLocalizedString(@"Leaderboard", nil), NSLocalizedString(@"Invite Friends", nil),NSLocalizedString(@"My Friends", nil), nil];
+    //NSArray *buttonTitles = [NSArray arrayWithObjects:@"Check-in", @"Leaderboard", @"Invite Friends", @"My Friends", nil];
     //NSMutableArray<GFSquareItem *> *buttonItems =[[NSMutableArray<GFSquareItem *> alloc]init];
     //self.buttonItems = buttonItems;
     self.buttonItems = [[NSMutableArray<GFSquareItem *> alloc]init];
@@ -173,7 +174,7 @@ static CGFloat  const margin = 0;
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects: settingBtn, fixedButton, notificationBtn, nil]];
     
     //Title
-    self.navigationItem.title = @"My Zuzu";
+    self.navigationItem.title = NSLocalizedString(@"My Zuzu", nil);
     
 }
 
@@ -182,20 +183,24 @@ static CGFloat  const margin = 0;
 {
     GFSquareItem *item = _buttonItems[indexPath.item];
     
-    if ([item.name isEqualToString: @"Check-in"]) {
+    //if ([item.name isEqualToString: @"Check-in"]) {
+    if (indexPath.row == 0) {
         MeHomeTableViewController *eventVC = [[MeHomeTableViewController alloc] init];
         [self.navigationController pushViewController:eventVC animated:YES];
     }
-    else if ([item.name isEqualToString: @"Leaderboard"]) {
+    //else if ([item.name isEqualToString: @"Leaderboard"]) {
+    else if (indexPath.row == 1) {
         LeaderboardHomeTableViewController *leaderboardVC = [[LeaderboardHomeTableViewController alloc] init];
         leaderboardVC.view.frame = CGRectMake(0, 0, GFScreenWidth, self.view.gf_height - GFTabBarH);
-        leaderboardVC.navigationItem.title = @"Leaderboard";
+        leaderboardVC.navigationItem.title = NSLocalizedString(@"Leaderboard", nil);
         [self.navigationController pushViewController:leaderboardVC animated:YES];
     }
-    else if ([item.name isEqualToString: @"Invite Friends"]) {
+    //else if ([item.name isEqualToString: @"Invite Friends"]) {
+    else if (indexPath.row == 2) {
         [self showShareView];
     }
-    else if ([item.name isEqualToString: @"My Friends"]) {
+    //else if ([item.name isEqualToString: @"My Friends"]) {
+    else if (indexPath.row == 3) {
         ZZFriendsTableViewController *myFriendsVC = [[ZZFriendsTableViewController alloc] init];
         //myFriendsVC.view.frame = CGRectMake(0, 0, GFScreenWidth, self.view.gf_height - GFTabBarH);
         //myFriendsVC.navigationItem.title = @"My Friends";
@@ -223,28 +228,28 @@ static CGFloat  const margin = 0;
     [self presentViewController:activityVC animated:YES completion:nil];
      */
     
-    ZGAlertView *alertView = [[ZGAlertView alloc] initWithTitle:@"Invite Friends" message:@"" cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    ZGAlertView *alertView = [[ZGAlertView alloc] initWithTitle: NSLocalizedString(@"Invite Friends", nil) message:@"" cancelButtonTitle:nil otherButtonTitles:nil, nil];
     self.alertView = alertView;
     
     UIButton *facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
     facebookButton.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1];
-    [facebookButton setTitle:@"Find friends on Facebook" forState:UIControlStateNormal];
+    [facebookButton setTitle:NSLocalizedString(@"Find friends on Facebook", nil) forState:UIControlStateNormal];
     [alertView addCustomButton:facebookButton toIndex:0];
     
     UIButton *googlePlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
     googlePlusButton.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:72.0/255.0 blue:54.0/255.0 alpha:1];
-    [googlePlusButton setTitle:@"Connect with Google+" forState:UIControlStateNormal];
+    [googlePlusButton setTitle:NSLocalizedString(@"Connect with Google+", nil) forState:UIControlStateNormal];
     [alertView addCustomButton:googlePlusButton toIndex:1];
     
     UIButton *smsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     smsButton.backgroundColor = [UIColor colorWithRed:91.0/255.0 green:194.0/255.0 blue:54.0/255.0 alpha:1];
-    [smsButton setTitle:@"SMS Your Friends" forState:UIControlStateNormal];
+    [smsButton setTitle:NSLocalizedString(@"SMS Your Friends", nil) forState:UIControlStateNormal];
     [smsButton addTarget:self action:@selector(showMessageView) forControlEvents:UIControlEventTouchUpInside];
     [alertView addCustomButton:smsButton toIndex:2];
     
     UIButton *shareUrlButton = [UIButton buttonWithType:UIButtonTypeCustom];
     shareUrlButton.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:0 alpha:1];
-    [shareUrlButton setTitle:@"Share URL" forState:UIControlStateNormal];
+    [shareUrlButton setTitle:NSLocalizedString(@"Share URL", nil) forState:UIControlStateNormal];
     [shareUrlButton addTarget:self action:@selector(shareURLButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [alertView addCustomButton:shareUrlButton toIndex:3];
     

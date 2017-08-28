@@ -102,7 +102,7 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
-    self.navigationItem.title = thisRestaurant.restaurantName.en;
+    self.navigationItem.title = thisRestaurant.restaurantName;
     
 }
 
@@ -231,7 +231,9 @@
     [self.view addSubview:titleView];
      */
     
-    NSArray *titleContens = @[@"Overview",@"Check-in",@"Photo",@"Menu"];
+    NSArray *titleContens = [NSArray arrayWithObjects: NSLocalizedString(@"Overview", nil), NSLocalizedString(@"Check-in", nil), NSLocalizedString(@"Photo", nil),NSLocalizedString(@"Menu", nil), nil];
+    
+    //NSArray *titleContens = @[@"Overview",@"Check-in",@"Photo",@"Menu"];
     NSInteger count = titleContens.count;
     NSLog(@"titlecontents count is %ld", (long)count);
     
@@ -392,6 +394,7 @@
     NSDictionary *inData = @{
                              @"action" : @"getRestaurantDetail",
                              @"token" : userToken,
+                             @"lang" : [AppDelegate APP].user.preferredLanguage,
                              @"data" : inSubData
                              };
     NSDictionary *parameters = @{@"data" : inData};
@@ -429,7 +432,7 @@
     NSDictionary *inData = [[NSDictionary alloc] init];
     
     NSDictionary *inSubData = @{@"restaurantId" : thisRestaurant.restaurantId};
-    inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"data":inSubData};
+    inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"lang": [AppDelegate APP].user.preferredLanguage, @"data":inSubData};
     
     NSDictionary *parameters = @{@"data" : inData};
     
@@ -442,6 +445,19 @@
         NSLog(@"responseObject - data is %@", responseObject[@"data"]);
         
         self.contents = [ZZContentModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        for (int i = 0; i < self.contents.count; i++) {
+            if (self.contents[i].numOfLike == NULL) {
+                self.contents[i].numOfLike = 0;
+            }
+            NSString *str = [self.contents[i].listImage.imageUrl pathExtension];
+            NSLog(@"str of pathExtension %@", str);
+            
+            if ([str isEqualToString:@"undefined"] || str == NULL) {
+                self.contents[i].withImage = @0;
+            } else {
+                self.contents[i].withImage = @1;
+            }
+        }
         //reviewVC.contents = self.contents;
         NSLog(@"selfContentsinRestaurantDetail %@", self.contents);
         //[self saveUIImages];

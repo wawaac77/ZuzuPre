@@ -46,6 +46,7 @@
 
 @property (nonatomic, assign) NSNumber *age;
 @property (nonatomic, copy) NSString *gender;
+
 @property (nonatomic, copy) NSString *phone;
 @property (nonatomic, strong) ZZTypicalInformationModel *userIndustry;
 @property (nonatomic, strong) ZZTypicalInformationModel *userProfession;
@@ -53,6 +54,7 @@
 @property (nonatomic, assign) NSNumber *maxPrice;
 @property (nonatomic, assign) NSNumber *minPrice;
 
+@property (nonatomic, copy) NSString *preferredLanguage;
 @property (nonatomic, strong) NSNumber *numOfFollower;
 
 @property (nonatomic, assign) NSNumber *showOnLockScreen;

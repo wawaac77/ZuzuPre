@@ -64,7 +64,7 @@ static NSString *const ID = @"ID";
     
     [self preferredStatusBarStyle];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    self.navigationItem.title = @"My Friends";
+    self.navigationItem.title = NSLocalizedString(@"My Friends", nil);
     
     UIBarButtonItem *addButton = [UIBarButtonItem ItemWithImage:[UIImage imageNamed:@"ic_settings"] WithHighlighted:[UIImage imageNamed:@"ic_settings"] Target:self action:@selector(settingClicked)];
 

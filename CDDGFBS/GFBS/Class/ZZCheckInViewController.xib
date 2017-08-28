@@ -13,13 +13,14 @@
             <connections>
                 <outlet property="cancelButton" destination="zf6-Gp-BM9" id="whh-zG-o0e"/>
                 <outlet property="checkinButton" destination="0ns-PH-Yl2" id="FRJ-p5-L57"/>
+                <outlet property="checkinLabel" destination="R3d-qc-Dud" id="yJ8-pt-hew"/>
                 <outlet property="facebookButton" destination="cFi-vB-myB" id="AIG-bb-orO"/>
                 <outlet property="imagePickerButton" destination="lyZ-I5-0cB" id="ST3-cz-XYR"/>
                 <outlet property="locationButton" destination="OHy-0L-YXj" id="fww-y6-KGC"/>
                 <outlet property="pickerImageView" destination="6pJ-9C-Vwp" id="JCm-bl-gy1"/>
                 <outlet property="toolBarView" destination="Rrn-wn-EQM" id="9yi-te-HKR"/>
                 <outlet property="topProfileImageView" destination="iy1-4l-cOP" id="9xt-6J-Xuu"/>
-                <outlet property="topView" destination="VWh-NI-1o9" id="Q1E-K6-81m"/>
+                <outlet property="topView" destination="R3d-qc-Dud" id="SDj-sE-nt5"/>
                 <outlet property="twitterButton" destination="5Fi-U2-tDt" id="B3y-HM-veY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -155,7 +156,7 @@
                                     <rect key="frame" x="5" y="0.0" width="180" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    <state key="normal" title="Cancel">
+                                    <state key="normal">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -166,7 +167,7 @@
                                     <rect key="frame" x="190" y="0.0" width="180" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.83276491119999996" green="0.73090298239999996" blue="0.29533309320000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" title="Check in">
+                                    <state key="normal">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>

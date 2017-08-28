@@ -468,6 +468,9 @@
 		789E0D661F17DCAE00CCAAE4 /* ZZInboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 789E0D641F17DCAE00CCAAE4 /* ZZInboxCell.m */; };
 		789E0D671F17DCAE00CCAAE4 /* ZZInboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789E0D651F17DCAE00CCAAE4 /* ZZInboxCell.xib */; };
 		78C126B11F4EB5460087CCF6 /* imageplaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 78C126B01F4EB5450087CCF6 /* imageplaceholder.png */; };
+		78C126B61F501EE80087CCF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78C126B81F501EE80087CCF6 /* Localizable.strings */; };
+		78C126BD1F5047440087CCF6 /* HomePostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830892F1F1C85A700C31BFE /* HomePostTableViewController.m */; };
+		78C126C01F505C0E0087CCF6 /* InternationalControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C126BF1F505C0E0087CCF6 /* InternationalControl.m */; };
 		78D85BDE1F444875007E8112 /* ic_select_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 78D85BDD1F444875007E8112 /* ic_select_grey.png */; };
 		78F49F721EE6F37B00674130 /* EventListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F711EE6F37B00674130 /* EventListTableViewController.m */; };
 		78F49F801EE6F5A900674130 /* MyEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F7E1EE6F5A900674130 /* MyEventCell.m */; };
@@ -1170,6 +1173,13 @@
 		789E0D641F17DCAE00CCAAE4 /* ZZInboxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZInboxCell.m; sourceTree = "<group>"; };
 		789E0D651F17DCAE00CCAAE4 /* ZZInboxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZInboxCell.xib; sourceTree = "<group>"; };
 		78C126B01F4EB5450087CCF6 /* imageplaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageplaceholder.png; sourceTree = "<group>"; };
+		78C126B71F501EE80087CCF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		78C126B91F501F5C0087CCF6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		78C126BA1F501F5C0087CCF6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		78C126BB1F501F640087CCF6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		78C126BC1F501F650087CCF6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		78C126BE1F505C0E0087CCF6 /* InternationalControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InternationalControl.h; path = GFBS/Class/InternationalControl.h; sourceTree = SOURCE_ROOT; };
+		78C126BF1F505C0E0087CCF6 /* InternationalControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InternationalControl.m; path = GFBS/Class/InternationalControl.m; sourceTree = SOURCE_ROOT; };
 		78D85BDD1F444875007E8112 /* ic_select_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_select_grey.png; sourceTree = "<group>"; };
 		78F49F701EE6F37B00674130 /* EventListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListTableViewController.h; sourceTree = "<group>"; };
 		78F49F711EE6F37B00674130 /* EventListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListTableViewController.m; sourceTree = "<group>"; };
@@ -1401,6 +1411,7 @@
 		189CA3231DDADBF6004D07EA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				78C126B81F501EE80087CCF6 /* Localizable.strings */,
 				7800971C1EC9C3A9008F9F99 /* launch_image_zuzu.png */,
 				786069661F15DB9B00A8AB88 /* zuzu0.5 output */,
 				7800963A1EC9C1E3008F9F99 /* supporting images */,
@@ -1626,6 +1637,8 @@
 		18BE027B1DDB497900D27893 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				78C126BE1F505C0E0087CCF6 /* InternationalControl.h */,
+				78C126BF1F505C0E0087CCF6 /* InternationalControl.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3025,6 +3038,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 189CA3171DDADBF6004D07EA;
 			productRefGroup = 189CA3211DDADBF6004D07EA /* Products */;
@@ -3088,6 +3103,7 @@
 				786069B71F15DB9B00A8AB88 /* ic_inbox-o.png in Resources */,
 				788CC35C1F1A169C00DC4116 /* GoogleService-Info.plist in Resources */,
 				780096ED1EC9C1F5008F9F99 /* zuzu-login-one-image.png in Resources */,
+				78C126B61F501EE80087CCF6 /* Localizable.strings in Resources */,
 				780097001EC9C1F5008F9F99 /* ic_location.png in Resources */,
 				789CFF981F12399100EBA772 /* ZZImageCollectionCell.xib in Resources */,
 				7813FE991F25F3E90065D527 /* ic_add-friend-black.png in Resources */,
@@ -3595,6 +3611,7 @@
 				788CC3581F19EC3900DC4116 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				7813FE9F1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				7813FE911F25EE820065D527 /* ZZAddFriendsViewController.m in Sources */,
+				78C126C01F505C0E0087CCF6 /* InternationalControl.m in Sources */,
 				788CC33E1F19EC3900DC4116 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				189980501DDBF6B4009071F4 /* GFAdViewController.m in Sources */,
 				18B7C73D1DE08620004BD781 /* GFSubTagViewController.m in Sources */,
@@ -3611,6 +3628,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78C126BD1F5047440087CCF6 /* HomePostTableViewController.m in Sources */,
 				189CA33E1DDADBF6004D07EA /* GFBSTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3643,8 +3661,21 @@
 			isa = PBXVariantGroup;
 			children = (
 				189CA3321DDADBF6004D07EA /* Base */,
+				78C126B91F501F5C0087CCF6 /* zh-Hans */,
+				78C126BB1F501F640087CCF6 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		78C126B81F501EE80087CCF6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78C126B71F501EE80087CCF6 /* en */,
+				78C126BA1F501F5C0087CCF6 /* zh-Hans */,
+				78C126BC1F501F650087CCF6 /* zh-Hant */,
+			);
+			name = Localizable.strings;
+			path = Class;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -3654,6 +3685,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3702,6 +3734,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

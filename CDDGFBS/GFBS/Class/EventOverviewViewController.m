@@ -108,10 +108,10 @@
     _numberOfPeopleLable.text = [NSString stringWithFormat:@"%@/%@  People", _thisEvent.listEventJoinedCount,_thisEvent.listEventQuota];
     _startTimeLabel.text = _thisEvent.listEventStartDate;
     _endTimeLabel.text = [NSString stringWithFormat:@"Ends %@", _thisEvent.listEventEndDate];
-    _placeTypeLabel.text = _thisEvent.listEventRestaurant.restaurantName.en;
-    _locationTextView.text = _thisEvent.listEventRestaurant.restaurantAddress.en;
+    _placeTypeLabel.text = _thisEvent.listEventRestaurant.restaurantName;
+    _locationTextView.text = _thisEvent.listEventRestaurant.restaurantAddress;
     
-    _dishStyleLabel.text = _thisEvent.eventCuisine.informationName.en;
+    _dishStyleLabel.text = _thisEvent.eventCuisine.informationName;
     NSString *features = [[NSString alloc] init];
     for (int i = 0; i < _thisEvent.listEventInterests.count; i++) {
         ZZInterest *thisInterest = [_thisEvent.listEventInterests objectAtIndex:i];

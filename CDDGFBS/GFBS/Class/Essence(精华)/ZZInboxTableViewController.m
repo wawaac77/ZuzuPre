@@ -159,7 +159,7 @@ static NSString *const ID = @"ID";
     [self.navigationItem setRightBarButtonItem:newMessageButton];
     
     //Title
-    self.navigationItem.title = @"Inbox";
+    self.navigationItem.title = NSLocalizedString(@"Inbox", nil);
     
 }
 

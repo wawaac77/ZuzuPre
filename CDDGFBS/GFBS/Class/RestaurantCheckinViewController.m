@@ -104,12 +104,6 @@ static NSString *const ID = @"ID";
     [cell.contentView addSubview:restaurantButton];
     
     ZZContentModel *thisContent = self.contents[indexPath.row];
-    if (_contents[indexPath.row].listImage_UIImage == nil) {
-        NSURL *URL = [NSURL URLWithString:_contents[indexPath.row].listImage.imageUrl];
-        NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
-        UIImage *image = [[UIImage alloc]initWithData:data];
-        _contents[indexPath.row].listImage_UIImage = image;
-    }
     cell.event = thisContent;
     
     return cell;
@@ -117,10 +111,6 @@ static NSString *const ID = @"ID";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    //NSIndexPath *recordIndexPath = [[NSIndexPath alloc] init];
-    //self.recordIndexPath = recordIndexPath;
-    //recordIndexPath = indexPath;
     
     GFCommentViewController *commentsVC = [[GFCommentViewController alloc] init];
     commentsVC.topic = [_contents objectAtIndex:indexPath.row];

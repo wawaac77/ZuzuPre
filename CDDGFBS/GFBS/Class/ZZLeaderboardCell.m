@@ -68,7 +68,7 @@
     _profileImageView.layer.cornerRadius = _profileImageView.frame.size.width / 2;
     
     _usernameLabel.text = thisUser.leaderboardMember.userUserName;
-    _locationLabel.text = thisUser.leaderboardMember.userLastCheckIn.listEventRestaurant.restaurantName.en;
+    _locationLabel.text = thisUser.leaderboardMember.userLastCheckIn.listEventRestaurant.restaurantName;
     _scoreLabel.text = [NSString stringWithFormat:@"%@",thisUser.leaderboardLevel];
     if (thisUser.leaderboardMember.numOfFollower != NULL) {
         _followersNumLabel.text = [NSString stringWithFormat:@"%@ followers", thisUser.leaderboardMember.numOfFollower];

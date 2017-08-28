@@ -39,6 +39,7 @@
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSString *username = [userDefault objectForKey:@"KEY_USER_NAME"];
     NSString *userToken = [userDefault objectForKey:@"KEY_USER_TOKEN"];
+    NSString *userlang = [userDefault objectForKey:@"KEY_USER_LANG"];
     
     if (userToken != nil) {
         
@@ -48,11 +49,13 @@
         user = [[ZZUser alloc] init];
         user.userToken = userToken;
         user.userUserName = username;
+        user.preferredLanguage = userlang;
         GFTabBarController *tabVC = [[GFTabBarController alloc] init];
         self.window.rootViewController = tabVC;
         
         [self.window makeKeyAndVisible];
         NSLog(@"userToken in default user %@", userToken);
+        NSLog(@"userLang in default user %@", user.preferredLanguage);
         
         return YES;
     }

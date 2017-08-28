@@ -26,10 +26,10 @@
 {
     EventRestaurant *thisRestaurant = restaurant;
     [self downloadImageFromURL:thisRestaurant.restaurantIcon.imageUrl];
-    _bigTitleLabel.text = restaurant.restaurantName.en;
+    _bigTitleLabel.text = restaurant.restaurantName;
     //restaurant.restaurantDistance
    
-    _locationLabel.text = [NSString stringWithFormat:@"%@ - %.2fkm",thisRestaurant.restaurantDistrict.informationName.en, thisRestaurant.restaurantDistance];
+    _locationLabel.text = [NSString stringWithFormat:@"%@ - %.2fkm",thisRestaurant.restaurantDistrict.informationName, thisRestaurant.restaurantDistance];
 }
 
 -(void) downloadImageFromURL :(NSString *)imageUrl{

@@ -64,8 +64,8 @@ static NSTimeZone *outputTimeZone_;
     
     CGFloat textHeight = textSize.height;
     
-    if (textHeight > 80.0f) {
-        textHeight = 80.0f;
+    if (textHeight > 100.0f) {
+        textHeight = 100.0f;
     }
     _cellHeight += textHeight;
 

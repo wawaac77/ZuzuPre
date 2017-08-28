@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIImageView *topProfileImageView;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
+@property (weak, nonatomic) IBOutlet UILabel *checkinLabel;
 - (IBAction)locationButtonClicked:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *toolBarView;
@@ -114,6 +115,11 @@
 - (void)setUpNavBar {
     [self preferredStatusBarStyle];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
+    NSString *str = NSLocalizedString(@"Please select your check-in location", nil);
+    _locationButton.titleLabel.text = [NSString stringWithFormat:@"        %@", str];
+    
+    _checkinLabel.text = NSLocalizedString(@"Check-in", nil);
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -195,6 +201,7 @@
     };
     NSDictionary *inData = @{
                              @"action" : @"searchRestaurant",
+                             @"lang" : [AppDelegate APP].user.preferredLanguage,
                              @"data" : keyFactors
                              };
     NSDictionary *parameters = @{@"data" : inData};
@@ -214,7 +221,7 @@
         self.locationArray = [[NSMutableArray alloc] init];
         self.restaurantIconArray = [[NSMutableArray alloc] init];
         for (int i = 0; i < _restaurants.count; i++) {
-            [_locationArray addObject:_restaurants[i].restaurantName.en];
+            [_locationArray addObject:_restaurants[i].restaurantName];
             [_restaurantIconArray addObject:_restaurants[i].restaurantIcon.imageUrl];
         }
         NSLog(@"_locationArray %@", _locationArray);
@@ -321,8 +328,13 @@
     
     _cancelButton.layer.cornerRadius = 4.0f;
     _cancelButton.clipsToBounds = YES;
+    [_cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
+    
     _checkinButton.layer.cornerRadius = 4.0f;
+    _checkinButton.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
     _checkinButton.clipsToBounds = YES;
+    [_checkinButton setTitle:NSLocalizedString(@"Check in", nil) forState:UIControlStateNormal];
+    
     //self.cancelButton.frame = CGRectMake(5, GFScreenHeight - GFTabBarH - 50, 180, 30);
     //通知
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -362,9 +374,10 @@
 //*************** setup textField *****************//
 - (void)setUpTextView
 {
-    NSString *username = @"Alice Jin";
+    NSString *username = [AppDelegate APP].user.userUserName;
     GFPlaceholderTextView *textView = [[GFPlaceholderTextView alloc] init];
-    textView.placeholder = [NSString stringWithFormat:@"What's in your mind, %@?",username];
+    NSString *str = NSLocalizedString(@"What's in your mind", nil);
+    textView.placeholder = [NSString stringWithFormat:@"%@, %@?", str, username];
     textView.frame = CGRectMake(0, ZZNewNavH, GFScreenWidth, GFScreenHeight - ZZNewNavH - GFTabBarH - 80);
     //textView.backgroundColor = [UIColor yellowColor];
     textView.delegate = self;
@@ -472,6 +485,8 @@
 - (IBAction)cancelButtonClicked:(id)sender {
     NSLog(@"Cancel Button clicked");
     self.textView.text = nil;
+    self.imageView.image = nil;
+    self.pickedImage = nil;
 }
 
 - (IBAction)twitterButtonClicked:(id)sender {

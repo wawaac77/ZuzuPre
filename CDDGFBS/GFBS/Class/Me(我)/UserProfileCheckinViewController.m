@@ -61,7 +61,7 @@
 }
 
 - (void)setUpAfterLoadNewData {
-    _topLocationLabel.text = _myProfile.userLastCheckIn.listEventRestaurant.restaurantName.en;
+    _topLocationLabel.text = _myProfile.userLastCheckIn.listEventRestaurant.restaurantName;
     
     [self setUpTopLabelBar];
     [self setUpChildVC];
@@ -97,8 +97,8 @@
     
     _topUserLabel.text = _myProfile.userUserName;
     _topScoreLabel.text = [NSString stringWithFormat:@"%@", _myProfile.checkinPoint];;
-    _topLocationLabel.text = _myProfile.userLastCheckIn.listEventRestaurant.restaurantName.en;
-    NSLog(@"listEventRestaurant.restaurantName  %@",_myProfile.userLastCheckIn.listEventRestaurant.restaurantName.en );
+    _topLocationLabel.text = _myProfile.userLastCheckIn.listEventRestaurant.restaurantName;
+    NSLog(@"listEventRestaurant.restaurantName  %@",_myProfile.userLastCheckIn.listEventRestaurant.restaurantName);
 }
 
 - (void)setUpTopLabelBar {

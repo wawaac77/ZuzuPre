@@ -120,7 +120,7 @@ static CGFloat  const margin = 0;
     
     
     //Title
-    self.navigationItem.title = @"Badges Collection";
+    self.navigationItem.title = NSLocalizedString(@"Badges Collection", nil);
     
 }
 

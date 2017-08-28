@@ -44,6 +44,7 @@ static NSString *const ID = @"ID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.searchTextField.delegate = self;
+    self.searchTextField.placeholder = NSLocalizedString(@"Enter keyword", nil);
     [self setUpTableView];
     
 }
@@ -59,7 +60,7 @@ static NSString *const ID = @"ID";
     
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
-    self.navigationItem.title = @"Add Friends";
+    self.navigationItem.title = NSLocalizedString(@"Add Friends", nil);
     
 }
 

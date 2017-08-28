@@ -73,25 +73,26 @@
 {
     
     GFNavigationController *nav = self.childViewControllers[0];
-    nav.tabBarItem.title = @"Home";
+    nav.tabBarItem.title = NSLocalizedString(@"Home", nil);
     nav.tabBarItem.image = [UIImage imageNamed:@"ic_home"];
     nav.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_home-o"];
     
     
     GFNavigationController *nav1 = self.childViewControllers[1];
-    nav1.tabBarItem.title = @"Check-in";
+    nav1.tabBarItem.title = NSLocalizedString(@"Check-in", nil);;
     nav1.tabBarItem.image = [UIImage imageNamed:@"ic_home-check-in"];
     nav1.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_home-check-in-o"];
     
     
     GFNavigationController *nav2 = self.childViewControllers[2];
-    nav2.tabBarItem.title = @"Inbox";
+    //nav2.tabBarItem.title = @"Inbox";
+    nav2.tabBarItem.title = NSLocalizedString(@"Inbox", nil);
     nav2.tabBarItem.image = [UIImage imageNamed:@"ic_inbox"];
     nav2.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_inbox-o"];
     
     
     GFNavigationController *nav3 = self.childViewControllers[3];
-    nav3.tabBarItem.title = @"My Zuzu";
+    nav3.tabBarItem.title = NSLocalizedString(@"My Zuzu", nil);
     nav3.tabBarItem.image = [UIImage imageNamed:@"ic_my_zuzu"];
     nav3.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_my_zuzu_on"];
     

@@ -124,8 +124,8 @@
     
     _topUserLabel.text = _myProfile.userUserName;
     _topScoreLabel.text = [NSString stringWithFormat:@"%@", _myProfile.checkinPoint];
-    _topLocationLabel.text = _myProfile.userLastCheckIn.listEventRestaurant.restaurantName.en;
-    NSLog(@"listEventRestaurant.restaurantName  %@",_myProfile.userLastCheckIn.listEventRestaurant.restaurantName.en );
+    _topLocationLabel.text = _myProfile.userLastCheckIn.listEventRestaurant.restaurantName;
+    NSLog(@"listEventRestaurant.restaurantName  %@",_myProfile.userLastCheckIn.listEventRestaurant.restaurantName);
 }
 
 - (void)loadNeweData {
@@ -138,7 +138,7 @@
     userToken = [AppDelegate APP].user.userToken;
     NSLog(@"first userToken %@", userToken);
     NSDictionary *inData = [[NSDictionary alloc] init];
-    inData = @{@"action" : @"getMyProfile", @"token" : userToken, @"lang": @"en"};
+    inData = @{@"action" : @"getMyProfile", @"token" : userToken, @"lang": [AppDelegate APP].user.preferredLanguage};
     NSDictionary *parameters = @{@"data" : inData};
     
     //发送请求
@@ -183,8 +183,20 @@
     //UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 435)];
     //scroll.contentSize = CGSizeMake(320, 700);
     //scroll.showsHorizontalScrollIndicator = YES;
+    NSArray *itemArray = [[NSArray alloc] init];
     
-    NSArray *itemArray = [NSArray arrayWithObjects: @"All", @"Following", @"Me", @"Leaderboard", nil];
+    NSString *userLang = [AppDelegate APP].user.preferredLanguage;
+    itemArray = [NSArray arrayWithObjects: NSLocalizedString(@"All", nil), NSLocalizedString(@"Following", nil), NSLocalizedString(@"Me", nil), NSLocalizedString(@"Leaderboard", nil), nil];
+
+    
+    /*
+    if ([userLang isEqualToString:@"en"]) {
+        itemArray = [NSArray arrayWithObjects: NSLocalizedString(@"All", nil), @"Following", @"Me", @"Leaderboard", nil];
+    } else if ([userLang isEqualToString:@"tw"]) {
+        itemArray = [NSArray arrayWithObjects: @"全部", @"關注", @"我", @"排行榜", nil];
+    }
+     */
+    //NSArray *itemArray = [NSArray arrayWithObjects: @"All", @"Following", @"Me", @"Leaderboard", nil];
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
     self.segmentedControl = segmentedControl;
     segmentedControl.frame = CGRectMake(10, 5 + ZZNewNavH, GFScreenWidth - 20, 25);

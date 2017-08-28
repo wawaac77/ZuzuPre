@@ -241,9 +241,11 @@ static NSString *const ID = @"ID";
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    /*
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //add code here for when you hit delete
     }
+     */
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -273,9 +275,9 @@ static NSString *const ID = @"ID";
 - (void) deleteButtonClicked: (UIButton *) sender {
     //ZZContentModel *thisContent = _contents[sender.tag];
     deleteIndex = sender.tag;
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     //[actionSheet addButtonWithTitle:@"Some Action"];
-    [actionSheet addButtonWithTitle:@"Delete"];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Delete", nil)];
     //actionSheet.cancelButtonIndex = actionSheet.numberOfButtons -1;
 
     [actionSheet showInView:self.view];
@@ -345,21 +347,22 @@ static NSString *const ID = @"ID";
     
     //2.凭借请求参数
     
-    NSString *userToken = [[NSString alloc] init];
-    userToken = [AppDelegate APP].user.userToken;
+    NSString *userToken = [AppDelegate APP].user.userToken;
+    NSString *userLang = [AppDelegate APP].user.preferredLanguage;
+    
     NSLog(@"user token %@", userToken);
     NSDictionary *inData = [[NSDictionary alloc] init];
     if (self.type == 0) {
-        inData = @{@"action" : @"getAllCheckinList", @"token" : userToken};
+        inData = @{@"action" : @"getAllCheckinList", @"token" : userToken, @"lang" : userLang};
     } else if (self.type == 1) {
-        inData = @{@"action" : @"getFriendCheckinList", @"token" : userToken};
+        inData = @{@"action" : @"getFriendCheckinList", @"token" : userToken, @"lang" : userLang};
     } else if (self.type == 2) {
-        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken};
+        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang};
     } else if (self.type == 4) {
         NSDictionary *inSubData = @{@"restaurantId" : self.restaurantID};
-        inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"data":inSubData};
+        inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 5) {
-        inData = @{@"action" : @"getAllCheckinList", @"token" : userToken};
+        inData = @{@"action" : @"getAllCheckinList", @"token" : userToken, @"lang" : userLang};
     }
     /*
     else if ([receivingType isEqualToString:@"User checkin"]) {
@@ -388,7 +391,7 @@ static NSString *const ID = @"ID";
             NSString *str = [self.contents[i].listImage.imageUrl pathExtension];
             NSLog(@"str of pathExtension %@", str);
             
-            if ([str isEqualToString:@"undefined"]) {
+            if ([str isEqualToString:@"undefined"] || str == NULL) {
                 self.contents[i].withImage = @0;
             } else {
                 self.contents[i].withImage = @1;
@@ -461,5 +464,10 @@ static NSString *const ID = @"ID";
     
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];
 }
+
+-(void)changeLanguage{
+    [self.view reloadInputViews];
+}
+
 
 @end

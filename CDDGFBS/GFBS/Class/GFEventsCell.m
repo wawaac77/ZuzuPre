@@ -159,17 +159,19 @@
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
     
-    self.bigTitleLabel.text = thisEvent.listEventRestaurant.restaurantName.en;
+    self.bigTitleLabel.text = thisEvent.listEventRestaurant.restaurantName;
     
-    self.placeLabel.text = thisEvent.listEventRestaurant.restaurantDistrict.informationName.en;
+    self.placeLabel.text = thisEvent.listEventRestaurant.restaurantDistrict.informationName;
     
     self.smallTitleLabel.text = thisEvent.listPublishUser.userUserName;
+    
+    NSString *likeString = NSLocalizedString(@"like", nil);
     if (thisEvent.numOfLike == NULL) {
         self.likeNumLabel.text = [NSString stringWithFormat:@" "] ;
     } else if ([thisEvent.numOfLike isEqual:@1]) {
-        self.likeNumLabel.text = [NSString stringWithFormat:@"%@ like",thisEvent.numOfLike] ;
+        self.likeNumLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", nil),thisEvent.numOfLike, likeString] ;
     } else {
-        self.likeNumLabel.text = [NSString stringWithFormat:@"%@ likes",thisEvent.numOfLike] ;
+        self.likeNumLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ %@", nil),thisEvent.numOfLike, likeString] ;
     }
     
     /*

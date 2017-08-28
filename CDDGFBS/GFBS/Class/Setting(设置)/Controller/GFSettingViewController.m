@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "InternationalControl.h"
 #import "GFSettingViewController.h"
 #import "ZZUser.h"
 #import "ZZTypicalInformationModel.h"
@@ -62,8 +63,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //[self loadNewData];
-    self.navigationItem.title = @"Settings";
+    self.navigationItem.title = NSLocalizedString(@"Settings", nil);
     _thisUser = [AppDelegate APP].user;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLanguageInVC) name:@"changeLanguageInVC" object:nil];
+    
+    [InternationalControl initUserLanguage];//初始化应用语言
+    
+    NSBundle *bundle = [InternationalControl bundle];
+    
+    
     //计算整个应用程序的缓存数据 --- > 沙盒（Cache）
     //NSFileManager
     //attributesOfItemAtPathe:指定文件路径，获取文件属性
@@ -109,6 +118,20 @@
     
     [_reuseIDArray insertObject:@"indicator" atIndex:5];
 
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return NSLocalizedString(@"Your Account", nil);
+    } else if (section == 1) {
+        return NSLocalizedString(@"Personal Information", nil);
+    } else if (section == 2) {
+        return NSLocalizedString(@"Visibility", nil);
+    } else if (section == 3) {
+        return NSLocalizedString(@"System", nil);
+    }
+    
+    return NULL;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -166,7 +189,7 @@
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
             accessoryLabel.font = [UIFont systemFontOfSize:15];
-            accessoryLabel.text = @"Log Out >";
+            accessoryLabel.text = NSLocalizedString(@"Log Out >", nil);
             [cell.contentView addSubview:accessoryLabel];
             
         } else if (indexPath.row == 1) {
@@ -184,7 +207,7 @@
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
             accessoryLabel.font = [UIFont systemFontOfSize:15];
-            accessoryLabel.text = @"Connected";
+            accessoryLabel.text = NSLocalizedString(@"Connected", nil);
             [cell.contentView addSubview:accessoryLabel];
             
         } else if (indexPath.row == 2) {
@@ -196,7 +219,7 @@
             CGFloat btnWidth = (GFScreenWidth - 20 - 10) / 2;
             
             UIButton *enButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, btnWidth, 30)];
-            [enButton addTarget:self action:@selector(enButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+            [enButton addTarget:self action:@selector(changeLanguage:) forControlEvents:UIControlEventTouchUpInside];
             [enButton setTitle:@"English" forState:UIControlStateNormal];
             [enButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             enButton.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
@@ -219,30 +242,30 @@
     else if (indexPath.section == 1) {
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Age";
+            cell.textLabel.text = NSLocalizedString(@"Age", nil);
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",_thisUser.age] ;
         
         } else if (indexPath.row == 1) {
-            cell.textLabel.text = @"Gender";
+            cell.textLabel.text = NSLocalizedString(@"Gender", nil);
             cell.detailTextLabel.text = _thisUser.gender;
             
         } else if (indexPath.row == 2) {
-            cell.textLabel.text = @"Phone";
+            cell.textLabel.text = NSLocalizedString(@"Phone", nil) ;
             cell.detailTextLabel.text = _thisUser.phone;
             
         } else if (indexPath.row == 3) {
-            cell.textLabel.text = @"Industry";
-            cell.detailTextLabel.text = _thisUser.userIndustry.informationName.en;
+            cell.textLabel.text = NSLocalizedString(@"Industry", nil);
+            cell.detailTextLabel.text = _thisUser.userIndustry.informationName;
             
         } else if (indexPath.row == 4) {
-            cell.textLabel.text = @"Profession";
-            cell.detailTextLabel.text = _thisUser.userProfession.informationName.en;
+            cell.textLabel.text = NSLocalizedString(@"Profession", nil);
+            cell.detailTextLabel.text = _thisUser.userProfession.informationName;
             
         } else if (indexPath.row == 5) {
-            cell.textLabel.text = @"Interests";
+            cell.textLabel.text = NSLocalizedString(@"Interests", nil);
             NSString *myInterests = @"";
             for (int i = 0; i < _thisUser.userInterests.count; i++) {
-                myInterests = [[NSString stringWithFormat:@"%@ ", _thisUser.userInterests[i].informationName.en] stringByAppendingString: myInterests];
+                myInterests = [[NSString stringWithFormat:@"%@ ", _thisUser.userInterests[i].informationName] stringByAppendingString: myInterests];
             }
             NSLog(@"myInterests %@", myInterests);
             cell.detailTextLabel.text = myInterests;
@@ -252,7 +275,7 @@
     else if (indexPath.section == 2) {
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Anyone can view my profile.";
+            cell.textLabel.text = NSLocalizedString(@"Anyone can view my profile.", nil);
             if ([self.thisUser.canSeeMyProfile isEqualToValue:@1]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
@@ -260,7 +283,7 @@
             }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else if (indexPath.row == 1) {
-            cell.textLabel.text = @"Anyone can message me.";
+            cell.textLabel.text = NSLocalizedString(@"Anyone can message me.", nil);
             if ([self.thisUser.canMessageMe isEqualToValue:@1]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
@@ -268,7 +291,7 @@
             }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else {
-            cell.textLabel.text = @"Let me friends see my email address.";
+            cell.textLabel.text = NSLocalizedString(@"Let my friends see my email address.", nil);
             if ([self.thisUser.canMyFriendSeeMyEmail isEqualToValue:@1]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
@@ -281,7 +304,7 @@
     else if (indexPath.section == 3) {
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Allow Notification";
+            cell.textLabel.text = NSLocalizedString( @"Allow Notification", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             switchView.tag = indexPath.row;
             cell.accessoryView = switchView;
@@ -299,7 +322,7 @@
     
     else if (indexPath.section == 4) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Email Notification";
+            cell.textLabel.text = NSLocalizedString( @"Email Notification", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
             if ([_thisUser.emailNotification isEqualToNumber:[NSNumber numberWithBool:true]]) {
@@ -311,7 +334,7 @@
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             //[switchView release];
         } else if (indexPath.row == 1) {
-            cell.textLabel.text = @"Sounds";
+            cell.textLabel.text = NSLocalizedString(@"Sounds", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
             
@@ -324,7 +347,7 @@
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             
         } else if (indexPath.row == 2) {
-            cell.textLabel.text = @"Show on Lock Screeen";
+            cell.textLabel.text = NSLocalizedString(@"Show on Lock Screen", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
             
@@ -341,13 +364,13 @@
     else if (indexPath.section == 5) {
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"About Zuzu";
+            cell.textLabel.text = NSLocalizedString( @"About Zuzu", nil);
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else if (indexPath.row == 1) {
-            cell.textLabel.text = @"Message Admin";
+            cell.textLabel.text = NSLocalizedString(@"Message Admin", nil) ;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else {
-            cell.textLabel.text = @"Version 1.0";
+            cell.textLabel.text = NSLocalizedString(@"Version 1.0", nil) ;
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
 
@@ -384,12 +407,62 @@
     parentCell.detailTextLabel.text = [NSString stringWithFormat:@"0 - %@", priceRange];
 }
 
+- (void)changeLanguage:(id)sender {
+    NSLog(@"Change language button clicked");
+    NSString *lan = [InternationalControl userLanguage];
+    [InternationalControl setUserlanguage:@"zh-Hant"];
+    
+    /*
+    if([lan isEqualToString:@"en"]){//判断当前的语言，进行改变
+        
+        
+        
+    }else{
+        
+        [InternationalControl setUserlanguage:@"en"];
+    }
+     */
+    
+    //改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguageInVC" object:nil];
+}
+
+-(void)changeLanguageInVC{
+    NSLog(@"reload VC");
+    [self viewDidLoad];
+}
+
 - (void)enButtonClicked {
     NSLog(@"English button clicked");
+    //*************** defualt user set even app is turned off *********//
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@"en" forKey:@"KEY_USER_LANG"];
+    [userDefaults synchronize];
+    
+    [AppDelegate APP].user.preferredLanguage = @"en";
+    
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguage" object:nil];
+    
+    [InternationalControl setUserlanguage:@"en"];
+    
+    //改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguageInVC" object:nil];
 }
 
 - (void)twButtonClicked {
     NSLog(@"Chinese button clicked");
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@"tw" forKey:@"KEY_USER_LANG"];
+    [userDefaults synchronize];
+    
+    [AppDelegate APP].user.preferredLanguage = @"tw";
+    
+    
+    [InternationalControl setUserlanguage:@"zh-Hant"];
+    
+    //改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguageInVC" object:nil];
+
 }
 
 
@@ -431,7 +504,7 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Hi, mate" message:@"Are you sure to log out?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Hi, mate", nil)  message:NSLocalizedString(@"Are you sure to log out?", nil)  delegate:self cancelButtonTitle: NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
             [alertView show];
 
         }
@@ -548,7 +621,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", [error localizedDescription]);
         
-        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"Busy network, please try later~" , nil)];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
@@ -565,9 +638,10 @@
     //2.凭借请求参数
     
     NSString *userToken = [AppDelegate APP].user.userToken;
+    NSString *userLang = [AppDelegate APP].user.preferredLanguage;
     
     //----------------get industry array-----------------//
-    NSDictionary *inData = @{@"action" : @"getIndustryList", @"token" : userToken};
+    NSDictionary *inData = @{@"action" : @"getIndustryList", @"token" : userToken, @"lang" : userLang};
     
     NSDictionary *parameters = @{@"data" : inData};
     
@@ -579,7 +653,7 @@
         NSLog(@"industry array %@", _industryArray);
         
         for (int i = 0; i < _industryArray.count; i++) {
-            [self.industry addObject:_industryArray[i].informationName.en];
+            [self.industry addObject:_industryArray[i].informationName];
         }
         NSLog(@"industry  %@", _industry);
         [self loadProfessionData];
@@ -601,10 +675,11 @@
     //2.凭借请求参数
     
     NSString *userToken = [AppDelegate APP].user.userToken;
+    NSString *userLang = [AppDelegate APP].user.preferredLanguage;
     
     //----------------get profession array-----------------//
     
-    NSDictionary *inData1 = @{@"action" : @"getProfessionList", @"token" : userToken};
+    NSDictionary *inData1 = @{@"action" : @"getProfessionList", @"token" : userToken, @"lang" : userLang};
     
     NSDictionary *parameters1 = @{@"data" : inData1};
     
@@ -615,7 +690,7 @@
         self.professionArray = [ZZTypicalInformationModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
         for (int i = 0; i < _professionArray.count; i++) {
-            [self.profession addObject:_professionArray[i].informationName.en];
+            [self.profession addObject:_professionArray[i].informationName];
         }
         [self loadInterestsData];
         
@@ -635,10 +710,10 @@
     
     //2.凭借请求参数
     
-    //NSString *userToken = [AppDelegate APP].user.userToken;
+    NSString *userLang = [AppDelegate APP].user.preferredLanguage;
     
     //----------------get interests array-----------------//
-    NSDictionary *inData2 = @{@"action" : @"getInterestList"};
+    NSDictionary *inData2 = @{@"action" : @"getInterestList", @"lang": userLang};
     
     NSDictionary *parameters2 = @{@"data" : inData2};
     
@@ -649,7 +724,7 @@
         self.interestsArray = [ZZTypicalInformationModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         //self.interests = [[NSMutableArray alloc] init];
         for (int i = 0; i < _interestsArray.count; i++) {
-            [self.interests addObject:_interestsArray[i].informationName.en];
+            [self.interests addObject:_interestsArray[i].informationName];
         }
         
         
@@ -729,6 +804,7 @@
                                 //@"showOnLockScreen" : _thisUser.showOnLockScreen,
                                 //@"industry" : _thisUser.userIndustry.informationID,
                                 //@"profession" : _thisUser.profession.informationID,
+                                 //@"preferredLanguag" :
                                 @"age" : _thisUser.age,
                                 //@"phone" : _thisUser.phone,
                                 //@"gender" :_thisUser.gender
