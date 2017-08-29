@@ -200,9 +200,15 @@
         @"page" : @"",
         @"geoPoint" : geoPoint
     };
+    
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
+    
     NSDictionary *inData = @{
                              @"action" : @"searchRestaurant",
-                             @"lang" : [AppDelegate APP].user.preferredLanguage,
+                             @"lang" : userLang,
                              @"data" : keyFactors
                              };
     NSDictionary *parameters = @{@"data" : inData};

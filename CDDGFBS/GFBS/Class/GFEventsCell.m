@@ -242,20 +242,21 @@
 
 - (void)likedButtonClicked: (UIButton *) sender {
     NSLog(@"self.thisEvent.listIsLike %@", self.thisEvent.listIsLike);
+    NSString *likeStr = ZBLocalized(@"likes", nil);
    
     if ([self.thisEvent.listIsLike isEqualToNumber:@1]) {
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-grey"] forState:UIControlStateNormal];
         self.thisEvent.listIsLike = [NSNumber numberWithBool:false];
         
         self.thisEvent.numOfLike = [NSNumber numberWithInt:[self.thisEvent.numOfLike intValue] - 1];
-        self.likeNumLabel.text = [NSString stringWithFormat:@"%zd likes", [self.thisEvent.numOfLike intValue]];
+        self.likeNumLabel.text = [NSString stringWithFormat:@"%zd %@", [self.thisEvent.numOfLike intValue], likeStr];
         [self likeCheckin:false];
         
     } else {
         [_heartButton setImage:[UIImage imageNamed:@"ic_heart-o"] forState:UIControlStateNormal];
         self.thisEvent.listIsLike = [NSNumber numberWithBool:true];
         self.thisEvent.numOfLike = [NSNumber numberWithInt:[self.thisEvent.numOfLike intValue] + 1];
-        self.likeNumLabel.text = [NSString stringWithFormat:@"%zd likes", [self.thisEvent.numOfLike intValue]];
+        self.likeNumLabel.text = [NSString stringWithFormat:@"%zd %@", [self.thisEvent.numOfLike intValue], likeStr];
 
         [self likeCheckin:true];
     }

@@ -79,9 +79,10 @@
 
 - (void)setUpAfterLoadData {
     
+    NSString *checkinStr = ZBLocalized(@"Check-in", nil);
     UILabel *numOfCheckinLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 80, GFScreenWidth - 20, 40)];
     numOfCheckinLabel.textAlignment = NSTextAlignmentCenter;
-    numOfCheckinLabel.text = [NSString stringWithFormat:@"%ld Check-in", _contents.count];
+    numOfCheckinLabel.text = [NSString stringWithFormat:@"%ld %@", _contents.count, checkinStr];
     numOfCheckinLabel.textColor = [UIColor whiteColor]; // pay attention to text color
     [self.view addSubview:numOfCheckinLabel];
     
@@ -391,11 +392,17 @@
     NSString *restaurantID = thisRestaurant.restaurantId;
     
     NSString *userToken = [AppDelegate APP].user.userToken;
+    
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
+    
     NSDictionary *inSubData = @{@"restaurantId" : restaurantID};
     NSDictionary *inData = @{
                              @"action" : @"getRestaurantDetail",
                              @"token" : userToken,
-                             @"lang" : [AppDelegate APP].user.preferredLanguage,
+                             @"lang" : userLang,
                              @"data" : inSubData
                              };
     NSDictionary *parameters = @{@"data" : inData};
@@ -430,10 +437,16 @@
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     
+    
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
+    
     NSDictionary *inData = [[NSDictionary alloc] init];
     
     NSDictionary *inSubData = @{@"restaurantId" : thisRestaurant.restaurantId};
-    inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"lang": [AppDelegate APP].user.preferredLanguage, @"data":inSubData};
+    inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"lang": userLang, @"data":inSubData};
     
     NSDictionary *parameters = @{@"data" : inData};
     

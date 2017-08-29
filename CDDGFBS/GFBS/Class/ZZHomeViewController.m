@@ -138,8 +138,13 @@
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     NSLog(@"first userToken %@", userToken);
+    
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
     NSDictionary *inData = [[NSDictionary alloc] init];
-    inData = @{@"action" : @"getMyProfile", @"token" : userToken, @"lang": [AppDelegate APP].user.preferredLanguage};
+    inData = @{@"action" : @"getMyProfile", @"token" : userToken, @"lang": userLang};
     NSDictionary *parameters = @{@"data" : inData};
     
     //发送请求
@@ -186,7 +191,10 @@
     //scroll.showsHorizontalScrollIndicator = YES;
     NSArray *itemArray = [[NSArray alloc] init];
     
-    NSString *userLang = [AppDelegate APP].user.preferredLanguage;
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
     itemArray = [NSArray arrayWithObjects: ZBLocalized(@"All", nil), ZBLocalized(@"Following", nil), ZBLocalized(@"Me", nil), ZBLocalized(@"Leaderboard", nil), nil];
 
     

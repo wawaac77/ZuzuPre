@@ -1,6 +1,7 @@
 
 
 #import<UIKit/UIKit.h>
+#import "ZBLocalized.h"
 
 /*常用数*/
 int const GFTextSize = 14;
@@ -62,4 +63,10 @@ NSString * const GetURL = @"http://52.76.120.122:3006/api/";
 NSString * const GFBoy = @"m";
 /*女*/
 NSString * const GFGirl = @"f";
+
+
+NSString * const HourAgoStr = @"hours ago";
+NSString * const MinAgoStr = @"minutes ago";
+NSString * const JustNowStr = @"Just now";
+NSString * const YesterdayStr = @"Yesterday";
 

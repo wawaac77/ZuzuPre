@@ -7,6 +7,7 @@
 //
 
 #import "ZZContentModel.h"
+#import "ZBLocalized.h"
 
 @implementation ZZContentModel
 
@@ -168,6 +169,7 @@ static NSTimeZone *outputTimeZone_;
     //NSLog(@"_listEventUpdatedAt in content%@", _listEventUpdatedAt);
     //NSLog(@"createAtDate NSDate in content %@", creatAtDate);
     //判断
+    
     if (creatAtDate.isThisYear) {//今年
         if ([calendar_ isDateInToday:creatAtDate]) {//今天
             //当前时间
@@ -177,16 +179,16 @@ static NSTimeZone *outputTimeZone_;
             NSDateComponents *comps = [calendar_ components:unit fromDate:creatAtDate toDate:nowDate options:0];
             
             if (comps.hour >= 1) {
-                return [NSString stringWithFormat:@"%zd hours ago",comps.hour];
+                return [NSString stringWithFormat:@"%zd %@",comps.hour, ZBLocalized(HourAgoStr, nil)];
             }else if (comps.minute >= 1){
-                return [NSString stringWithFormat:@"%zd minutes ago",comps.minute];
+                return [NSString stringWithFormat:@"%zd %@",comps.minute, ZBLocalized(MinAgoStr, nil)];
             }else
             {
-                return @"Just now";
+                return ZBLocalized(JustNowStr, nil);
             }
             
         }else if ([calendar_ isDateInYesterday:creatAtDate]){//昨天
-            outputFmt_.dateFormat = @"'Yesterday' HH:mm";
+            outputFmt_.dateFormat = @" HH:mm", ZBLocalized(YesterdayStr, nil) ;
             return [outputFmt_ stringFromDate:creatAtDate];
             
         }else{//其他
@@ -199,7 +201,8 @@ static NSTimeZone *outputTimeZone_;
         outputFmt_.dateFormat = @"dd MMM yyyy";
         return [outputFmt_ stringFromDate:creatAtDate];
     }
-    
+     
+    //fmt_.doesRelativeDateFormatting = YES;
     return _listEventUpdatedAt;
 }
 

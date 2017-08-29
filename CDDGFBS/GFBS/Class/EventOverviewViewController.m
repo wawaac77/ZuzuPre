@@ -67,9 +67,15 @@
     //2.凭借请求参数
     NSString *eventID = thisEventID;
     NSLog(@"overview thisEventID %@", eventID);
+    
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
     NSDictionary *forEventID = @ {@"eventId" : eventID};
     NSDictionary *inData = @{
                              @"action" : @"getEventDetail",
+                             @"lang" : userLang,
                              @"data" : forEventID};
     NSDictionary *parameters = @{@"data" : inData};
     

@@ -7,6 +7,7 @@
 //
 
 #import "GFRefreshHeader.h"
+#import "ZBLocalized.h"
 
 @implementation GFRefreshHeader
 
@@ -22,7 +23,7 @@
     self.lastUpdatedTimeLabel.textColor = [UIColor orangeColor];
     
     [self setTitle:@"Zuzu!" forState:MJRefreshStateIdle];
-    [self setTitle:@"Pull to refresh" forState:MJRefreshStatePulling];
+    [self setTitle:ZBLocalized(@"Pull to refresh", nil) forState:MJRefreshStatePulling];
     [self setTitle:@"Zuzuuuuuuu..." forState:MJRefreshStateRefreshing];
     
     

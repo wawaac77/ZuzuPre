@@ -283,9 +283,14 @@ static NSString*const ID = @"ID";
     
     //2.凭借请求参数
     NSArray *geoPoint = @[@114, @22];
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
     NSDictionary *geoPointDic = @ {@"geoPoint" : geoPoint};
     NSDictionary *inData = @{
                              @"action" : @"getNearbyEventList",
+                             @"lang" : userLang,
                              @"data" : geoPointDic};
     NSDictionary *parameters = @{@"data" : inData};
     

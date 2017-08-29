@@ -237,7 +237,7 @@ static NSString *const ID = @"ID";
 // for some items. By default, all items are editable.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
 // Override to support editing the table view.
@@ -303,6 +303,7 @@ static NSString *const ID = @"ID";
         
         NSString *userToken = [AppDelegate APP].user.userToken;
         NSDictionary *inSubData = @{@"checkinId" : thisContent.listEventID};
+        
         NSDictionary *inData = @{@"action" : @"deleteMyCheckinPost", @"token" : userToken, @"data" : inSubData};
         
         NSDictionary *parameters = @{@"data" : inData};
@@ -349,7 +350,7 @@ static NSString *const ID = @"ID";
     //2.凭借请求参数
     
     NSString *userToken = [AppDelegate APP].user.userToken;
-    //NSString *userLang = [AppDelegate APP].user.preferredLanguage;
+    //NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
     
     NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
     if ([userLang isEqualToString:@"zh-Hant"]) {

@@ -6,13 +6,16 @@
   Copyright © 2017 apple. All rights reserved.
 */
 
-"All" = "所有";
+"All" = "全部";
 "Following" = "關注";
 "Me" = "我";
 "Leaderboard" = "排行榜";
 "My Zuzu" = "我的Zuzu";
+"check-in" = "個簽到";
 "Check-in" = "簽到";
+"Points" = "分";
 "like" = "贊";
+"likes" = "贊";
 "Home" = "主頁";
 "Inbox" = "簡訊";
 "Invite Friends" = "邀請朋友";
@@ -27,10 +30,14 @@
 "Menu" = "菜單";
 "Events" = "活動";
 "Other Information" = "其他資訊";
+
+"Comments" = "評論";
 "Send" = "發送";
 
 "Add Friends" = "添加好友";
 "Enter keyword" = "輸入關鍵詞";
+
+"Pull to refresh" = "下拉更新";
 
 //*********** Check-in **************//
 "Please select your check-in location" = "請選擇您的簽到地點";
@@ -76,3 +83,7 @@
 
 "Busy network, please try later~" = "網絡繁忙，請稍後再試";
 
+//*********** Calendar **************//
+"hours ago" = "小時前";
+"minutes ago" = "分鐘前";
+"Just now" = "剛剛";

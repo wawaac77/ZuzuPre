@@ -52,8 +52,10 @@ UIKIT_EXTERN NSString * const GFBoy;
 UIKIT_EXTERN NSString * const GFGirl;
 
 
-
-
+UIKIT_EXTERN NSString * const HourAgoStr;
+UIKIT_EXTERN NSString * const MinAgoStr;
+UIKIT_EXTERN NSString * const JustNowStr;
+UIKIT_EXTERN NSString * const YesterdayStr;
 
 
 

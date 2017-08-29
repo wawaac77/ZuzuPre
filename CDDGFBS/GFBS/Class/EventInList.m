@@ -118,6 +118,8 @@ static NSCalendar *calendar_;
     NSDate *creatAtDate = [fmt_ dateFromString:_listEventStartDate];
     NSLog(@"createAtDate NSDate %@", creatAtDate);
     //判断
+    
+    /*
     if (creatAtDate.isThisYear) {//今年
         if ([calendar_ isDateInToday:creatAtDate]) {//今天
             //当前时间
@@ -148,6 +150,9 @@ static NSCalendar *calendar_;
     }else{//非今年
         return _listEventStartDate;
     }
+    */
+    
+    fmt_.doesRelativeDateFormatting = YES;
     
     return _listEventStartDate;
 

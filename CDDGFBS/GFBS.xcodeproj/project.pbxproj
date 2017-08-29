@@ -470,7 +470,6 @@
 		78C126B11F4EB5460087CCF6 /* imageplaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 78C126B01F4EB5450087CCF6 /* imageplaceholder.png */; };
 		78C126B61F501EE80087CCF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78C126B81F501EE80087CCF6 /* Localizable.strings */; };
 		78C126BD1F5047440087CCF6 /* HomePostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830892F1F1C85A700C31BFE /* HomePostTableViewController.m */; };
-		78C126C01F505C0E0087CCF6 /* InternationalControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C126BF1F505C0E0087CCF6 /* InternationalControl.m */; };
 		78C126CD1F5409000087CCF6 /* ZBLocalized.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C126CC1F5408FF0087CCF6 /* ZBLocalized.m */; };
 		78D85BDE1F444875007E8112 /* ic_select_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 78D85BDD1F444875007E8112 /* ic_select_grey.png */; };
 		78F49F721EE6F37B00674130 /* EventListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F711EE6F37B00674130 /* EventListTableViewController.m */; };
@@ -1179,8 +1178,6 @@
 		78C126BA1F501F5C0087CCF6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		78C126BB1F501F640087CCF6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		78C126BC1F501F650087CCF6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		78C126BE1F505C0E0087CCF6 /* InternationalControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InternationalControl.h; path = GFBS/Class/InternationalControl.h; sourceTree = SOURCE_ROOT; };
-		78C126BF1F505C0E0087CCF6 /* InternationalControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InternationalControl.m; path = GFBS/Class/InternationalControl.m; sourceTree = SOURCE_ROOT; };
 		78C126CB1F5408FF0087CCF6 /* ZBLocalized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBLocalized.h; sourceTree = "<group>"; };
 		78C126CC1F5408FF0087CCF6 /* ZBLocalized.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBLocalized.m; sourceTree = "<group>"; };
 		78D85BDD1F444875007E8112 /* ic_select_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_select_grey.png; sourceTree = "<group>"; };
@@ -1641,8 +1638,6 @@
 		18BE027B1DDB497900D27893 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				78C126BE1F505C0E0087CCF6 /* InternationalControl.h */,
-				78C126BF1F505C0E0087CCF6 /* InternationalControl.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3625,7 +3620,6 @@
 				788CC3581F19EC3900DC4116 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				7813FE9F1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				7813FE911F25EE820065D527 /* ZZAddFriendsViewController.m in Sources */,
-				78C126C01F505C0E0087CCF6 /* InternationalControl.m in Sources */,
 				788CC33E1F19EC3900DC4116 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				189980501DDBF6B4009071F4 /* GFAdViewController.m in Sources */,
 				18B7C73D1DE08620004BD781 /* GFSubTagViewController.m in Sources */,

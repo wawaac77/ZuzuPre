@@ -659,10 +659,14 @@
     
     NSString *userToken = [AppDelegate APP].user.userToken;
     NSString *userID = [AppDelegate APP].user.userID;
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
     
     NSLog(@"userID %@", userID);
     NSDictionary *inSubData = @{@"memberId" : userID};
-    NSDictionary *inData = @{@"action" : @"getProfile", @"token" : userToken, @"data" : inSubData};
+    NSDictionary *inData = @{@"action" : @"getProfile", @"token" : userToken, @"lang" : userLang, @"data" : inSubData};
     
     NSDictionary *parameters = @{@"data" : inData};
     
@@ -695,7 +699,10 @@
     //2.凭借请求参数
     
     NSString *userToken = [AppDelegate APP].user.userToken;
-    NSString *userLang = [AppDelegate APP].user.preferredLanguage;
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
     
     //----------------get industry array-----------------//
     NSDictionary *inData = @{@"action" : @"getIndustryList", @"token" : userToken, @"lang" : userLang};
@@ -732,7 +739,10 @@
     //2.凭借请求参数
     
     NSString *userToken = [AppDelegate APP].user.userToken;
-    NSString *userLang = [AppDelegate APP].user.preferredLanguage;
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
     
     //----------------get profession array-----------------//
     
@@ -767,7 +777,10 @@
     
     //2.凭借请求参数
     
-    NSString *userLang = [AppDelegate APP].user.preferredLanguage;
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
     
     //----------------get interests array-----------------//
     NSDictionary *inData2 = @{@"action" : @"getInterestList", @"lang": userLang};

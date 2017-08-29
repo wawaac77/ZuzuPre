@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZBLocalized.h"
 #import "UserProfileCheckinViewController.h"
 #import "HomePostTableViewController.h"
 #import "UserCheckinListChildTableViewController.h"
@@ -118,14 +119,16 @@
         button.layer.borderColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1].CGColor;
         [button setTitleColor:[UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:13];
+        NSString *checkinStr = ZBLocalized(@"check-in", nil);
+        NSString *pointsStr = ZBLocalized(@"Points", nil);
         if (i == 0) {
-            [button setTitle:[NSString stringWithFormat:@"%zd Check-in", self.numOfCheckins] forState:UIControlStateNormal];
+            [button setTitle:[NSString stringWithFormat:@"%zd %@", self.numOfCheckins, checkinStr] forState:UIControlStateNormal];
         }
         else if (i == 1) {
             [button setTitle:[NSString stringWithFormat:@"#%@ / %@", _myProfile.socialLevel, _myProfile.userOrganizingLevel ] forState:UIControlStateNormal];
         }
         else {
-            [button setTitle:[NSString stringWithFormat:@"%@ Points", _myProfile.checkinPoint] forState:UIControlStateNormal];
+            [button setTitle:[NSString stringWithFormat:@"%@ %@", _myProfile.checkinPoint, pointsStr] forState:UIControlStateNormal];
         }
     
         [_barButtonArray addObject:button];
@@ -160,9 +163,10 @@
 
 - (void)passValue:(NSInteger *)theValue {
     NSLog(@"passValueDelegate %zd", theValue);
-    _barButtonArray[0].titleLabel.text = [NSString stringWithFormat:@"%zd Check-in", theValue];
+    NSString *checkinStr = ZBLocalized(@"check-in", nil);
+    //_barButtonArray[0].titleLabel.text = [NSString stringWithFormat:@"%zd %@", theValue, checkinStr];
     
-    [_barButtonArray[0] setTitle:[NSString stringWithFormat:@"%zd Check-in", theValue] forState:UIControlStateNormal];
+    [_barButtonArray[0] setTitle:[NSString stringWithFormat:@"%zd %@", theValue, checkinStr] forState:UIControlStateNormal];
     self.numOfCheckins = theValue;
 }
 
@@ -175,8 +179,13 @@
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
+    
     NSDictionary *inSubData = @{@"memberId" : _myProfile.userID};
-    NSDictionary *inData = @{@"action" : @"getProfile", @"token" : userToken, @"data":inSubData};
+    NSDictionary *inData = @{@"action" : @"getProfile", @"token" : userToken, @"lang" :userLang, @"data":inSubData};
     
     NSDictionary *parameters = @{@"data" : inData};
     
