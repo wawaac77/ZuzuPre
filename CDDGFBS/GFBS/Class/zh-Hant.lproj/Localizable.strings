@@ -60,6 +60,11 @@
 "Hi, mate" = "哈嘍";
 "Are you sure to log out?" = "你確定要退出嗎？";
 "Log Out >" = "退出 >";
+"Switch to English version?" = "轉為英文版？";
+"Switch to Chinese version?" = "轉為中文版？";
+"It is already Chinese version now" = "已經是中文版";
+"It is already English version now" = "已經是英文版";
+"Are you sure?" = "你確定嗎？";
 
 "Language" = "語言";
 "Age" = "年齡";

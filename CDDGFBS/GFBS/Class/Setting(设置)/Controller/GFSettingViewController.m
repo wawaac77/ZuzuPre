@@ -222,7 +222,7 @@
         } else if (indexPath.row == 2) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 20)];
             [label setFont:[UIFont systemFontOfSize:15]];
-            label.text = @"Language";
+            label.text = ZBLocalized(@"Language", nil);
             [cell.contentView addSubview:label];
             
             CGFloat btnWidth = (GFScreenWidth - 20 - 10) / 2;
@@ -451,29 +451,26 @@
 
 - (void)enButtonClicked {
     NSLog(@"English button clicked");
-    
-    //*************** defualt user set even app is turned off *********//
-    /*
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:@"en" forKey:@"KEY_USER_LANG"];
-    [userDefaults synchronize];
-    
-    [AppDelegate APP].user.preferredLanguage = @"en";
-    
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguage" object:nil];
-    
-    [InternationalControl setUserlanguage:@"en"];
-    
-    //改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguage" object:nil];
-    */
-    
-    [[ZBLocalized sharedInstance]setLanguage:@"en"];
-    //[self.tableView reloadData];
-    //[self viewDidLoad];
-    [self initRootVC];
-    
     NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
+    
+    if ([language isEqualToString:@"en"]) {
+        /*
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"It is already English version now", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Ok", nil) otherButtonTitles: nil, nil];
+        //alertView.tag = 1;
+        [alertView show];
+         */
+        
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"Are you sure?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
+        alertView.tag = 1;
+        [alertView show];
+    }
+    
+    
+    //[[ZBLocalized sharedInstance]setLanguage:@"en"];
+    //[self initRootVC];
+    
+    //NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
     NSLog(@"切换后的语言:%@",language);
 }
 
@@ -493,10 +490,24 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguage" object:nil];
      */
     
-    [[ZBLocalized sharedInstance]setLanguage:@"zh-Hant"];
-    [self initRootVC];
-    
     NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
+    
+    if ([language isEqualToString:@"en"]) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"Are you sure?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
+        alertView.tag = 2;
+        [alertView show];
+        
+    } else {
+        /*
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:ZBLocalized(@"Hi", nil)  message:ZBLocalized(@"It is already Chinese version now", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Ok", nil) otherButtonTitles: nil, nil];
+        //alertView.tag = 1;
+        [alertView show];
+         */
+    }
+
+    
+    
+    //NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
     NSLog(@"切换后的语言:%@",language);
 
 }
@@ -525,7 +536,8 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
-    if (buttonIndex == 1) {
+    UIAlertView *alert = alertView;
+    if (buttonIndex == 1 && alertView.tag == 0) {
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         AppDelegate *appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         [AppDelegate APP].user = nil;
@@ -551,6 +563,13 @@
          */
 
         
+    } else if (alertView.tag == 1 && buttonIndex == 1) {
+        [[ZBLocalized sharedInstance]setLanguage:@"en"];
+        [self initRootVC];
+        
+    } else if (alertView.tag == 2 && buttonIndex == 1) {
+        [[ZBLocalized sharedInstance]setLanguage:@"zh-Hant"];
+        [self initRootVC];
     }
 }
 
@@ -561,7 +580,10 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:ZBLocalized(@"Hi, mate", nil)  message:ZBLocalized(@"Are you sure to log out?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
+            //ZBLocalized(@"Hi, mate", nil);
+            
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"Are you sure to log out?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
+            alertView.tag = 0;
             [alertView show];
 
         }

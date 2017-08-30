@@ -471,6 +471,7 @@
 		78C126B61F501EE80087CCF6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78C126B81F501EE80087CCF6 /* Localizable.strings */; };
 		78C126BD1F5047440087CCF6 /* HomePostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830892F1F1C85A700C31BFE /* HomePostTableViewController.m */; };
 		78C126CD1F5409000087CCF6 /* ZBLocalized.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C126CC1F5408FF0087CCF6 /* ZBLocalized.m */; };
+		78C127781F56A7260087CCF6 /* ic_fa-heart-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 78C127771F56A7250087CCF6 /* ic_fa-heart-g.png */; };
 		78D85BDE1F444875007E8112 /* ic_select_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 78D85BDD1F444875007E8112 /* ic_select_grey.png */; };
 		78F49F721EE6F37B00674130 /* EventListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F711EE6F37B00674130 /* EventListTableViewController.m */; };
 		78F49F801EE6F5A900674130 /* MyEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F7E1EE6F5A900674130 /* MyEventCell.m */; };
@@ -1180,6 +1181,7 @@
 		78C126BC1F501F650087CCF6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		78C126CB1F5408FF0087CCF6 /* ZBLocalized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBLocalized.h; sourceTree = "<group>"; };
 		78C126CC1F5408FF0087CCF6 /* ZBLocalized.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBLocalized.m; sourceTree = "<group>"; };
+		78C127771F56A7250087CCF6 /* ic_fa-heart-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_fa-heart-g.png"; sourceTree = "<group>"; };
 		78D85BDD1F444875007E8112 /* ic_select_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_select_grey.png; sourceTree = "<group>"; };
 		78F49F701EE6F37B00674130 /* EventListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListTableViewController.h; sourceTree = "<group>"; };
 		78F49F711EE6F37B00674130 /* EventListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListTableViewController.m; sourceTree = "<group>"; };
@@ -1368,13 +1370,6 @@
 				7864EB661F28ED6600AA572E /* NotificationButtonsCell.xib */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		186810001E0A9454006454D0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		189CA3171DDADBF6004D07EA = {
@@ -1753,7 +1748,6 @@
 				183E9CE81E8E585000B13C75 /* GFTopViewController.m */,
 				183E9CE91E8E585000B13C75 /* GFTopWindow.h */,
 				183E9CEA1E8E585000B13C75 /* GFTopWindow.m */,
-				186810001E0A9454006454D0 /* Controller */,
 				18BE02861DDB497A00D27893 /* AppDelegate.h */,
 				18BE02871DDB497A00D27893 /* AppDelegate.m */,
 				18BE02881DDB497A00D27893 /* Category */,
@@ -2472,6 +2466,7 @@
 				786069741F15DB9B00A8AB88 /* ic_google-plus.png */,
 				786069751F15DB9B00A8AB88 /* ic_heart-grey.png */,
 				786069761F15DB9B00A8AB88 /* ic_heart-o.png */,
+				78C127771F56A7250087CCF6 /* ic_fa-heart-g.png */,
 				786069771F15DB9B00A8AB88 /* ic_home-check-in-o.png */,
 				786069781F15DB9B00A8AB88 /* ic_home-check-in.png */,
 				786069791F15DB9B00A8AB88 /* ic_home-my-zuzu-o.png */,
@@ -3301,6 +3296,7 @@
 				780097071EC9C1F5008F9F99 /* gold_pin.png in Resources */,
 				786069AC1F15DB9B00A8AB88 /* ic_facebook-logo.png in Resources */,
 				7862274F1EF91AF8006F731F /* zuzu-login-1242x2208.png in Resources */,
+				78C127781F56A7260087CCF6 /* ic_fa-heart-g.png in Resources */,
 				780097141EC9C1F5008F9F99 /* my-friends.png in Resources */,
 				786069AF1F15DB9B00A8AB88 /* ic_heart-grey.png in Resources */,
 				786069D81F15DB9B00A8AB88 /* zuzu05-login-640x960.jpg in Resources */,

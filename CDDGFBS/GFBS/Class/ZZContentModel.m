@@ -165,6 +165,13 @@ static NSTimeZone *outputTimeZone_;
     //将服务器返回的数据进行处理
     fmt_.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"en"]) {
+        outputFmt_.dateFormat = @"dd MMM HH:mm";
+    } else {
+        outputFmt_.dateFormat = @"M月d日 HH:mm";
+    }
+    
     NSDate *creatAtDate = [fmt_ dateFromString:_listEventUpdatedAt];
     //NSLog(@"_listEventUpdatedAt in content%@", _listEventUpdatedAt);
     //NSLog(@"createAtDate NSDate in content %@", creatAtDate);
@@ -188,17 +195,26 @@ static NSTimeZone *outputTimeZone_;
             }
             
         }else if ([calendar_ isDateInYesterday:creatAtDate]){//昨天
-            outputFmt_.dateFormat = @" HH:mm", ZBLocalized(YesterdayStr, nil) ;
+            if ([userLang isEqualToString:@"en"]) {
+                outputFmt_.dateFormat = @"'Yesterday' HH:mm";
+            } else {
+                outputFmt_.dateFormat = @"昨天 HH:mm";
+            }
             return [outputFmt_ stringFromDate:creatAtDate];
             
         }else{//其他
-            outputFmt_.dateFormat = @"dd MMM HH:mm";
+            //outputFmt_.dateFormat = @"dd MMM HH:mm";
             return [outputFmt_ stringFromDate:creatAtDate];
             
         }
         
     }else{//非今年
-        outputFmt_.dateFormat = @"dd MMM yyyy";
+        //outputFmt_.dateFormat = @"dd MMM yyyy";
+        if ([userLang isEqualToString:@"en"]) {
+            outputFmt_.dateFormat = @"dd MMM yyyy";
+        } else {
+            outputFmt_.dateFormat = @"yyyy年M月d日";
+        }
         return [outputFmt_ stringFromDate:creatAtDate];
     }
      

@@ -7,6 +7,7 @@
 //
 
 #import "NotificationItem.h"
+#import "ZBLocalized.h"
 #import <MJExtension.h>
 
 @implementation NotificationItem
@@ -46,13 +47,18 @@ static NSTimeZone *outputTimeZone_;
 
 
 - (NSString *)updatedAt {
-    //将服务器返回的数据进行处理
     fmt_.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"en"]) {
+        outputFmt_.dateFormat = @"dd MMM HH:mm";
+    } else {
+        outputFmt_.dateFormat = @"M月d日 HH:mm";
+    }
+    
+    
     NSDate *creatAtDate = [fmt_ dateFromString:_updatedAt];
-    NSLog(@"_listEventUpdatedAt %@", _updatedAt);
-    NSLog(@"createAtDate NSDate %@", creatAtDate);
-    //判断
+    
     if (creatAtDate.isThisYear) {//今年
         if ([calendar_ isDateInToday:creatAtDate]) {//今天
             //当前时间
@@ -62,31 +68,40 @@ static NSTimeZone *outputTimeZone_;
             NSDateComponents *comps = [calendar_ components:unit fromDate:creatAtDate toDate:nowDate options:0];
             
             if (comps.hour >= 1) {
-                return [NSString stringWithFormat:@"%zd hours ago",comps.hour];
+                return [NSString stringWithFormat:@"%zd %@",comps.hour, ZBLocalized(HourAgoStr, nil)];
             }else if (comps.minute >= 1){
-                return [NSString stringWithFormat:@"%zd minutes ago",comps.minute];
+                return [NSString stringWithFormat:@"%zd %@",comps.minute, ZBLocalized(MinAgoStr, nil)];
             }else
             {
-                return @"Just now";
+                return ZBLocalized(JustNowStr, nil);
             }
             
         }else if ([calendar_ isDateInYesterday:creatAtDate]){//昨天
-            outputFmt_.dateFormat = @"'Yesterday' HH:mm";
+            if ([userLang isEqualToString:@"en"]) {
+                outputFmt_.dateFormat = @"'Yesterday' HH:mm";
+            } else {
+                outputFmt_.dateFormat = @"昨天 HH:mm";
+            }
             return [outputFmt_ stringFromDate:creatAtDate];
             
         }else{//其他
-            outputFmt_.dateFormat = @"dd MMM HH:mm";
+            //outputFmt_.dateFormat = @"dd MMM HH:mm";
             return [outputFmt_ stringFromDate:creatAtDate];
             
         }
         
     }else{//非今年
-        outputFmt_.dateFormat = @"dd MMM yyyy";
+        //outputFmt_.dateFormat = @"dd MMM yyyy";
+        if ([userLang isEqualToString:@"en"]) {
+            outputFmt_.dateFormat = @"dd MMM yyyy";
+        } else {
+            outputFmt_.dateFormat = @"yyyy年M月d日";
+        }
         return [outputFmt_ stringFromDate:creatAtDate];
     }
     
+    //fmt_.doesRelativeDateFormatting = YES;
     return _updatedAt;
-
 }
 
 @end
