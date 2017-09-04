@@ -435,6 +435,10 @@
 		788CC35C1F1A169C00DC4116 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 788CC35B1F1A169C00DC4116 /* GoogleService-Info.plist */; };
 		788CC35D1F1A169C00DC4116 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 788CC35B1F1A169C00DC4116 /* GoogleService-Info.plist */; };
 		788CC35E1F1A169C00DC4116 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 788CC35B1F1A169C00DC4116 /* GoogleService-Info.plist */; };
+		78919F971F5D219000654C37 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78919F951F5D219000654C37 /* ForgetPasswordViewController.m */; };
+		78919F981F5D219000654C37 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78919F961F5D219000654C37 /* ForgetPasswordViewController.xib */; };
+		78919F9C1F5D578100654C37 /* ResetPWSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78919F9A1F5D578100654C37 /* ResetPWSuccessViewController.m */; };
+		78919F9D1F5D578100654C37 /* ResetPWSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78919F9B1F5D578100654C37 /* ResetPWSuccessViewController.xib */; };
 		7897E1041EF3E6A00046D647 /* EventListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7897E1021EF3E6A00046D647 /* EventListCell.m */; };
 		7897E1051EF3E6A00046D647 /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7897E1031EF3E6A00046D647 /* EventListCell.xib */; };
 		7897E1081EF7766A0046D647 /* EventInList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7897E1071EF7766A0046D647 /* EventInList.m */; };
@@ -1117,6 +1121,12 @@
 		788CC32C1F19EC3900DC4116 /* JSQMessagesTypingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTypingView.h; sourceTree = "<group>"; };
 		788CC32D1F19EC3900DC4116 /* JSQMessagesTypingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTypingView.m; sourceTree = "<group>"; };
 		788CC35B1F1A169C00DC4116 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		78919F941F5D219000654C37 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
+		78919F951F5D219000654C37 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
+		78919F961F5D219000654C37 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
+		78919F991F5D578100654C37 /* ResetPWSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPWSuccessViewController.h; sourceTree = "<group>"; };
+		78919F9A1F5D578100654C37 /* ResetPWSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPWSuccessViewController.m; sourceTree = "<group>"; };
+		78919F9B1F5D578100654C37 /* ResetPWSuccessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPWSuccessViewController.xib; sourceTree = "<group>"; };
 		7897E1011EF3E6A00046D647 /* EventListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListCell.h; sourceTree = "<group>"; };
 		7897E1021EF3E6A00046D647 /* EventListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListCell.m; sourceTree = "<group>"; };
 		7897E1031EF3E6A00046D647 /* EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
@@ -2190,6 +2200,12 @@
 				7829FF9D1ED8040100C934C2 /* LoginViewController.m */,
 				7829FF9E1ED8040100C934C2 /* LoginViewController.xib */,
 				7829FFA11ED807A800C934C2 /* LoginSignChildVC */,
+				78919F941F5D219000654C37 /* ForgetPasswordViewController.h */,
+				78919F951F5D219000654C37 /* ForgetPasswordViewController.m */,
+				78919F961F5D219000654C37 /* ForgetPasswordViewController.xib */,
+				78919F991F5D578100654C37 /* ResetPWSuccessViewController.h */,
+				78919F9A1F5D578100654C37 /* ResetPWSuccessViewController.m */,
+				78919F9B1F5D578100654C37 /* ResetPWSuccessViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -3107,6 +3123,7 @@
 				788CC35C1F1A169C00DC4116 /* GoogleService-Info.plist in Resources */,
 				780096ED1EC9C1F5008F9F99 /* zuzu-login-one-image.png in Resources */,
 				78C126B61F501EE80087CCF6 /* Localizable.strings in Resources */,
+				78919F981F5D219000654C37 /* ForgetPasswordViewController.xib in Resources */,
 				780097001EC9C1F5008F9F99 /* ic_location.png in Resources */,
 				789CFF981F12399100EBA772 /* ZZImageCollectionCell.xib in Resources */,
 				7813FE991F25F3E90065D527 /* ic_add-friend-black.png in Resources */,
@@ -3325,6 +3342,7 @@
 				7813FE971F25F18B0065D527 /* ZZAddFriendsCell.xib in Resources */,
 				786069D01F15DB9B00A8AB88 /* check-in-image-713x288.jpg in Resources */,
 				786069DB1F15FA2A00A8AB88 /* guide-1.jpg in Resources */,
+				78919F9D1F5D578100654C37 /* ResetPWSuccessViewController.xib in Resources */,
 				7824E32C1EF13BF700F85BFB /* profile-bg-black_02.jpg in Resources */,
 				780097361ECAD4FD008F9F99 /* zuzu-login-750x1334-plain.png in Resources */,
 				780096CC1EC9C1F5008F9F99 /* ic_fa-mail-reply.png in Resources */,
@@ -3431,6 +3449,7 @@
 			files = (
 				789CFF781F0CA5FB00EBA772 /* EventRestaurant.m in Sources */,
 				7897E1041EF3E6A00046D647 /* EventListCell.m in Sources */,
+				78919F971F5D219000654C37 /* ForgetPasswordViewController.m in Sources */,
 				789CFFAA1F13CE2F00EBA772 /* ZZLeaderboardModel.m in Sources */,
 				18388AD81DFAAF21004E1DF9 /* GFRecommendViewController.m in Sources */,
 				78F49F721EE6F37B00674130 /* EventListTableViewController.m in Sources */,
@@ -3511,6 +3530,7 @@
 				18B61AF21E0CF48F00CAC3FF /* GFAddTagsViewController.m in Sources */,
 				18C826351DE736B3007341E3 /* GFPictureViewController.m in Sources */,
 				1829A6A11DE818F70086AD86 /* GFRefreshHeader.m in Sources */,
+				78919F9C1F5D578100654C37 /* ResetPWSuccessViewController.m in Sources */,
 				7824E3591EF2201D00F85BFB /* BadgesSquareCell.m in Sources */,
 				18B7C72A1DE07501004BD781 /* GFLoginRegisterView.m in Sources */,
 				783089481F1D039800C31BFE /* CommentHeaderView.m in Sources */,

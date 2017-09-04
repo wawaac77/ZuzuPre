@@ -11,6 +11,7 @@
 #import "GFEventDetailViewController.h"
 #import "GFTabBarController.h"
 #import "GFNavigationController.h"
+#import "ForgetPasswordViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -113,7 +114,7 @@
     NSString *password = _passwordTextField.text;
     if (email.length == 0) {
         _emailTextField.text = @"alicej@gmail.com";
-        _passwordTextField.text =@"123456";
+        _passwordTextField.text = @"123456";
 
     }
     
@@ -238,7 +239,37 @@
 - (IBAction)forgetPasswordClicked:(id)sender {
     
     NSLog(@"forget password > button clicked");
+    /*
     
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"RESET PASSWORD"
+                                                                              message: @"Please enter your emial address"
+                                                                       preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Email";
+        textField.textColor = [UIColor grayColor];
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textField.borderStyle = UITextBorderStyleRoundedRect;
+    }];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSArray * textfields = alertController.textFields;
+        UITextField * namefield = textfields[0];
+        //UITextField * passwordfiled = textfields[1];
+        //NSLog(@"%@:%@",namefield.text,passwordfiled.text);
+        NSLog(@"%@",namefield.text);
+        
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    */
+    
+    ForgetPasswordViewController *forgetVC = [[ForgetPasswordViewController alloc] init];
+    forgetVC.view.frame = [UIScreen mainScreen].bounds;
+    [self presentViewController:forgetVC animated:YES completion:nil];
+    
+    //NSLog(@"finished forgetVC push");
+    
+    /*
     //取消请求
     [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
     
@@ -279,6 +310,7 @@
             [SVProgressHUD dismiss];
         });
     }];
+     */
     
 
 }
