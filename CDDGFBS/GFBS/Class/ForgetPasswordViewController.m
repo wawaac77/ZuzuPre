@@ -27,6 +27,17 @@
 
 @implementation ForgetPasswordViewController
 
+#pragma mark - 懒加载
+-(GFHTTPSessionManager *)manager
+{
+    if (!_manager) {
+        _manager = [GFHTTPSessionManager manager];
+        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    }
+    
+    return _manager;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpView];
@@ -52,12 +63,13 @@
 }
 
 - (IBAction)submitButtonClicked:(id)sender {
-    
-    NSLog(@"submit button clicked");
+     
     //取消请求
     [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
     
+    
     //2.凭借请求参数
+    
     NSString *email = _emailField.text;
     NSDictionary *emailDic = @ {@"email" : email};
     NSDictionary *inData = @{
@@ -66,25 +78,23 @@
     NSDictionary *parameters = @{@"data" : inData};
     
     NSLog(@"upcoming events parameters %@", parameters);
-    
-    
+
     [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
         
         NSNumber *responseStatus = [[NSNumber alloc] init];
         responseStatus = responseObject[@"status"];
         
+        
         NSLog(@"responseStatus %@", responseStatus);
         
         
         if ([responseStatus isEqualToNumber:@1]) {
-            /*
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"ZUZU" message:@"You could check your email and set new password now ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alertView show];
-         */
+    
             NSLog(@"start push resetPW success vc");
             ResetPWSuccessViewController *resetVC = [[ResetPWSuccessViewController alloc] init];
             resetVC.view.frame = [UIScreen mainScreen].bounds;
             resetVC.email = email;
+            
             
             [self presentViewController:resetVC animated:YES completion:nil];
             
