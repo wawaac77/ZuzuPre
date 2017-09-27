@@ -15,6 +15,8 @@
 #import <SDImageCache.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <GoogleSignIn.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface SignUpChildViewController () <GIDSignInUIDelegate>
 
@@ -89,7 +91,14 @@
 
 - (void)setupLayout {
     _signupWithFacebookButton.layer.cornerRadius = 5.0f;
+    _signupWithFacebookButton.clipsToBounds = YES;
+    _signupWithFacebookButton.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1];
+    [_signupWithFacebookButton addTarget:self action:@selector(loginFBButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    
     _signupWithGoogleButton.layer.cornerRadius = 5.0f;
+    _signupWithGoogleButton.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:72.0/255.0 blue:54.0/255.0 alpha:1];
+    
+    
     _signupButton.layer.cornerRadius = 5.0f;
     _signupButton.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
     
@@ -331,4 +340,26 @@
 - (IBAction)googleSignupButtonClicked:(id)sender {
     //[self signIn:<#(GIDSignIn *)#> didSignInForUser:<#(GIDGoogleUser *)#> withError:nil];
 }
+
+//************************ end of google signin *******************************//
+
+//************************login with Facebook *******************************//
+- (void)loginFBButtonClicked {
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login
+     logInWithReadPermissions: @[@"public_profile", @"email", @"user_friends"]
+     fromViewController:self
+     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         if (error) {
+             NSLog(@"Process error");
+         } else if (result.isCancelled) {
+             NSLog(@"Cancelled");
+         } else {
+             NSLog(@"Logged in");
+             NSLog(@"facebookToken %@", result.token);
+             
+         }
+     }];
+}
+//************************* end of Facebook signin part **************************//
 @end

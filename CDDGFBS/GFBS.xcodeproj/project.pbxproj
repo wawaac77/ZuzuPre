@@ -290,6 +290,13 @@
 		784D3F741ECC85CD0058C63F /* GFNearbyEventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 784D3F721ECC85CD0058C63F /* GFNearbyEventsViewController.xib */; };
 		784FBB801F1F032A00014395 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 784FBB7E1F1F032A00014395 /* Fabric.framework */; };
 		784FBB811F1F032A00014395 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 784FBB7F1F1F032A00014395 /* Crashlytics.framework */; };
+		785FF2341F7B8FAE002A42E9 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785FF2331F7B8FAE002A42E9 /* FBSDKCoreKit.framework */; };
+		785FF2361F7B8FBC002A42E9 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785FF2351F7B8FBC002A42E9 /* FBSDKLoginKit.framework */; };
+		785FF2381F7B8FD2002A42E9 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785FF2371F7B8FD2002A42E9 /* FBSDKShareKit.framework */; };
+		785FF2411F7B923A002A42E9 /* tutorial-1242x2208-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 785FF23E1F7B923A002A42E9 /* tutorial-1242x2208-1.jpg */; };
+		785FF2421F7B923A002A42E9 /* tutorial-1242x2208-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 785FF23F1F7B923A002A42E9 /* tutorial-1242x2208-2.jpg */; };
+		785FF2431F7B923A002A42E9 /* tutorial-1242x2208-3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 785FF2401F7B923A002A42E9 /* tutorial-1242x2208-3.jpg */; };
+		785FF2451F7B949A002A42E9 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785FF2441F7B949A002A42E9 /* Bolts.framework */; };
 		786069631F15D98100A8AB88 /* DHGifImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7860695F1F15D98100A8AB88 /* DHGifImageOperation.m */; };
 		786069641F15D98100A8AB88 /* DHGuidePageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 786069611F15D98100A8AB88 /* DHGuidePageHUD.m */; };
 		786069651F15D98100A8AB88 /* GuideImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 786069621F15D98100A8AB88 /* GuideImage.bundle */; };
@@ -907,6 +914,13 @@
 		784D3F721ECC85CD0058C63F /* GFNearbyEventsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GFNearbyEventsViewController.xib; sourceTree = "<group>"; };
 		784FBB7E1F1F032A00014395 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		784FBB7F1F1F032A00014395 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		785FF2331F7B8FAE002A42E9 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		785FF2351F7B8FBC002A42E9 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		785FF2371F7B8FD2002A42E9 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		785FF23E1F7B923A002A42E9 /* tutorial-1242x2208-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial-1242x2208-1.jpg"; sourceTree = "<group>"; };
+		785FF23F1F7B923A002A42E9 /* tutorial-1242x2208-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial-1242x2208-2.jpg"; sourceTree = "<group>"; };
+		785FF2401F7B923A002A42E9 /* tutorial-1242x2208-3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "tutorial-1242x2208-3.jpg"; sourceTree = "<group>"; };
+		785FF2441F7B949A002A42E9 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		7860695E1F15D98100A8AB88 /* DHGifImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGifImageOperation.h; sourceTree = "<group>"; };
 		7860695F1F15D98100A8AB88 /* DHGifImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHGifImageOperation.m; sourceTree = "<group>"; };
 		786069601F15D98100A8AB88 /* DHGuidePageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGuidePageHUD.h; sourceTree = "<group>"; };
@@ -1232,10 +1246,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				785FF2341F7B8FAE002A42E9 /* FBSDKCoreKit.framework in Frameworks */,
 				7824E3611EF27D5300F85BFB /* MapKit.framework in Frameworks */,
+				785FF2361F7B8FBC002A42E9 /* FBSDKLoginKit.framework in Frameworks */,
+				785FF2381F7B8FD2002A42E9 /* FBSDKShareKit.framework in Frameworks */,
 				F0DF6B9C479499B133954DC1 /* libPods-GFBS.a in Frameworks */,
 				784FBB811F1F032A00014395 /* Crashlytics.framework in Frameworks */,
 				784FBB801F1F032A00014395 /* Fabric.framework in Frameworks */,
+				785FF2451F7B949A002A42E9 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1834,9 +1852,13 @@
 		6F4DA860D03CDB4F1CA64D50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				785FF2441F7B949A002A42E9 /* Bolts.framework */,
 				784FBB7E1F1F032A00014395 /* Fabric.framework */,
 				784FBB7F1F1F032A00014395 /* Crashlytics.framework */,
 				7824E3601EF27D5300F85BFB /* MapKit.framework */,
+				785FF2371F7B8FD2002A42E9 /* FBSDKShareKit.framework */,
+				785FF2351F7B8FBC002A42E9 /* FBSDKLoginKit.framework */,
+				785FF2331F7B8FAE002A42E9 /* FBSDKCoreKit.framework */,
 				16F7F4458D42D3C1C1286EDF /* libPods-GFBS.a */,
 			);
 			name = Frameworks;
@@ -2439,6 +2461,16 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		785FF23D1F7B923A002A42E9 /* 1242x2208 */ = {
+			isa = PBXGroup;
+			children = (
+				785FF23E1F7B923A002A42E9 /* tutorial-1242x2208-1.jpg */,
+				785FF23F1F7B923A002A42E9 /* tutorial-1242x2208-2.jpg */,
+				785FF2401F7B923A002A42E9 /* tutorial-1242x2208-3.jpg */,
+			);
+			path = 1242x2208;
+			sourceTree = "<group>";
+		};
 		7860695D1F15D98100A8AB88 /* DHGuidePageHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -2528,6 +2560,7 @@
 		786069961F15DB9B00A8AB88 /* jpg */ = {
 			isa = PBXGroup;
 			children = (
+				785FF23D1F7B923A002A42E9 /* 1242x2208 */,
 				786069971F15DB9B00A8AB88 /* check-in-image-2-713x288.jpg */,
 				786069981F15DB9B00A8AB88 /* check-in-image-713x288.jpg */,
 				786069991F15DB9B00A8AB88 /* zuzu05-bg-1242x2208.jpg */,
@@ -3231,6 +3264,7 @@
 				789CFF4A1F02115800EBA772 /* SliderCell.xib in Resources */,
 				18B3D6C11DEC518700474981 /* GFSeeBigImageViewController.xib in Resources */,
 				780096BE1EC9C1F5008F9F99 /* ic_ fa-image_280x33.png in Resources */,
+				785FF2421F7B923A002A42E9 /* tutorial-1242x2208-2.jpg in Resources */,
 				788246D51ED2E7BA0058B226 /* EventPhotoViewController.xib in Resources */,
 				780096B31EC9C1F5008F9F99 /* event-banner-1036x328-02.jpg in Resources */,
 				780096FF1EC9C1F5008F9F99 /* ic_fa-users.png in Resources */,
@@ -3240,6 +3274,7 @@
 				786069C81F15DB9B00A8AB88 /* ic_price.png in Resources */,
 				780097161EC9C1F5008F9F99 /* Thumbs.db in Resources */,
 				7830895D1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib in Resources */,
+				785FF2411F7B923A002A42E9 /* tutorial-1242x2208-1.jpg in Resources */,
 				780097391ECAD956008F9F99 /* zuzu_App_Icon_167x167.png in Resources */,
 				786069C71F15DB9B00A8AB88 /* ic_phone_call.png in Resources */,
 				780096C71EC9C1F5008F9F99 /* ic_fa-credit-card.png in Resources */,
@@ -3320,6 +3355,7 @@
 				78FFE5B61ECDAD8300F909A2 /* RestaurantViewController.xib in Resources */,
 				788246D01ED2E7A90058B226 /* EventDiscussionViewController.xib in Resources */,
 				7824E32F1EF13BF700F85BFB /* profile-bg-brown_01.jpg in Resources */,
+				785FF2431F7B923A002A42E9 /* tutorial-1242x2208-3.jpg in Resources */,
 				780096BB1EC9C1F5008F9F99 /* ic_ fa-coffee.png in Resources */,
 				7800970E1EC9C1F5008F9F99 /* ic_pen_338x338.png in Resources */,
 				780097081EC9C1F5008F9F99 /* grey_pin.png in Resources */,

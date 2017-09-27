@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,6 @@
                 <outlet property="forgetPasswordButton" destination="Pm4-12-mNb" id="d2b-yl-lsU"/>
                 <outlet property="loginUsingFirebaseButton" destination="glg-sD-Y9c" id="5g6-eJ-wqc"/>
                 <outlet property="loginWithFacebookButton" destination="QL2-m1-iFJ" id="l8P-LR-D58"/>
-                <outlet property="loginWithGoogleButton" destination="faM-Vi-qnf" id="6X1-zo-iPB"/>
                 <outlet property="nextButton" destination="k6e-oj-Zzm" id="btT-sX-XNx"/>
                 <outlet property="passwordTextField" destination="Wq2-Ww-J7A" id="FpI-uJ-QXN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="1RR-1e-oIs"/>
@@ -27,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QL2-m1-iFJ">
-                    <rect key="frame" x="35" y="60" width="304" height="40"/>
+                    <rect key="frame" x="35" y="60" width="305" height="40"/>
                     <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="UgE-D8-gK2"/>
@@ -42,7 +41,7 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="faM-Vi-qnf">
-                    <rect key="frame" x="35" y="113" width="304" height="40"/>
+                    <rect key="frame" x="35" y="113" width="305" height="40"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Mdv-Ej-Byu"/>
@@ -54,7 +53,7 @@
                     <rect key="frame" x="47" y="123" width="30" height="20"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xho-Ce-RRG">
-                    <rect key="frame" x="179" y="177" width="16" height="21"/>
+                    <rect key="frame" x="179.5" y="177" width="16" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -66,13 +65,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PhD-sM-MZa">
-                    <rect key="frame" x="35" y="258" width="304" height="30"/>
+                    <rect key="frame" x="35" y="258" width="305" height="30"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wq2-Ww-J7A">
-                    <rect key="frame" x="35" y="296" width="304" height="30"/>
+                    <rect key="frame" x="35" y="296" width="305" height="30"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits"/>
@@ -92,7 +91,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6e-oj-Zzm">
-                    <rect key="frame" x="284" y="392" width="55" height="30"/>
+                    <rect key="frame" x="285" y="392" width="55" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="7as-20-TZm"/>
                         <constraint firstAttribute="width" constant="55" id="E0t-th-77i"/>

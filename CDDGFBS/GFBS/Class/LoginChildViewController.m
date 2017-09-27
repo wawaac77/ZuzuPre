@@ -19,10 +19,16 @@
 #import <UIImageView+WebCache.h>
 #import <SDImageCache.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface LoginChildViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *loginWithFacebookButton;
 @property (weak, nonatomic) IBOutlet UIButton *loginWithGoogleButton;
+
+
+
+
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *forgetPasswordButton;
@@ -31,6 +37,7 @@
 - (IBAction)forgetPasswordClicked:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *loginUsingFirebaseButton;
 - (IBAction)loginUsingFirebaseClicked:(id)sender;
+- (IBAction)loginWithGoogleClicked:(id)sender;
 
 /*请求管理者*/
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
@@ -54,11 +61,41 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor clearColor];
+    [GIDSignIn sharedInstance].uiDelegate = self;
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(receiveToggleAuthUINotification:)
+     name:@"ToggleAuthUINotification"
+     object:nil];
+    
+    [self toggleAuthUI];
+    
     [self setupLayout];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                           action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
+    
+    /*
+    //** facebook login setup
+    if ([FBSDKAccessToken currentAccessToken]) {
+        
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,name,picture.width(100).height(100)"}]startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+            if (!error) {
+                NSString *nameOfLoginUser = [result valueForKey:@"name"];
+                NSString *idOfLoginUser = [result valueForKey:@"id"];
+                
+                NSLog(@"facebook public_profile nameOfLoginUser %@", nameOfLoginUser);
+                NSLog(@"facebook id nameOfLoginUser %@", idOfLoginUser);
+                
+                NSString *imageStringOfLoginUser = [[[result valueForKey:@"picture"] valueForKey:@"data"] valueForKey:@"url"];
+                //NSURL *url = [[NSURL alloc] initWithURL: imageStringOfLoginUser];
+                //[self.imageView setImageWithURL:url placeholderImage: nil];
+            }
+        }];
+        
+    }
+     */
 }
 
 -(void)dismissKeyboard {
@@ -68,10 +105,19 @@
 
 - (void)setupLayout {
     _loginWithFacebookButton.layer.cornerRadius = 5.0f;
-    _loginWithGoogleButton.layer.masksToBounds = YES;
+    _loginWithFacebookButton.layer.masksToBounds = YES;
+    _loginWithFacebookButton.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1];
+    [_loginWithFacebookButton addTarget:self action:@selector(loginFBButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
     _loginWithGoogleButton.layer.cornerRadius = 5.0f;
     [_loginWithGoogleButton setClipsToBounds:YES];
+    _loginWithGoogleButton.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:72.0/255.0 blue:54.0/255.0 alpha:1];
+    
+    
+    _signInButton = [[GIDSignInButton alloc]initWithFrame:CGRectMake(35, 113, 305, 40)];
+    _signInButton.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:72.0/255.0 blue:54.0/255.0 alpha:1];
+
+    [self.view addSubview:_signInButton];
     
     _passwordTextField.secureTextEntry = YES;
     /*
@@ -148,36 +194,6 @@
             
             NSLog(@"user token = %@", thisUser.userToken);
             
-            /*
-             
-            NSString *imageURL = thisUser.userProfileImage.imageUrl;
-            NSURL  *url = [NSURL URLWithString:imageURL];
-            NSData *urlData = [NSData dataWithContentsOfURL:url];
-             
-            if ( urlData )
-             
-            {
-             
-            NSLog(@"Downloading started...");
-             
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-             
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-             
-            NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"dwnld_image.png"];
-             
-            NSLog(@"FILE : %@",filePath);
-             
-            [urlData writeToFile:filePath atomically:YES];
-             
-            UIImage *image1=[UIImage imageWithContentsOfFile:filePath];
-             
-            thisUser.userProfileImage_UIImage = image1;
-             
-            NSLog(@"Completed...");
-             
-            }
-             */
             
             //*************** defualt user set even app is turned off *********//
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -239,84 +255,100 @@
 - (IBAction)forgetPasswordClicked:(id)sender {
     
     NSLog(@"forget password > button clicked");
-    /*
-    
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"RESET PASSWORD"
-                                                                              message: @"Please enter your emial address"
-                                                                       preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"Email";
-        textField.textColor = [UIColor grayColor];
-        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        textField.borderStyle = UITextBorderStyleRoundedRect;
-    }];
-    
-    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSArray * textfields = alertController.textFields;
-        UITextField * namefield = textfields[0];
-        //UITextField * passwordfiled = textfields[1];
-        //NSLog(@"%@:%@",namefield.text,passwordfiled.text);
-        NSLog(@"%@",namefield.text);
-        
-    }]];
-    [self presentViewController:alertController animated:YES completion:nil];
-    
-    */
     
     ForgetPasswordViewController *forgetVC = [[ForgetPasswordViewController alloc] init];
     forgetVC.view.frame = [UIScreen mainScreen].bounds;
     [self presentViewController:forgetVC animated:YES completion:nil];
-    
-    //NSLog(@"finished forgetVC push");
-    
-    /*
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
-    NSString *email = _emailTextField.text;
-    NSDictionary *emailDic = @ {@"email" : email};
-    NSDictionary *inData = @{
-                             @"action" : @"forgetPassword",
-                             @"data" : emailDic};
-    NSDictionary *parameters = @{@"data" : inData};
-    
-    NSLog(@"upcoming events parameters %@", parameters);
-    
-    
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
-        
-        NSNumber *responseStatus = [[NSNumber alloc] init];
-        responseStatus = responseObject[@"status"];
-       
-        NSLog(@"responseStatus %@", responseStatus);
-        if ([responseStatus isEqualToNumber:@1]) {
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"ZUZU" message:@"You could check your email and set new password now ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alertView show];
-            
-        } else {
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"The account does not exist." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-            [alertView show];
-
-        }
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
-        [SVProgressHUD showWithStatus:@"Busy network, please try later"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-    }];
-     */
     
 
 }
 - (IBAction)loginUsingFirebaseClicked:(id)sender {
     
 }
+
+//************************* Google signin **************************//
+
+- (IBAction)loginWithGoogleClicked:(id)sender {
+    
+    
+    
+}
+
+- (void)signIn:(GIDSignIn *)signIn
+didSignInForUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+    // Perform any operations on signed in user here.
+    NSString *userId = user.userID;                  // For client-side use only!
+    NSString *idToken = user.authentication.idToken; // Safe to send to the server
+    NSString *fullName = user.profile.name;
+    NSString *givenName = user.profile.givenName;
+    NSString *familyName = user.profile.familyName;
+    NSString *email = user.profile.email;
+    // ...
+}
+
+// Implement these methods only if the GIDSignInUIDelegate is not a subclass of
+// UIViewController.
+
+// Stop the UIActivityIndicatorView animation that was started when the user
+// pressed the Sign In button
+- (void)signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error {
+    //[myActivityIndicator stopAnimating];
+}
+
+// Present a view that prompts the user to sign in with Google
+- (void)signIn:(GIDSignIn *)signIn
+presentViewController:(UIViewController *)viewController {
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+// Dismiss the "Sign in with Google" view
+- (void)signIn:(GIDSignIn *)signIn
+dismissViewController:(UIViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)toggleAuthUI {
+    if ([GIDSignIn sharedInstance].currentUser.authentication == nil) {
+        // Not signed in
+        //self.statusText.text = @"Google Sign in\niOS Demo";
+        self.signInButton.hidden = NO;
+        //self.signOutButton.hidden = YES;
+        //self.disconnectButton.hidden = YES;
+    } else {
+        // Signed in
+        self.signInButton.hidden = YES;
+        //self.signOutButton.hidden = NO;
+        //self.disconnectButton.hidden = NO;
+    }
+}
+
+- (IBAction)didTapSignOut:(id)sender {
+    [[GIDSignIn sharedInstance] signOut];
+}
+
+//************************* end of Google signin part **************************//
+
+
+//************************login with Facebook *******************************//
+- (void)loginFBButtonClicked {
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login
+     logInWithReadPermissions: @[@"public_profile", @"email", @"user_friends"]
+     fromViewController:self
+     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         if (error) {
+             NSLog(@"Process error");
+         } else if (result.isCancelled) {
+             NSLog(@"Cancelled");
+         } else {
+             NSLog(@"Logged in");
+             NSLog(@"facebookToken %@", result.token);
+             
+         }
+     }];
+}
+//************************* end of Facebook signin part **************************//
 
 #pragma mark - 监听键盘的弹出和隐藏
 /*
@@ -334,6 +366,7 @@
 }
  */
 
+//************************* keyboard hide & show ***************************//
 - (void)keyBoardWillHide:(NSNotification *)note
 {
     //键盘最终的Frame
