@@ -36,6 +36,8 @@
     NSString *username = [userDefault objectForKey:@"KEY_USER_NAME"];
     NSString *userToken = [userDefault objectForKey:@"KEY_USER_TOKEN"];
     NSString *userlang = [userDefault objectForKey:@"KEY_USER_LANG"];
+    NSString *googleUserID = [userDefault objectForKey:@"googlePlusUserID"];
+    NSString *facebookUserID = [userDefault objectForKey:@"facebookUserID"];
     
     //[[InternationalControl sharedInstance]
     
@@ -50,6 +52,8 @@
         [ZZUser shareUser].userToken = userToken;
         [ZZUser shareUser].userUserName = username;
         [ZZUser shareUser].preferredLanguage = userlang;
+        [ZZUser shareUser].userGoogleID = googleUserID;
+        [ZZUser shareUser].userFacebookID = facebookUserID;
 
         
         //初始化语言
@@ -183,9 +187,13 @@ didSignInForUser:(GIDGoogleUser *)user
                                      [NSString stringWithFormat:@"Signed in user: %@",
                                       fullName]};
     NSLog(@"UserName in GooglePlus %@",fullName);
+    NSLog(@"UserId in GooglePlus %@",userId);
+    
+    [ZZUser shareUser].userGoogleID = userId;
     
     //From integrations demo
     [[NSUserDefaults standardUserDefaults] setObject:fullName forKey:@"googlePlusLogin"];
+    [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"googlePlusUserID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ForceUpdateLocation" object:self userInfo:[NSDictionary dictionaryWithObject:fullName?:@"" forKey:@"full_name"]];
     // end of From integrations demo

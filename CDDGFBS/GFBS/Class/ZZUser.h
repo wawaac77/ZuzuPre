@@ -74,6 +74,10 @@
                         Success:(void (^)(NSDictionary *result))success
                         Failure:(void (^)(NSError *error))failue;
 
+//******************* others ****************************//
+@property (nonatomic, copy) NSString *facebookEmail;
+@property (nonatomic, copy) NSString *googleEmail;
+
 //******************* 单例 ****************************//
 /**
  获取单例

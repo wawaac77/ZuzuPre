@@ -359,9 +359,76 @@ dismissViewController:(UIViewController *)viewController {
          } else {
              NSLog(@"Logged in");
              NSLog(@"facebookToken %@", result.token);
-             
+             if ([FBSDKAccessToken currentAccessToken])
+             {
+                 
+                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me?fields=id,name,age_range,birthday,devices,email,gender,last_name,family,friends,location,picture" parameters:nil]
+                  startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                      if (!error) {
+                          
+                          NSString * accessToken = [[FBSDKAccessToken currentAccessToken] tokenString];
+                          NSLog(@"fetched user:%@ ,%@", result,accessToken);
+                          
+                          //fbResultData =[[NSMutableDictionary alloc]init];
+                          
+                          if ([result objectForKey:@"email"]) {
+                              [ZZUser shareUser].facebookEmail = [result objectForKey:@"email"];
+                          }
+                          if ([result objectForKey:@"gender"]) {
+                              [ZZUser shareUser].gender = [result objectForKey:@"gender"];
+                          }
+                          if ([result objectForKey:@"name"]) {
+                              
+                          }
+                          if ([result objectForKey:@"last_name"]) {
+                                                        }
+                          if ([result objectForKey:@"id"]) {
+                            
+                              [ZZUser shareUser].userFacebookID = [result objectForKey:@"id"];
+                              [[NSUserDefaults standardUserDefaults] setObject:[result objectForKey:@"id"] forKey:@"facebookUserID"];
+                              [[NSUserDefaults standardUserDefaults] synchronize];
+
+                          }
+                          
+                          FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                                        initWithGraphPath:[NSString stringWithFormat:@"me/picture?type=large&redirect=false"]
+                                                        parameters:nil
+                                                        HTTPMethod:@"GET"];
+                          [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                                                id result,
+                                                                NSError *error) {
+                              if (!error){
+                                  
+                                  /*
+                                  if ([[result objectForKey:@"data"] objectForKey:@"url"]) {
+                                      [fbResultData setObject:[[result objectForKey:@"data"] objectForKey:@"url"] forKey:@"picture"];
+                                  }
+                                  
+                                  //You get all detail here in fbResultData
+                                  NSLog(@"Final data of FB login********%@",fbResultData);
+                                  [_userDefaults setObject:[NSString stringWithFormat:@"%@ %@",[fbResultData objectForKey:@"name"],[fbResultData objectForKey:@"last_name"]] forKey:@"facebookLogin"];
+                                  [_userDefaults synchronize];
+                                  [self showAlertForLoggedIn:[NSString stringWithFormat:@"%@ %@",[fbResultData objectForKey:@"name"],[fbResultData objectForKey:@"last_name"]]];
+                                   
+                                  */
+                              } }];
+                      }
+                      else {
+                          NSLog(@"result: %@",[error description]);
+                          //                              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error description] delegate:nil cancelButtonTitle:NSLocalizedString(@"DISMISS", nil) otherButtonTitle:nil];
+                          // [alert showInView:self.view.window];
+                          //[self showAlertForLoggedIn:[error description]];
+                      }
+                  }];
+             }
+             else{
+                 [[FBSDKLoginManager new] logOut];
+                 //                     [_customFaceBookButton setImage:[UIImage imageNamed:@"fb_connected"] forState:UIControlStateNormal];
+             }
          }
      }];
+    
+    
 }
 //************************* End of Facebook signin part **************************//
 

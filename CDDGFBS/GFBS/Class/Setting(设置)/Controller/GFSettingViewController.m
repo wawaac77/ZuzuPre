@@ -218,7 +218,7 @@
             
             [cell.contentView addSubview:accessoryLabel];
             
-            if ([ZZUser shareUser].userFacebookID == NULL) {
+            if ([ZZUser shareUser].userGoogleID == NULL) {
                 //accessoryLabel.text = ZBLocalized(@"Not connected", nil);
             } else {
                 
