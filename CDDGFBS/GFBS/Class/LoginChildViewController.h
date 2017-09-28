@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <GoogleSignIn.h>
+#import <Google/SignIn.h>
 
-@interface LoginChildViewController : UIViewController
-
-@property(strong, nonatomic) IBOutlet GIDSignInButton *signInButton;
+@interface LoginChildViewController : UIViewController<GIDSignInUIDelegate>
 
 @end

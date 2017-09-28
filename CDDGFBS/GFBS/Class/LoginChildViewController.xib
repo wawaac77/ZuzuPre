@@ -15,6 +15,7 @@
                 <outlet property="forgetPasswordButton" destination="Pm4-12-mNb" id="d2b-yl-lsU"/>
                 <outlet property="loginUsingFirebaseButton" destination="glg-sD-Y9c" id="5g6-eJ-wqc"/>
                 <outlet property="loginWithFacebookButton" destination="QL2-m1-iFJ" id="l8P-LR-D58"/>
+                <outlet property="loginWithGoogleButton" destination="faM-Vi-qnf" id="Adc-SP-aRt"/>
                 <outlet property="nextButton" destination="k6e-oj-Zzm" id="btT-sX-XNx"/>
                 <outlet property="passwordTextField" destination="Wq2-Ww-J7A" id="FpI-uJ-QXN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="1RR-1e-oIs"/>

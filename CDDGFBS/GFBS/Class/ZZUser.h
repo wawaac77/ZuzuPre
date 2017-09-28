@@ -68,8 +68,19 @@
 
 
 @property (nonatomic, copy) UIImage *userProfileImage_UIImage;
+@property (nonatomic, strong) NSNumber *notificationNum;
 
 + (NSURLSessionDataTask *)login:(NSDictionary *)paramDic
                         Success:(void (^)(NSDictionary *result))success
                         Failure:(void (^)(NSError *error))failue;
+
+//******************* 单例 ****************************//
+/**
+ 获取单例
+ 
+ @return 对象
+ */
++ (instancetype)shareUser;
+
+
 @end

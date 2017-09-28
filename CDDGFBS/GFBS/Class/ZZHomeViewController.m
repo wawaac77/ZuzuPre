@@ -13,9 +13,9 @@
 #import "FriendsHomeTableViewController.h"
 #import "MeHomeTableViewController.h"
 #import "LeaderboardHomeTableViewController.h"
-//#import "ZZFriendsTableViewController.h"
 #import "ZZAddFriendsViewController.h"
 #import "LoginViewController.h"
+#import "ZZUser.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -168,6 +168,43 @@
             self.myProfile = thisUser;
             [AppDelegate APP].user = thisUser;
             [self setUpTopView];
+            
+            //*************** user instance *********//
+            [ZZUser shareUser].userID = thisUser.userID;
+            [ZZUser shareUser].userUpdatedAt = thisUser.userUpdatedAt;
+            [ZZUser shareUser].userCreatedAt = thisUser.userCreatedAt;
+            [ZZUser shareUser].usertName = thisUser.usertName;
+            [ZZUser shareUser].userEmail = thisUser.userEmail;
+            //[ZZUser shareUser].usertPassword = thisUser.usertPassword;
+            [ZZUser shareUser].userUserName = thisUser.userUserName;
+            [ZZUser shareUser].userStatus = thisUser.userStatus;
+            [ZZUser shareUser].userToken = thisUser.userToken;
+            [ZZUser shareUser].userFacebookID = thisUser.userFacebookID;
+            [ZZUser shareUser].userGoogleID = thisUser.userGoogleID;
+            [ZZUser shareUser].userOrganizingExp = thisUser.userOrganizingExp;
+            [ZZUser shareUser].userOrganizingLevel = thisUser.userOrganizingLevel;
+            [ZZUser shareUser].socialExp = thisUser.socialExp;
+            [ZZUser shareUser].socialLevel = thisUser.socialLevel;
+            [ZZUser shareUser].checkinPoint = thisUser.checkinPoint;
+            [ZZUser shareUser].userInterests = [[NSMutableArray alloc] init];
+            [ZZUser shareUser].userInterests = thisUser.userInterests;
+            [ZZUser shareUser].userLastCheckIn = thisUser.userLastCheckIn;
+            [ZZUser shareUser].age = thisUser.age;
+            [ZZUser shareUser].gender = thisUser.gender;
+            [ZZUser shareUser].userIndustry = thisUser.userIndustry;
+            [ZZUser shareUser].userProfession = thisUser.userProfession;
+            [ZZUser shareUser].maxPrice = thisUser.maxPrice;
+            [ZZUser shareUser].minPrice = thisUser.minPrice;
+            [ZZUser shareUser].preferredLanguage = thisUser.preferredLanguage;
+            [ZZUser shareUser].numOfFollower = thisUser.numOfFollower;
+            [ZZUser shareUser].showOnLockScreen = thisUser.showOnLockScreen;
+            [ZZUser shareUser].sounds = thisUser.sounds;
+            [ZZUser shareUser].emailNotification = thisUser.emailNotification;
+            [ZZUser shareUser].allowNotification = thisUser.allowNotification;
+            [ZZUser shareUser].canSeeMyProfile = thisUser.canSeeMyProfile;
+            [ZZUser shareUser].canMessageMe = thisUser.canMessageMe;
+            [ZZUser shareUser].canMyFriendSeeMyEmail = thisUser.canMyFriendSeeMyEmail;
+            [ZZUser shareUser].notificationNum = thisUser.notificationNum;
             NSLog(@"this user %@", thisUser);
             NSLog(@"this user. userName %@", thisUser.usertName);
         }
@@ -186,9 +223,6 @@
 
 - (void)setUpTitleView {
     
-    //UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 435)];
-    //scroll.contentSize = CGSizeMake(320, 700);
-    //scroll.showsHorizontalScrollIndicator = YES;
     NSArray *itemArray = [[NSArray alloc] init];
     
     NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
@@ -198,14 +232,6 @@
     itemArray = [NSArray arrayWithObjects: ZBLocalized(@"All", nil), ZBLocalized(@"Following", nil), ZBLocalized(@"Me", nil), ZBLocalized(@"Leaderboard", nil), nil];
 
     
-    /*
-    if ([userLang isEqualToString:@"en"]) {
-        itemArray = [NSArray arrayWithObjects: ZBLocalized(@"All", nil), @"Following", @"Me", @"Leaderboard", nil];
-    } else if ([userLang isEqualToString:@"tw"]) {
-        itemArray = [NSArray arrayWithObjects: @"全部", @"關注", @"我", @"排行榜", nil];
-    }
-     */
-    //NSArray *itemArray = [NSArray arrayWithObjects: @"All", @"Following", @"Me", @"Leaderboard", nil];
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
     self.segmentedControl = segmentedControl;
     segmentedControl.frame = CGRectMake(10, 5 + ZZNewNavH, GFScreenWidth - 20, 25);
@@ -322,16 +348,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)addFriendsButtonClicked:(id)sender {
     ZZAddFriendsViewController *addFriendsVC = [[ZZAddFriendsViewController alloc] init];

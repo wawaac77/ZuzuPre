@@ -17,7 +17,6 @@
 #import "GFSettingViewController.h"
 #import "BadgesCollectionViewController.h"
 #import "NotificationViewController.h"
-#import "LeaderboardViewController.h"
 #import "ZZFriendsTableViewController.h"
 #import "MeHomeTableViewController.h"
 
@@ -416,8 +415,10 @@ static CGFloat  const margin = 0;
 
 
 - (IBAction)leaderboardButtonClicked:(id)sender {
+    /*
     LeaderboardViewController *leaderboardVC = [[LeaderboardViewController alloc] init];
     [self.navigationController pushViewController:leaderboardVC animated:YES];
+     */
 }
 
 - (void)dismissViews {

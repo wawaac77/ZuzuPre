@@ -443,14 +443,6 @@ static NSString *const ID = @"ID";
     [_delegate passValue:num];
 }
 
-- (void)saveUIImages {
-    for (int i = 0; i < _contents.count; i++) {
-        NSURL *URL = [NSURL URLWithString:_contents[i].listImage.imageUrl];
-        NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
-        UIImage *image = [[UIImage alloc]initWithData:data];
-        _contents[i].listImage_UIImage = image;
-    }
-}
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -472,12 +464,6 @@ static NSString *const ID = @"ID";
     
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];
 }
-/*
--(void)changeLanguage{
-    NSLog(@"changeLanguage");
-    [self.view reloadInputViews];
-}
- */
 
 
 @end

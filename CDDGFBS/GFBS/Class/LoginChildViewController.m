@@ -7,8 +7,6 @@
 //
 #import "AppDelegate.h"
 #import "LoginChildViewController.h"
-#import "GFHomeViewController.h"
-#import "GFEventDetailViewController.h"
 #import "GFTabBarController.h"
 #import "GFNavigationController.h"
 #import "ForgetPasswordViewController.h"
@@ -26,18 +24,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginWithFacebookButton;
 @property (weak, nonatomic) IBOutlet UIButton *loginWithGoogleButton;
 
-
-
-
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *forgetPasswordButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
+
 - (IBAction)nextButtonClicked:(id)sender;
 - (IBAction)forgetPasswordClicked:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *loginUsingFirebaseButton;
 - (IBAction)loginUsingFirebaseClicked:(id)sender;
-- (IBAction)loginWithGoogleClicked:(id)sender;
 
 /*请求管理者*/
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
@@ -59,9 +54,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
     self.view.backgroundColor = [UIColor clearColor];
+    //self.view.frame = [UIScreen mainScreen].bounds;
+
+    //keyboard
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
+    //layout
+    [self setupLayout];
+    
+    //google
     [GIDSignIn sharedInstance].uiDelegate = self;
+    
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(receiveToggleAuthUINotification:)
@@ -70,32 +78,6 @@
     
     [self toggleAuthUI];
     
-    [self setupLayout];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                          action:@selector(dismissKeyboard)];
-    
-    [self.view addGestureRecognizer:tap];
-    
-    /*
-    //** facebook login setup
-    if ([FBSDKAccessToken currentAccessToken]) {
-        
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,name,picture.width(100).height(100)"}]startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-            if (!error) {
-                NSString *nameOfLoginUser = [result valueForKey:@"name"];
-                NSString *idOfLoginUser = [result valueForKey:@"id"];
-                
-                NSLog(@"facebook public_profile nameOfLoginUser %@", nameOfLoginUser);
-                NSLog(@"facebook id nameOfLoginUser %@", idOfLoginUser);
-                
-                NSString *imageStringOfLoginUser = [[[result valueForKey:@"picture"] valueForKey:@"data"] valueForKey:@"url"];
-                //NSURL *url = [[NSURL alloc] initWithURL: imageStringOfLoginUser];
-                //[self.imageView setImageWithURL:url placeholderImage: nil];
-            }
-        }];
-        
-    }
-     */
 }
 
 -(void)dismissKeyboard {
@@ -110,14 +92,9 @@
     [_loginWithFacebookButton addTarget:self action:@selector(loginFBButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
     _loginWithGoogleButton.layer.cornerRadius = 5.0f;
-    [_loginWithGoogleButton setClipsToBounds:YES];
+    _loginWithGoogleButton.clipsToBounds = YES;
     _loginWithGoogleButton.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:72.0/255.0 blue:54.0/255.0 alpha:1];
-    
-    
-    _signInButton = [[GIDSignInButton alloc]initWithFrame:CGRectMake(35, 113, 305, 40)];
-    _signInButton.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:72.0/255.0 blue:54.0/255.0 alpha:1];
-
-    [self.view addSubview:_signInButton];
+    [_loginWithGoogleButton addTarget:self action:@selector(loginWithGoogleClicked) forControlEvents:UIControlEventTouchUpInside];
     
     _passwordTextField.secureTextEntry = YES;
     /*
@@ -136,15 +113,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)nextButtonClicked:(id)sender {
     
@@ -177,8 +145,6 @@
         
         ZZUser *thisUser = [[ZZUser alloc] init];
         thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
-        //thisUser = [ZZUser mj_objectWithKeyValues:responseObject];
-        
         
         if (thisUser == nil) {
             
@@ -206,6 +172,42 @@
             NSLog(@"this user. userName %@", thisUser.usertName);
             NSLog(@"this user. memberId %@", thisUser.userID);
 
+            //*************** user instance *********//
+            [ZZUser shareUser].userID = thisUser.userID;
+            [ZZUser shareUser].userUpdatedAt = thisUser.userUpdatedAt;
+            [ZZUser shareUser].userCreatedAt = thisUser.userCreatedAt;
+            [ZZUser shareUser].usertName = thisUser.usertName;
+            [ZZUser shareUser].userEmail = thisUser.userEmail;
+            //[ZZUser shareUser].usertPassword = thisUser.usertPassword;
+            [ZZUser shareUser].userUserName = thisUser.userUserName;
+            [ZZUser shareUser].userStatus = thisUser.userStatus;
+            [ZZUser shareUser].userToken = thisUser.userToken;
+            [ZZUser shareUser].userFacebookID = thisUser.userFacebookID;
+            [ZZUser shareUser].userGoogleID = thisUser.userGoogleID;
+            [ZZUser shareUser].userOrganizingExp = thisUser.userOrganizingExp;
+            [ZZUser shareUser].userOrganizingLevel = thisUser.userOrganizingLevel;
+            [ZZUser shareUser].socialExp = thisUser.socialExp;
+            [ZZUser shareUser].socialLevel = thisUser.socialLevel;
+            [ZZUser shareUser].checkinPoint = thisUser.checkinPoint;
+            [ZZUser shareUser].userInterests = [[NSMutableArray alloc] init];
+            [ZZUser shareUser].userInterests = thisUser.userInterests;
+            [ZZUser shareUser].userLastCheckIn = thisUser.userLastCheckIn;
+            [ZZUser shareUser].age = thisUser.age;
+            [ZZUser shareUser].gender = thisUser.gender;
+            [ZZUser shareUser].userIndustry = thisUser.userIndustry;
+            [ZZUser shareUser].userProfession = thisUser.userProfession;
+            [ZZUser shareUser].maxPrice = thisUser.maxPrice;
+            [ZZUser shareUser].minPrice = thisUser.minPrice;
+            [ZZUser shareUser].preferredLanguage = thisUser.preferredLanguage;
+            [ZZUser shareUser].numOfFollower = thisUser.numOfFollower;
+            [ZZUser shareUser].showOnLockScreen = thisUser.showOnLockScreen;
+            [ZZUser shareUser].sounds = thisUser.sounds;
+            [ZZUser shareUser].emailNotification = thisUser.emailNotification;
+            [ZZUser shareUser].allowNotification = thisUser.allowNotification;
+            [ZZUser shareUser].canSeeMyProfile = thisUser.canSeeMyProfile;
+            [ZZUser shareUser].canMessageMe = thisUser.canMessageMe;
+            [ZZUser shareUser].canMyFriendSeeMyEmail = thisUser.canMyFriendSeeMyEmail;
+            [ZZUser shareUser].notificationNum = thisUser.notificationNum;
             
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
             window.rootViewController = [[GFTabBarController alloc]init];
@@ -254,25 +256,37 @@
 
 - (IBAction)forgetPasswordClicked:(id)sender {
     
-    NSLog(@"forget password > button clicked");
-    
     ForgetPasswordViewController *forgetVC = [[ForgetPasswordViewController alloc] init];
     forgetVC.view.frame = [UIScreen mainScreen].bounds;
     [self presentViewController:forgetVC animated:YES completion:nil];
     
-
 }
+
 - (IBAction)loginUsingFirebaseClicked:(id)sender {
     
 }
 
+
+#pragma mark - Google
 //************************* Google signin **************************//
 
-- (IBAction)loginWithGoogleClicked:(id)sender {
-    
-    
-    
+- (void)loginWithGoogleClicked {
+    [[GIDSignIn sharedInstance] signIn];
+    //self.googlePlusLogoutButtonInstance.enabled=YES;
+
 }
+
+/*
+- (void)googlePlusLogoutButtonClick {
+    [[GIDSignIn sharedInstance] signOut];
+    //[[GPPSignIn sharedInstance] signOut];
+    [[GIDSignIn sharedInstance] disconnect];
+    self.googlePlusLogoutButtonInstance.enabled=NO;
+    [_userDefaults removeObjectForKey:@"googlePlusLogin"];
+    [_userDefaults synchronize];
+}
+ */
+
 
 - (void)signIn:(GIDSignIn *)signIn
 didSignInForUser:(GIDGoogleUser *)user
@@ -312,12 +326,12 @@ dismissViewController:(UIViewController *)viewController {
     if ([GIDSignIn sharedInstance].currentUser.authentication == nil) {
         // Not signed in
         //self.statusText.text = @"Google Sign in\niOS Demo";
-        self.signInButton.hidden = NO;
+        //self.signInButton.hidden = NO;
         //self.signOutButton.hidden = YES;
         //self.disconnectButton.hidden = YES;
     } else {
         // Signed in
-        self.signInButton.hidden = YES;
+        //self.signInButton.hidden = YES;
         //self.signOutButton.hidden = NO;
         //self.disconnectButton.hidden = NO;
     }
@@ -330,6 +344,7 @@ dismissViewController:(UIViewController *)viewController {
 //************************* end of Google signin part **************************//
 
 
+#pragma mark - Facebook
 //************************login with Facebook *******************************//
 - (void)loginFBButtonClicked {
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
@@ -348,7 +363,7 @@ dismissViewController:(UIViewController *)viewController {
          }
      }];
 }
-//************************* end of Facebook signin part **************************//
+//************************* End of Facebook signin part **************************//
 
 #pragma mark - 监听键盘的弹出和隐藏
 /*
@@ -366,7 +381,7 @@ dismissViewController:(UIViewController *)viewController {
 }
  */
 
-//************************* keyboard hide & show ***************************//
+//************************* keyboard ***************************//
 - (void)keyBoardWillHide:(NSNotification *)note
 {
     //键盘最终的Frame

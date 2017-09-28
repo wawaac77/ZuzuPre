@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "EventListTableViewController.h"
-#import "GFEventDetailViewController.h"
 
 #import "MyEvent.h"
 #import "MyEventCell.h"
@@ -275,10 +274,11 @@ static NSString *const eventID = @"myEvent";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"indexPath.row %ld", indexPath.row);
-    
+    /*
     GFEventDetailViewController *detailVC = [[GFEventDetailViewController alloc] init];
     detailVC.eventDetail = self.myEvents[indexPath.row];
     [self.navigationController pushViewController:detailVC animated:YES];
+     */
 }
 
 -(void)joinButtonClicked {

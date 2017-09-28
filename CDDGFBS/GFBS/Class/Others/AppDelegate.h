@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ZZUser.h"
-#import <GoogleSignIn.h>
+#import "Crashlytics/Crashlytics.h"
+
+#import <Google/SignIn.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Fabric/Fabric.h>
+#import <Firebase.h>
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, GIDSignInDelegate>
 

@@ -7,19 +7,12 @@
 //
 
 #import "AppDelegate.h"
-//#import "InternationalControl.h"
 #import "ZBLocalized.h"
 #import <SDImageCache.h>
 #import "GFTabBarController.h"
 #import "GFAdViewController.h"
 #import "LoginViewController.h"
 #import "DHGuidePageHUD.h"
-@import Firebase;
-#import <Fabric/Fabric.h>
-#import "Crashlytics/Crashlytics.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-
-
 
 @interface AppDelegate ()
 
@@ -48,13 +41,16 @@
     
     if (userToken != nil) {
         
-        ///UIWindow *window = [UIApplication sharedApplication].keyWindow;
-        //window.rootViewController = [[GFTabBarController alloc]init];
-        
         user = [[ZZUser alloc] init];
         user.userToken = userToken;
         user.userUserName = username;
         user.preferredLanguage = userlang;
+        
+        //user instance
+        [ZZUser shareUser].userToken = userToken;
+        [ZZUser shareUser].userUserName = username;
+        [ZZUser shareUser].preferredLanguage = userlang;
+
         
         //初始化语言
         if ([userlang isEqualToString:@"en"]) {
@@ -79,6 +75,7 @@
 //    GFAdViewController *adVC = [[GFAdViewController alloc]init];
     
     //GFTabBarController *tabVc = [[GFTabBarController alloc] init];
+    
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     self.window.rootViewController = loginVC;
     
@@ -93,22 +90,24 @@
     DHGuidePageHUD *guidePage = [[DHGuidePageHUD alloc] dh_initWithFrame:self.window.frame imageNameArray:imageNameArray buttonIsHidden:YES];
     [self.window addSubview:guidePage];
     
-    //清除过期缓存
-    [[SDImageCache sharedImageCache] cleanDisk];
     
-    [GFTopWindow gf_show];
-    [FIRApp configure];
     
     /******** Google+ signin *********/
-    //NSError* configureError;
-    //[[GGLContext sharedInstance] configureWithError: &configureError];
-    //NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
-    [GIDSignIn sharedInstance].clientID = @"YOUR_CLIENT_ID";
+    NSError* configureError;
+    [[GGLContext sharedInstance] configureWithError: &configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+    //[GIDSignIn sharedInstance].clientID = @"YOUR_CLIENT_ID";
     [GIDSignIn sharedInstance].delegate = self;
     
     /******** Facebook signin *********/
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+    
+    //清除过期缓存
+    [[SDImageCache sharedImageCache] cleanDisk];
+    
+    [GFTopWindow gf_show];
+    //[FIRApp configure];
     
     return YES;
 }
@@ -116,7 +115,7 @@
 //************************* Facebook ************************//
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    NSLog(@"applicationDidBecomeActive");
+    
     [FBSDKAppEvents activateApp];
 }
 
@@ -126,20 +125,45 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    /************************* Facebook ************************/
-    NSLog(@"application openURL");
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                          openURL:url
-                                                sourceApplication:sourceApplication
-                                                       annotation:annotation];
     
+    NSLog(@"application openURL");
+    
+    /************************* Facebook ************************/
+    if ([[FBSDKApplicationDelegate sharedInstance] application:application
+                                                       openURL:url
+                                             sourceApplication:sourceApplication
+                                                    annotation:annotation]) {
+        return YES;
+    }
     /************************* Google+ ************************/
-    return [[GIDSignIn sharedInstance] handleURL:url
-                               sourceApplication:sourceApplication
-                                      annotation:annotation];
+    /*
+    else if ([[GIDSignIn sharedInstance] handleURL:url
+                                   sourceApplication:sourceApplication
+                                          annotation:annotation]) {
+        return YES;
+    }
+    */
+    
+    return NO;
+    
 }
 // [END openurl]
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+{
+    NSLog(@"URL in other Method %@",url);
+    if ([[GIDSignIn sharedInstance] handleURL:url
+                            sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                   annotation:options[UIApplicationOpenURLOptionsAnnotationKey]]){
+        return YES;
+    }
+    else if ([[FBSDKApplicationDelegate sharedInstance]application:app openURL:url options:options]){
+        return YES;
+    }
+    
+    // If you handle other (non Twitter Kit) URLs elsewhere in your app, return YES. Otherwise
+    return NO;
+}
 
 /************************* Google+ ************************/
 
@@ -158,10 +182,20 @@ didSignInForUser:(GIDGoogleUser *)user
     NSDictionary *statusText = @{@"statusText":
                                      [NSString stringWithFormat:@"Signed in user: %@",
                                       fullName]};
+    NSLog(@"UserName in GooglePlus %@",fullName);
+    
+    //From integrations demo
+    [[NSUserDefaults standardUserDefaults] setObject:fullName forKey:@"googlePlusLogin"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ForceUpdateLocation" object:self userInfo:[NSDictionary dictionaryWithObject:fullName?:@"" forKey:@"full_name"]];
+    // end of From integrations demo
+    
+    /*
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"ToggleAuthUINotification"
      object:nil
      userInfo:statusText];
+     */
     // [END_EXCLUDE]
 }
 // [END signin_handler]

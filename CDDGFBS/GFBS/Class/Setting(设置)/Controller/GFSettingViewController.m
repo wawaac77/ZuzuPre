@@ -14,6 +14,7 @@
 #import "GFSettingViewController.h"
 #import "ZZUser.h"
 #import "ZZTypicalInformationModel.h"
+#import "CuisineTableViewController.h"
 
 #import "AboutZZViewController.h"
 #import "ZZMessageAdminViewController.h"
@@ -24,31 +25,14 @@
 #import <SDImageCache.h>
 #import <UIImageView+WebCache.h>    
 #import <SVProgressHUD.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-@interface GFSettingViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate>
-
-//@property (weak, nonatomic) IBOutlet UILabel *rangeLabel;
-//@property (weak, nonatomic) NSString *priceRange;
-
-@property (strong, nonatomic) IBOutlet UIPickerView *picker;
+@interface GFSettingViewController () <UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray<NSString *> *reuseIDArray;
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
 @property (strong, nonatomic) ZZUser *thisUser;
-
-@property (strong, nonatomic) NSMutableArray<ZZTypicalInformationModel *> *industryArray;
-@property (strong, nonatomic) NSMutableArray<ZZTypicalInformationModel *> *professionArray;
-@property (strong, nonatomic) NSMutableArray<ZZTypicalInformationModel *> *interestsArray;
-
-@property (strong, nonatomic) NSMutableArray<NSString *> *industry;
-@property (strong, nonatomic) NSMutableArray<NSString *> *profession;
-@property (strong, nonatomic) NSMutableArray<NSString *> *interests;
-
-@property (strong, nonatomic) NSMutableArray<NSString *> *selectedPickerArray;
-
-@property (strong, nonatomic) ZZTypicalInformationModel *selectedItem;
-
-@property (strong, nonatomic) NSBundle *bundle;
 
 @end
 
@@ -68,19 +52,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"changeLanguage viewDidLoad");
-    //[self loadNewData];
+    
     self.navigationItem.title = ZBLocalized(@"Settings", nil);
-    _thisUser = [AppDelegate APP].user;
+    _thisUser = [[ZZUser alloc] init];
+    _thisUser = [ZZUser shareUser];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLanguage) name:@"changeLanguage" object:nil];
+    [self setUpReuseIDArray];
+    [self toggleAuthUI];
     
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLanguageInVC) name:@"changeLanguageInVC" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLanguage) name:@"changeLanguage" object:nil];
     
-    //[InternationalControl initUserLanguage];//初始化应用语言
-    
-    //NSBundle *bundle = [InternationalControl bundle];
-    //self.bundle = bundle;
-    
+    //google
+    [GIDSignIn sharedInstance].uiDelegate = self;
     
     //计算整个应用程序的缓存数据 --- > 沙盒（Cache）
     //NSFileManager
@@ -91,28 +74,9 @@
     
     //[self.view addGestureRecognizer:tap];
 
-    [self setUpReuseIDArray];
     
-    self.industry = [[NSMutableArray alloc] init];
-    self.profession = [[NSMutableArray alloc] init];
-    self.interests = [[NSMutableArray alloc] init];
-    [self loadIndustryData];
-    //[self loadProfessionData];
-    //[self loadInterestsData];
-    [self setUpPickerView];
-    
-}
-- (void)dismissPickerView {
-    [self.picker resignFirstResponder];
 }
 
-- (void)setUpPickerView {
-    //_industryArray = [[NSMutableArray alloc] initWithObjects:@"A",@"B",@"C",@"D",@"E", nil];
-    _picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 400, GFScreenWidth, 150)];
-    _picker.dataSource = self;
-    _picker.delegate = self;
-    _picker.backgroundColor = [UIColor lightGrayColor];
-}
 
 - (void)setUpReuseIDArray {
     _reuseIDArray = [[NSMutableArray alloc] init];
@@ -148,22 +112,25 @@
     //UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:ID];
     NSString *cellID = _reuseIDArray[indexPath.section];
     
-    if (indexPath.section == 0 && indexPath.row == 2) {
+    if (indexPath.section == 0 && indexPath.row == 3) {
         cellID = @"buttons";
     }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
     
     NSLog(@"cellID --- %@", cellID);
     
     if (cell == nil) {
         switch (indexPath.section) {
             case 0:{
-                if (indexPath.row == 2) {
+                if (indexPath.row == 3) {
                     cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellID];
+                    cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
                 } else {
                     cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+                    cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
                 }
                 break;
             }
@@ -171,10 +138,14 @@
                 
             case 1:
                 cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1 reuseIdentifier:cellID];
+                cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0f];
                 break;
                 
             default:
                 cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1 reuseIdentifier:cellID];
+                cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0f];
                 break;
         }
     }
@@ -215,11 +186,48 @@
             
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
-            accessoryLabel.font = [UIFont systemFontOfSize:15];
-            accessoryLabel.text = ZBLocalized(@"Connected", nil);
+            accessoryLabel.font = [UIFont systemFontOfSize:14];
+            
             [cell.contentView addSubview:accessoryLabel];
             
-        } else if (indexPath.row == 2) {
+            if ([ZZUser shareUser].userFacebookID == NULL) {
+            
+                //accessoryLabel.text = ZBLocalized(@"Not connected", nil);
+                
+            } else {
+                accessoryLabel.text = ZBLocalized(@"Connected", nil);
+            }
+            
+        }
+        
+        else if (indexPath.row == 2) {
+            
+            cell.textLabel.text = @"Login with Goolge";
+            cell.imageView.image = [UIImage imageNamed:@"Ic_fa-star"];
+            
+            UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 8, 34, 34)];
+            myImageView.image =[UIImage imageNamed:@"google-plus-2-512 copy.png"];
+            myImageView.layer.cornerRadius = 5.0f;
+            myImageView.clipsToBounds = YES;
+            myImageView.contentMode = UIViewContentModeScaleAspectFit;
+            [cell.contentView addSubview:myImageView];
+            
+            UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
+            accessoryLabel.textAlignment = NSTextAlignmentRight;
+            accessoryLabel.font = [UIFont systemFontOfSize:14];
+            
+            [cell.contentView addSubview:accessoryLabel];
+            
+            if ([ZZUser shareUser].userFacebookID == NULL) {
+                //accessoryLabel.text = ZBLocalized(@"Not connected", nil);
+            } else {
+                
+                accessoryLabel.text = ZBLocalized(@"Connected", nil);
+            }
+            
+        }
+        
+        else if (indexPath.row == 3) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 20)];
             [label setFont:[UIFont systemFontOfSize:15]];
             label.text = ZBLocalized(@"Language", nil);
@@ -252,9 +260,6 @@
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
             cell.textLabel.text = ZBLocalized(@"Age", nil);
-            //NSString *ageStr = [_bundle localizedStringForKey:@"Age" value:nil table:@"hello"];
-            //NSLog(@"ageStr = %@", ageStr);
-            //cell.textLabel.text = ageStr;
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",_thisUser.age] ;
         
         } else if (indexPath.row == 1) {
@@ -382,7 +387,7 @@
             cell.textLabel.text = ZBLocalized(@"Message Admin", nil) ;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else {
-            cell.textLabel.text = ZBLocalized(@"Version 1.0", nil) ;
+            cell.textLabel.text = ZBLocalized(@"Version 0.5", nil) ;
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
 
@@ -394,7 +399,7 @@
 {
     
     if (indexPath.section == 0) {
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             return 70.0f;
         } else {
             return 50.0f;
@@ -419,6 +424,7 @@
     parentCell.detailTextLabel.text = [NSString stringWithFormat:@"0 - %@", priceRange];
 }
 
+/*
 - (void)changeLanguage:(id)sender {
     /*
     NSLog(@"Change language button clicked");
@@ -439,26 +445,24 @@
     
     //改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguage" object:nil];
-    
+/*
     NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
     NSLog(@"切换后的语言:%@",language);
 }
+*/
 
+/*
 -(void)changeLanguageInVC{
     NSLog(@"reload VC");
     [self viewDidLoad];
 }
+ */
 
 - (void)enButtonClicked {
     NSLog(@"English button clicked");
     NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
     
     if ([language isEqualToString:@"en"]) {
-        /*
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"It is already English version now", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Ok", nil) otherButtonTitles: nil, nil];
-        //alertView.tag = 1;
-        [alertView show];
-         */
         
     } else {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"Are you sure?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
@@ -466,30 +470,12 @@
         [alertView show];
     }
     
-    
-    //[[ZBLocalized sharedInstance]setLanguage:@"en"];
-    //[self initRootVC];
-    
-    //NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
     NSLog(@"切换后的语言:%@",language);
 }
 
 - (void)twButtonClicked {
     NSLog(@"Chinese button clicked");
-    /*
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:@"tw" forKey:@"KEY_USER_LANG"];
-    [userDefaults synchronize];
-    
-    [AppDelegate APP].user.preferredLanguage = @"tw";
-    
-    
-    [InternationalControl setUserlanguage:@"zh-Hant"];
-    
-    //改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeLanguage" object:nil];
-     */
-    
+   
     NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
     
     if ([language isEqualToString:@"en"]) {
@@ -498,15 +484,9 @@
         [alertView show];
         
     } else {
-        /*
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:ZBLocalized(@"Hi", nil)  message:ZBLocalized(@"It is already Chinese version now", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Ok", nil) otherButtonTitles: nil, nil];
-        //alertView.tag = 1;
-        [alertView show];
-         */
+        
     }
 
-    
-    
     //NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
     NSLog(@"切换后的语言:%@",language);
 
@@ -516,27 +496,13 @@
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     window.rootViewController = [[GFTabBarController alloc]init];
     [window makeKeyWindow];
-    
-    /*
-    GFTabBarController *tab=[[GFTabBarController alloc]init];
-    tab.selectedIndex = 0;
-    /*
-     LanguageViewController*LanguageVC=[[LanguageViewController alloc]init];
-     LanguageVC=tab.selectedViewController;
-     */
-    /*
-    [self dismissViewControllerAnimated:YES completion:^{
-        [UIApplication sharedApplication].keyWindow.rootViewController = tab;
-    }];
-    */
-    
-    
 }
 
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
     UIAlertView *alert = alertView;
+    //log out
     if (buttonIndex == 1 && alertView.tag == 0) {
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         AppDelegate *appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -549,24 +515,13 @@
         
         [appDel.window makeKeyAndVisible];
         [appDel.window setRootViewController:loginVC];
-        
-        /*
-        id rootController = [[[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:0] nextResponder];
-        if ([rootController isKindOfClass:[LoginViewController class]]){
-            //do something
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        } else {
-            LoginViewController *loginVC = [[LoginViewController alloc] init];
-            [[UIApplication sharedApplication].keyWindow setRootViewController:loginVC];
-            
-        }
-         */
-
-        
+       
+    // change to English
     } else if (alertView.tag == 1 && buttonIndex == 1) {
         [[ZBLocalized sharedInstance]setLanguage:@"en"];
         [self initRootVC];
         
+    //change to Chinese
     } else if (alertView.tag == 2 && buttonIndex == 1) {
         [[ZBLocalized sharedInstance]setLanguage:@"zh-Hant"];
         [self initRootVC];
@@ -580,47 +535,45 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             
-            //ZBLocalized(@"Hi, mate", nil);
-            
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"Are you sure to log out?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"Are you sure?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
             alertView.tag = 0;
             [alertView show];
 
         }
+        else if (indexPath.row == 1) {
+            [self loginFBButtonClicked];
+            
+        }
         
-        
+        else if (indexPath.row == 2) {
+            [self loginWithGoogleClicked];
+        }
+
     }
     else if (indexPath.section == 1) {
         
         if (indexPath.row == 3) {
-            if (self.industry.count == 0) {
-                [self loadIndustryData];
-            }
-            self.selectedPickerArray = [[NSMutableArray alloc]initWithArray:self.industry];
-            NSLog(@"self.industry %@", self.industry);
-            NSLog(@"self.selectedPickerArray %@", self.selectedPickerArray);
-            NSLog(@"self.industryArray in didSelectRow %@", self.industryArray);
-            [self.view insertSubview:_picker belowSubview:self.tableView];
-            [_picker reloadAllComponents];
+            
+            CuisineTableViewController *cuisineVC = [[CuisineTableViewController alloc] init];
+            cuisineVC.tableType = @"Industry";
+            cuisineVC.delegate = self;
+            [self.navigationController pushViewController:cuisineVC animated:YES];
+
+            
         }
         else if (indexPath.row == 4) {
-            if (self.profession.count == 0) {
-                [self loadProfessionData];
-            }
-            self.selectedPickerArray = [[NSMutableArray alloc]initWithArray:self.profession];
-            NSLog(@"self.selectedPickerArray %@", self.selectedPickerArray);
-             [self.view insertSubview:_picker belowSubview:self.tableView];
-            [_picker reloadAllComponents];
+            
+            CuisineTableViewController *cuisineVC = [[CuisineTableViewController alloc] init];
+            cuisineVC.tableType = @"Profession";
+            cuisineVC.delegate = self;
+            [self.navigationController pushViewController:cuisineVC animated:YES];
         }
         else if (indexPath.row == 5) {
-            if (self.interests.count == 0) {
-                [self loadInterestsData];
-            }
             
-            self.selectedPickerArray = [[NSMutableArray alloc]initWithArray:self.interests];;
-            NSLog(@"self.selectedPickerArray %@", self.selectedPickerArray);
-            [self.view addSubview:_picker];
-            [_picker reloadAllComponents];
+            CuisineTableViewController *cuisineVC = [[CuisineTableViewController alloc] init];
+            cuisineVC.tableType = @"Interests";
+            cuisineVC.delegate = self;
+            [self.navigationController pushViewController:cuisineVC animated:YES];
         }
     }
     else if (indexPath.section == 2) {
@@ -669,209 +622,6 @@
             [self.navigationController pushViewController:adminVC animated:YES];
         }
     }
-}
-
-//*********************** table view data **************************//
-- (void)loadNewData {
- 
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
-    
-    NSString *userToken = [AppDelegate APP].user.userToken;
-    NSString *userID = [AppDelegate APP].user.userID;
-    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
-    if ([userLang isEqualToString:@"zh-Hant"]) {
-        userLang = @"tw";
-    }
-    
-    NSLog(@"userID %@", userID);
-    NSDictionary *inSubData = @{@"memberId" : userID};
-    NSDictionary *inData = @{@"action" : @"getProfile", @"token" : userToken, @"lang" : userLang, @"data" : inSubData};
-    
-    NSDictionary *parameters = @{@"data" : inData};
-    
-    NSLog(@"publish content parameters %@", parameters);
-    
-    
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
-        
-        NSLog(@"responseObject is %@", responseObject);
-        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
-        [SVProgressHUD showWithStatus:ZBLocalized(@"Busy network, please try later~" , nil)];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-    }];
-
-}
-
-//*********************** picker view **************************//
-#pragma -picker data
-- (void)loadIndustryData {
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
-    
-    NSString *userToken = [AppDelegate APP].user.userToken;
-    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
-    if ([userLang isEqualToString:@"zh-Hant"]) {
-        userLang = @"tw";
-    }
-    
-    //----------------get industry array-----------------//
-    NSDictionary *inData = @{@"action" : @"getIndustryList", @"token" : userToken, @"lang" : userLang};
-    
-    NSDictionary *parameters = @{@"data" : inData};
-    
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
-        
-        NSLog(@"responseObject is %@", responseObject);
-        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
-        self.industryArray = [ZZTypicalInformationModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        NSLog(@"industry array %@", _industryArray);
-        
-        for (int i = 0; i < _industryArray.count; i++) {
-            [self.industry addObject:_industryArray[i].informationName];
-        }
-        NSLog(@"industry  %@", _industry);
-        [self loadProfessionData];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
-        [SVProgressHUD showWithStatus:@"Busy network for industry, please try later~"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-    }];
-}
-
-- (void)loadProfessionData {
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
-    
-    NSString *userToken = [AppDelegate APP].user.userToken;
-    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
-    if ([userLang isEqualToString:@"zh-Hant"]) {
-        userLang = @"tw";
-    }
-    
-    //----------------get profession array-----------------//
-    
-    NSDictionary *inData1 = @{@"action" : @"getProfessionList", @"token" : userToken, @"lang" : userLang};
-    
-    NSDictionary *parameters1 = @{@"data" : inData1};
-    
-    [_manager POST:GetURL parameters:parameters1 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
-        
-        NSLog(@"responseObject is %@", responseObject);
-        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
-        self.professionArray = [ZZTypicalInformationModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        
-        for (int i = 0; i < _professionArray.count; i++) {
-            [self.profession addObject:_professionArray[i].informationName];
-        }
-        [self loadInterestsData];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
-        [SVProgressHUD showWithStatus:@"Busy network for profession, please try later~"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-    }];
-}
-
-- (void)loadInterestsData {
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
-    
-    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
-    if ([userLang isEqualToString:@"zh-Hant"]) {
-        userLang = @"tw";
-    }
-    
-    //----------------get interests array-----------------//
-    NSDictionary *inData2 = @{@"action" : @"getInterestList", @"lang": userLang};
-    
-    NSDictionary *parameters2 = @{@"data" : inData2};
-    
-    [_manager POST:GetURL parameters:parameters2 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
-        
-        NSLog(@"responseObject is %@", responseObject);
-        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
-        self.interestsArray = [ZZTypicalInformationModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        //self.interests = [[NSMutableArray alloc] init];
-        for (int i = 0; i < _interestsArray.count; i++) {
-            [self.interests addObject:_interestsArray[i].informationName];
-        }
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
-        [SVProgressHUD showWithStatus:@"Busy network for interest, please try later~"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-    }];
-}
-
-
-#pragma -picke view
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView{
-   
-    return 1;
-}
-
--(NSInteger)pickerView:(UIPickerView*)pivkerView numberOfRowsInComponent:(NSInteger)component{
-   
-    return [_selectedPickerArray count];
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-   
-    return [_selectedPickerArray objectAtIndex:row];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-    _selectedItem = [_selectedPickerArray objectAtIndex:row];
-    if ([self.tableView indexPathForSelectedRow].row == 3) {
-        _thisUser.userIndustry = [_industryArray objectAtIndex:row];
-    }
-    else if ([self.tableView indexPathForSelectedRow].row == 4) {
-        _thisUser.userProfession = [_professionArray objectAtIndex:row];
-    }
-    else if (([self.tableView indexPathForSelectedRow].row == 5)) {
-        if (![_thisUser.userInterests containsObject:[_interestsArray objectAtIndex:row]]) {
-            [_thisUser.userInterests addObject:[_interestsArray objectAtIndex:row]];
-        } else {
-            [_picker removeFromSuperview];
-        }
-        NSLog(@"_thisUser.userInterests %@", _thisUser.userInterests);
-    }
-    
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];
-    NSLog(@"_selectedItem %@", _selectedItem);
-    
-    //[self updateProfile];
-    [_picker removeFromSuperview];
-   
 }
 
 - (void)updateProfile {
@@ -928,14 +678,127 @@
     //[self updateProfile];
 }
 
+/*
 - (void)changeLanguage {
     NSLog(@"changeLanguage");
     
     //[[InternationalControl sharedInstance]
     //[self viewDidLoad];
     [self.tableView reloadData];
+}
+ */
+
+//************************* pass value delegate ****************************//
+- (void)passValueCuisine:(ZZUser *)theValue {
+    
+    /*
+    if (theValue.userIndustry != NULL) {
+        [ZZUser shareUser].userIndustry = theValue.userIndustry;
+    }
+     */
+    
+    [self.tableView reloadData];
+}
+
+#pragma mark - Facebook
+//************************login with Facebook *******************************//
+- (void)loginFBButtonClicked {
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login
+     logInWithReadPermissions: @[@"public_profile", @"email", @"user_friends"]
+     fromViewController:self
+     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         if (error) {
+             NSLog(@"Process error");
+         } else if (result.isCancelled) {
+             NSLog(@"Cancelled");
+         } else {
+             NSLog(@"Logged in");
+             NSLog(@"facebookToken %@", result.token);
+             
+         }
+     }];
+}
+
+//************************ End of login with Facebook *******************************//
+
+#pragma mark - Google
+//************************* Google signin **************************//
+
+- (void)loginWithGoogleClicked {
+    [[GIDSignIn sharedInstance] signIn];
+    //self.googlePlusLogoutButtonInstance.enabled=YES;
     
 }
+
+/*
+ - (void)googlePlusLogoutButtonClick {
+ [[GIDSignIn sharedInstance] signOut];
+ //[[GPPSignIn sharedInstance] signOut];
+ [[GIDSignIn sharedInstance] disconnect];
+ self.googlePlusLogoutButtonInstance.enabled=NO;
+ [_userDefaults removeObjectForKey:@"googlePlusLogin"];
+ [_userDefaults synchronize];
+ }
+ */
+
+
+- (void)signIn:(GIDSignIn *)signIn
+didSignInForUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+    // Perform any operations on signed in user here.
+    NSString *userId = user.userID;                  // For client-side use only!
+    NSString *idToken = user.authentication.idToken; // Safe to send to the server
+    NSString *fullName = user.profile.name;
+    NSString *givenName = user.profile.givenName;
+    NSString *familyName = user.profile.familyName;
+    NSString *email = user.profile.email;
+    // ...
+}
+
+// Implement these methods only if the GIDSignInUIDelegate is not a subclass of
+// UIViewController.
+
+// Stop the UIActivityIndicatorView animation that was started when the user
+// pressed the Sign In button
+- (void)signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error {
+    //[myActivityIndicator stopAnimating];
+}
+
+// Present a view that prompts the user to sign in with Google
+- (void)signIn:(GIDSignIn *)signIn
+presentViewController:(UIViewController *)viewController {
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+// Dismiss the "Sign in with Google" view
+- (void)signIn:(GIDSignIn *)signIn
+dismissViewController:(UIViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)toggleAuthUI {
+    if ([GIDSignIn sharedInstance].currentUser.authentication == nil) {
+        // Not signed in
+        //self.statusText.text = @"Google Sign in\niOS Demo";
+        //self.signInButton.hidden = NO;
+        //self.signOutButton.hidden = YES;
+        //self.disconnectButton.hidden = YES;
+    } else {
+        // Signed in
+        //self.signInButton.hidden = YES;
+        //self.signOutButton.hidden = NO;
+        //self.disconnectButton.hidden = NO;
+    }
+}
+
+- (IBAction)didTapSignOut:(id)sender {
+    [[GIDSignIn sharedInstance] signOut];
+}
+
+//************************* end of Google signin part **************************//
+
+
 /*
 -(void)viewWillAppear:(BOOL)animated{
     NSLog(@"indexPathForSlectedRow in viewWillAppear %@", [self.tableView indexPathForSelectedRow]);

@@ -22,4 +22,6 @@
 //@property (nonatomic, strong) TwEn *informationName;
 @property (nonatomic, strong) NSString *informationName;
 
+@property (nonatomic, strong) NSNumber *selected;
+
 @end

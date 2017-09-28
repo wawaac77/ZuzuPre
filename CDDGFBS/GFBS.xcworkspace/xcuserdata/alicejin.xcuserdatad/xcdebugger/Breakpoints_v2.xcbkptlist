@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Setting(&#x8bbe;&#x7f6e;)/Controller/GFSettingViewController.m"
-            timestampString = "525601545.468183"
+            timestampString = "528288723.166793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -308,11 +308,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Essence(&#x7cbe;&#x534e;)/Controller/EventListTableViewController.m"
-            timestampString = "521272336.053888"
+            timestampString = "528278778.463106"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "-loadNewEvents"
             landmarkType = "7">
             <Locations>
@@ -420,11 +420,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Me(&#x6211;)/Controller/MyZuzuViewController.m"
-            timestampString = "525603009.389124"
+            timestampString = "528278778.463106"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "-setUpFunctionsCollectionView"
             landmarkType = "7">
          </BreakpointContent>
@@ -752,11 +752,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Me(&#x6211;)/Controller/MyZuzuViewController.m"
-            timestampString = "525603009.389124"
+            timestampString = "528278778.463106"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "-notificationClicked"
             landmarkType = "7">
          </BreakpointContent>
@@ -848,11 +848,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/LoginChildViewController.m"
-            timestampString = "528197242.184883"
+            timestampString = "528278778.463106"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-nextButtonClicked:"
             landmarkType = "7">
             <Locations>
@@ -896,11 +896,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/LoginChildViewController.m"
-            timestampString = "528197242.184883"
+            timestampString = "528280019.098506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "-nextButtonClicked:"
             landmarkType = "7">
          </BreakpointContent>
@@ -912,11 +912,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/LoginChildViewController.m"
-            timestampString = "528197242.184883"
+            timestampString = "528278778.463106"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "-nextButtonClicked:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1674,11 +1674,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/HomePostTableViewController.m"
-            timestampString = "525671805.206181"
+            timestampString = "528285125.334402"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "473"
-            endingLineNumber = "473"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
             landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1864,43 +1864,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Setting(&#x8bbe;&#x7f6e;)/Controller/GFSettingViewController.m"
-            timestampString = "525777110.195526"
+            timestampString = "528288723.166793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "796"
-            endingLineNumber = "796"
-            landmarkName = "-loadInterestsData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GFBS/Class/Setting(&#x8bbe;&#x7f6e;)/Controller/GFSettingViewController.m"
-            timestampString = "525777110.195526"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "735"
-            endingLineNumber = "735"
-            landmarkName = "-loadIndustryData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GFBS/Class/Setting(&#x8bbe;&#x7f6e;)/Controller/GFSettingViewController.m"
-            timestampString = "525777110.195526"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "591"
-            endingLineNumber = "591"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1992,11 +1960,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Setting(&#x8bbe;&#x7f6e;)/Controller/GFSettingViewController.m"
-            timestampString = "525777110.195526"
+            timestampString = "528288723.166793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "928"
-            endingLineNumber = "928"
+            startingLineNumber = "678"
+            endingLineNumber = "678"
             landmarkName = "-viewWillDisappear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2024,11 +1992,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/Setting(&#x8bbe;&#x7f6e;)/Controller/GFSettingViewController.m"
-            timestampString = "525601545.468183"
+            timestampString = "528288723.166793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -2088,7 +2056,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GFBS/Class/LoginChildViewController.m"
-            timestampString = "528197242.184883"
+            timestampString = "528280019.098506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "260"
