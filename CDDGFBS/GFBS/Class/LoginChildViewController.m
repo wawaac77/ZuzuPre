@@ -182,8 +182,8 @@
             [ZZUser shareUser].userUserName = thisUser.userUserName;
             [ZZUser shareUser].userStatus = thisUser.userStatus;
             [ZZUser shareUser].userToken = thisUser.userToken;
-            [ZZUser shareUser].userFacebookID = thisUser.userFacebookID;
-            [ZZUser shareUser].userGoogleID = thisUser.userGoogleID;
+            //[ZZUser shareUser].userFacebookID = thisUser.userFacebookID;
+            //[ZZUser shareUser].userGoogleID = thisUser.userGoogleID;
             [ZZUser shareUser].userOrganizingExp = thisUser.userOrganizingExp;
             [ZZUser shareUser].userOrganizingLevel = thisUser.userOrganizingLevel;
             [ZZUser shareUser].socialExp = thisUser.socialExp;
@@ -385,6 +385,7 @@ dismissViewController:(UIViewController *)viewController {
                           if ([result objectForKey:@"id"]) {
                             
                               [ZZUser shareUser].userFacebookID = [result objectForKey:@"id"];
+                              NSLog(@"[ZZUser shareUser].userFacebookID %@", [ZZUser shareUser].userFacebookID);
                               [[NSUserDefaults standardUserDefaults] setObject:[result objectForKey:@"id"] forKey:@"facebookUserID"];
                               [[NSUserDefaults standardUserDefaults] synchronize];
 

@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <Google/SignIn.h>
 #import "CuisineTableViewController.h"
+#import "SubFillTableViewController.h"
 
-@interface GFSettingViewController : UITableViewController <CuisineChildViewControllerDelegate, GIDSignInUIDelegate>
+@interface GFSettingViewController : UITableViewController <FillinChildViewControllerDelegate, CuisineChildViewControllerDelegate, GIDSignInUIDelegate>
 
 @end

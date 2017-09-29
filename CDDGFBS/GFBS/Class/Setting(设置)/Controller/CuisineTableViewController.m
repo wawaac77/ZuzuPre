@@ -47,8 +47,50 @@ static NSString*const ID = @"ID";
     self.navigationItem.title = ZBLocalized(self.tableType, nil) ;
     self.thisUser = [[ZZUser alloc] init];
     
+    
     [self setUpNavBar];
-    [self setUpArray];
+    
+    if ([self.tableType isEqualToString: @"Gender"]) {
+        self.cuisineArray = [[NSMutableArray alloc] init];
+        
+        ZZTypicalInformationModel *female = [[ZZTypicalInformationModel alloc] init];
+        female.informationName = ZBLocalized(@"Female", nil);
+                [_cuisineArray addObject:female];
+        
+        ZZTypicalInformationModel *male = [[ZZTypicalInformationModel alloc] init];
+        male.informationName = ZBLocalized(@"Male", nil);
+        [_cuisineArray addObject:male];
+        
+        if ([[ZZUser shareUser].gender isEqualToString:female.informationName]) {
+            _cuisineArray[0].selected = @1;
+        } else {
+            _cuisineArray[1].selected = @1;
+        }
+
+        
+    }
+    
+    else if ([self.tableType isEqualToString: @"Age"]) {
+        self.cuisineArray = [[NSMutableArray alloc] initWithCapacity:120];
+        
+        for (int i = 0; i < 120; i++) {
+
+            ZZTypicalInformationModel *age = [[ZZTypicalInformationModel alloc] init];
+            age.informationName = [NSString stringWithFormat:@"%zd", i];
+            [_cuisineArray addObject:age];
+            
+            //self.cuisineArray[i].informationName = [NSString stringWithFormat:@"%zd", i];
+            
+            if (i == [[ZZUser shareUser].age intValue]) {
+                self.cuisineArray[i].selected = @1;
+            }
+        }
+    }
+    
+    else {
+        [self setUpArray];
+    }
+   
     [self.tableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
 }
 
@@ -192,7 +234,7 @@ static NSString*const ID = @"ID";
         }
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         
-    } else if ([self.tableType isEqualToString:@"Industry"] || [self.tableType isEqualToString:@"Profession"]) { // can only select one
+    } else if ([self.tableType isEqualToString:@"Industry"] || [self.tableType isEqualToString:@"Profession"] || [self.tableType isEqualToString:@"Gender"] || [self.tableType isEqualToString:@"Age"] ) { // can only select one
         _cuisineArray[indexPath.row].selected = @1;
         for (int i = 0; i < _cuisineArray.count; i++) {
             if (!(i == indexPath.row)) {
@@ -250,6 +292,30 @@ static NSString*const ID = @"ID";
         }
         
         [ZZUser shareUser].userProfession = _thisUser.userProfession;
+    }
+    
+    else if ([self.tableType isEqualToString: @"Gender"]) {
+        
+        for (int i = 0; i < _cuisineArray.count; i++) {
+            if ([_cuisineArray[i].selected isEqual:@1]) {
+                _thisUser.gender = _cuisineArray[i].informationName;
+                break;
+            }
+        }
+        
+        [ZZUser shareUser].gender = _thisUser.gender;
+    }
+    
+    else if ([self.tableType isEqualToString: @"Age"]) {
+        
+        for (int i = 0; i < _cuisineArray.count; i++) {
+            if ([_cuisineArray[i].selected isEqual:@1]) {
+                _thisUser.age = [NSNumber numberWithInteger:[_cuisineArray[i].informationName integerValue]];
+                break;
+            }
+        }
+        
+        [ZZUser shareUser].age = _thisUser.age;
     }
     
     [self passValueMethod];

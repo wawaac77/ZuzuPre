@@ -15,6 +15,7 @@
 #import "ZZUser.h"
 #import "ZZTypicalInformationModel.h"
 #import "CuisineTableViewController.h"
+#import "SubFillTableViewController.h"
 
 #import "AboutZZViewController.h"
 #import "ZZMessageAdminViewController.h"
@@ -54,6 +55,8 @@
     NSLog(@"changeLanguage viewDidLoad");
     
     self.navigationItem.title = ZBLocalized(@"Settings", nil);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(okButtonClicked)];
+
     _thisUser = [[ZZUser alloc] init];
     _thisUser = [ZZUser shareUser];
     
@@ -139,13 +142,13 @@
             case 1:
                 cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1 reuseIdentifier:cellID];
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
-                cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0f];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
                 break;
                 
             default:
                 cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1 reuseIdentifier:cellID];
                 cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
-                cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0f];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
                 break;
         }
     }
@@ -186,9 +189,11 @@
             
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
-            accessoryLabel.font = [UIFont systemFontOfSize:14];
+            accessoryLabel.font = [UIFont systemFontOfSize:15];
             
             [cell.contentView addSubview:accessoryLabel];
+            
+            NSLog(@"[ZZUser shareUser].userFacebookID in setting %@", [ZZUser shareUser].userFacebookID);
             
             if ([ZZUser shareUser].userFacebookID == NULL) {
             
@@ -214,7 +219,7 @@
             
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
-            accessoryLabel.font = [UIFont systemFontOfSize:14];
+            accessoryLabel.font = [UIFont systemFontOfSize:15];
             
             [cell.contentView addSubview:accessoryLabel];
             
@@ -551,8 +556,32 @@
 
     }
     else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            
+            CuisineTableViewController *cuisineVC = [[CuisineTableViewController alloc] init];
+            cuisineVC.tableType = @"Age";
+            cuisineVC.delegate = self;
+            [self.navigationController pushViewController:cuisineVC animated:YES];
+            
+        }
+
+        else if (indexPath.row == 1) {
+            
+            CuisineTableViewController *cuisineVC = [[CuisineTableViewController alloc] init];
+            cuisineVC.tableType = @"Gender";
+            cuisineVC.delegate = self;
+            [self.navigationController pushViewController:cuisineVC animated:YES];
+        }
         
-        if (indexPath.row == 3) {
+        else if (indexPath.row == 2) {
+            
+            SubFillTableViewController *cuisineVC = [[SubFillTableViewController alloc] init];
+            cuisineVC.tableType = @"Phone";
+            cuisineVC.delegate = self;
+            [self.navigationController pushViewController:cuisineVC animated:YES];
+        }
+        
+        else if (indexPath.row == 3) {
             
             CuisineTableViewController *cuisineVC = [[CuisineTableViewController alloc] init];
             cuisineVC.tableType = @"Industry";
@@ -627,6 +656,11 @@
 - (void)updateProfile {
     [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
     
+    NSMutableArray<NSString *> *interestIDArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [ZZUser shareUser].userInterests.count; i++) {
+        [interestIDArray addObject:[ZZUser shareUser].userInterests[i].informationID];
+    }
+    
     //2.凭借请求参数
     
     NSString *userToken = [AppDelegate APP].user.userToken;
@@ -635,21 +669,31 @@
     
     
     NSDictionary *inSubData2 = @{
-                                //@"name" : _thisUser.usertName,
-                                //@"interests" : _thisUser.userInterests,
-                                //@"maxPrice" : _thisUser.maxPrice,
-                                //@"minPrice" : _thisUser.minPrice,
+                                //@"name" : [ZZUser shareUser].usertName,
+                                @"username" : [ZZUser shareUser].userUserName,
+                                //@"googleId" : [ZZUser shareUser].userGoogleID,
+                                //@"facebookId" : [ZZUser shareUser].userFacebookID,
+
+                                @"age" : [ZZUser shareUser].age,
+                                @"gender" :[ZZUser shareUser].gender,
+                                @"phone" : [ZZUser shareUser].phone,
+                                @"industry" : [ZZUser shareUser].userIndustry.informationID,
+                                @"profession" : [ZZUser shareUser].userProfession.informationID,
+                                @"interests" : interestIDArray,
+                                //@"maxPrice" : [ZZUser shareUser].maxPrice,
+                                //@"minPrice" : [ZZUser shareUser].minPrice,
                                 //@"allowNotification" : _thisUser.allowNotification,
                                 //@"emailNotification" : _thisUser.emailNotification,
                                 //@"allowNotification" : _thisUser.allowNotification,
                                 //@"sounds" : _thisUser.sounds,
                                 //@"showOnLockScreen" : _thisUser.showOnLockScreen,
-                                //@"industry" : _thisUser.userIndustry.informationID,
-                                //@"profession" : _thisUser.profession.informationID,
-                                 //@"preferredLanguag" :
-                                @"age" : _thisUser.age,
-                                //@"phone" : _thisUser.phone,
-                                //@"gender" :_thisUser.gender
+                                
+                                //@"preferredLanguag" : [ZZUser shareUser].preferredLanguage,
+                                
+                               
+                                
+                               
+                                
                                 };
     NSDictionary *inData2 = @{@"action" : @"updateProfile", @"token" : userToken, @"data" : inSubData2,
                              @"canSeeMyProfile" : _thisUser.canSeeMyProfile,
@@ -674,9 +718,12 @@
     
 }
 
+/*
 - (void)viewWillDisappear:(BOOL)animated {
-    //[self updateProfile];
+    NSLog(@"updated profile");
+    [self updateProfile];
 }
+*/
 
 /*
 - (void)changeLanguage {
@@ -700,6 +747,11 @@
     [self.tableView reloadData];
 }
 
+- (void)passValue:(NSNumber *)theValue {
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Facebook
 //************************login with Facebook *******************************//
 - (void)loginFBButtonClicked {
@@ -716,8 +768,79 @@
              NSLog(@"Logged in");
              NSLog(@"facebookToken %@", result.token);
              
+             if ([FBSDKAccessToken currentAccessToken])
+             {
+                 
+                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me?fields=id,name,age_range,birthday,devices,email,gender,last_name,family,friends,location,picture" parameters:nil]
+                  startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                      if (!error) {
+                          
+                          NSString * accessToken = [[FBSDKAccessToken currentAccessToken] tokenString];
+                          NSLog(@"fetched user:%@ ,%@", result,accessToken);
+                          
+                          //fbResultData =[[NSMutableDictionary alloc]init];
+                          
+                          if ([result objectForKey:@"email"]) {
+                              [ZZUser shareUser].facebookEmail = [result objectForKey:@"email"];
+                          }
+                          if ([result objectForKey:@"gender"]) {
+                              [ZZUser shareUser].gender = [result objectForKey:@"gender"];
+                          }
+                          if ([result objectForKey:@"name"]) {
+                              
+                          }
+                          if ([result objectForKey:@"last_name"]) {
+                          }
+                          if ([result objectForKey:@"id"]) {
+                              
+                              [ZZUser shareUser].userFacebookID = [result objectForKey:@"id"];
+                              NSLog(@"[ZZUser shareUser].userFacebookID %@", [ZZUser shareUser].userFacebookID);
+                              [[NSUserDefaults standardUserDefaults] setObject:[result objectForKey:@"id"] forKey:@"facebookUserID"];
+                              [[NSUserDefaults standardUserDefaults] synchronize];
+                              
+                          }
+                          
+                          FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                                        initWithGraphPath:[NSString stringWithFormat:@"me/picture?type=large&redirect=false"]
+                                                        parameters:nil
+                                                        HTTPMethod:@"GET"];
+                          [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                                                id result,
+                                                                NSError *error) {
+                              if (!error){
+                                  
+                                  /*
+                                   if ([[result objectForKey:@"data"] objectForKey:@"url"]) {
+                                   [fbResultData setObject:[[result objectForKey:@"data"] objectForKey:@"url"] forKey:@"picture"];
+                                   }
+                                   
+                                   //You get all detail here in fbResultData
+                                   NSLog(@"Final data of FB login********%@",fbResultData);
+                                   [_userDefaults setObject:[NSString stringWithFormat:@"%@ %@",[fbResultData objectForKey:@"name"],[fbResultData objectForKey:@"last_name"]] forKey:@"facebookLogin"];
+                                   [_userDefaults synchronize];
+                                   [self showAlertForLoggedIn:[NSString stringWithFormat:@"%@ %@",[fbResultData objectForKey:@"name"],[fbResultData objectForKey:@"last_name"]]];
+                                   
+                                   */
+                              } }];
+                      }
+                      else {
+                          NSLog(@"result: %@",[error description]);
+                          //                              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error description] delegate:nil cancelButtonTitle:NSLocalizedString(@"DISMISS", nil) otherButtonTitle:nil];
+                          // [alert showInView:self.view.window];
+                          //[self showAlertForLoggedIn:[error description]];
+                      }
+                  }];
+             }
+             else{
+                 [[FBSDKLoginManager new] logOut];
+                 //                     [_customFaceBookButton setImage:[UIImage imageNamed:@"fb_connected"] forState:UIControlStateNormal];
+             }
+             
          }
      }];
+    
+    NSIndexPath* indexPath1 = [NSIndexPath indexPathForRow:1 inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath1] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 //************************ End of login with Facebook *******************************//
@@ -798,6 +921,10 @@ dismissViewController:(UIViewController *)viewController {
 
 //************************* end of Google signin part **************************//
 
+
+- (void)okButtonClicked {
+    [self updateProfile];
+}
 
 /*
 -(void)viewWillAppear:(BOOL)animated{
