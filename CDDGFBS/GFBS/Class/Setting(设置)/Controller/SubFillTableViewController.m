@@ -99,6 +99,7 @@ static NSString*const ID = @"ID";
     
     if (indexPath.row == 0) {
         self.phoneField1 = textfield;
+        self.phoneField1.text = [ZZUser shareUser].phone;
     } else if (indexPath.row == 1) {
         self.phoneField2 = textfield;
     }

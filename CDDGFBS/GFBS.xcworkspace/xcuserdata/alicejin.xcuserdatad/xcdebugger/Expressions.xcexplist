@@ -126,6 +126,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[ZZUser setAllowNotification:]:ZZUser.h">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.thisUser.allowNotification">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[AFHTTPSessionManager POST:parameters:progress:success:failure:]:AFHTTPSessionManager.m">
       </ContextState>
       <ContextState
@@ -202,6 +210,14 @@
          <PersistentStrings>
             <PersistentString
                value = "self.industry">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[GFSettingViewController switchChanged:]:GFSettingViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_thisUser.allowNotification">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

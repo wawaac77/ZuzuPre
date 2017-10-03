@@ -35,6 +35,8 @@
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
 @property (strong, nonatomic) ZZUser *thisUser;
 
+@property (strong, nonatomic) UISwitch *allowNotificationSwitch;
+
 @end
 
 @implementation GFSettingViewController
@@ -328,15 +330,16 @@
         if (indexPath.row == 0) {
             cell.textLabel.text = ZBLocalized( @"Allow Notification", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-            switchView.tag = indexPath.row;
+            self.allowNotificationSwitch = switchView;
             cell.accessoryView = switchView;
             
-            if ([_thisUser.allowNotification isEqualToNumber:[NSNumber numberWithBool:true]]) {
+            if ([[ZZUser shareUser].allowNotification isEqualToValue:@1]) {
                 [switchView setOn:YES animated:NO];
             } else {
                 [switchView setOn:NO animated:NO];
             }
-            switchView.tag = indexPath.row + 10 * indexPath.section;
+            
+            switchView.tag = 0;
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         
         }
@@ -347,12 +350,24 @@
             cell.textLabel.text = ZBLocalized( @"Email Notification", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
-            if ([_thisUser.emailNotification isEqualToNumber:[NSNumber numberWithBool:true]]) {
+            
+            NSLog(@"going to set switch enable ");
+            if ([[ZZUser shareUser].allowNotification isEqualToValue:@1]) {
+                switchView.enabled = YES;
+                
+            } else {
+                switchView.enabled = NO;
+                
+            }
+            
+            if ([[ZZUser shareUser].emailNotification isEqualToValue:@1]) {
                 [switchView setOn:YES animated:NO];
+                NSLog(@"switch set to ON");
             } else {
                 [switchView setOn:NO animated:NO];
+                NSLog(@"switch set to off");
             }
-            switchView.tag = indexPath.row;
+            switchView.tag = 1;
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             //[switchView release];
         } else if (indexPath.row == 1) {
@@ -360,12 +375,22 @@
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
             
-            if ([_thisUser.sounds isEqualToNumber:[NSNumber numberWithBool:true]]) {
+            if ([[ZZUser shareUser].allowNotification isEqualToValue:@1]) {
+                switchView.enabled = YES;
+                NSLog(@"switchView enable = YES  for sound");
+            } else {
+                switchView.enabled = NO;
+                NSLog(@"switchView enable = NO  for sound");
+            }
+
+            if ([[ZZUser shareUser].sounds isEqualToValue:@1]) {
                 [switchView setOn:YES animated:NO];
+                NSLog(@"switch set to ON");
             } else {
                 [switchView setOn:NO animated:NO];
+                NSLog(@"switch set to off");
             }
-            switchView.tag = indexPath.row;
+            switchView.tag = 2;
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             
         } else if (indexPath.row == 2) {
@@ -373,12 +398,20 @@
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
             
-            if ([_thisUser.showOnLockScreen isEqualToNumber:[NSNumber numberWithBool:true]]) {
+            if ([[ZZUser shareUser].allowNotification isEqualToValue:@1]) {
+                switchView.enabled = YES;
+                NSLog(@"switchView enable = YES  for sound");
+            } else {
+                switchView.enabled = NO;
+                NSLog(@"switchView enable = NO  for sound");
+            }
+
+            if ([[ZZUser shareUser].showOnLockScreen isEqualToValue:@1]) {
                 [switchView setOn:YES animated:NO];
             } else {
                 [switchView setOn:NO animated:NO];
             }
-            switchView.tag = indexPath.row;
+            switchView.tag = 3;
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         }
     }
@@ -416,8 +449,44 @@
 
 - (void)switchChanged:(id)sender {
     UISwitch *switchControl = sender;
-    NSLog(@"sender.tag %@", switchControl.tag);
+    
+    NSLog(@"sender.tag %zd", switchControl.tag);
     NSLog(@"This switch is %@", switchControl.on ? @"ON" : @"OFF");
+    
+    BOOL switchResult = switchControl.on ? @"ON" : @"OFF";
+    
+    //NSLog(@"swichResult %@", switchResult);
+    
+    if (switchControl.tag == 0) {
+        [ZZUser shareUser].allowNotification = [NSNumber numberWithBool:switchResult];
+        if ([switchControl.on ? @"ON" : @"OFF"  isEqual: @"OFF"]) {
+            _thisUser.allowNotification =  @false;
+            _thisUser.emailNotification =  @false;
+            _thisUser.sounds =  @false;
+            _thisUser.showOnLockScreen =  @false;
+            
+            [ZZUser shareUser].allowNotification = @false;
+            [ZZUser shareUser].emailNotification = @false;
+            [ZZUser shareUser].sounds = @false;
+            [ZZUser shareUser].showOnLockScreen = @false;
+            
+            NSLog(@"reload some sections");
+            //[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(3, 4)] withRowAnimation: UITableViewRowAnimationNone];
+            
+            [self.tableView reloadData];
+            
+        } else {
+            [ZZUser shareUser].allowNotification = @true;
+            
+            [self.tableView reloadData];
+        }
+    } else if (switchControl.tag == 1) {
+        [ZZUser shareUser].emailNotification = [NSNumber numberWithBool:switchResult];
+    } else if (switchControl.tag == 2) {
+        [ZZUser shareUser].sounds = [NSNumber numberWithBool:switchResult];
+    } else if (switchControl.tag == 3) {
+        [ZZUser shareUser].showOnLockScreen = [NSNumber numberWithBool:switchResult];
+    }
 }
 
 - (IBAction)sliderValueChanged:(id)sender {
@@ -612,9 +681,11 @@
             if ([self.thisUser.canSeeMyProfile isEqualToValue:@1]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
                 self.thisUser.canSeeMyProfile = @0;
+                [ZZUser shareUser].canSeeMyProfile = @0;
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
                 self.thisUser.canSeeMyProfile = @1;
+                [ZZUser shareUser].canSeeMyProfile = @1;
             }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else if (indexPath.row == 1) {
@@ -622,9 +693,11 @@
             if ([self.thisUser.canMessageMe isEqualToValue:@1]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
                 self.thisUser.canMessageMe = @0;
+                [ZZUser shareUser].canMessageMe = @0;
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
                 self.thisUser.canMessageMe = @1;
+                [ZZUser shareUser].canMessageMe = @1;
             }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else {
@@ -632,9 +705,11 @@
             if ([self.thisUser.canMyFriendSeeMyEmail isEqualToValue:@1]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
                 self.thisUser.canMyFriendSeeMyEmail = @0;
+                [ZZUser shareUser].canMyFriendSeeMyEmail = @0;
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
                 self.thisUser.canMyFriendSeeMyEmail = @1;
+                [ZZUser shareUser].canMyFriendSeeMyEmail = @true;
             }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
 
@@ -664,12 +739,8 @@
     //2.凭借请求参数
     
     NSString *userToken = [AppDelegate APP].user.userToken;
-    
-    //----------------get profession array-----------------//
-    
-    
+ 
     NSDictionary *inSubData2 = @{
-                                //@"name" : [ZZUser shareUser].usertName,
                                 @"username" : [ZZUser shareUser].userUserName,
                                 //@"googleId" : [ZZUser shareUser].userGoogleID,
                                 //@"facebookId" : [ZZUser shareUser].userFacebookID,
@@ -680,25 +751,25 @@
                                 @"industry" : [ZZUser shareUser].userIndustry.informationID,
                                 @"profession" : [ZZUser shareUser].userProfession.informationID,
                                 @"interests" : interestIDArray,
-                                //@"maxPrice" : [ZZUser shareUser].maxPrice,
-                                //@"minPrice" : [ZZUser shareUser].minPrice,
-                                //@"allowNotification" : _thisUser.allowNotification,
-                                //@"emailNotification" : _thisUser.emailNotification,
-                                //@"allowNotification" : _thisUser.allowNotification,
-                                //@"sounds" : _thisUser.sounds,
-                                //@"showOnLockScreen" : _thisUser.showOnLockScreen,
-                                
-                                //@"preferredLanguag" : [ZZUser shareUser].preferredLanguage,
-                                
                                
+                                //@"canSeeMyProfile" : [ZZUser shareUser].canSeeMyProfile,
+                                //@"canMessageMe" : [ZZUser shareUser].canMessageMe,
+                                //@"canMyFriendSeeMyEmail" : [ZZUser shareUser].canMyFriendSeeMyEmail,
                                 
-                               
-                                
+                                @"allowNotification" : [ZZUser shareUser].allowNotification,
+                                @"emailNotification" : [ZZUser shareUser].emailNotification,
+                                @"showOnLockScreen" : [ZZUser shareUser].allowNotification,
+                                @"sounds" : [ZZUser shareUser].sounds,
                                 };
+    
+    NSLog(@"[ZZUser shareUser].canSeeMyProfile %@", [ZZUser shareUser].canSeeMyProfile);
+    NSLog(@"[ZZUser shareUser].canMessageMe %@", [ZZUser shareUser].canMessageMe);
+    NSLog(@"[ZZUser shareUser].canFriendSeeMyEmail %@", [ZZUser shareUser].canMyFriendSeeMyEmail);
+    
     NSDictionary *inData2 = @{@"action" : @"updateProfile", @"token" : userToken, @"data" : inSubData2,
-                             @"canSeeMyProfile" : _thisUser.canSeeMyProfile,
-                             @"canMessageMe" : _thisUser.canMessageMe,
-                             @"canMyFriendSeeMyEmail" : _thisUser.canMyFriendSeeMyEmail};
+                             @"canSeeMyProfile" : [ZZUser shareUser].canSeeMyProfile,
+                             @"canMessageMe" : [ZZUser shareUser].canMessageMe,
+                             @"canMyFriendSeeMyEmail" : [ZZUser shareUser].canMyFriendSeeMyEmail};
     NSDictionary *parameters2 = @{@"data" : inData2};
     
     [_manager POST:GetURL parameters:parameters2 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {

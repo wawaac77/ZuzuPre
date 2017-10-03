@@ -14,6 +14,7 @@
 
 @property (weak)id <FillinChildViewControllerDelegate> delegate;
 @property (strong, nonatomic) NSString *tableType;
+//@property (strong, nonatomic) NSString *information;
 
 @end
 
