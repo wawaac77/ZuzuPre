@@ -193,6 +193,7 @@
             [ZZUser shareUser].gender = thisUser.gender;
             [ZZUser shareUser].userIndustry = thisUser.userIndustry;
             [ZZUser shareUser].userProfession = thisUser.userProfession;
+            [ZZUser shareUser].phone = thisUser.phone;
             [ZZUser shareUser].maxPrice = thisUser.maxPrice;
             [ZZUser shareUser].minPrice = thisUser.minPrice;
             [ZZUser shareUser].preferredLanguage = thisUser.preferredLanguage;
@@ -206,7 +207,9 @@
             [ZZUser shareUser].canMyFriendSeeMyEmail = thisUser.canMyFriendSeeMyEmail;
             [ZZUser shareUser].notificationNum = thisUser.notificationNum;
             NSLog(@"this user %@", thisUser);
-            NSLog(@"this user. userName %@", thisUser.usertName);
+            NSLog(@"this user. sounds %@", thisUser.sounds);
+            NSLog(@"this user. emailNotification %@", thisUser.emailNotification);
+            NSLog(@"this user. showonLockScreen %@", thisUser.showOnLockScreen);
         }
         
         

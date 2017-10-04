@@ -125,8 +125,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
     
-    NSLog(@"cellID --- %@", cellID);
-    
     if (cell == nil) {
         switch (indexPath.section) {
             case 0:{
@@ -275,7 +273,7 @@
             
         } else if (indexPath.row == 2) {
             cell.textLabel.text = ZBLocalized(@"Phone", nil) ;
-            cell.detailTextLabel.text = _thisUser.phone;
+            cell.detailTextLabel.text = [ZZUser shareUser].phone;
             
         } else if (indexPath.row == 3) {
             cell.textLabel.text = ZBLocalized(@"Industry", nil);
@@ -300,7 +298,8 @@
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
             cell.textLabel.text = ZBLocalized(@"Anyone can view my profile.", nil);
-            if ([self.thisUser.canSeeMyProfile isEqualToValue:@1]) {
+            NSLog(@"self.thisUser.canSeeMyProfile %@", self.thisUser.canSeeMyProfile);
+            if ([self.thisUser.canSeeMyProfile isEqualToValue:@true]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
@@ -308,7 +307,7 @@
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else if (indexPath.row == 1) {
             cell.textLabel.text = ZBLocalized(@"Anyone can message me.", nil);
-            if ([self.thisUser.canMessageMe isEqualToValue:@1]) {
+            if ([self.thisUser.canMessageMe isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
@@ -333,9 +332,12 @@
             self.allowNotificationSwitch = switchView;
             cell.accessoryView = switchView;
             
-            if ([[ZZUser shareUser].allowNotification isEqualToValue:@1]) {
+            NSLog(@"[ZZUser shareUser].allowNotification switch %@", [ZZUser shareUser].allowNotification);
+            if ([[ZZUser shareUser].allowNotification isEqualToNumber:[NSNumber numberWithBool:@1]]) {
+                NSLog(@"allowNotification switch is on");
                 [switchView setOn:YES animated:NO];
             } else {
+                NSLog(@"allowNotification switch is off");
                 [switchView setOn:NO animated:NO];
             }
             
@@ -352,7 +354,7 @@
             cell.accessoryView = switchView;
             
             NSLog(@"going to set switch enable ");
-            if ([[ZZUser shareUser].allowNotification isEqualToValue:@1]) {
+            if ([[ZZUser shareUser].allowNotification isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 switchView.enabled = YES;
                 
             } else {
@@ -360,7 +362,7 @@
                 
             }
             
-            if ([[ZZUser shareUser].emailNotification isEqualToValue:@1]) {
+            if ([[ZZUser shareUser].emailNotification isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 [switchView setOn:YES animated:NO];
                 NSLog(@"switch set to ON");
             } else {
@@ -375,7 +377,7 @@
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
             
-            if ([[ZZUser shareUser].allowNotification isEqualToValue:@1]) {
+            if ([[ZZUser shareUser].allowNotification isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 switchView.enabled = YES;
                 NSLog(@"switchView enable = YES  for sound");
             } else {
@@ -383,7 +385,7 @@
                 NSLog(@"switchView enable = NO  for sound");
             }
 
-            if ([[ZZUser shareUser].sounds isEqualToValue:@1]) {
+            if ([[ZZUser shareUser].sounds isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 [switchView setOn:YES animated:NO];
                 NSLog(@"switch set to ON");
             } else {
@@ -397,8 +399,7 @@
             cell.textLabel.text = ZBLocalized(@"Show on Lock Screen", nil);
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             cell.accessoryView = switchView;
-            
-            if ([[ZZUser shareUser].allowNotification isEqualToValue:@1]) {
+            NSLog(@"show on lock screen switch %@", [ZZUser shareUser].showOnLockScreen );            if ([[ZZUser shareUser].allowNotification isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 switchView.enabled = YES;
                 NSLog(@"switchView enable = YES  for sound");
             } else {
@@ -406,7 +407,7 @@
                 NSLog(@"switchView enable = NO  for sound");
             }
 
-            if ([[ZZUser shareUser].showOnLockScreen isEqualToValue:@1]) {
+            if ([[ZZUser shareUser].showOnLockScreen isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 [switchView setOn:YES animated:NO];
             } else {
                 [switchView setOn:NO animated:NO];
@@ -760,6 +761,10 @@
                                 @"emailNotification" : [ZZUser shareUser].emailNotification,
                                 @"showOnLockScreen" : [ZZUser shareUser].allowNotification,
                                 @"sounds" : [ZZUser shareUser].sounds,
+                                
+                                @"canSeeMyProfile" : [ZZUser shareUser].canSeeMyProfile,
+                                @"canMessageMe" : [ZZUser shareUser].canMessageMe,
+                                @"canMyFriendSeeMyEmail" : [ZZUser shareUser].canMyFriendSeeMyEmail
                                 };
     
     NSLog(@"[ZZUser shareUser].canSeeMyProfile %@", [ZZUser shareUser].canSeeMyProfile);
@@ -767,9 +772,7 @@
     NSLog(@"[ZZUser shareUser].canFriendSeeMyEmail %@", [ZZUser shareUser].canMyFriendSeeMyEmail);
     
     NSDictionary *inData2 = @{@"action" : @"updateProfile", @"token" : userToken, @"data" : inSubData2,
-                             @"canSeeMyProfile" : [ZZUser shareUser].canSeeMyProfile,
-                             @"canMessageMe" : [ZZUser shareUser].canMessageMe,
-                             @"canMyFriendSeeMyEmail" : [ZZUser shareUser].canMyFriendSeeMyEmail};
+                            };
     NSDictionary *parameters2 = @{@"data" : inData2};
     
     [_manager POST:GetURL parameters:parameters2 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
