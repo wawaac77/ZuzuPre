@@ -33,7 +33,6 @@
 
 @property (strong, nonatomic) NSMutableArray<NSString *> *reuseIDArray;
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
-@property (strong, nonatomic) ZZUser *thisUser;
 
 @property (strong, nonatomic) UISwitch *allowNotificationSwitch;
 
@@ -58,9 +57,6 @@
     
     self.navigationItem.title = ZBLocalized(@"Settings", nil);
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(okButtonClicked)];
-
-    _thisUser = [[ZZUser alloc] init];
-    _thisUser = [ZZUser shareUser];
     
     [self setUpReuseIDArray];
     [self toggleAuthUI];
@@ -158,7 +154,7 @@
         if (indexPath.row == 0) {
 
             cell.textLabel.text = [AppDelegate APP].user.userUserName;
-            cell.detailTextLabel.text = _thisUser.userEmail;
+            cell.detailTextLabel.text = [ZZUser shareUser].userEmail;
             cell.imageView.image = [UIImage imageNamed:@"Ic_fa-star"];
             
             NSString *imageURL = [AppDelegate APP].user.userProfileImage.imageUrl;
@@ -200,6 +196,7 @@
                 //accessoryLabel.text = ZBLocalized(@"Not connected", nil);
                 
             } else {
+                NSLog(@"facebookId in setting %@", [ZZUser shareUser].userFacebookID);
                 accessoryLabel.text = ZBLocalized(@"Connected", nil);
             }
             
@@ -223,10 +220,11 @@
             
             [cell.contentView addSubview:accessoryLabel];
             
-            if ([ZZUser shareUser].userGoogleID == NULL) {
+            if ([[ZZUser shareUser].userGoogleID isEqualToString:@""] || [ZZUser shareUser].userGoogleID == NULL) {
                 //accessoryLabel.text = ZBLocalized(@"Not connected", nil);
             } else {
                 
+                NSLog(@"googleId in setting = %@", [ZZUser shareUser].userGoogleID);
                 accessoryLabel.text = ZBLocalized(@"Connected", nil);
             }
             
@@ -265,11 +263,11 @@
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
             cell.textLabel.text = ZBLocalized(@"Age", nil);
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",_thisUser.age] ;
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[ZZUser shareUser].age] ;
         
         } else if (indexPath.row == 1) {
             cell.textLabel.text = ZBLocalized(@"Gender", nil);
-            cell.detailTextLabel.text = _thisUser.gender;
+            cell.detailTextLabel.text = [ZZUser shareUser].gender;
             
         } else if (indexPath.row == 2) {
             cell.textLabel.text = ZBLocalized(@"Phone", nil) ;
@@ -277,17 +275,17 @@
             
         } else if (indexPath.row == 3) {
             cell.textLabel.text = ZBLocalized(@"Industry", nil);
-            cell.detailTextLabel.text = _thisUser.userIndustry.informationName;
+            cell.detailTextLabel.text = [ZZUser shareUser].userIndustry.informationName;
             
         } else if (indexPath.row == 4) {
             cell.textLabel.text = ZBLocalized(@"Profession", nil);
-            cell.detailTextLabel.text = _thisUser.userProfession.informationName;
+            cell.detailTextLabel.text = [ZZUser shareUser].userProfession.informationName;
             
         } else if (indexPath.row == 5) {
             cell.textLabel.text = ZBLocalized(@"Interests", nil);
             NSString *myInterests = @"";
-            for (int i = 0; i < _thisUser.userInterests.count; i++) {
-                myInterests = [[NSString stringWithFormat:@"%@ ", _thisUser.userInterests[i].informationName] stringByAppendingString: myInterests];
+            for (int i = 0; i < [ZZUser shareUser].userInterests.count; i++) {
+                myInterests = [[NSString stringWithFormat:@"%@ ", [ZZUser shareUser].userInterests[i].informationName] stringByAppendingString: myInterests];
             }
             NSLog(@"myInterests %@", myInterests);
             cell.detailTextLabel.text = myInterests;
@@ -298,8 +296,7 @@
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
             cell.textLabel.text = ZBLocalized(@"Anyone can view my profile.", nil);
-            NSLog(@"self.thisUser.canSeeMyProfile %@", self.thisUser.canSeeMyProfile);
-            if ([self.thisUser.canSeeMyProfile isEqualToValue:@true]) {
+            if ([[ZZUser shareUser].canSeeMyProfile isEqualToValue:@true]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
@@ -307,7 +304,7 @@
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else if (indexPath.row == 1) {
             cell.textLabel.text = ZBLocalized(@"Anyone can message me.", nil);
-            if ([self.thisUser.canMessageMe isEqualToNumber:[NSNumber numberWithBool:@1]]) {
+            if ([[ZZUser shareUser].canMessageMe isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
@@ -315,7 +312,7 @@
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else {
             cell.textLabel.text = ZBLocalized(@"Let my friends see my email address.", nil);
-            if ([self.thisUser.canMyFriendSeeMyEmail isEqualToValue:@1]) {
+            if ([[ZZUser shareUser].canMyFriendSeeMyEmail isEqualToValue:@1]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
@@ -461,11 +458,7 @@
     if (switchControl.tag == 0) {
         [ZZUser shareUser].allowNotification = [NSNumber numberWithBool:switchResult];
         if ([switchControl.on ? @"ON" : @"OFF"  isEqual: @"OFF"]) {
-            _thisUser.allowNotification =  @false;
-            _thisUser.emailNotification =  @false;
-            _thisUser.sounds =  @false;
-            _thisUser.showOnLockScreen =  @false;
-            
+           
             [ZZUser shareUser].allowNotification = @false;
             [ZZUser shareUser].emailNotification = @false;
             [ZZUser shareUser].sounds = @false;
@@ -621,7 +614,13 @@
         }
         
         else if (indexPath.row == 2) {
-            [self loginWithGoogleClicked];
+            if ([ZZUser shareUser].userGoogleID == NULL || [[ZZUser shareUser].userGoogleID isEqualToString:@""]) {
+                [self loginWithGoogleClicked];
+                //[self googlePlusLogoutButtonClick];
+                
+            } else {
+                [self googlePlusLogoutButtonClick];
+            }
         }
 
     }
@@ -679,37 +678,35 @@
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0) {
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            if ([self.thisUser.canSeeMyProfile isEqualToValue:@1]) {
+            if ([[ZZUser shareUser].canSeeMyProfile isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
-                self.thisUser.canSeeMyProfile = @0;
+                
                 [ZZUser shareUser].canSeeMyProfile = @0;
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
-                self.thisUser.canSeeMyProfile = @1;
+                
                 [ZZUser shareUser].canSeeMyProfile = @1;
             }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else if (indexPath.row == 1) {
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            if ([self.thisUser.canMessageMe isEqualToValue:@1]) {
+            if ([[ZZUser shareUser].canMessageMe isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
-                self.thisUser.canMessageMe = @0;
                 [ZZUser shareUser].canMessageMe = @0;
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
-                self.thisUser.canMessageMe = @1;
                 [ZZUser shareUser].canMessageMe = @1;
             }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
         } else {
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            if ([self.thisUser.canMyFriendSeeMyEmail isEqualToValue:@1]) {
+            if ([[ZZUser shareUser].canMyFriendSeeMyEmail isEqualToNumber:[NSNumber numberWithBool:@1]]) {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check-o"]];
-                self.thisUser.canMyFriendSeeMyEmail = @0;
+                
                 [ZZUser shareUser].canMyFriendSeeMyEmail = @0;
             } else {
                 cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check"]];
-                self.thisUser.canMyFriendSeeMyEmail = @1;
+                
                 [ZZUser shareUser].canMyFriendSeeMyEmail = @true;
             }
             cell.accessoryView.frame = CGRectMake(0, 0, 24, 24);
@@ -752,10 +749,6 @@
                                 @"industry" : [ZZUser shareUser].userIndustry.informationID,
                                 @"profession" : [ZZUser shareUser].userProfession.informationID,
                                 @"interests" : interestIDArray,
-                               
-                                //@"canSeeMyProfile" : [ZZUser shareUser].canSeeMyProfile,
-                                //@"canMessageMe" : [ZZUser shareUser].canMessageMe,
-                                //@"canMyFriendSeeMyEmail" : [ZZUser shareUser].canMyFriendSeeMyEmail,
                                 
                                 @"allowNotification" : [ZZUser shareUser].allowNotification,
                                 @"emailNotification" : [ZZUser shareUser].emailNotification,
@@ -924,20 +917,30 @@
 
 - (void)loginWithGoogleClicked {
     [[GIDSignIn sharedInstance] signIn];
+     [self.tableView reloadData];
     //self.googlePlusLogoutButtonInstance.enabled=YES;
     
 }
 
-/*
+
  - (void)googlePlusLogoutButtonClick {
- [[GIDSignIn sharedInstance] signOut];
- //[[GPPSignIn sharedInstance] signOut];
- [[GIDSignIn sharedInstance] disconnect];
- self.googlePlusLogoutButtonInstance.enabled=NO;
- [_userDefaults removeObjectForKey:@"googlePlusLogin"];
- [_userDefaults synchronize];
+ 
+     [[GIDSignIn sharedInstance] signOut];
+     //[[GPPSignIn sharedInstance] signOut];
+     [[GIDSignIn sharedInstance] disconnect];
+     
+     NSLog(@"google plus sign out");
+     
+     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"googlePlusLogin"];
+     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"googlePlusUserID"];
+     [[NSUserDefaults standardUserDefaults] synchronize];
+     
+     [ZZUser shareUser].userGoogleID = NULL;
+     
+     [self.tableView reloadData];
+     
  }
- */
+
 
 
 - (void)signIn:(GIDSignIn *)signIn

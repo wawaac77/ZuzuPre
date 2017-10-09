@@ -77,6 +77,7 @@
 //******************* others ****************************//
 @property (nonatomic, copy) NSString *facebookEmail;
 @property (nonatomic, copy) NSString *googleEmail;
+@property (nonatomic, copy) NSURL *googleProfileImageUrl;
 
 //******************* 单例 ****************************//
 /**

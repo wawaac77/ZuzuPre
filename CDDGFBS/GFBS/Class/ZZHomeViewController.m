@@ -117,6 +117,22 @@
     _topProfileImageView.layer.cornerRadius = _topProfileImageView.frame.size.width / 2;
     _topProfileImageView.clipsToBounds = YES;
     //_topProfileImageView.image = [UIImage imageNamed:@"profile_image_animals.jpeg"];
+    
+    /*
+    if (self.myProfile.userUserName == NULL || nil) {
+        self.myProfile.userUserName = [[NSUserDefaults standardUserDefaults] objectForKey:@"googlePlusLogin"];
+    }
+     */
+    
+
+    
+    /*
+    if (self.myProfile.userProfileImage.imageUrl == NULL || nil) {
+        self.myProfile.userProfileImage.imageUrl = [ZZUser shareUser].googleProfileImageUrl.absoluteString;
+    }
+     */
+    
+    
     [self.topProfileImageView sd_setImageWithURL:[NSURL URLWithString:self.myProfile.userProfileImage.imageUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (!image) return ;
         self.topProfileImageView.image = [image gf_circleImage];
@@ -143,6 +159,9 @@
     if ([userLang isEqualToString:@"zh-Hant"]) {
         userLang = @"tw";
     }
+    
+    userLang = @"en";
+    NSLog(@"userLang in homepage loadNewData %@", userLang);
     NSDictionary *inData = [[NSDictionary alloc] init];
     inData = @{@"action" : @"getMyProfile", @"token" : userToken, @"lang": userLang};
     NSDictionary *parameters = @{@"data" : inData};
@@ -207,6 +226,9 @@
             [ZZUser shareUser].canMyFriendSeeMyEmail = thisUser.canMyFriendSeeMyEmail;
             [ZZUser shareUser].notificationNum = thisUser.notificationNum;
             NSLog(@"this user %@", thisUser);
+            NSLog(@"this user.userUserName %@", thisUser.userUserName);
+            NSLog(@"this User.userProfileImage.imageUrl %@", thisUser.userProfileImage.imageUrl);
+
             NSLog(@"this user. sounds %@", thisUser.sounds);
             NSLog(@"this user. emailNotification %@", thisUser.emailNotification);
             NSLog(@"this user. showonLockScreen %@", thisUser.showOnLockScreen);

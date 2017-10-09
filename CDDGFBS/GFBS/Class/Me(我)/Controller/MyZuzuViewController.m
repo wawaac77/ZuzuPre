@@ -253,11 +253,17 @@ static CGFloat  const margin = 0;
     [shareUrlButton addTarget:self action:@selector(shareURLButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [alertView addCustomButton:shareUrlButton toIndex:3];
     
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelButton.backgroundColor = [UIColor clearColor];
+    [cancelButton setTitle:ZBLocalized(@"Cancel", nil) forState:UIControlStateNormal];
+    //[shareUrlButton addTarget:self action:@selector(shareURLButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [alertView addCustomButton:cancelButton toIndex:4];
+    
     alertView.titleColor = [UIColor whiteColor];
     alertView.backgroundColor = [UIColor clearColor];
     
-    NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:facebookButton, googlePlusButton, smsButton, shareUrlButton, nil];
-    NSArray *iconArray = [[NSArray alloc] initWithObjects:@"ic_facebook-logo",@"ic_google-plus", @"ic_sms",@"",nil];
+    NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:facebookButton, googlePlusButton, smsButton, shareUrlButton,cancelButton, nil];
+    NSArray *iconArray = [[NSArray alloc] initWithObjects:@"ic_facebook-logo",@"ic_google-plus", @"ic_sms",@"",@"",nil];
     for (int i = 0; i < buttonArray.count; i++) {
         UIButton *button = [buttonArray objectAtIndex:i];
         button.layer.cornerRadius = 5.0f;
