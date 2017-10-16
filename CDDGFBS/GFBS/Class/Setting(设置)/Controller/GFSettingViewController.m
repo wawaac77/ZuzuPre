@@ -20,6 +20,7 @@
 #import "AboutZZViewController.h"
 #import "ZZMessageAdminViewController.h"
 #import "LoginViewController.h"
+#import "ImagePickerViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -35,6 +36,8 @@
 @property (strong , nonatomic)GFHTTPSessionManager *manager;
 
 @property (strong, nonatomic) UISwitch *allowNotificationSwitch;
+
+@property (strong, nonatomic) UIButton *changeProfileImageButton;
 
 @end
 
@@ -164,6 +167,11 @@
             myImageView.contentMode = UIViewContentModeScaleAspectFill;
             [myImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
             [cell.contentView addSubview:myImageView];
+            
+            //change profile image button
+            self.changeProfileImageButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+            [_changeProfileImageButton addTarget:self action:@selector(changeProfileImage) forControlEvents:UIControlEventTouchUpInside];
+            [cell.contentView addSubview:_changeProfileImageButton];
             
             UILabel *accessoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(GFScreenWidth - 100, 10, 90, 30)];
             accessoryLabel.textAlignment = NSTextAlignmentRight;
@@ -547,7 +555,7 @@
     NSString *language=[[ZBLocalized sharedInstance]currentLanguage];
     
     if ([language isEqualToString:@"en"]) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"Are you sure?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"Are you sure to log out?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
         alertView.tag = 2;
         [alertView show];
         
@@ -593,6 +601,12 @@
     } else if (alertView.tag == 2 && buttonIndex == 1) {
         [[ZBLocalized sharedInstance]setLanguage:@"zh-Hant"];
         [self initRootVC];
+    } else if (alertView.tag == 3 && buttonIndex == 1) { //age
+        [ZZUser shareUser].age = [NSNumber numberWithInteger:[[alertView textFieldAtIndex:0].text integerValue]];
+        [self.tableView reloadData];
+    } else if (alertView.tag == 4 && buttonIndex == 1) { //phone
+        [ZZUser shareUser].phone = [alertView textFieldAtIndex:0].text;
+        [self.tableView reloadData];
     }
 }
 
@@ -627,10 +641,16 @@
     else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             
+            /*
             CuisineTableViewController *cuisineVC = [[CuisineTableViewController alloc] init];
             cuisineVC.tableType = @"Age";
             cuisineVC.delegate = self;
             [self.navigationController pushViewController:cuisineVC animated:YES];
+             */
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:ZBLocalized(@"Please input your age", nil)  delegate:self cancelButtonTitle:ZBLocalized(@"Cancel", nil)  otherButtonTitles: ZBLocalized(@"Done", nil) , nil];
+            alertView.tag = 3;
+            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+            [alertView show];
             
         }
 
@@ -643,11 +663,17 @@
         }
         
         else if (indexPath.row == 2) {
-            
+            /*
             SubFillTableViewController *cuisineVC = [[SubFillTableViewController alloc] init];
             cuisineVC.tableType = @"Phone";
             cuisineVC.delegate = self;
             [self.navigationController pushViewController:cuisineVC animated:YES];
+             */
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:ZBLocalized(@"Please input your phone number", nil)  delegate:self cancelButtonTitle:ZBLocalized(@"Cancel", nil)  otherButtonTitles: ZBLocalized(@"Done", nil) , nil];
+            alertView.tag = 4;
+            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+            [alertView show];
         }
         
         else if (indexPath.row == 3) {
@@ -1001,6 +1027,11 @@ dismissViewController:(UIViewController *)viewController {
 
 - (void)okButtonClicked {
     [self updateProfile];
+}
+
+- (void)changeProfileImage {
+    ImagePickerViewController *imagePickerVC = [[ImagePickerViewController alloc] init];
+    [self.navigationController pushViewController:imagePickerVC animated:YES];
 }
 
 /*

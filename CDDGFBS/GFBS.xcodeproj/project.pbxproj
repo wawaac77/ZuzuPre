@@ -300,6 +300,11 @@
 		785FF2561F7D0134002A42E9 /* google-plus-2-512 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 785FF2551F7D0134002A42E9 /* google-plus-2-512 copy.png */; };
 		785FF25A1F7E4D7F002A42E9 /* SubFillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785FF2581F7E4D7F002A42E9 /* SubFillTableViewController.m */; };
 		785FF25B1F7E4D7F002A42E9 /* SubFillTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785FF2591F7E4D7F002A42E9 /* SubFillTableViewController.xib */; };
+		785FF3591F949B46002A42E9 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 785FF3531F949B46002A42E9 /* LxGridViewFlowLayout.m */; };
+		785FF35A1F949B46002A42E9 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 785FF3551F949B46002A42E9 /* TZTestCell.m */; };
+		785FF35B1F949B46002A42E9 /* ImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785FF3571F949B46002A42E9 /* ImagePickerViewController.m */; };
+		785FF35C1F949B46002A42E9 /* ImagePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785FF3581F949B46002A42E9 /* ImagePickerViewController.xib */; };
+		785FF35F1F94A2B3002A42E9 /* MMSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785FF35E1F94A2B3002A42E9 /* MMSViewController.m */; };
 		786069631F15D98100A8AB88 /* DHGifImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7860695F1F15D98100A8AB88 /* DHGifImageOperation.m */; };
 		786069641F15D98100A8AB88 /* DHGuidePageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 786069611F15D98100A8AB88 /* DHGuidePageHUD.m */; };
 		786069651F15D98100A8AB88 /* GuideImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 786069621F15D98100A8AB88 /* GuideImage.bundle */; };
@@ -902,6 +907,15 @@
 		785FF2571F7E4D7F002A42E9 /* SubFillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubFillTableViewController.h; sourceTree = "<group>"; };
 		785FF2581F7E4D7F002A42E9 /* SubFillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubFillTableViewController.m; sourceTree = "<group>"; };
 		785FF2591F7E4D7F002A42E9 /* SubFillTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubFillTableViewController.xib; sourceTree = "<group>"; };
+		785FF3521F949B46002A42E9 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
+		785FF3531F949B46002A42E9 /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
+		785FF3541F949B46002A42E9 /* TZTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZTestCell.h; sourceTree = "<group>"; };
+		785FF3551F949B46002A42E9 /* TZTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZTestCell.m; sourceTree = "<group>"; };
+		785FF3561F949B46002A42E9 /* ImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerViewController.h; sourceTree = "<group>"; };
+		785FF3571F949B46002A42E9 /* ImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerViewController.m; sourceTree = "<group>"; };
+		785FF3581F949B46002A42E9 /* ImagePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePickerViewController.xib; sourceTree = "<group>"; };
+		785FF35D1F94A2B3002A42E9 /* MMSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSViewController.h; sourceTree = "<group>"; };
+		785FF35E1F94A2B3002A42E9 /* MMSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSViewController.m; sourceTree = "<group>"; };
 		7860695E1F15D98100A8AB88 /* DHGifImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGifImageOperation.h; sourceTree = "<group>"; };
 		7860695F1F15D98100A8AB88 /* DHGifImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHGifImageOperation.m; sourceTree = "<group>"; };
 		786069601F15D98100A8AB88 /* DHGuidePageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGuidePageHUD.h; sourceTree = "<group>"; };
@@ -1310,6 +1324,9 @@
 		185420821DF064F1004F6378 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				785FF35D1F94A2B3002A42E9 /* MMSViewController.h */,
+				785FF35E1F94A2B3002A42E9 /* MMSViewController.m */,
+				785FF3511F949B30002A42E9 /* imagePicker */,
 				185420831DF064F1004F6378 /* GFSettingViewController.h */,
 				185420841DF064F1004F6378 /* GFSettingViewController.m */,
 				185420851DF064F1004F6378 /* GFSettingViewController.storyboard */,
@@ -2384,6 +2401,20 @@
 			path = 1242x2208;
 			sourceTree = "<group>";
 		};
+		785FF3511F949B30002A42E9 /* imagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				785FF3521F949B46002A42E9 /* LxGridViewFlowLayout.h */,
+				785FF3531F949B46002A42E9 /* LxGridViewFlowLayout.m */,
+				785FF3541F949B46002A42E9 /* TZTestCell.h */,
+				785FF3551F949B46002A42E9 /* TZTestCell.m */,
+				785FF3561F949B46002A42E9 /* ImagePickerViewController.h */,
+				785FF3571F949B46002A42E9 /* ImagePickerViewController.m */,
+				785FF3581F949B46002A42E9 /* ImagePickerViewController.xib */,
+			);
+			name = imagePicker;
+			sourceTree = "<group>";
+		};
 		7860695D1F15D98100A8AB88 /* DHGuidePageHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -3265,6 +3296,7 @@
 				7800970D1EC9C1F5008F9F99 /* ic_pen.png in Resources */,
 				780096C21EC9C1F5008F9F99 /* ic_fa-angle-right.png in Resources */,
 				780096BA1EC9C1F5008F9F99 /* ic_ fa-check-square-o.png in Resources */,
+				785FF35C1F949B46002A42E9 /* ImagePickerViewController.xib in Resources */,
 				780096C51EC9C1F5008F9F99 /* ic_fa-check.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3371,6 +3403,7 @@
 				788CC33D1F19EC3900DC4116 /* JSQMessagesBubblesSizeCalculator.m in Sources */,
 				189CA3251DDADBF6004D07EA /* main.m in Sources */,
 				786069E31F1609C500A8AB88 /* ZZHomeViewController.m in Sources */,
+				785FF35B1F949B46002A42E9 /* ImagePickerViewController.m in Sources */,
 				786069EB1F160A7400A8AB88 /* FriendsHomeTableViewController.m in Sources */,
 				180292421DE990C700743619 /* NSCalendar+GFExtension.m in Sources */,
 				789E0D661F17DCAE00CCAAE4 /* ZZInboxCell.m in Sources */,
@@ -3445,6 +3478,7 @@
 				7829FF911ED576D700C934C2 /* RestaurantMenuViewController.m in Sources */,
 				18388AD41DFAAB27004E1DF9 /* GFSubTagItem.m in Sources */,
 				7829FFB81EE16AE000C934C2 /* MinScrollMenuItem.m in Sources */,
+				785FF3591F949B46002A42E9 /* LxGridViewFlowLayout.m in Sources */,
 				1829A69E1DE7E8390086AD86 /* GFTopic.m in Sources */,
 				788CC33C1F19EC3900DC4116 /* JSQAudioMediaViewAttributes.m in Sources */,
 				78F49F841EE6F61100674130 /* MyEvent.m in Sources */,
@@ -3477,6 +3511,7 @@
 				18BE029F1DDB4A7600D27893 /* GFNavigationController.m in Sources */,
 				7864EB621F28C5B500AA572E /* ZZMessageAdminViewController.m in Sources */,
 				788CC3401F19EC3900DC4116 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
+				785FF35F1F94A2B3002A42E9 /* MMSViewController.m in Sources */,
 				18B61AFA1E0D5DED00CAC3FF /* GFTagTextField.m in Sources */,
 				18C8262C1DE7368D007341E3 /* ZZAttendingViewController.m in Sources */,
 				7864EB6F1F2B424400AA572E /* OverviewCell.m in Sources */,
@@ -3506,6 +3541,7 @@
 				786069641F15D98100A8AB88 /* DHGuidePageHUD.m in Sources */,
 				788CC3311F19EC3900DC4116 /* UIColor+JSQMessages.m in Sources */,
 				18C826291DE72630007341E3 /* GFTitleButton.m in Sources */,
+				785FF35A1F949B46002A42E9 /* TZTestCell.m in Sources */,
 				181EF74B1E0BD27400C91928 /* GFAddToolBar.m in Sources */,
 				785FF2511F7CDFBD002A42E9 /* CuisineTableViewController.m in Sources */,
 				18B7C73A1DE08392004BD781 /* UITextField+GFPlaceholder.m in Sources */,

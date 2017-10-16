@@ -359,11 +359,14 @@ static NSString *const ID = @"ID";
     NSLog(@"preferred language [AppDelegate APP].user.preferredLanguage %@", userLang);
     
     NSLog(@"user token %@", userToken);
+    
+    NSDictionary *inSubData = @{@"page" : @1};
+    
     NSDictionary *inData = [[NSDictionary alloc] init];
     if (self.type == 0) {
         inData = @{@"action" : @"getAllCheckinList", @"token" : userToken, @"lang" : userLang};
     } else if (self.type == 1) {
-        inData = @{@"action" : @"getFriendCheckinList", @"token" : userToken, @"lang" : userLang};
+        inData = @{@"action" : @"getFriendCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 2) {
         inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang};
     } else if (self.type == 4) {

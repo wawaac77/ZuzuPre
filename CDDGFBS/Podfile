@@ -1,6 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, "8.0"
 
+target 'GFBS' do 
+
 pod "AFNetworking"
 pod "SDWebImage"
 pod "SVProgressHUD"
@@ -10,13 +12,16 @@ pod "DOPDropDownMenu-Enhanced"
 pod "Masonry"
 pod "SDCycleScrollView"
 pod "LTNavigationBar"
+
+pod "MMSProfileImagePicker" 
 pod 'LLImagePickerView'
+pod 'RSKImageCropper'
+
 pod "DACircularProgress"
 pod "pop"
 pod 'GoogleSignIn'
-pod try Google
 pod 'Firebase/Storage'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
 
-target :"GFBS"
+end 
