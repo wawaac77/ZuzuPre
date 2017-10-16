@@ -279,6 +279,8 @@
 		783F82311F17149100491529 /* ZZLeaderboardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 783F822F1F17149100491529 /* ZZLeaderboardCell.m */; };
 		783F82321F17149100491529 /* ZZLeaderboardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783F82301F17149100491529 /* ZZLeaderboardCell.xib */; };
 		783F82341F176E7300491529 /* profile_image_animals.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 783F82331F176E7300491529 /* profile_image_animals.jpeg */; };
+		7845F5181F94B14B00F18625 /* PickSingleImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7845F5161F94B14B00F18625 /* PickSingleImageViewController.m */; };
+		7845F5191F94B14B00F18625 /* PickSingleImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7845F5171F94B14B00F18625 /* PickSingleImageViewController.xib */; };
 		784D3F691ECC79EE0058C63F /* GFEventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 784D3F671ECC79EE0058C63F /* GFEventsCell.m */; };
 		784D3F6A1ECC79EE0058C63F /* GFEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 784D3F681ECC79EE0058C63F /* GFEventsCell.xib */; };
 		784FBB801F1F032A00014395 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 784FBB7E1F1F032A00014395 /* Fabric.framework */; };
@@ -304,7 +306,6 @@
 		785FF35A1F949B46002A42E9 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 785FF3551F949B46002A42E9 /* TZTestCell.m */; };
 		785FF35B1F949B46002A42E9 /* ImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785FF3571F949B46002A42E9 /* ImagePickerViewController.m */; };
 		785FF35C1F949B46002A42E9 /* ImagePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785FF3581F949B46002A42E9 /* ImagePickerViewController.xib */; };
-		785FF35F1F94A2B3002A42E9 /* MMSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785FF35E1F94A2B3002A42E9 /* MMSViewController.m */; };
 		786069631F15D98100A8AB88 /* DHGifImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7860695F1F15D98100A8AB88 /* DHGifImageOperation.m */; };
 		786069641F15D98100A8AB88 /* DHGuidePageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 786069611F15D98100A8AB88 /* DHGuidePageHUD.m */; };
 		786069651F15D98100A8AB88 /* GuideImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 786069621F15D98100A8AB88 /* GuideImage.bundle */; };
@@ -883,6 +884,9 @@
 		783F822F1F17149100491529 /* ZZLeaderboardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZLeaderboardCell.m; sourceTree = "<group>"; };
 		783F82301F17149100491529 /* ZZLeaderboardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZLeaderboardCell.xib; sourceTree = "<group>"; };
 		783F82331F176E7300491529 /* profile_image_animals.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_image_animals.jpeg; sourceTree = "<group>"; };
+		7845F5151F94B14B00F18625 /* PickSingleImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickSingleImageViewController.h; sourceTree = "<group>"; };
+		7845F5161F94B14B00F18625 /* PickSingleImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickSingleImageViewController.m; sourceTree = "<group>"; usesTabs = 0; };
+		7845F5171F94B14B00F18625 /* PickSingleImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickSingleImageViewController.xib; sourceTree = "<group>"; };
 		784D3F661ECC79EE0058C63F /* GFEventsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFEventsCell.h; sourceTree = "<group>"; };
 		784D3F671ECC79EE0058C63F /* GFEventsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFEventsCell.m; sourceTree = "<group>"; };
 		784D3F681ECC79EE0058C63F /* GFEventsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GFEventsCell.xib; sourceTree = "<group>"; };
@@ -914,8 +918,6 @@
 		785FF3561F949B46002A42E9 /* ImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerViewController.h; sourceTree = "<group>"; };
 		785FF3571F949B46002A42E9 /* ImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerViewController.m; sourceTree = "<group>"; };
 		785FF3581F949B46002A42E9 /* ImagePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePickerViewController.xib; sourceTree = "<group>"; };
-		785FF35D1F94A2B3002A42E9 /* MMSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSViewController.h; sourceTree = "<group>"; };
-		785FF35E1F94A2B3002A42E9 /* MMSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSViewController.m; sourceTree = "<group>"; };
 		7860695E1F15D98100A8AB88 /* DHGifImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGifImageOperation.h; sourceTree = "<group>"; };
 		7860695F1F15D98100A8AB88 /* DHGifImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHGifImageOperation.m; sourceTree = "<group>"; };
 		786069601F15D98100A8AB88 /* DHGuidePageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGuidePageHUD.h; sourceTree = "<group>"; };
@@ -1324,8 +1326,6 @@
 		185420821DF064F1004F6378 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				785FF35D1F94A2B3002A42E9 /* MMSViewController.h */,
-				785FF35E1F94A2B3002A42E9 /* MMSViewController.m */,
 				785FF3511F949B30002A42E9 /* imagePicker */,
 				185420831DF064F1004F6378 /* GFSettingViewController.h */,
 				185420841DF064F1004F6378 /* GFSettingViewController.m */,
@@ -1344,6 +1344,9 @@
 				785FF2571F7E4D7F002A42E9 /* SubFillTableViewController.h */,
 				785FF2581F7E4D7F002A42E9 /* SubFillTableViewController.m */,
 				785FF2591F7E4D7F002A42E9 /* SubFillTableViewController.xib */,
+				7845F5151F94B14B00F18625 /* PickSingleImageViewController.h */,
+				7845F5161F94B14B00F18625 /* PickSingleImageViewController.m */,
+				7845F5171F94B14B00F18625 /* PickSingleImageViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3109,6 +3112,7 @@
 				786069C11F15DB9B00A8AB88 /* ic_chair.png in Resources */,
 				18B7C72C1DE07508004BD781 /* GFLoginRegisterView.xib in Resources */,
 				18E8D3811DE9EB4A00ED4EE1 /* GFTopicVoiceView.xib in Resources */,
+				7845F5191F94B14B00F18625 /* PickSingleImageViewController.xib in Resources */,
 				786069A31F15DB9B00A8AB88 /* check-o.png in Resources */,
 				7824E35A1EF2201D00F85BFB /* BadgesSquareCell.xib in Resources */,
 				7824E3471EF1408E00F85BFB /* ic_badges_338x338-01.png in Resources */,
@@ -3511,7 +3515,6 @@
 				18BE029F1DDB4A7600D27893 /* GFNavigationController.m in Sources */,
 				7864EB621F28C5B500AA572E /* ZZMessageAdminViewController.m in Sources */,
 				788CC3401F19EC3900DC4116 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
-				785FF35F1F94A2B3002A42E9 /* MMSViewController.m in Sources */,
 				18B61AFA1E0D5DED00CAC3FF /* GFTagTextField.m in Sources */,
 				18C8262C1DE7368D007341E3 /* ZZAttendingViewController.m in Sources */,
 				7864EB6F1F2B424400AA572E /* OverviewCell.m in Sources */,
@@ -3527,6 +3530,7 @@
 				18BE02B21DDB4C3900D27893 /* GFMeViewController.m in Sources */,
 				783089601F1E1E7100C31BFE /* ZZFriendModel.m in Sources */,
 				789CFF971F12399100EBA772 /* ZZImageCollectionCell.m in Sources */,
+				7845F5181F94B14B00F18625 /* PickSingleImageViewController.m in Sources */,
 				788CC34C1F19EC3900DC4116 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				788CC3381F19EC3900DC4116 /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
 				788CC3501F19EC3900DC4116 /* JSQMessagesComposerTextView.m in Sources */,

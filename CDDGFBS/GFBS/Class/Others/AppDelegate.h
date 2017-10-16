@@ -10,7 +10,7 @@
 #import "ZZUser.h"
 #import "Crashlytics/Crashlytics.h"
 
-#import <Google/SignIn.h>
+#import <GoogleSignIn/GoogleSignIn.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Fabric/Fabric.h>
 #import <Firebase.h>

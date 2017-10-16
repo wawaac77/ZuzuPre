@@ -14,7 +14,7 @@
 #import <UIImageView+WebCache.h>
 #import <SDImageCache.h>
 #import <FirebaseAuth/FirebaseAuth.h>
-#import <GoogleSignIn.h>
+#import <GoogleSignIn/GoogleSignIn.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 

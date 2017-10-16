@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GTMOAuth2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -79,6 +84,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RSKImageCropper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SDCycleScrollView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -117,7 +127,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2170C5E5DAF3D0C754167A83C1810D5E</key>
+		<key>08E6D5FFC74A08E67173ED5CD3081DFE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>207A26BAC2594537AA96367A0D4CE50D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,17 +142,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>33A3D1AC025752525EB824999A9D8893</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>4CC50A5F39EB43A05C7B14700B577F75</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>58885A79D8F2FE6A57DF1D65A1A33E7E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>58E7450DB13C5ECCE92D3C0DF7CF0903</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5EE7B8DF0F3F02CB903340652462F49C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -148,11 +168,6 @@
 			<true/>
 		</dict>
 		<key>637A4670064D475B88F09E999D132CA3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6D0CA19ACCA2436B115AB25FBFF240C8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,12 +187,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9FC0F03FD3F1CD68AF049A0E83DFA653</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A316B54C67E947D23CECD230FA5BFAEF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B943E23B88B8A73E6A51791997A6B4A4</key>
+		<key>C3700D9A2BD8B43BB5C034C32AA9E484</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -197,17 +217,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DE868725B18AE240E550C5515AE66BC4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E5053B007B687ED9F9FBC4CD0906C796</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E5BD2F282DDFD8B252B56B8FD7897693</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EAE45C123C22F83F258F201FDFBA835E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

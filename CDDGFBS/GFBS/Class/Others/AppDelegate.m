@@ -128,8 +128,11 @@
     
     /******** Google+ signin *********/
     NSError* configureError;
+    /*
     [[GGLContext sharedInstance] configureWithError: &configureError];
     NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+     */
+    
     //[GIDSignIn sharedInstance].clientID = @"YOUR_CLIENT_ID";
     [GIDSignIn sharedInstance].delegate = self;
     NSLog(@"[GGLContext sharedInstance]  in appDelegate works");

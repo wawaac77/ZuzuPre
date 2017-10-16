@@ -16,6 +16,7 @@
 #import "ZZTypicalInformationModel.h"
 #import "CuisineTableViewController.h"
 #import "SubFillTableViewController.h"
+#import "PickSingleImageViewController.h"
 
 #import "AboutZZViewController.h"
 #import "ZZMessageAdminViewController.h"
@@ -617,7 +618,7 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"Are you sure?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil  message:ZBLocalized(@"Are you sure to log out?", nil)  delegate:self cancelButtonTitle: ZBLocalized(@"Cancel", nil) otherButtonTitles:ZBLocalized(@"Yes", nil), nil];
             alertView.tag = 0;
             [alertView show];
 
@@ -1030,8 +1031,14 @@ dismissViewController:(UIViewController *)viewController {
 }
 
 - (void)changeProfileImage {
+    /*
     ImagePickerViewController *imagePickerVC = [[ImagePickerViewController alloc] init];
     [self.navigationController pushViewController:imagePickerVC animated:YES];
+     */
+    
+    PickSingleImageViewController *pickVC = [[PickSingleImageViewController alloc] init];
+    [self.navigationController pushViewController:pickVC animated:YES];
+    
 }
 
 /*

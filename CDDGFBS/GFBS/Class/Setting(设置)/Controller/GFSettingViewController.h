@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Google/SignIn.h>
+#import <GoogleSignIn/GoogleSignIn.h>
 #import "CuisineTableViewController.h"
 #import "SubFillTableViewController.h"
 
