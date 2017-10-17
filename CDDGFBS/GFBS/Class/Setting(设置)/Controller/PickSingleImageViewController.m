@@ -8,14 +8,22 @@
 
 #import "PickSingleImageViewController.h"
 #import <RSKImageCropper.h>
+#import "ZBLocalized.h"
 
 #import <SVProgressHUD.h>
+#import <SDImageCache.h>
+#import <UIImageView+WebCache.h>
 
-@interface PickSingleImageViewController () <RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource>
+@interface PickSingleImageViewController () <RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource, UIImagePickerControllerDelegate> {
+    CGFloat imageViewWidth;
+    CGFloat chooseButtonWidth;
+}
 
-@property (strong, nonatomic) UIButton *uploadButton;
+@property (weak, nonatomic) IBOutlet UIButton *chooseButton;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 @property (strong, nonatomic) UIImage *pickedImage;
-@property (strong, nonatomic) UIImageView *imageView;
+
 
 @end
 
@@ -23,24 +31,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.frame = [UIScreen mainScreen].bounds;
+    self.navigationItem.title = ZBLocalized(@"Upload Profile Image", nil);
+    [self setUpNavBar];
     
-    self.uploadButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 100, 40, 50)];
-    [_uploadButton addTarget:self action:@selector(chooseImage) forControlEvents:UIControlEventTouchUpInside];
- 
-    [_uploadButton setTintColor:[UIColor blueColor]];
-    _uploadButton.backgroundColor = [UIColor greenColor];
-    [_uploadButton setTitle:@"choose" forState:UIControlStateNormal];
-    [self.view addSubview:_uploadButton];
+    //_chooseButton.frame = CGRectMake((GFScreenWidth - chooseButtonWidth) / 2, 300, chooseButtonWidth, 40);
+    [_chooseButton addTarget:self action:@selector(chooseImage) forControlEvents:UIControlEventTouchUpInside];
+    [_chooseButton setTintColor:[UIColor whiteColor]];
+    _chooseButton.backgroundColor = ZZGoldColor;
+    _chooseButton.layer.cornerRadius = 4.0f;
+    [_chooseButton setTitle:@"Choose from Library" forState:UIControlStateNormal];
+    [self.view addSubview:_chooseButton];
     
-    
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 200, 100, 100)];
-    [self.view addSubview:_imageView];
-    // Do any additional setup after loading the view from its nib.
+    imageViewWidth = 200;
+    NSString *imageURL = [ZZUser shareUser].userProfileImage.imageUrl;
+    [_imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
+    //_imageView.frame = CGRectMake((GFScreenWidth - imageViewWidth)/2, 80, imageViewWidth, imageViewWidth);
+    _imageView.layer.cornerRadius = _imageView.gf_width / 2;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setUpNavBar {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Upload" style:UIBarButtonItemStyleDone target:self action:@selector(okButtonClicked)];
+    
+}
+
+- (void)okButtonClicked {
+    NSLog(@"Upload button clicked");
 }
 
 - (void)chooseImage {
