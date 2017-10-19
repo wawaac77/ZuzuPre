@@ -28,6 +28,8 @@
     
     float longitude;
     float latitude;
+    
+    float margin;
 }
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIImageView *topProfileImageView;
@@ -35,18 +37,23 @@
 @property (weak, nonatomic) IBOutlet UILabel *checkinLabel;
 - (IBAction)locationButtonClicked:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIView *toolBarView;
+//@property (weak, nonatomic) IBOutlet UIView *toolBarView;
+@property (strong, nonatomic) UIView *toolBarView;
 
-@property (weak, nonatomic) IBOutlet UIButton *imagePickerButton;
+//@property (weak, nonatomic) IBOutlet UIButton *imagePickerButton;
+@property (strong, nonatomic) UIButton *imagePickerButton;
 - (IBAction)imagePickerButtonClicked:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+//@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (strong, nonatomic) UIButton *cancelButton;
 - (IBAction)cancelButtonClicked:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *checkinButton;
+//@property (weak, nonatomic) IBOutlet UIButton *checkinButton;
+@property (strong, nonatomic) UIButton *checkinButton;
 - (IBAction)checkinButtonClicked:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
+//@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
+@property (strong, nonatomic) UIButton *facebookButton;
 - (IBAction)facebookButtonClicked:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *twitterButton;
@@ -83,6 +90,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.frame = [UIScreen mainScreen].bounds;
+    
     if (self.locationManager == nil) {
         self.locationManager = [[CLLocationManager alloc] init];
     }
@@ -327,19 +336,45 @@
 
 #pragma -tool bar
 - (void)setUpToolBarView {
-    self.toolBarView.frame = CGRectMake(0, GFScreenHeight - GFTabBarH - 80, GFScreenWidth, 80);
+    
+    margin = 10.0f;
+    
+    self.toolBarView = [[UIView alloc] initWithFrame:CGRectMake(0, GFScreenHeight - GFTabBarH - 80, GFScreenWidth, 80)];
+    //self.toolBarView.frame = CGRectMake(0, GFScreenHeight - GFTabBarH - 80, GFScreenWidth, 80);
+    [self.view addSubview:self.toolBarView];
+    
+    float buttonWidth = 20;
+    
+    //buttons
+    self.imagePickerButton = [[UIButton alloc] initWithFrame:CGRectMake(margin, 10, buttonWidth, buttonWidth)];
+    [_imagePickerButton setImage:[UIImage imageNamed:@"ic_checkin-camera"] forState:UIControlStateNormal];
+    [_imagePickerButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [_imagePickerButton addTarget:self action:@selector(imagePickerButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.toolBarView addSubview:_imagePickerButton];
+    
+
     [_twitterButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [_facebookButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [_imagePickerButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+   
     
+    self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(margin, 40, (GFScreenWidth - margin * 3) /2, 30)];
     _cancelButton.layer.cornerRadius = 4.0f;
     _cancelButton.clipsToBounds = YES;
+    //_cancelButton.frame = CGRectMake(margin, 0, GFScreenWidth - margin * 3, 30);
     [_cancelButton setTitle:ZBLocalized(@"Cancel", nil) forState:UIControlStateNormal];
+    _cancelButton.backgroundColor = [UIColor grayColor];
+    [_cancelButton addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.toolBarView addSubview:self.cancelButton];
     
+    self.checkinButton = [[UIButton alloc] initWithFrame:CGRectMake(GFScreenWidth/2 + margin/2, 40, (GFScreenWidth - 3 * margin) / 2, 30)];
     _checkinButton.layer.cornerRadius = 4.0f;
     _checkinButton.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
     _checkinButton.clipsToBounds = YES;
+    //_checkinButton.frame = CGRectMake(GFScreenWidth/2 + margin/2, 0, GFScreenWidth - 3 * margin, 30);
+    [_checkinButton addTarget:self action:@selector(checkinButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [_checkinButton setTitle:ZBLocalized(@"Check in", nil) forState:UIControlStateNormal];
+    _checkinButton.backgroundColor = ZZGoldColor;
+    [self.toolBarView addSubview:self.checkinButton];
     
     //self.cancelButton.frame = CGRectMake(5, GFScreenHeight - GFTabBarH - 50, 180, 30);
     //通知
@@ -448,6 +483,7 @@
 
 #pragma - imagePicker action
 //*************** imagePicker *****************//
+/*
 - (IBAction)imagePickerButtonClicked:(id)sender {
     
     /*
@@ -458,7 +494,7 @@
     NSLog(@" %@", imagePickerVC.pickedImageArray);
     _pickedImagesArray = imagePickerVC.pickedImageArray;
      */
-    
+    /*
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -467,6 +503,18 @@
     
     [self presentViewController:picker animated:YES completion:NULL];
     
+}
+*/
+
+
+- (void)imagePickerButtonClicked {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -488,7 +536,16 @@
 }
 
 //*************** cancel button *****************//
+/*
 - (IBAction)cancelButtonClicked:(id)sender {
+    NSLog(@"Cancel Button clicked");
+    self.textView.text = nil;
+    self.imageView.image = nil;
+    self.pickedImage = nil;
+}
+ */
+
+- (void)cancelButtonClicked {
     NSLog(@"Cancel Button clicked");
     self.textView.text = nil;
     self.imageView.image = nil;
@@ -503,6 +560,7 @@
 
 
 //*************** checkin button *****************//
+/*
 - (IBAction)checkinButtonClicked:(id)sender {
     NSLog(@"check in button clicked");
     /*
@@ -512,6 +570,7 @@
     }
     else {
      */
+/*
         NSLog(@"Check in posted");
         [self postCheckIn];
         self.textView.text = nil;
@@ -520,6 +579,17 @@
     
     // if (![self.textView.text isEqualToString:@""])
 }
+*/
+
+- (void)checkinButtonClicked {
+    NSLog(@"check in button clicked");
+   
+    NSLog(@"Check in posted");
+    [self postCheckIn];
+    self.textView.text = nil;
+    self.imageView.image = nil;
+}
+
 
 //*************** post checkin *****************//
 - (void)postCheckIn {

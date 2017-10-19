@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZZCheckInViewController">
             <connections>
-                <outlet property="cancelButton" destination="zf6-Gp-BM9" id="whh-zG-o0e"/>
-                <outlet property="checkinButton" destination="0ns-PH-Yl2" id="FRJ-p5-L57"/>
                 <outlet property="checkinLabel" destination="R3d-qc-Dud" id="yJ8-pt-hew"/>
                 <outlet property="facebookButton" destination="cFi-vB-myB" id="AIG-bb-orO"/>
-                <outlet property="imagePickerButton" destination="lyZ-I5-0cB" id="ST3-cz-XYR"/>
                 <outlet property="locationButton" destination="OHy-0L-YXj" id="fww-y6-KGC"/>
                 <outlet property="pickerImageView" destination="6pJ-9C-Vwp" id="JCm-bl-gy1"/>
-                <outlet property="toolBarView" destination="Rrn-wn-EQM" id="9yi-te-HKR"/>
                 <outlet property="topProfileImageView" destination="iy1-4l-cOP" id="9xt-6J-Xuu"/>
                 <outlet property="topView" destination="R3d-qc-Dud" id="SDj-sE-nt5"/>
                 <outlet property="twitterButton" destination="5Fi-U2-tDt" id="B3y-HM-veY"/>
@@ -121,14 +117,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyZ-I5-0cB">
-                                    <rect key="frame" x="10" y="5" width="20" height="20"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="ic_checkin-camera"/>
-                                    <connections>
-                                        <action selector="imagePickerButtonClicked:" destination="-1" eventType="touchUpInside" id="rZd-v2-7Qt"/>
-                                    </connections>
-                                </button>
                                 <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fi-U2-tDt">
                                     <rect key="frame" x="339" y="6" width="20" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -151,30 +139,6 @@
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aSL-Nj-0jn" userLabel="bottom">
                             <rect key="frame" x="0.0" y="35" width="375" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zf6-Gp-BM9">
-                                    <rect key="frame" x="5" y="0.0" width="180" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    <state key="normal">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="cancelButtonClicked:" destination="-1" eventType="touchUpInside" id="qmc-3F-SxN"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ns-PH-Yl2">
-                                    <rect key="frame" x="190" y="0.0" width="180" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.83276491119999996" green="0.73090298239999996" blue="0.29533309320000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="checkinButtonClicked:" destination="-1" eventType="touchUpInside" id="Aki-yw-d33"/>
-                                    </connections>
-                                </button>
-                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
@@ -194,7 +158,6 @@
     </objects>
     <resources>
         <image name="ic_checkin" width="24" height="29"/>
-        <image name="ic_checkin-camera" width="38" height="33"/>
         <image name="ic_facebook" width="19" height="35"/>
         <image name="ic_select_m2cafe" width="15" height="8"/>
         <image name="ic_twitter" width="33" height="27"/>

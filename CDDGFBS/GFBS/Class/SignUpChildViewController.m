@@ -215,7 +215,7 @@
         
         
         //********** regist Firebase ***********************//
-        
+        /*
         [[FIRAuth auth]createUserWithEmail:self.emailTextField.text password:self.passwordTextField.text completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
            
             if (error) {
@@ -235,7 +235,8 @@
                 
             }
         }];
-    
+    */
+        
     }
     
 }

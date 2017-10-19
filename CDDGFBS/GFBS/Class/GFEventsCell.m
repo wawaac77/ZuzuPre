@@ -166,11 +166,12 @@
     
     self.smallTitleLabel.text = thisEvent.listPublishUser.userUserName;
     
+    NSLog(@"thisEvent.numOfLike %@", thisEvent.numOfLike);
     NSString *likeString = ZBLocalized(@"like", nil);
     NSString *likeString1 = ZBLocalized(@"likes", nil);
     if (thisEvent.numOfLike == NULL || thisEvent.numOfLike == nil || [thisEvent.numOfLike isEqualToNumber:@0]) {
         self.likeNumLabel.text = [NSString stringWithFormat:@" "] ;
-    } else if ([thisEvent.numOfLike isEqual:@1]) {
+    } else if ([thisEvent.numOfLike isEqualToNumber:@1]) {
         self.likeNumLabel.text = [NSString stringWithFormat:ZBLocalized(@"%@ %@", nil),thisEvent.numOfLike, likeString] ;
     } else {
         self.likeNumLabel.text = [NSString stringWithFormat:ZBLocalized(@"%@ %@", nil),thisEvent.numOfLike, likeString1] ;
@@ -190,7 +191,7 @@
     //height = thisEvent.cellHeight - 337 - GFMargin;
     //height = thisEvent.cellHeight - 334 - GFMargin;
     //height = 30;
-    NSLog(@"cell not comment textField height %f", height);
+    //NSLog(@"cell not comment textField height %f", height);
     
     /*
     if (thisEvent.listImage_UIImage == nil) {

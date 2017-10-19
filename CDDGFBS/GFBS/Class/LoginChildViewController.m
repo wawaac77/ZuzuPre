@@ -167,6 +167,10 @@
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:thisUser.userUserName forKey:@"KEY_USER_NAME"];
             [userDefaults setObject:thisUser.userToken forKey:@"KEY_USER_TOKEN"];
+            
+            if (thisUser.preferredLanguage == NULL) {
+                thisUser.preferredLanguage = @"en";
+            }
             [userDefaults setObject:thisUser.preferredLanguage forKey:@"KEY_USER_LANG"];
             [userDefaults synchronize];
             

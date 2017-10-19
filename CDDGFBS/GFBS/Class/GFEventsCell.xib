@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -108,9 +108,11 @@
                                     <constraint firstAttribute="width" constant="50" id="KKF-d6-5Dw"/>
                                 </constraints>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="192" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDK-iD-Xeu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="192" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDK-iD-Xeu">
                                 <rect key="frame" x="312" y="25" width="55" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="uMX-rr-REx"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -118,7 +120,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="QDK-iD-Xeu" secondAttribute="bottom" constant="14" id="4uh-4S-ADC"/>
                             <constraint firstAttribute="trailing" secondItem="JaW-NH-5ma" secondAttribute="trailing" constant="8" id="CvW-oF-5NO"/>
+                            <constraint firstItem="QDK-iD-Xeu" firstAttribute="top" secondItem="fc8-bp-aTW" secondAttribute="top" constant="25" id="D6r-Yk-7Eq"/>
                             <constraint firstItem="gOs-eH-eif" firstAttribute="top" secondItem="fc8-bp-aTW" secondAttribute="top" constant="4" id="EHE-5S-QKB"/>
                             <constraint firstItem="nu7-bQ-TSd" firstAttribute="leading" secondItem="aPI-Ob-bQ4" secondAttribute="trailing" constant="2" id="ICq-L9-3af"/>
                             <constraint firstItem="aPI-Ob-bQ4" firstAttribute="top" secondItem="fc8-bp-aTW" secondAttribute="top" constant="19" id="J4m-l9-FWS"/>
@@ -127,6 +131,7 @@
                             <constraint firstAttribute="trailing" secondItem="nu7-bQ-TSd" secondAttribute="trailing" constant="8" id="ReV-UV-xLa"/>
                             <constraint firstAttribute="height" constant="60" id="SJr-NK-XNY"/>
                             <constraint firstItem="ID9-T7-fAQ" firstAttribute="leading" secondItem="Q3p-fr-XpF" secondAttribute="trailing" constant="22" id="Svk-5X-Mfj"/>
+                            <constraint firstAttribute="trailing" secondItem="QDK-iD-Xeu" secondAttribute="trailing" constant="8" id="T00-tf-xPX"/>
                             <constraint firstItem="Q3p-fr-XpF" firstAttribute="top" secondItem="fc8-bp-aTW" secondAttribute="top" constant="4" id="Th3-Vh-ggj"/>
                             <constraint firstItem="2R6-cu-mxx" firstAttribute="leading" secondItem="fc8-bp-aTW" secondAttribute="leading" constant="8" id="Tqs-jM-X2s"/>
                             <constraint firstItem="nu7-bQ-TSd" firstAttribute="leading" secondItem="gOs-eH-eif" secondAttribute="trailing" constant="36" id="UZt-cy-JGA"/>
