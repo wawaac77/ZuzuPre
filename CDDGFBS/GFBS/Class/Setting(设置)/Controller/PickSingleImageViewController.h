@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PickSingleImageDelegate;
+
+@protocol PickSingleImageDelegate <NSObject >
+
+- (void) passSingleImage:(NSString *) theURL;
+
+@end
+
 @interface PickSingleImageViewController : UIViewController
+
+@property (weak, nonatomic)id <PickSingleImageDelegate> delegate;
 
 @end

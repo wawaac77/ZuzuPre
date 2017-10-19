@@ -50,20 +50,13 @@
 - (void)setUser:(ZZLeaderboardModel *)user {
     ZZLeaderboardModel *thisUser = user;
     _numberLabel.text = [NSString stringWithFormat:@"%@", thisUser.leaderboardRank];
-    //[self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisUser.leaderboardMember.userProfileImage.imageUrl] placeholderImage:nil];
-    //_profileImageView.image = [UIImage imageNamed:@"icon.png"];
-    //[self downloadImageFromURL:thisUser.leaderboardMember.userProfileImage.imageUrl];
     
-    /*
-    NSURL *URL = [NSURL URLWithString:thisUser.leaderboardMember.userProfileImage.imageUrl];
-    NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
-    UIImage *image = [[UIImage alloc]initWithData:data];
-     */
-    if (thisUser.leaderboardMember.userProfileImage_UIImage == NULL) {
-        _profileImageView.image = [UIImage imageNamed:@"defaultUserIcon"];
-    } else {
-        _profileImageView.image = thisUser.leaderboardMember.userProfileImage_UIImage;
-    }
+    UIImage *placeholder = [[UIImage imageNamed:@"defaultUserIcon"]gf_circleImage];
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:thisUser.leaderboardMember.userProfileImage.imageUrl] placeholderImage:placeholder completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (!image) return ;
+        //self.profileImageView.image = [image gf_circleImage];
+    }];
+    
     _profileImageView.layer.masksToBounds = YES;
     _profileImageView.layer.cornerRadius = _profileImageView.frame.size.width / 2;
     

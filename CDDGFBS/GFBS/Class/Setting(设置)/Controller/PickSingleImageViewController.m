@@ -10,6 +10,8 @@
 #import <RSKImageCropper.h>
 #import "ZBLocalized.h"
 
+#import <MJExtension.h>
+#import <AFNetworking.h>
 #import <SVProgressHUD.h>
 #import <SDImageCache.h>
 #import <UIImageView+WebCache.h>
@@ -24,10 +26,22 @@
 
 @property (strong, nonatomic) UIImage *pickedImage;
 
+@property (strong , nonatomic)GFHTTPSessionManager *manager;
 
 @end
 
 @implementation PickSingleImageViewController
+
+#pragma mark - 懒加载
+-(GFHTTPSessionManager *)manager
+{
+    if (!_manager) {
+        _manager = [GFHTTPSessionManager manager];
+        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    }
+    
+    return _manager;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,6 +62,9 @@
     [_imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
     //_imageView.frame = CGRectMake((GFScreenWidth - imageViewWidth)/2, 80, imageViewWidth, imageViewWidth);
     _imageView.layer.cornerRadius = _imageView.gf_width / 2;
+    _imageView.clipsToBounds = YES;
+    _imageView.contentMode = UIViewContentModeScaleAspectFit;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,9 +77,88 @@
     
 }
 
+//*********** upload image *******************//
+- (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
+
+- (NSString *)contentTypeForImageData:(NSData *)data {
+    uint8_t c;
+    [data getBytes:&c length:1];
+    
+    switch (c) {
+        case 0xFF:
+            return @"image/jpeg";
+        case 0x89:
+            return @"image/png";
+        case 0x47:
+            return @"image/gif";
+        case 0x49:
+            break;
+        case 0x42:
+            return @"image/bmp";
+        case 0x4D:
+            return @"image/tiff";
+    }
+    return nil;
+}
+
 - (void)okButtonClicked {
     NSLog(@"Upload button clicked");
+    
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    NSString *userToken = [[NSString alloc] init];
+    userToken = [AppDelegate APP].user.userToken;
+    NSLog(@"userToken in checkinVC %@", userToken);
+    
+    NSString *imageBase64 = [UIImagePNGRepresentation(_pickedImage)
+                             base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSData *imageData = UIImagePNGRepresentation(_pickedImage);
+    NSString *imageType = [self contentTypeForImageData:imageData];
+    NSString *imageInfo = [NSString stringWithFormat:@"data:%@;base64,%@",imageType, imageBase64];
+    
+    NSDictionary *inSubData = @{@"profilePic": imageInfo};
+    
+    NSDictionary *inData = @{@"action" : @"uploadProfilePic",
+                             @"token" : userToken,
+                             @"data" : inSubData};
+    
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    //发送请求
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+        //self.profileImageView.image = nil;
+        
+        [AppDelegate APP].user.userProfileImage_UIImage = _pickedImage;
+        
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:ZBLocalized(@"Profile image uploaded!", nil)  delegate:self cancelButtonTitle:ZBLocalized(@"Ok", nil)  otherButtonTitles:nil, nil];
+        [alertView show];
+        
+        ZZUser *sucessBack = [[ZZUser alloc] init];
+        sucessBack = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
+        [ZZUser shareUser].userProfileImage.imageUrl = sucessBack.userProfileImage.imageUrl;
+        NSLog(@"[appDelegate]sucessBack.userProfileImage.imageUrl %@", sucessBack.userProfileImage.imageUrl);
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:sucessBack.userProfileImage.imageUrl forKey:@"KEY_USER_PROFILE_PICURL"];
+        [userDefaults synchronize];
+        
+        
+        //[self textView];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        //[self.tableView.mj_footer endRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        
+    }];
 }
+
 
 - (void)chooseImage {
     
@@ -91,6 +187,8 @@
     imageCropVC.delegate = self;
     [self.navigationController pushViewController:imageCropVC animated:YES];
     
+
+    
 }
 
 
@@ -117,6 +215,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+/*
 // The original image has been cropped. Additionally provides a rotation angle used to produce image.
 - (void)imageCropViewController:(RSKImageCropViewController *)controller
                    didCropImage:(UIImage *)croppedImage
@@ -126,6 +225,9 @@
     self.imageView.image = croppedImage;
     [self.navigationController popViewControllerAnimated:YES];
 }
+ */
+
+/*
 
 // The original image will be cropped.
 - (void)imageCropViewController:(RSKImageCropViewController *)controller
@@ -134,6 +236,9 @@
     // Use when `applyMaskToCroppedImage` set to YES.
     [SVProgressHUD show];
 }
+ */
+
+/*
 
 // Returns a custom rect for the mask.
 - (CGRect)imageCropViewControllerCustomMaskRect:(RSKImageCropViewController *)controller
@@ -155,6 +260,8 @@
     
     return maskRect;
 }
+ */
+
 
 // Returns a custom path for the mask.
 - (UIBezierPath *)imageCropViewControllerCustomMaskPath:(RSKImageCropViewController *)controller
@@ -180,5 +287,8 @@
     return controller.maskRect;
 }
 
+- (void) passSingleImage:(NSString *) theURL {
+    [_delegate passSingleImage:[ZZUser shareUser].userProfileImage.imageUrl];
+}
 
 @end

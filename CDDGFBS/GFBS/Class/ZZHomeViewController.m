@@ -116,23 +116,7 @@
 - (void)setUpTopView {
     _topProfileImageView.layer.cornerRadius = _topProfileImageView.frame.size.width / 2;
     _topProfileImageView.clipsToBounds = YES;
-    //_topProfileImageView.image = [UIImage imageNamed:@"profile_image_animals.jpeg"];
-    
-    /*
-    if (self.myProfile.userUserName == NULL || nil) {
-        self.myProfile.userUserName = [[NSUserDefaults standardUserDefaults] objectForKey:@"googlePlusLogin"];
-    }
-     */
-    
-
-    
-    /*
-    if (self.myProfile.userProfileImage.imageUrl == NULL || nil) {
-        self.myProfile.userProfileImage.imageUrl = [ZZUser shareUser].googleProfileImageUrl.absoluteString;
-    }
-     */
-    
-    
+        
     [self.topProfileImageView sd_setImageWithURL:[NSURL URLWithString:self.myProfile.userProfileImage.imageUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (!image) return ;
         self.topProfileImageView.image = [image gf_circleImage];
@@ -189,6 +173,9 @@
             [self setUpTopView];
             
             //*************** user instance *********//
+            
+            [ZZUser shareUser].userProfileImage = thisUser.userProfileImage;
+            
             [ZZUser shareUser].userID = thisUser.userID;
             [ZZUser shareUser].userUpdatedAt = thisUser.userUpdatedAt;
             [ZZUser shareUser].userCreatedAt = thisUser.userCreatedAt;

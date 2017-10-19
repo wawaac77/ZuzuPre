@@ -186,6 +186,7 @@ static CGFloat  const margin = 0;
     //if ([item.name isEqualToString: @"Check-in"]) {
     if (indexPath.row == 0) {
         MeHomeTableViewController *eventVC = [[MeHomeTableViewController alloc] init];
+        eventVC.navigationItem.title = ZBLocalized(@"My Checkin", nil);
         [self.navigationController pushViewController:eventVC animated:YES];
     }
     //else if ([item.name isEqualToString: @"Leaderboard"]) {

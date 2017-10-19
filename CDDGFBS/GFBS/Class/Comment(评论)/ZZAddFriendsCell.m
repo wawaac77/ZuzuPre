@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ZZAddFriendsCell.h"
 #import "ZZFriendModel.h"
+#import "ZBLocalized.h"
 
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
@@ -56,7 +57,9 @@
     
     self.mainImageView.layer.cornerRadius = _mainImageView.frame.size.width / 2;
     _mainImageView.clipsToBounds = YES;
-    [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:friend.userProfileImage.imageUrl] placeholderImage:nil];
+    
+    UIImage *placeholder = [[UIImage imageNamed:@"defaultUserIcon"]gf_circleImage];
+    [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:friend.userProfileImage.imageUrl] placeholderImage:placeholder];
     self.nameLabel.text = friend.userUserName;
     
     //NSString *memberId = myFriend.userID;
@@ -87,7 +90,7 @@
     [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
         self.imageView.image = nil;
         
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"ZUZU" message:@"Friend request is sent!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:ZBLocalized(@"Your following is successful!", nil)  delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

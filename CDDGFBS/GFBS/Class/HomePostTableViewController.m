@@ -178,34 +178,8 @@ static NSString *const ID = @"ID";
     }
     
     
-    ZZContentModel *thisContent = self.contents[indexPath.row];
+    //ZZContentModel *thisContent = self.contents[indexPath.row];
     
-    /*
-    NSString *str = [thisContent.listImage.imageUrl pathExtension];
-    NSLog(@"str of pathExtension %@", str);
-
-    if ([str isEqualToString:@"png"] || [str isEqualToString:@"jpg"] || [str isEqualToString:@"jpeg"]) {
-        self.contents[indexPath.row].withImage = @1;
-    } else {
-        self.contents[indexPath.row].withImage = @0;
-    }
-     */
-    
-    /*
-    if (_contents[indexPath.row].listImage_UIImage == NULL) {
-        NSURL *URL = [NSURL URLWithString:_contents[indexPath.row].listImage.imageUrl];
-        NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
-        NSLog(@"imageData %@", data);
-        UIImage *image = [[UIImage alloc]initWithData:data];
-        NSLog(@"UIImage %@", image);
-        if (image == NULL) {
-            _contents[indexPath.row].withImage = [NSNumber numberWithBool:@0];
-        } else {
-            _contents[indexPath.row].withImage = [NSNumber numberWithBool:@1];
-        }
-        _contents[indexPath.row].listImage_UIImage = image;
-    }
-     */
     cell.event = self.contents[indexPath.row];
     
     return cell;
@@ -373,7 +347,7 @@ static NSString *const ID = @"ID";
         NSDictionary *inSubData = @{@"restaurantId" : self.restaurantID};
         inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 5) {
-        inData = @{@"action" : @"getAllCheckinList", @"token" : userToken, @"lang" : userLang};
+        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang};
     }
     /*
     else if ([receivingType isEqualToString:@"User checkin"]) {
@@ -393,8 +367,7 @@ static NSString *const ID = @"ID";
         NSLog(@"responseObject - data is %@", responseObject[@"data"]);
         
         self.contents = [ZZContentModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        //[self saveUIImages];
-        
+     
         for (int i = 0; i < self.contents.count; i++) {
             if (self.contents[i].numOfLike == NULL) {
                 self.contents[i].numOfLike = 0;
@@ -410,6 +383,8 @@ static NSString *const ID = @"ID";
         }
         
         self.selectedContents = [[NSMutableArray alloc] init];
+        
+        /*
         if (self.type == 5) {
             NSLog(@"select process starts working");
             for (int i = 0; i < _contents.count ; i++) {
@@ -421,6 +396,7 @@ static NSString *const ID = @"ID";
             [_contents removeAllObjects];
             [_contents addObjectsFromArray:_selectedContents];
         }
+        */
         
         [self passValueMethod];
         

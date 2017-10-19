@@ -61,7 +61,7 @@ static NSString *const ID = @"ID";
     
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
-    self.navigationItem.title = ZBLocalized(@"Add Friends", nil);
+    self.navigationItem.title = ZBLocalized(@"Add Followings", nil);
     
 }
 

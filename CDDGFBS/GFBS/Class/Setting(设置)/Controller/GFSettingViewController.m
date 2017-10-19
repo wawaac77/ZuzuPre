@@ -16,7 +16,6 @@
 #import "ZZTypicalInformationModel.h"
 #import "CuisineTableViewController.h"
 #import "SubFillTableViewController.h"
-#import "PickSingleImageViewController.h"
 
 #import "AboutZZViewController.h"
 #import "ZZMessageAdminViewController.h"
@@ -121,7 +120,8 @@
         cellID = @"buttons";
     }
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
     
@@ -161,7 +161,7 @@
             cell.detailTextLabel.text = [ZZUser shareUser].userEmail;
             cell.imageView.image = [UIImage imageNamed:@"Ic_fa-star"];
             
-            NSString *imageURL = [AppDelegate APP].user.userProfileImage.imageUrl;
+            NSString *imageURL = [ZZUser shareUser].userProfileImage.imageUrl;
             UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 8, 34, 34)];
             myImageView.layer.cornerRadius = myImageView.gf_width / 2;
             myImageView.clipsToBounds = YES;
@@ -846,6 +846,13 @@
     [self.tableView reloadData];
 }
 
+- (void)passSingleImage:(NSString *)theURL {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Facebook
 //************************login with Facebook *******************************//
 - (void)loginFBButtonClicked {
@@ -1041,13 +1048,18 @@ dismissViewController:(UIViewController *)viewController {
     
 }
 
+
 /*
 -(void)viewWillAppear:(BOOL)animated{
     NSLog(@"indexPathForSlectedRow in viewWillAppear %@", [self.tableView indexPathForSelectedRow]);
     NSLog(@"indexPathForSlectedRow in viewWillAppear.row %ld", [self.tableView indexPathForSelectedRow].row);
     
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];
+    if ([self.tableView indexPathForSelectedRow].section == 0 && [self.tableView indexPathForSelectedRow].row == 0) {
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];
+
+    }
+ 
 }
- */
+*/
 
 @end

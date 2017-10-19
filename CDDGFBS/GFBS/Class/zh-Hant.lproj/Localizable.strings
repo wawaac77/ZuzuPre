@@ -87,6 +87,8 @@
 "Version 1.0" = "版本1.0";
 
 "Busy network, please try later~" = "網絡繁忙，請稍後再試";
+"Your following is successful!" = "關注成功！";
+"Profile image uploaded!" = "頭像上傳成功！";
 
 //*********** Calendar **************//
 "hours ago" = "小時前";

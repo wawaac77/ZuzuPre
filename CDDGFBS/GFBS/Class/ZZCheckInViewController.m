@@ -93,8 +93,6 @@
     }
     [self.locationManager startUpdatingLocation];
     
-    
-    [self setUpTopView];
     [self setUpPostView];
     // Do any additional setup after loading the view from its nib.
 }
@@ -116,6 +114,7 @@
 - (void)setUpNavBar {
     [self preferredStatusBarStyle];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self setUpTopView];
     
     NSString *str = ZBLocalized(@"Please select your check-in location", nil);
     _locationButton.titleLabel.text = [NSString stringWithFormat:@"        %@", str];
