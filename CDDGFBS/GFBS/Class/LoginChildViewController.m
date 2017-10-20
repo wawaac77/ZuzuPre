@@ -129,7 +129,7 @@
     NSString *email = _emailTextField.text;
     NSString *password = _passwordTextField.text;
     if (email.length == 0) {
-        _emailTextField.text = @"alicej@gmail.com";
+        _emailTextField.text = @"wawaac@gmail.com";
         _passwordTextField.text = @"123456";
 
     }
