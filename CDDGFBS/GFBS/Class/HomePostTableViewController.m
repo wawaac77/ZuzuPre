@@ -28,6 +28,8 @@ static NSString *const ID = @"ID";
 @interface HomePostTableViewController () {
     int contentCellHeightCount;
     int deleteIndex;
+    
+    int currentPage;
 }
 
 /*所有帖子数据*/
@@ -79,6 +81,7 @@ static NSString *const ID = @"ID";
     contentCellHeightCount = 0;
     deleteIndex = -1;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    currentPage = 2;
     
     [self setUpTable];
     [self setupRefresh];
@@ -307,7 +310,7 @@ static NSString *const ID = @"ID";
     self.tableView.mj_header = [GFRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewEvents)];
     [self.tableView.mj_header beginRefreshing];
     
-    //self.tableView.mj_footer = [GFRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    self.tableView.mj_footer = [GFRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
 /*************************Here is reloading data place************************/
@@ -315,6 +318,7 @@ static NSString *const ID = @"ID";
 -(void)loadNewEvents
 {
     NSLog(@"loadNewEvents工作了");
+    currentPage = 2;
     //NSLog(@"receivingType %@",receivingType);
     //NSLog(@"userID in HomePostVC %@", userID);
 
@@ -338,16 +342,16 @@ static NSString *const ID = @"ID";
     
     NSDictionary *inData = [[NSDictionary alloc] init];
     if (self.type == 0) {
-        inData = @{@"action" : @"getAllCheckinList", @"token" : userToken, @"lang" : userLang};
+        inData = @{@"action" : @"getAllCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 1) {
         inData = @{@"action" : @"getFriendCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 2) {
-        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang};
+        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 4) {
         NSDictionary *inSubData = @{@"restaurantId" : self.restaurantID};
         inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 5) {
-        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang};
+        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     }
     /*
     else if ([receivingType isEqualToString:@"User checkin"]) {
@@ -413,8 +417,104 @@ static NSString *const ID = @"ID";
             [SVProgressHUD dismiss];
         });
     }];
+}
+
+#pragma mark - 加载更多数据
+-(void)loadMoreData
+{
+    NSLog(@"loadMoreData工作了");
+    if (currentPage == 0) {
+        [self.tableView.mj_footer endRefreshing];
+        return;
+    } // if no new data
+    
+    //取消请求
+    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
+    
+    //2.凭借请求参数
+    
+    NSString *userToken = [AppDelegate APP].user.userToken;
+    //NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
+    NSLog(@"preferred language [AppDelegate APP].user.preferredLanguage %@", userLang);
+    
+    NSLog(@"user token %@", userToken);
+    
+    NSLog(@"current page %zd", currentPage);
+    NSNumber *pageParameter = [[NSNumber alloc] initWithInt:currentPage];
+    
+    NSDictionary *inSubData = @{@"page" : pageParameter};
+    
+    NSDictionary *inData = [[NSDictionary alloc] init];
+    if (self.type == 0) {
+        inData = @{@"action" : @"getAllCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
+    } else if (self.type == 1) {
+        inData = @{@"action" : @"getFriendCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
+    } else if (self.type == 2) {
+        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
+    } else if (self.type == 4) {
+        NSDictionary *inSubData = @{@"restaurantId" : self.restaurantID};
+        inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
+    } else if (self.type == 5) {
+        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
+    }
+    
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    //发送请求
+    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        
+        
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        
+        NSMutableArray<ZZContentModel *> *moreData = [ZZContentModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        if (moreData.count != 0) {
+            [self.contents addObjectsFromArray:moreData];
+            
+            int start = (int)(self.contents.count - moreData.count);
+            
+            for (int i = start; i < self.contents.count; i++) {
+                
+                if (self.contents[i].numOfLike == NULL) {
+                    self.contents[i].numOfLike = 0;
+                }
+                NSString *str = [self.contents[i].listImage.imageUrl pathExtension];
+                NSLog(@"str of pathExtension %@", str);
+                
+                if ([str isEqualToString:@"undefined"] || str == NULL) {
+                    self.contents[i].withImage = @0;
+                } else {
+                    self.contents[i].withImage = @1;
+                }
+            }
+            currentPage ++;
+        } else {
+            currentPage = 0;
+        }
+        
+        [self.tableView reloadData];
+        [self.tableView.mj_footer endRefreshing];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", [error localizedDescription]);
+        
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        [self.tableView.mj_footer endRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        
+    }];
     
 }
+
+
 
 - (void)passValueMethod {
     NSInteger *num = self.contents.count;
@@ -434,6 +534,8 @@ static NSString *const ID = @"ID";
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
 }
+
+
 
 
 //************************* update cell which is hearted in commentVC ******************************//
