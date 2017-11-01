@@ -319,8 +319,6 @@ static NSString *const ID = @"ID";
 {
     NSLog(@"loadNewEvents工作了");
     currentPage = 2;
-    //NSLog(@"receivingType %@",receivingType);
-    //NSLog(@"userID in HomePostVC %@", userID);
 
     //取消请求
     [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];

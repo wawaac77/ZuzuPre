@@ -163,6 +163,10 @@ static CGFloat  const margin = 0;
 
 - (void)setUpNavBar
 {
+    [self preferredStatusBarStyle];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
     UIBarButtonItem *settingBtn = [UIBarButtonItem ItemWithImage:[UIImage imageNamed:@"ic_settings"] WithHighlighted:[UIImage imageNamed:@"ic_settings"] Target:self action:@selector(settingClicked)];
     UIBarButtonItem *fixedButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFixedSpace target: nil action: nil];
     fixedButton.width = 20;

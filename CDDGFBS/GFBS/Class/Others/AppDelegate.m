@@ -69,7 +69,7 @@
     
     //[[InternationalControl sharedInstance]
     
-    if (userToken != nil) {
+    if (userToken != nil || userToken != NULL) {
         
         user = [[ZZUser alloc] init];
         user.userToken = userToken;
