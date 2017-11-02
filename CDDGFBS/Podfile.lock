@@ -70,6 +70,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.11)
   - GTMSessionFetcher/Full (1.1.11):
     - GTMSessionFetcher/Core (= 1.1.11)
+  - JSQMessagesViewController (7.3.4)
   - LLImagePickerView (0.0.1):
     - ACAlertController
     - MWPhotoBrowser (~> 2.1.2)
@@ -104,9 +105,11 @@ DEPENDENCIES:
   - DACircularProgress
   - DOPDropDownMenu-Enhanced
   - Firebase/Auth
+  - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
   - GoogleSignIn
+  - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController.git`, branch `develop`)
   - LLImagePickerView
   - LTNavigationBar
   - Masonry
@@ -117,6 +120,16 @@ DEPENDENCIES:
   - SDCycleScrollView
   - SDWebImage
   - SVProgressHUD
+
+EXTERNAL SOURCES:
+  JSQMessagesViewController:
+    :branch: develop
+    :git: https://github.com/jessesquires/JSQMessagesViewController.git
+
+CHECKOUT OPTIONS:
+  JSQMessagesViewController:
+    :commit: c247626cdb31724ae706733ce7bd8eb4bd2d2513
+    :git: https://github.com/jessesquires/JSQMessagesViewController.git
 
 SPEC CHECKSUMS:
   ACAlertController: 10f0455c3e1691a6197b5cd0d96d6f9a03c82763
@@ -134,6 +147,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
+  JSQMessagesViewController: c11b9e77372ab72c45c67311f6da7342e32df1e8
   LLImagePickerView: 0c5238f42e6799859d64ab5c3e412d1daadc0e8d
   LTNavigationBar: c278785bed344862e18146b5f06792932e4feacc
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
@@ -149,6 +163,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   TZImagePickerController: 086034156913375cb19c8e4103562f15322c3b36
 
-PODFILE CHECKSUM: e72c9225b549913f5d4a7118033f1694cf314111
+PODFILE CHECKSUM: 1ed98006e2915d68da66769d5c575a7770bd3a5e
 
 COCOAPODS: 1.2.0

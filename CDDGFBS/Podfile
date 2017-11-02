@@ -19,9 +19,11 @@ pod 'RSKImageCropper'
 pod "DACircularProgress"
 pod "pop"
 pod 'GoogleSignIn'
+
+pod 'Firebase/Core'
 pod 'Firebase/Storage'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
-pod 'JSQMessagesViewController'
+pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
 
 target :"GFBS" 

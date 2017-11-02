@@ -20,9 +20,10 @@
 #import <UIImageView+WebCache.h>
 //#import <SDImageCache.h>
 
+
 static NSString *const ID = @"ID";
 
-@interface ZZInboxTableViewController ()
+@interface ZZInboxTableViewController () 
 
 @property (nonatomic, strong) NSMutableArray<ZZFriendModel *> *friendList;
 
@@ -122,7 +123,7 @@ static NSString *const ID = @"ID";
 
 
 // Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtInxPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
@@ -151,6 +152,12 @@ static NSString *const ID = @"ID";
 - (void)newMessageClicked {
     NSLog(@"new message clicked");
 }
+
+/*
+- (void)dealloc {
+    [[_ref child:@"messages"] removeObserverWithHandle:_refHandle];
+}
+ */
 
 
 /*

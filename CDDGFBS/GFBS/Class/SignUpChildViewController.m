@@ -14,6 +14,7 @@
 #import <UIImageView+WebCache.h>
 #import <SDImageCache.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "MeasurementHelper.h"
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -30,24 +31,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *signupButton;
 - (IBAction)signupButtonClicked:(id)sender;
 
-/*请求管理者*/
-@property (strong , nonatomic)GFHTTPSessionManager *manager;
+@property(strong, nonatomic) FIRAuthStateDidChangeListenerHandle handle;
 
 
 @end
 
 @implementation SignUpChildViewController
-
--(GFHTTPSessionManager *)manager
-{
-    if (!_manager) {
-        _manager = [GFHTTPSessionManager manager];
-        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    }
-    
-    return _manager;
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -67,8 +56,18 @@
     [GIDSignIn sharedInstance].uiDelegate = self;
     
     // Uncomment to automatically sign in the user.
-    //[[GIDSignIn sharedInstance] signInSilently];
-    // [START_EXCLUDE silent]
+    [[GIDSignIn sharedInstance] signInSilently];
+   
+    //**firebase**//
+    self.handle = [[FIRAuth auth]
+                   addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user) {
+                       if (user) {
+                           [MeasurementHelper sendLoginEvent];
+                           [self performSegueWithIdentifier:@"SignInToFP" sender:nil];
+                       }
+                   }];
+    
+     // [START_EXCLUDE silent]
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(receiveToggleAuthUINotification:)
@@ -311,6 +310,9 @@
 }
 
 - (void)dealloc {
+    
+    [[FIRAuth auth] removeAuthStateDidChangeListener:_handle];
+    
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
      name:@"ToggleAuthUINotification"

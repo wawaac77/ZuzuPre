@@ -1022,6 +1022,15 @@ dismissViewController:(UIViewController *)viewController {
 
 - (IBAction)didTapSignOut:(id)sender {
     [[GIDSignIn sharedInstance] signOut];
+    
+    FIRAuth *firebaseAuth = [FIRAuth auth];
+    NSError *signOutError;
+    BOOL status = [firebaseAuth signOut:&signOutError];
+    if (!status) {
+        NSLog(@"Error signing out: %@", signOutError);
+        return;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //************************* end of Google signin part **************************//

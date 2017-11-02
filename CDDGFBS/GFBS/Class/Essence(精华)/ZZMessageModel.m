@@ -10,6 +10,7 @@
 #import "ZBLocalized.h"
 
 #import "NSUserDefaults+DemoSettings.h"
+#import <JSQMessagesAvatarImageFactory.h>
 
 @implementation ZZMessageModel
 
@@ -67,7 +68,7 @@
         JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
         
         self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
-        self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageZuzuGoldColor]];
+        self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:ZZGoldColor];
     }
     
     return self;

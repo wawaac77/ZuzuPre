@@ -10,10 +10,10 @@
 #import "ZBLocalized.h"
 #import "ZZChatViewController.h"
 
+#import <JSQMessagesViewController.h>
 #import "JSQMessagesViewAccessoryButtonDelegate.h"
+
 #import <Firebase.h>
-
-
 
 @interface ZZChatViewController () <JSQMessagesViewAccessoryButtonDelegate>
 

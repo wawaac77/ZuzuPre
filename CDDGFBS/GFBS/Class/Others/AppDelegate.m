@@ -33,21 +33,15 @@
     return  (AppDelegate*) [[UIApplication sharedApplication] delegate];
 }
 
-#pragma mark - 懒加载
--(GFHTTPSessionManager *)manager
-{
-    if (!_manager) {
-        _manager = [GFHTTPSessionManager manager];
-        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    }
-    
-    return _manager;
-}
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //Fabric
     [Fabric with:@[[Crashlytics class]]];
+    
+    //Firebase
+    [FIRApp configure];
+    [GIDSignIn sharedInstance].clientID = [FIRApp defaultApp].options.clientID;
+    [GIDSignIn sharedInstance].delegate = self;
 
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -69,10 +63,11 @@
     
     //[[InternationalControl sharedInstance]
     
-    if (userToken != nil || userToken != NULL) {
+    if (userToken != nil && userToken != NULL) {
         
         user = [[ZZUser alloc] init];
         user.userToken = userToken;
+        NSLog(@"userToken in appdelegate %@", user.userToken);
         user.userUserName = username;
         user.preferredLanguage = userlang;
         
@@ -134,7 +129,7 @@
      */
     
     //[GIDSignIn sharedInstance].clientID = @"YOUR_CLIENT_ID";
-    [GIDSignIn sharedInstance].delegate = self;
+    //[GIDSignIn sharedInstance].delegate = self;
     NSLog(@"[GGLContext sharedInstance]  in appDelegate works");
     
     /******** Facebook signin *********/
@@ -145,7 +140,7 @@
     [[SDImageCache sharedImageCache] cleanDisk];
     
     [GFTopWindow gf_show];
-    //[FIRApp configure];
+    
     
     return YES;
 }
@@ -214,40 +209,58 @@
 - (void)signIn:(GIDSignIn *)signIn
 didSignInForUser:(GIDGoogleUser *)user
      withError:(NSError *)error {
-    // Perform any operations on signed in user here.
-    NSString *userId = user.userID;                  // For client-side use only!
-    NSString *idToken = user.authentication.idToken; // Safe to send to the server
-    NSString *fullName = user.profile.name;
-    NSString *givenName = user.profile.givenName;
-    NSString *familyName = user.profile.familyName;
-    NSString *email = user.profile.email;
     
-    if (user.profile.hasImage)
-    {
-        NSURL *googleProfileImageUrl = [user.profile imageURLWithDimension:100];
-        NSLog(@"googleProfileImageUrl : %@", googleProfileImageUrl);
-        [ZZUser shareUser].googleProfileImageUrl = googleProfileImageUrl;
+    if (error == nil) {
+        //from Firebase
+        GIDAuthentication *authentication = user.authentication;
+        FIRAuthCredential *credential =
+        [FIRGoogleAuthProvider credentialWithIDToken:authentication.idToken
+                                         accessToken:authentication.accessToken];
+        [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error %@", error.localizedDescription);
+            }
+        }];
+        
+        
+        //Google signin
+        NSString *userId = user.userID;                  // For client-side use only!
+        NSString *idToken = user.authentication.idToken; // Safe to send to the server
+        NSString *fullName = user.profile.name;
+        NSString *givenName = user.profile.givenName;
+        NSString *familyName = user.profile.familyName;
+        NSString *email = user.profile.email;
+        
+        if (user.profile.hasImage)
+        {
+            NSURL *googleProfileImageUrl = [user.profile imageURLWithDimension:100];
+            NSLog(@"googleProfileImageUrl : %@", googleProfileImageUrl);
+            [ZZUser shareUser].googleProfileImageUrl = googleProfileImageUrl;
+        }
+        
+        // [START_EXCLUDE]
+        NSDictionary *statusText = @{@"statusText":
+                                         [NSString stringWithFormat:@"Signed in user: %@",
+                                          fullName]};
+        NSLog(@"UserName in GooglePlus %@",fullName);
+        NSLog(@"UserId in GooglePlus %@",userId);
+        NSLog(@"didSignInForUser:(GIDGoogleUser *)user in appDelegate works");
+        
+        [ZZUser shareUser].userGoogleID = userId;
+        
+        //From integrations demo
+        [[NSUserDefaults standardUserDefaults] setObject:fullName forKey:@"googlePlusLogin"];
+        [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"googlePlusUserID"];
+        [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"googlePlusUserImageUrl"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ForceUpdateLocation" object:self userInfo:[NSDictionary dictionaryWithObject:fullName?:@"" forKey:@"full_name"]];
+        // end of From integrations demo
+        
+        [self googleLogin];
+    } else {
+        NSLog(@"Error %@", error.localizedDescription);
     }
     
-    // [START_EXCLUDE]
-    NSDictionary *statusText = @{@"statusText":
-                                     [NSString stringWithFormat:@"Signed in user: %@",
-                                      fullName]};
-    NSLog(@"UserName in GooglePlus %@",fullName);
-    NSLog(@"UserId in GooglePlus %@",userId);
-    NSLog(@"didSignInForUser:(GIDGoogleUser *)user in appDelegate works");
-    
-    [ZZUser shareUser].userGoogleID = userId;
-    
-    //From integrations demo
-    [[NSUserDefaults standardUserDefaults] setObject:fullName forKey:@"googlePlusLogin"];
-    [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"googlePlusUserID"];
-    [[NSUserDefaults standardUserDefaults] setObject:userId forKey:@"googlePlusUserImageUrl"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ForceUpdateLocation" object:self userInfo:[NSDictionary dictionaryWithObject:fullName?:@"" forKey:@"full_name"]];
-    // end of From integrations demo
-    
-    [self googleLogin]; 
     /*
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"ToggleAuthUINotification"
