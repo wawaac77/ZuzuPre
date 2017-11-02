@@ -67,10 +67,7 @@
 }
 
 - (void)addFriendButtonClicked {
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
+   
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
    
@@ -86,20 +83,18 @@
     
     NSDictionary *parameters = @{@"data" : inData};
     
-    //发送请求
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
+        
         self.imageView.image = nil;
         
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:ZBLocalized(@"Your following is successful!", nil)  delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-        
+        [SVProgressHUD dismiss];
     }];
+    
 }
 
 @end

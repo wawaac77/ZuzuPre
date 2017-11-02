@@ -135,12 +135,6 @@
 
 - (IBAction)signupButtonClicked:(id)sender {
     
-    NSLog(@"signup button clicked");
-    
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
     NSString *email = _emailTextField.text;
     NSString *username = _userTextField.text;
     NSString *name = _nameTextField.text;
@@ -164,53 +158,47 @@
     NSLog(@"upcoming events parameters %@", parameters);
     
     
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
         
-        /*
-         NSString *responseStatus = [[NSString alloc] init];
-         responseStatus = responseObject[@"status"];
-         NSString *message = [[NSString alloc] init];
-         message = responseObject [@"message"];
-         NSLog(@"message %@", message);
-         NSLog(@"responseStauts %@", responseStatus);
-         */
-        ZZUser *thisUser = [[ZZUser alloc] init];
-        thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
-        NSLog(@"this user %@", thisUser);
-        NSLog(@"this user. userName %@", thisUser.usertName);
-        
-        if (thisUser == nil) {
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Hi" message:@"The email is registered, please login or active the account ^^" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-            [alertView show];
+        [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
             
-        } else {
-            if ([thisUser.userStatus isEqualToString:@"inactive"]) {
-                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Congretulations!" message:@"You have registered a Zuzu account, please go to the email and activate it ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            /*
+             NSString *responseStatus = [[NSString alloc] init];
+             responseStatus = responseObject[@"status"];
+             NSString *message = [[NSString alloc] init];
+             message = responseObject [@"message"];
+             NSLog(@"message %@", message);
+             NSLog(@"responseStauts %@", responseStatus);
+             */
+            ZZUser *thisUser = [[ZZUser alloc] init];
+            thisUser = [ZZUser mj_objectWithKeyValues:data[@"data"]];
+            NSLog(@"this user %@", thisUser);
+            NSLog(@"this user. userName %@", thisUser.usertName);
+            
+            if (thisUser == nil) {
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Hi" message:@"The email is registered, please login or active the account ^^" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
                 [alertView show];
-            /**the following else part will never be implemented for this api**/
+                
             } else {
-                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Hi!" message:@"You have already had an account, please login ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alertView show];
-
-                [AppDelegate APP].user = [[ZZUser alloc] init];
-                [AppDelegate APP].user = thisUser;
+                if ([thisUser.userStatus isEqualToString:@"inactive"]) {
+                    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Congretulations!" message:@"You have registered a Zuzu account, please go to the email and activate it ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [alertView show];
+                    /**the following else part will never be implemented for this api**/
+                } else {
+                    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Hi!" message:@"You have already had an account, please login ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [alertView show];
+                    
+                    [AppDelegate APP].user = [[ZZUser alloc] init];
+                    [AppDelegate APP].user = thisUser;
+                    
+                }
                 
             }
             
             
-            
-        }
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
-        [SVProgressHUD showWithStatus:@"Busy network, please try later"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        } failed:^(NSError *error) {
+            [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
             [SVProgressHUD dismiss];
-        });
-    }];
+        }];
     
         
         

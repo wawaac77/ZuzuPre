@@ -11,6 +11,7 @@
 #import "ZZInboxTableViewController.h"
 #import "ZZInboxCell.h"
 #import "ZZLeaderboardModel.h"
+#import "ZZFriendModel.h"
 #import "ZZChatViewController.h"
 
 #import <AFNetworking.h>
@@ -23,23 +24,12 @@ static NSString *const ID = @"ID";
 
 @interface ZZInboxTableViewController ()
 
-@property (strong , nonatomic)GFHTTPSessionManager *manager;
-
-@property (nonatomic, strong) NSMutableArray<ZZLeaderboardModel *> *rankList;
+@property (nonatomic, strong) NSMutableArray<ZZFriendModel *> *friendList;
 
 @end
 
 @implementation ZZInboxTableViewController
 
-#pragma mark - 懒加载
--(GFHTTPSessionManager *)manager
-{
-    if (!_manager) {
-        _manager = [GFHTTPSessionManager manager];
-        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    }
-    return _manager;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,36 +51,30 @@ static NSString *const ID = @"ID";
 }
 
 - (void)loadNeweData {
-    
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
+
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
     NSDictionary *inData = [[NSDictionary alloc] init];
-    inData = @{@"action" : @"getLeaderboardAttendees", @"token" : userToken};
+    inData = @{@"action" : @"getFriendList", @"token" : userToken, @"lang" : userLang};
     NSDictionary *parameters = @{@"data" : inData};
     
-    //发送请求
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
-        NSMutableArray *rankArray = responseObject[@"data"];
-        self.rankList = [ZZLeaderboardModel mj_objectArrayWithKeyValuesArray:rankArray];
-        NSLog(@"rankList %@", self.rankList);
-        
+        NSMutableArray *rankArray = data[@"data"];
+        self.friendList = [ZZFriendModel mj_objectArrayWithKeyValuesArray:rankArray];
+      
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
         
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        //[self.tableView.mj_footer endRefreshing];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-        
+        [SVProgressHUD dismiss];
     }];
+
 }
 
 -(void)setUpTable
@@ -113,14 +97,14 @@ static NSString *const ID = @"ID";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _rankList.count;
+    return _friendList.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZZInboxCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
-    ZZLeaderboardModel *thisRank = self.rankList[indexPath.row];
-    //cell.chat = thisRank;
+    ZZFriendModel *friendInfo = self.friendList[indexPath.row];
+    cell.friendInfo = friendInfo;
     
     return cell;
 }
@@ -130,9 +114,9 @@ static NSString *const ID = @"ID";
     ZZChatViewController *chatVC = [[ZZChatViewController alloc] init];
     //chatVC.view.frame = CGRectMake(0, ZZNewNavH, self.view.gf_width, self.view.gf_height - GFTabBarH - ZZNewNavH);
     chatVC.hidesBottomBarWhenPushed = YES;
-    ZZLeaderboardModel *thisRank = self.rankList[indexPath.row];
+    ZZFriendModel *thisFriend = self.friendList[indexPath.row];
     //chatVC.title = thisRank.leaderboardMember.userUserName;
-    chatVC.title = thisRank.leaderboardMember.userUserName;
+    chatVC.title = thisFriend.friendInfo.userUserName;
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 

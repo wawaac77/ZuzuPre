@@ -284,11 +284,6 @@ didDisconnectWithUser:(GIDGoogleUser *)user
 
 - (void)googleLogin {
     
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
-    
     NSDictionary *inSubData = @ {@"googleId" : [ZZUser shareUser].userGoogleID};
     NSDictionary *inData = @{
                              @"action" : @"googleLogin",
@@ -297,11 +292,10 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     
     NSLog(@"upcoming events parameters %@", parameters);
     
-    
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
         ZZUser *thisUser = [[ZZUser alloc] init];
-        thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
+        thisUser = [ZZUser mj_objectWithKeyValues:data[@"data"]];
         
         if (thisUser == nil) {
             
@@ -376,14 +370,9 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         }
         
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
-        [SVProgressHUD showWithStatus:@"Busy network, please try later"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
+    } failed:^(NSError *error) {
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        [SVProgressHUD dismiss];
     }];
     
 }

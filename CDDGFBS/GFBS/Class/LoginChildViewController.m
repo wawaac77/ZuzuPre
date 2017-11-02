@@ -41,16 +41,6 @@
 
 @implementation LoginChildViewController
 
-#pragma mark - 懒加载
--(GFHTTPSessionManager *)manager
-{
-    if (!_manager) {
-        _manager = [GFHTTPSessionManager manager];
-        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    }
-    
-    return _manager;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -122,10 +112,7 @@
     //UIWindow *window = [UIApplication sharedApplication].keyWindow;
     //window.rootViewController = [[GFTabBarController alloc]init];
     
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
+
     NSString *email = _emailTextField.text;
     NSString *password = _passwordTextField.text;
     if (email.length == 0) {
@@ -142,11 +129,10 @@
 
     NSLog(@"upcoming events parameters %@", parameters);
     
-    
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
         ZZUser *thisUser = [[ZZUser alloc] init];
-        thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
+        thisUser = [ZZUser mj_objectWithKeyValues:data[@"data"]];
         
         if (thisUser == nil) {
             
@@ -177,7 +163,7 @@
             NSLog(@"this user %@", thisUser);
             NSLog(@"this user. userName %@", thisUser.usertName);
             NSLog(@"this user. memberId %@", thisUser.userID);
-
+            
             //*************** user instance *********//
             [ZZUser shareUser].userID = thisUser.userID;
             [ZZUser shareUser].userUpdatedAt = thisUser.userUpdatedAt;
@@ -219,45 +205,39 @@
             window.rootViewController = [[GFTabBarController alloc]init];
             [window makeKeyWindow];
             /*
-            [[FIRAuth auth]signInWithEmail:self.emailTextField.text
-                                  password:self.passwordTextField.text
-                                completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
-                                    if (error) {
-                                        NSLog(@"%@", [error localizedDescription]);
-                                        
-                                        [SVProgressHUD showWithStatus:@"Busy network, please try later"];
-                                        
-                                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                            [SVProgressHUD dismiss];
-                                        });
-                                        
-                                        
-                                    }
-                                    else{
+             [[FIRAuth auth]signInWithEmail:self.emailTextField.text
+             password:self.passwordTextField.text
+             completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+             if (error) {
+             NSLog(@"%@", [error localizedDescription]);
              
-                                        [AppDelegate APP].user = [[ZZUser alloc] init];
-                                        [AppDelegate APP].user = thisUser;
-                                        
-                                        NSLog(@"user token = %@", thisUser.userToken);
-                                        
-                                        UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                                        window.rootViewController = [[GFTabBarController alloc]init];
-                                    }
-                                }];
+             [SVProgressHUD showWithStatus:@"Busy network, please try later"];
+             
+             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+             [SVProgressHUD dismiss];
+             });
+             
+             
+             }
+             else{
+             
+             [AppDelegate APP].user = [[ZZUser alloc] init];
+             [AppDelegate APP].user = thisUser;
+             
+             NSLog(@"user token = %@", thisUser.userToken);
+             
+             UIWindow *window = [UIApplication sharedApplication].keyWindow;
+             window.rootViewController = [[GFTabBarController alloc]init];
+             }
+             }];
              */
         }
         
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
-        [SVProgressHUD showWithStatus:@"Busy network, please try later"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
+    } failed:^(NSError *error) {
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        [SVProgressHUD dismiss];
     }];
-
+    
 }
 
 - (IBAction)forgetPasswordClicked:(id)sender {
@@ -287,11 +267,6 @@
 
 - (void)googleLogin {
    
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
-   
     NSDictionary *inSubData = @ {@"googleId" : [ZZUser shareUser].userGoogleID};
     NSDictionary *inData = @{
                              @"action" : @"googleLogin",
@@ -300,11 +275,10 @@
     
     NSLog(@"upcoming events parameters %@", parameters);
     
-    
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
         ZZUser *thisUser = [[ZZUser alloc] init];
-        thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
+        thisUser = [ZZUser mj_objectWithKeyValues:data[@"data"]];
         
         if (thisUser == nil) {
             
@@ -325,6 +299,10 @@
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:thisUser.userUserName forKey:@"KEY_USER_NAME"];
             [userDefaults setObject:thisUser.userToken forKey:@"KEY_USER_TOKEN"];
+            
+            if (thisUser.preferredLanguage == NULL) {
+                thisUser.preferredLanguage = @"en";
+            }
             [userDefaults setObject:thisUser.preferredLanguage forKey:@"KEY_USER_LANG"];
             [userDefaults synchronize];
             
@@ -372,18 +350,12 @@
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
             window.rootViewController = [[GFTabBarController alloc]init];
             [window makeKeyWindow];
-
+            
         }
         
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
-        [SVProgressHUD showWithStatus:@"Busy network, please try later"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
+    } failed:^(NSError *error) {
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        [SVProgressHUD dismiss];
     }];
 
 }

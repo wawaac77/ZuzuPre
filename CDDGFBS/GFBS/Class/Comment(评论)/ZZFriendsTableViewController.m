@@ -134,34 +134,22 @@ static NSString *const ID = @"ID";
 #pragma mark - 加载新数据
 -(void)loadNewEvents
 {
-    NSLog(@"loadNewEvents工作了");
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
-    
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     NSDictionary *inData = @{@"action" : @"getFriendList", @"token" : userToken};
     NSDictionary *parameters = @{@"data" : inData};
     
-    
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
-        self.friendsArray = [ZZFriendModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        self.friendsArray = [ZZFriendModel mj_objectArrayWithKeyValuesArray:data[@"data"]];
         
         [self.tableView reloadData];
         
         [self.tableView.mj_header endRefreshing];
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        [self.tableView.mj_header endRefreshing];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
+        [SVProgressHUD dismiss];
     }];
     
 }

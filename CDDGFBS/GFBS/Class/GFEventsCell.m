@@ -280,11 +280,7 @@
 }
 
 - (void)likeCheckin: (BOOL) like {
-    NSLog(@"_event %@", self.thisEvent);
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
+   
     NSNumber *likeNum = [[NSNumber alloc] initWithBool:like];
     NSLog(@"likeNum %@", likeNum);
     
@@ -302,22 +298,16 @@
     
     NSLog(@"publish content parameters %@", parameters);
     
-    
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
-        NSLog(@"responseObject is %@", responseObject);
-        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
+        NSLog(@"responseObject is %@", data);
+        NSLog(@"responseObject - data is %@", data[@"data"]);
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
+        [SVProgressHUD dismiss];
     }];
 
-    
 }
 
 - (void)awakeFromNib {

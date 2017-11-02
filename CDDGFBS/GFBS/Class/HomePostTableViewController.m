@@ -273,10 +273,6 @@ static NSString *const ID = @"ID";
         //NSLog(@"receivingType %@",receivingType);
         //NSLog(@"userID in HomePostVC %@", userID);
         
-        //取消请求
-        [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-        
-        //2.凭借请求参数
         
         NSString *userToken = [AppDelegate APP].user.userToken;
         NSDictionary *inSubData = @{@"checkinId" : thisContent.listEventID};
@@ -285,20 +281,12 @@ static NSString *const ID = @"ID";
         
         NSDictionary *parameters = @{@"data" : inData};
         
-        [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+        [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
             
-            NSLog(@"responseObject is %@", responseObject);
-            NSLog(@"responseObject - data is %@", responseObject[@"data"]);
-            //[self.tableView reloadData];
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"%@", [error localizedDescription]);
-            
+  
+        } failed:^(NSError *error) {
             [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-            [self.tableView.mj_header endRefreshing];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [SVProgressHUD dismiss];
-            });
+            [SVProgressHUD dismiss];
         }];
         
     }
@@ -319,11 +307,6 @@ static NSString *const ID = @"ID";
 {
     NSLog(@"loadNewEvents工作了");
     currentPage = 2;
-
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
     
     NSString *userToken = [AppDelegate APP].user.userToken;
     //NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
@@ -362,14 +345,10 @@ static NSString *const ID = @"ID";
     
     NSLog(@"publish content parameters %@", parameters);
     
-    
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
-        NSLog(@"responseObject is %@", responseObject);
-        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
+        self.contents = [ZZContentModel mj_objectArrayWithKeyValuesArray:data[@"data"]];
         
-        self.contents = [ZZContentModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-     
         for (int i = 0; i < self.contents.count; i++) {
             if (self.contents[i].numOfLike == NULL) {
                 self.contents[i].numOfLike = 0;
@@ -387,18 +366,18 @@ static NSString *const ID = @"ID";
         self.selectedContents = [[NSMutableArray alloc] init];
         
         /*
-        if (self.type == 5) {
-            NSLog(@"select process starts working");
-            for (int i = 0; i < _contents.count ; i++) {
-                if ([_contents[i].listPublishUser.userID isEqualToString:self.userID]) {
-                    [_selectedContents addObject:_contents[i]];
-                }
-            }
-            
-            [_contents removeAllObjects];
-            [_contents addObjectsFromArray:_selectedContents];
-        }
-        */
+         if (self.type == 5) {
+         NSLog(@"select process starts working");
+         for (int i = 0; i < _contents.count ; i++) {
+         if ([_contents[i].listPublishUser.userID isEqualToString:self.userID]) {
+         [_selectedContents addObject:_contents[i]];
+         }
+         }
+         
+         [_contents removeAllObjects];
+         [_contents addObjectsFromArray:_selectedContents];
+         }
+         */
         
         [self passValueMethod];
         
@@ -406,15 +385,11 @@ static NSString *const ID = @"ID";
         
         [self.tableView.mj_header endRefreshing];
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        [self.tableView.mj_header endRefreshing];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
+        [SVProgressHUD dismiss];
     }];
+
 }
 
 #pragma mark - 加载更多数据
@@ -425,11 +400,6 @@ static NSString *const ID = @"ID";
         [self.tableView.mj_footer endRefreshing];
         return;
     } // if no new data
-    
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
     
     NSString *userToken = [AppDelegate APP].user.userToken;
     //NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
@@ -463,14 +433,9 @@ static NSString *const ID = @"ID";
     
     NSDictionary *parameters = @{@"data" : inData};
     
-    //发送请求
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
-        
-        NSLog(@"responseObject is %@", responseObject);
-        NSLog(@"responseObject - data is %@", responseObject[@"data"]);
-        
-        NSMutableArray<ZZContentModel *> *moreData = [ZZContentModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        NSMutableArray<ZZContentModel *> *moreData = [ZZContentModel mj_objectArrayWithKeyValuesArray:data[@"data"]];
         
         if (moreData.count != 0) {
             [self.contents addObjectsFromArray:moreData];
@@ -499,15 +464,9 @@ static NSString *const ID = @"ID";
         [self.tableView reloadData];
         [self.tableView.mj_footer endRefreshing];
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        [self.tableView.mj_footer endRefreshing];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-        
+        [SVProgressHUD dismiss];
     }];
     
 }

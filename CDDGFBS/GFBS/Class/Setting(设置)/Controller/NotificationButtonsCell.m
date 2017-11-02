@@ -67,10 +67,6 @@
 
 - (void)acceptButtonClicked {
     NSLog(@"accept button clicked");
-    
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
 
     NSString *userToken = [AppDelegate APP].user.userToken;
     
@@ -79,37 +75,21 @@
     
     NSDictionary *parameters = @{@"data" : inData};
     
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
         self.label.text = [NSString stringWithFormat:@"%@ has become your friend.", self.thisRequest.memberRequest.userUserName];
         _acceptButton.hidden = YES;
         _declineButton.hidden = YES;
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", [error localizedDescription]);
-        
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [SVProgressHUD dismiss];
-            
-        });
-        
+        [SVProgressHUD dismiss];
     }];
-    
-    
     
 }
 
 - (void)declineButtonClicked {
-    NSLog(@"declineButtonClicked");
-    
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
-    
+  
     NSString *userToken = [AppDelegate APP].user.userToken;
     
     NSDictionary *inSubData = @{@"friendRelationshipId" : self.thisRequest.friendshipID, @"status" : @"declined"};
@@ -117,24 +97,15 @@
     
     NSDictionary *parameters = @{@"data" : inData};
     
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
         self.label.text = [NSString stringWithFormat:@"You have declined %@'s friend request.", self.thisRequest.memberRequest.userUserName];
         _acceptButton.hidden = YES;
         _declineButton.hidden = YES;
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", [error localizedDescription]);
-        
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [SVProgressHUD dismiss];
-            
-        });
-        
+        [SVProgressHUD dismiss];
     }];
     
 }

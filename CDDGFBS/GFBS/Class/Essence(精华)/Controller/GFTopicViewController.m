@@ -120,10 +120,7 @@ static NSString *const topicID = @"topic";
 #pragma mark - 加载新数据
 -(void)loadNewTopics
 {
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
     
-    //2.凭借请求参数
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"a"] = @"list";
     parameters[@"c"] = @"data";
@@ -160,10 +157,6 @@ static NSString *const topicID = @"topic";
 #pragma mark - 加载更多数据
 -(void)loadMoreData
 {
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"a"] = @"list";
     parameters[@"c"] = @"data";

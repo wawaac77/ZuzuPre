@@ -101,10 +101,7 @@ static NSString*const ID = @"ID";
 
 
 - (void)setUpArray {
-    
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
+  
     NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
     if ([userLang isEqualToString:@"zh-Hant"]) {
         userLang = @"tw";
@@ -124,10 +121,9 @@ static NSString*const ID = @"ID";
     
     NSDictionary *parameters = @{@"data" : inData};
     
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
-        NSLog(@"response %@", responseObject[@"data"]);
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
-        self.cuisineArray = [ZZTypicalInformationModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        self.cuisineArray = [ZZTypicalInformationModel mj_objectArrayWithKeyValuesArray:data[@"data"]];
         
         if ([self.tableType isEqualToString: @"Industry"]) {
             for (int i = 0; i < _cuisineArray.count; i ++) {
@@ -149,7 +145,7 @@ static NSString*const ID = @"ID";
                     NSLog(@"_cuisineArray selected %@", _cuisineArray[i].informationName);
                 } else {
                     _cuisineArray[i].selected = @0;
-
+                    
                 }
             }
             
@@ -172,19 +168,11 @@ static NSString*const ID = @"ID";
         
         [self.tableView reloadData];
         
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", [error localizedDescription]);
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [SVProgressHUD dismiss];
-            
-        });
-        
+        [SVProgressHUD dismiss];
     }];
+    
 }
 
 #pragma mark - Table view data source

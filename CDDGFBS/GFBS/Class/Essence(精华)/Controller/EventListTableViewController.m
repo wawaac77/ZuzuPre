@@ -124,10 +124,7 @@ static NSString *const eventID = @"myEvent";
 #pragma mark - 加载新数据
 -(void)loadNewEvents
 {
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
+
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     NSLog(@"user token %@", userToken);
@@ -147,26 +144,19 @@ static NSString *const eventID = @"myEvent";
     
     NSLog(@"%@", parameters);
     
-    //发送请求
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
         //字典转模型 //没有这句话显示不出数据
-        self.myEvents = [MyEvent mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        
-        NSLog(@"%@", self.myEvents);
+        self.myEvents = [MyEvent mj_objectArrayWithKeyValuesArray:data[@"data"]];
         
         [self.tableView reloadData];
         
         [self.tableView.mj_header endRefreshing];
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failed:^(NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
-        
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        [self.tableView.mj_header endRefreshing];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
+        [SVProgressHUD dismiss];
     }];
     
 }
@@ -174,8 +164,6 @@ static NSString *const eventID = @"myEvent";
 #pragma mark - 加载更多数据
 -(void)loadMoreData
 {
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
     
     //2.凭借请求参数
     /*
@@ -191,31 +179,23 @@ static NSString *const eventID = @"myEvent";
     
     NSDictionary *parameters = @{@"data" : inData};
 
-    //发送请求
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
+        NSLog(@"responseObject in topics %@", data);
         
-        NSLog(@"responseObject in topics %@", responseObject);
-        
-        [responseObject writeToFile:@"/Users/apple/Desktop/ceshi.plist" atomically:YES];
+        [data writeToFile:@"/Users/apple/Desktop/ceshi.plist" atomically:YES];
         
         //字典转模型
-        NSMutableArray<MyEvent *> *moreEvents = [MyEvent mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        NSMutableArray<MyEvent *> *moreEvents = [MyEvent mj_objectArrayWithKeyValuesArray:data[@"data"]];
         [self.myEvents addObjectsFromArray:moreEvents];
         
         [self.tableView reloadData];
         
         [self.tableView.mj_footer endRefreshing];
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", [error localizedDescription]);
-        
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        [self.tableView.mj_footer endRefreshing];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-        
+        [SVProgressHUD dismiss];
     }];
     
 }

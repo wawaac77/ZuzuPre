@@ -172,10 +172,6 @@
 
 - (void)loadNeweData {
     
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     
@@ -189,38 +185,20 @@
     
     NSDictionary *parameters = @{@"data" : inData};
     
-    //发送请求
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
         ZZUser *thisUser = [[ZZUser alloc] init];
-        thisUser = [ZZUser mj_objectWithKeyValues:responseObject[@"data"]];
+        thisUser = [ZZUser mj_objectWithKeyValues:data[@"data"]];
         self.myProfile = thisUser;
         
         [self setUpAfterLoadNewData];
-        NSLog(@"this user %@", thisUser);
-        NSLog(@"this user. userName %@", thisUser.usertName);
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        //[self.tableView.mj_footer endRefreshing];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-        
+        [SVProgressHUD dismiss];
     }];
+    
 }
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)messageButtonClicked:(id)sender {
     ZZChatViewController *chatVC = [[ZZChatViewController alloc] init];
@@ -229,10 +207,7 @@
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 - (IBAction)addFriendButtonClicked:(id)sender {
-    //取消请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    //2.凭借请求参数
+
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     
@@ -248,19 +223,14 @@
     
     NSDictionary *parameters = @{@"data" : inData};
     
-    //发送请求
-    [_manager POST:GetURL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
-        //self.imageView.image = nil;
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"ZUZU" message:@"Your following is successful!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failed:^(NSError *error) {
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-        
+        [SVProgressHUD dismiss];
     }];
     
 }

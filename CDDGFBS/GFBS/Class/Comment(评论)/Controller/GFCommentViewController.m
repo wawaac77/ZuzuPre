@@ -174,10 +174,7 @@ static NSString *const headID = @"head";
 #pragma mark - 加载网络数据
 -(void)loadNewComment
 {
-    // 取消所有请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
     
-    // 参数
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     NSDictionary *checkinId = @{@"checkinId" : _topic.listEventID};
@@ -393,10 +390,6 @@ static NSString *const headID = @"head";
 
 - (IBAction)sendButtonClicked:(id)sender {
     
-    // 取消所有请求
-    [self.manager.tasks makeObjectsPerformSelector:@selector(cancel)];
-    
-    // 参数
     NSString *userToken = [[NSString alloc] init];
     userToken = [AppDelegate APP].user.userToken;
     NSDictionary *inSubData = @{@"checkinId" : _topic.listEventID, @"message" :_commentTextField.text};
