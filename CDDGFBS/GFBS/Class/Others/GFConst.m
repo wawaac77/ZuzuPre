@@ -70,3 +70,5 @@ NSString * const MinAgoStr = @"minutes ago";
 NSString * const JustNowStr = @"Just now";
 NSString * const YesterdayStr = @"Yesterday";
 
+NSString * const APPKEY = @"3367a80b768bfc766f8b273b";
+NSString * const CHANNEL = @"";

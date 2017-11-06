@@ -65,17 +65,6 @@ static NSString *const ID = @"ID";
 }
  */
 
-#pragma mark - 懒加载
--(GFHTTPSessionManager *)manager
-{
-    if (!_manager) {
-        _manager = [GFHTTPSessionManager manager];
-        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    }
-    
-    return _manager;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     contentCellHeightCount = 0;
@@ -112,6 +101,23 @@ static NSString *const ID = @"ID";
     //self.tableView.rowHeight = UITableViewAutomaticDimension;
     //self.tableView.estimatedRowHeight = 400;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GFEventsCell class]) bundle:nil] forCellReuseIdentifier:ID];
+    
+    CGFloat bannerH = 60;
+    if (self.type == 0) {
+        UIView *bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, GFScreenWidth, bannerH)];
+        bannerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gold_background"]];
+        
+        UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, bannerH - 20, bannerH - 20)];
+        icon.image = [UIImage imageNamed:@"medal"];
+        [bannerView addSubview:icon];
+        
+        UILabel *bannerLabel = [[UILabel alloc] initWithFrame:CGRectMake(bannerH, 10, GFScreenWidth - bannerH + 10, bannerH - 20)];
+        bannerLabel.text = @"Prize of this month is iPhoneX !!!";
+        [bannerView addSubview:bannerLabel];
+        
+        self.tableView.tableHeaderView = bannerView;
+    }
+    
     
     //[self.tableView reloadData];
 }
@@ -308,7 +314,7 @@ static NSString *const ID = @"ID";
     NSLog(@"loadNewEvents工作了");
     currentPage = 2;
     
-    NSString *userToken = [AppDelegate APP].user.userToken;
+    NSString *userToken = [ZZUser shareUser].userToken;
     //NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
     
     NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];

@@ -22,8 +22,11 @@ pod 'GoogleSignIn'
 
 pod 'Firebase/Core'
 pod 'Firebase/Storage'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Database'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
 pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController.git', :branch => 'develop'
+
+pod 'JPush'
+pod 'CocoaLumberjack'
 
 target :"GFBS" 

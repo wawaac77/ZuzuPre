@@ -14,6 +14,7 @@
 #import "ZZHomeViewController.h"
 #import "ZZCheckInViewController.h"
 #import "ZZInboxTableViewController.h"
+#import "JCHATConversationListViewController.h"
 #import "MyZuzuViewController.h"
 #import "GFEssenceViewController.h"
 #import "GFPublishView.h"
@@ -115,8 +116,8 @@
     GFNavigationController *nav1 = [[GFNavigationController alloc]initWithRootViewController:checkin];
     [self addChildViewController:nav1];
     
-    /** Restaurants */
-    ZZInboxTableViewController *inbox = [[ZZInboxTableViewController alloc] init];
+    /** Inbox */
+    JCHATConversationListViewController *inbox = [[JCHATConversationListViewController alloc] init];
     GFNavigationController *nav2 = [[GFNavigationController alloc]initWithRootViewController:inbox];
     [self addChildViewController:nav2];
     

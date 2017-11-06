@@ -57,6 +57,9 @@ UIKIT_EXTERN NSString * const MinAgoStr;
 UIKIT_EXTERN NSString * const JustNowStr;
 UIKIT_EXTERN NSString * const YesterdayStr;
 
+UIKIT_EXTERN NSString * const APPKEY;
+UIKIT_EXTERN NSString * const CHANNEL;
+
 
 
 

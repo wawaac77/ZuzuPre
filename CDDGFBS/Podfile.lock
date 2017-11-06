@@ -15,6 +15,12 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - CocoaLumberjack (3.3.0):
+    - CocoaLumberjack/Default (= 3.3.0)
+    - CocoaLumberjack/Extensions (= 3.3.0)
+  - CocoaLumberjack/Default (3.3.0)
+  - CocoaLumberjack/Extensions (3.3.0):
+    - CocoaLumberjack/Default
   - DACircularProgress (2.3.1)
   - DOPDropDownMenu-Enhanced (1.0.0)
   - Firebase/Auth (4.0.4):
@@ -70,6 +76,9 @@ PODS:
   - GTMSessionFetcher/Core (1.1.11)
   - GTMSessionFetcher/Full (1.1.11):
     - GTMSessionFetcher/Core (= 1.1.11)
+  - JCore (1.1.6)
+  - JPush (3.0.7):
+    - JCore (~> 1.1.6)
   - JSQMessagesViewController (7.3.4)
   - LLImagePickerView (0.0.1):
     - ACAlertController
@@ -102,6 +111,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - CocoaLumberjack
   - DACircularProgress
   - DOPDropDownMenu-Enhanced
   - Firebase/Auth
@@ -109,6 +119,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - GoogleSignIn
+  - JPush
   - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController.git`, branch `develop`)
   - LLImagePickerView
   - LTNavigationBar
@@ -134,6 +145,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   ACAlertController: 10f0455c3e1691a6197b5cd0d96d6f9a03c82763
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  CocoaLumberjack: 3c8c74683302f9012bb168e1c4b7ae3c0b558431
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DOPDropDownMenu-Enhanced: 9ec473b16351b5b0b2d6ef87e7f666fe5ff54ad5
   Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
@@ -147,6 +159,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
+  JCore: 18fc8725124f26e55625eaf224659b3a999dcf63
+  JPush: 111b79b8a0169ab8fd4c486dac3ed166ed69293e
   JSQMessagesViewController: c11b9e77372ab72c45c67311f6da7342e32df1e8
   LLImagePickerView: 0c5238f42e6799859d64ab5c3e412d1daadc0e8d
   LTNavigationBar: c278785bed344862e18146b5f06792932e4feacc
@@ -163,6 +177,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   TZImagePickerController: 086034156913375cb19c8e4103562f15322c3b36
 
-PODFILE CHECKSUM: 1ed98006e2915d68da66769d5c575a7770bd3a5e
+PODFILE CHECKSUM: c53f9f105fe21a1d8614df09321eafaaa6a5d1a7
 
 COCOAPODS: 1.2.0
