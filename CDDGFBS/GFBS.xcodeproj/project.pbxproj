@@ -663,6 +663,7 @@
 		789B25FA1FB069D80023812F /* NSString+MessageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 789B25F51FB069D80023812F /* NSString+MessageInputView.m */; };
 		789B25FB1FB069D80023812F /* UIImage +ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = 789B25F61FB069D80023812F /* UIImage +ResizeMagick.m */; };
 		789B26001FB06B230023812F /* ViewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 789B25FF1FB06B230023812F /* ViewUtil.m */; };
+		789B26031FB1B7390023812F /* JCHATCustomFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 789B26021FB1B7390023812F /* JCHATCustomFormatter.m */; };
 		789CFF491F02115800EBA772 /* SliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 789CFF471F02115800EBA772 /* SliderCell.m */; };
 		789CFF4A1F02115800EBA772 /* SliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789CFF481F02115800EBA772 /* SliderCell.xib */; };
 		789CFF551F026C6700EBA772 /* SearchEventDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 789CFF541F026C6700EBA772 /* SearchEventDetail.m */; };
@@ -1568,6 +1569,8 @@
 		789B25FC1FB06AEC0023812F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		789B25FE1FB06B230023812F /* ViewUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtil.h; sourceTree = "<group>"; };
 		789B25FF1FB06B230023812F /* ViewUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtil.m; sourceTree = "<group>"; };
+		789B26011FB1B7380023812F /* JCHATCustomFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCHATCustomFormatter.h; sourceTree = "<group>"; };
+		789B26021FB1B7390023812F /* JCHATCustomFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCHATCustomFormatter.m; sourceTree = "<group>"; };
 		789CFF461F02115800EBA772 /* SliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderCell.h; sourceTree = "<group>"; };
 		789CFF471F02115800EBA772 /* SliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderCell.m; sourceTree = "<group>"; };
 		789CFF481F02115800EBA772 /* SliderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCell.xib; sourceTree = "<group>"; };
@@ -3103,6 +3106,8 @@
 				789B23DA1FB065670023812F /* JCHATSelectFriendsCtl.h */,
 				789B23DB1FB065670023812F /* JCHATSelectFriendsCtl.m */,
 				789B23DC1FB065670023812F /* JCHATSelectFriendsCtl.xib */,
+				789B26011FB1B7380023812F /* JCHATCustomFormatter.h */,
+				789B26021FB1B7390023812F /* JCHATCustomFormatter.m */,
 				789B245F1FB067CA0023812F /* JChatConstants.h */,
 				789B23DD1FB065670023812F /* Model */,
 				789B23E21FB065670023812F /* View */,
@@ -4355,6 +4360,7 @@
 				7824E3591EF2201D00F85BFB /* BadgesSquareCell.m in Sources */,
 				18B7C72A1DE07501004BD781 /* GFLoginRegisterView.m in Sources */,
 				783089481F1D039800C31BFE /* CommentHeaderView.m in Sources */,
+				789B26031FB1B7390023812F /* JCHATCustomFormatter.m in Sources */,
 				783089351F1C913200C31BFE /* ZZContentModel.m in Sources */,
 				789B23BA1FB060FA0023812F /* DemoSettingsViewController.m in Sources */,
 				7883331C1F17781100967337 /* ZZCheckInViewController.m in Sources */,
