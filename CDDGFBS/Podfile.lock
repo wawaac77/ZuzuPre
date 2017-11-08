@@ -69,6 +69,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GPUImage (0.1.7)
   - GTMOAuth2 (1.1.4):
     - GTMSessionFetcher (~> 1.1)
   - GTMSessionFetcher (1.1.11):
@@ -77,6 +78,8 @@ PODS:
   - GTMSessionFetcher/Full (1.1.11):
     - GTMSessionFetcher/Core (= 1.1.11)
   - JCore (1.1.6)
+  - JMessage (3.1.1):
+    - JCore (~> 1.1.1)
   - JPush (3.0.7):
     - JCore (~> 1.1.6)
   - JSQMessagesViewController (7.3.4)
@@ -119,6 +122,8 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - GoogleSignIn
+  - GPUImage (~> 0.1.7)
+  - JMessage (~> 3.1.0)
   - JPush
   - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController.git`, branch `develop`)
   - LLImagePickerView
@@ -157,9 +162,11 @@ SPEC CHECKSUMS:
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   JCore: 18fc8725124f26e55625eaf224659b3a999dcf63
+  JMessage: ff9ed99ec0b92535411365a6a2ab6c5b247327f3
   JPush: 111b79b8a0169ab8fd4c486dac3ed166ed69293e
   JSQMessagesViewController: c11b9e77372ab72c45c67311f6da7342e32df1e8
   LLImagePickerView: 0c5238f42e6799859d64ab5c3e412d1daadc0e8d
@@ -177,6 +184,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   TZImagePickerController: 086034156913375cb19c8e4103562f15322c3b36
 
-PODFILE CHECKSUM: c53f9f105fe21a1d8614df09321eafaaa6a5d1a7
+PODFILE CHECKSUM: eb4e8519a02294eecbfddfc6bc948fe031662542
 
 COCOAPODS: 1.2.0

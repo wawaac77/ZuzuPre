@@ -28,5 +28,10 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 
 pod 'JPush'
 pod 'CocoaLumberjack'
+pod 'GPUImage', '~> 0.1.7'
+pod 'JMessage', '~> 3.1.0'
+
+
+
 
 target :"GFBS" 

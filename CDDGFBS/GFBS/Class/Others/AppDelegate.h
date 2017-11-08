@@ -10,6 +10,7 @@
 #import "ZZUser.h"
 #import "Crashlytics/Crashlytics.h"
 
+#import "JChatConstants.h"
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Fabric/Fabric.h>

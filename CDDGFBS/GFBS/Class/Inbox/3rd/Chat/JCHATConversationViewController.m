@@ -7,21 +7,21 @@
 //
 
 #import "JCHATConversationViewController.h"
-#import "MJPhoto.h"
-#import "MJPhotoBrowser.h"
+//#import "MJPhoto.h"
+//#import "MJPhotoBrowser.h"
 #import "JCHATFileManager.h"
 #import "JCHATShowTimeCell.h"
 #import "JCHATDetailsInfoViewController.h"
 #import "JCHATGroupSettingCtl.h"
 #import "AppDelegate.h"
-#import "MBProgressHUD+Add.h"
+//#import "MBProgressHUD+Add.h"
 #import "UIImage+ResizeMagick.h"
-#import "JCHATPersonViewController.h"
+//#import "JCHATPersonViewController.h"
 #import "JCHATFriendDetailViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <JMessage/JMSGConversation.h>
 #import "JCHATStringUtils.h"
-#import "JCHATAlreadyLoginViewController.h"
+//#import "JCHATAlreadyLoginViewController.h"
 #import <UIKit/UIPrintInfo.h>
 #import "JCHATLoadMessageTableViewCell.h"
 #import "JCHATSendMsgManager.h"
