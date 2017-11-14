@@ -129,6 +129,7 @@ DEPENDENCIES:
   - LLImagePickerView
   - LTNavigationBar
   - Masonry
+  - MBProgressHUD
   - MJExtension
   - MJRefresh
   - pop
@@ -184,6 +185,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   TZImagePickerController: 086034156913375cb19c8e4103562f15322c3b36
 
-PODFILE CHECKSUM: eb4e8519a02294eecbfddfc6bc948fe031662542
+PODFILE CHECKSUM: a50884d0f975bea7ce940fb253b71740038e63f2
 
 COCOAPODS: 1.2.0

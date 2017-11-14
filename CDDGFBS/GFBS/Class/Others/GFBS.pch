@@ -15,7 +15,7 @@
 #import "JCHATStringUtils.h"
 #import <JMessage/JMessage.h>
 #import "MBProgressHUD.h"
-//#import "MBProgressHUD+Add.h"
+#import "MBProgressHUD+Add.h"
 #import "ViewUtil.h"
 #import "JCHATAlertToSendImage.h"
 #import "JCHATStringUtils.h"

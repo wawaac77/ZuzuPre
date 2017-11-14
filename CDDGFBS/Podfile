@@ -7,6 +7,7 @@ pod "AFNetworking"
 pod "SDWebImage"
 pod "SVProgressHUD"
 pod "MJExtension"
+
 pod "MJRefresh"
 pod "DOPDropDownMenu-Enhanced"
 pod "Masonry"
@@ -30,7 +31,7 @@ pod 'JPush'
 pod 'CocoaLumberjack'
 pod 'GPUImage', '~> 0.1.7'
 pod 'JMessage', '~> 3.1.0'
-
+pod 'MBProgressHUD'
 
 
 

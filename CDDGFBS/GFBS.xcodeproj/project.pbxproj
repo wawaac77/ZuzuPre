@@ -1591,7 +1591,6 @@
 		789B25F51FB069D80023812F /* NSString+MessageInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MessageInputView.m"; sourceTree = "<group>"; };
 		789B25F61FB069D80023812F /* UIImage +ResizeMagick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage +ResizeMagick.m"; sourceTree = "<group>"; };
 		789B25F71FB069D80023812F /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
-		789B25FC1FB06AEC0023812F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		789B25FE1FB06B230023812F /* ViewUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtil.h; sourceTree = "<group>"; };
 		789B25FF1FB06B230023812F /* ViewUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtil.m; sourceTree = "<group>"; };
 		789B26011FB1B7380023812F /* JCHATCustomFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCHATCustomFormatter.h; sourceTree = "<group>"; };
@@ -3095,7 +3094,6 @@
 		789B23A21FB060F90023812F /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
-				789B25FC1FB06AEC0023812F /* PrefixHeader.pch */,
 				789B260B1FB2B5610023812F /* HMPhotoPicker */,
 				789B26041FB2B4AC0023812F /* ChatImageBubble */,
 				789B25FD1FB06B230023812F /* Utils */,
