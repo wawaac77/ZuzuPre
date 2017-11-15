@@ -508,21 +508,27 @@
     DDLogDebug(@"Logout anyway.");
     
     AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
+      /*
     if ([appDelegate.tabBarCtl.loginIdentify isEqualToString:kFirstLogin]) {
       [self.navigationController.navigationController popToViewController:[self.navigationController.navigationController.childViewControllers objectAtIndex:0] animated:YES];
     }
+       */
+      
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kuserName];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
-    [JMSGUser logout:^(id resultObject, NSError *error) {
-      DDLogDebug(@"Logout callback with - %@", error);
-    }];
-    
-    JCHATAlreadyLoginViewController *loginCtl = [[JCHATAlreadyLoginViewController alloc] init];
+      [JMSGUser logout:^(id resultObject, NSError *error) {
+          DDLogDebug(@"Logout callback with - %@", error);
+      }];
+      
+  /*
+      JCHATAlreadyLoginViewController *loginCtl = [[JCHATAlreadyLoginViewController alloc] init];
     loginCtl.hidesBottomBarWhenPushed = YES;
     UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:loginCtl];
     appDelegate.window.rootViewController = navLogin;
+   */
+      
   }
 }
 #pragma mark --获取对应消息的索引
@@ -1343,6 +1349,7 @@ NSInteger sortMessageType(id object1,id object2,void *cha) {
     return;
   }
   
+    /*
   if (![model.message isReceived]) {
     JCHATPersonViewController *personCtl =[[JCHATPersonViewController alloc] init];
     personCtl.hidesBottomBarWhenPushed = YES;
@@ -1359,6 +1366,7 @@ NSInteger sortMessageType(id object1,id object2,void *cha) {
     
     [self.navigationController pushViewController:friendCtl animated:YES];
   }
+     */
 }
 
 #pragma mark -连续播放语音
@@ -1385,6 +1393,7 @@ NSInteger sortMessageType(id object1,id object2,void *cha) {
   JCHATMessageTableViewCell *cell =(JCHATMessageTableViewCell *)tableViewCell;
   NSInteger count = _imgDataArr.count;
   NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
+    /*
   for (int i = 0; i<count; i++) {
     JCHATChatModel *messageObject = [_imgDataArr objectAtIndex:i];
     MJPhoto *photo = [[MJPhoto alloc] init];
@@ -1398,6 +1407,8 @@ NSInteger sortMessageType(id object1,id object2,void *cha) {
   browser.photos = photos; // 设置所有的图片
   browser.conversation =_conversation;
   [browser show];
+     */
+    
 }
 
 #pragma mark --获取所有发送消息图片

@@ -4,8 +4,8 @@
 #import "JCHATConversationViewController.h"
 #import "JCHATSelectFriendsCtl.h"
 #import "MBProgressHUD+Add.h"
-#import "JCHATAlertViewWait.h"
-#import "JCHATAlreadyLoginViewController.h"
+//#import "JCHATAlertViewWait.h"
+//#import "JCHATAlreadyLoginViewController.h"
 #import "AppDelegate.h"
 
 #define kBackBtnFrame CGRectMake(0, 0, 50, 30)

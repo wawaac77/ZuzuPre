@@ -43,6 +43,7 @@ static NSString *const ID = @"ID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.tableFooterView = [[UIView alloc] init];
     
     [self setupRefresh];
     [self setUpTable];
