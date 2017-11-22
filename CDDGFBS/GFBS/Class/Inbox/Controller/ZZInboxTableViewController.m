@@ -18,6 +18,7 @@
 #import <MJExtension.h>
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
+#import <JMessage/JMessage.h>
 //#import <SDImageCache.h>
 
 
