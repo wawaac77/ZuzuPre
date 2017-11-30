@@ -11,6 +11,10 @@
 #import "GFNavigationController.h"
 #import "ForgetPasswordViewController.h"
 
+#import "NSString+MessageInputView.h"
+#import "JChatConstants.h"
+#import "JCHATTimeOutManager.h"
+
 #import <AFNetworking.h>
 #import <MJExtension.h>
 #import <SVProgressHUD.h>
@@ -28,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *forgetPasswordButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
+
+@property(assign, nonatomic) BOOL logging;
 
 - (IBAction)nextButtonClicked:(id)sender;
 - (IBAction)forgetPasswordClicked:(id)sender;
@@ -70,6 +76,30 @@
     [self toggleAuthUI];
     */
     
+    /**JMessage*/
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(dBMigrateFinish)
+                                                 name:kDBMigrateFinishNotification object:nil];
+    
+    AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
+    if (appDelegate.isDBMigrating) {
+        NSLog(@"is DBMigrating don't get allconversations");
+        [MBProgressHUD showMessage:@"正在升级数据库" toView:self.view];
+    }
+}
+
+/**JMessage*/
+- (void)dBMigrateFinish {
+    JCHATMAINTHREAD(^{
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    });
+}
+
+- (void)requestTimeout {
+    DDLogDebug(@"login request timeout");
+    if (_logging == YES) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }
 }
 
 -(void)dismissKeyboard {
@@ -109,16 +139,12 @@
 - (IBAction)nextButtonClicked:(id)sender {
     
     NSLog(@"next > button clicked");
-    //UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    //window.rootViewController = [[GFTabBarController alloc]init];
     
-
     NSString *email = _emailTextField.text;
     NSString *password = _passwordTextField.text;
     if (email.length == 0) {
         _emailTextField.text = @"wawaac@gmail.com";
         _passwordTextField.text = @"123456";
-
     }
     
     NSDictionary *emailAndPassword = @ {@"email" : email, @"password" : password};
@@ -130,6 +156,7 @@
     NSLog(@"upcoming events parameters %@", parameters);
     
     [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
+        NSLog(@"run [GFHTTPSessionManager shareManager] ");
         
         ZZUser *thisUser = [[ZZUser alloc] init];
         thisUser = [ZZUser mj_objectWithKeyValues:data[@"data"]];
@@ -148,12 +175,10 @@
             
             NSLog(@"user token = %@", thisUser.userToken);
             
-            
             //*************** defualt user set even app is turned off *********//
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:thisUser.userUserName forKey:@"KEY_USER_NAME"];
             [userDefaults setObject:thisUser.userToken forKey:@"KEY_USER_TOKEN"];
-            
             if (thisUser.preferredLanguage == NULL) {
                 thisUser.preferredLanguage = @"en";
             }
@@ -201,9 +226,13 @@
             [ZZUser shareUser].canMyFriendSeeMyEmail = thisUser.canMyFriendSeeMyEmail;
             [ZZUser shareUser].notificationNum = thisUser.notificationNum;
             
+            [self loginJMessageWithUsername:email password:password];
+            /*
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
+            NSLog(@"runned UIWindow *window = [UIApplication sharedApplication].keyWindow");
             window.rootViewController = [[GFTabBarController alloc]init];
             [window makeKeyWindow];
+             */
             /*
              [[FIRAuth auth]signInWithEmail:self.emailTextField.text
              password:self.passwordTextField.text
@@ -237,9 +266,54 @@
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
         [SVProgressHUD dismiss];
     }];
-    
 }
 
+/**
+ JMessage login
+ */
+- (void)loginJMessageWithUsername:(NSString *)username password:(NSString *)password {
+    _logging = YES;
+    [MBProgressHUD showMessage:@"正在登陆" toView:self.view];
+    [[JCHATTimeOutManager ins] startTimerWithVC:self];
+    [JMSGUser loginWithUsername:username
+                       password:password
+              completionHandler:^(id resultObject, NSError *error) {
+                  [[JCHATTimeOutManager ins] stopTimer];
+                  _logging = NO;
+                  if (error == nil) {
+                      [[NSUserDefaults standardUserDefaults] setObject:username forKey:klastLoginUserName];
+                      AppDelegate *appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
+                      [appDelegate setupMainTabBar];
+                      [appDelegate.tabBarCtl setSelectedIndex:0];
+                      // 显示登录状态？
+                      appDelegate.window.rootViewController = appDelegate.tabBarCtl;
+                      [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                      
+                      [[NSNotificationCenter defaultCenter] postNotificationName:kupdateUserInfo object:nil];
+                      [self userLoginSave];
+                      
+                      UIWindow *window = [UIApplication sharedApplication].keyWindow;
+                      NSLog(@"runned UIWindow *window = [UIApplication sharedApplication].keyWindow");
+                      window.rootViewController = [[GFTabBarController alloc]init];
+                      [window makeKeyWindow];
+                      
+                  } else {
+                      JCHATMAINTHREAD(^{
+                          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                      });
+                      [MBProgressHUD showMessage:[JCHATStringUtils errorAlert:error] view:self.view];
+                  }
+              }];
+}
+
+- (void)userLoginSave {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:_emailTextField.text forKey:kuserName];
+    [userDefaults setObject:_passwordTextField.text forKey:kPassword];
+    [userDefaults synchronize];
+}
+
+#pragma mark - forget Password
 - (IBAction)forgetPasswordClicked:(id)sender {
     
     ForgetPasswordViewController *forgetVC = [[ForgetPasswordViewController alloc] init];

@@ -8,13 +8,18 @@
 #import "AppDelegate.h"
 #import "SignUpChildViewController.h"
 
+#import "JChatConstants.h"
+#import "NSString+MessageInputView.h"
+#import "JCHATSetDetailViewController.h"
+#import "JCHATTimeOutManager.h"
+
 #import <AFNetworking.h>
 #import <MJExtension.h>
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
 #import <SDImageCache.h>
 #import <FirebaseAuth/FirebaseAuth.h>
-#import "MeasurementHelper.h"
+//#import "MeasurementHelper.h"
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -62,7 +67,7 @@
     self.handle = [[FIRAuth auth]
                    addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user) {
                        if (user) {
-                           [MeasurementHelper sendLoginEvent];
+                           //[MeasurementHelper sendLoginEvent];
                            [self performSegueWithIdentifier:@"SignInToFP" sender:nil];
                        }
                    }];
@@ -148,39 +153,34 @@
     
     else
     {
-    NSDictionary *emailAndPassword = @ {@"email" : email, @"password" : password, @"name": name, @"username" : username};
-    NSDictionary *inData = @{
-                             @"action" : @"register",
-                             @"data" : emailAndPassword};
-    NSDictionary *parameters = @{@"data" : inData};
-    
-    NSLog(@"upcoming events parameters %@", parameters);
-    
-    
+        NSDictionary *emailAndPassword = @{
+                                           @"email" : email,
+                                           @"password" : password,
+                                           @"name": name,
+                                           @"username" : username
+                                           };
+        NSDictionary *inData = @{
+                                 @"action" : @"register",
+                                 @"data" : emailAndPassword
+                                 };
+        NSDictionary *parameters = @{@"data" : inData};
+        
+        NSLog(@"upcoming events parameters %@", parameters);
         
         [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
             
-            /*
-             NSString *responseStatus = [[NSString alloc] init];
-             responseStatus = responseObject[@"status"];
-             NSString *message = [[NSString alloc] init];
-             message = responseObject [@"message"];
-             NSLog(@"message %@", message);
-             NSLog(@"responseStauts %@", responseStatus);
-             */
-            ZZUser *thisUser = [[ZZUser alloc] init];
-            thisUser = [ZZUser mj_objectWithKeyValues:data[@"data"]];
-            NSLog(@"this user %@", thisUser);
-            NSLog(@"this user. userName %@", thisUser.usertName);
+            ZZUser *thisUser = [ZZUser mj_objectWithKeyValues:data[@"data"]];
             
             if (thisUser == nil) {
+                [self registJMessageWithUsername:email password:password];
+                
                 UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Hi" message:@"The email is registered, please login or active the account ^^" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
                 [alertView show];
                 
             } else {
                 if ([thisUser.userStatus isEqualToString:@"inactive"]) {
-                    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Congretulations!" message:@"You have registered a Zuzu account, please go to the email and activate it ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                    [alertView show];
+                    [self registJMessageWithUsername:email password:password];
+                   
                     /**the following else part will never be implemented for this api**/
                 } else {
                     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Hi!" message:@"You have already had an account, please login ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -192,7 +192,6 @@
                 }
                 
             }
-            
             
         } failed:^(NSError *error) {
             [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
@@ -226,6 +225,57 @@
         
     }
     
+}
+
+- (void)registJMessageWithUsername:(NSString *)username password:(NSString *)password {
+    //[MBProgressHUD showMessage:@"正在注册" view:self.view];
+    //[[JCHATTimeOutManager ins] startTimerWithVC:self];
+    [JMSGUser registerWithUsername:username
+                          password:password
+                 completionHandler:^(id resultObject, NSError *error) {
+                     [[JCHATTimeOutManager ins] stopTimer];
+                     if (error == nil) {
+                         [MBProgressHUD hideHUDForView:self.view animated:YES];
+                         [MBProgressHUD showMessage:@"注册成功" view:self.view];
+                         [[JCHATTimeOutManager ins] startTimerWithVC:self];
+                         [JMSGUser loginWithUsername:username
+                                            password:password
+                                   completionHandler:^(id resultObject, NSError *error) {
+                                       [[JCHATTimeOutManager ins] stopTimer];
+                                       if (error == nil) {
+                                           [[NSUserDefaults standardUserDefaults] setObject:username forKey:kuserName];
+                                           [[NSUserDefaults standardUserDefaults] setObject:username forKey:klastLoginUserName];
+                                           
+                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                           JCHATSetDetailViewController *detailVC = [[JCHATSetDetailViewController alloc] init];
+                                           [self.navigationController pushViewController:detailVC animated:YES];
+                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                           
+                                           UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Congretulations!" message:@"You have registered a Zuzu account, please go to the email and activate it ^^" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                           [alertView show];
+                                       } else {
+                                           DDLogDebug(@"login fail error  %@",error);
+                                           NSString *alert = [JCHATStringUtils errorAlert:error];
+                                           alert = [JCHATStringUtils errorAlert:error];
+                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                           [MBProgressHUD showMessage:alert view:self.view];
+                                           DDLogError(alert);
+                                       }
+                                   }];
+                     } else {
+                         NSString *alert = @"注册失败";
+                         alert = [JCHATStringUtils errorAlert:error];
+                         [MBProgressHUD hideHUDForView:self.view animated:YES];
+                         [MBProgressHUD showMessage:alert view:self.view];
+                     }
+                 }];
+}
+
+- (void)JMessageUserLoginSave {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:self.emailTextField.text forKey:kuserName];
+    [userDefaults setObject:self.passwordTextField.text forKey:kPassword];
+    [userDefaults synchronize];
 }
 
 #pragma mark - 监听键盘的弹出和隐藏

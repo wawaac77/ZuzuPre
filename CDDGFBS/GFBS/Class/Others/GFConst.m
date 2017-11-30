@@ -50,7 +50,7 @@ NSString * const GFBSURL = @"http://api.budejie.com/api/api_open.php";
 NSString * const GFBSADURL = @"http://mobads.baidu.com/cpro/ui/mads.php";
 
 /*请求URL*/
-NSString * const GetURL = @"http://52.76.120.122:3006/api/";
+NSString * const GetURL = @"http://52.69.26.57:3000/api/";
 
 
 //UIColor * const COLOR_GOLD = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
@@ -71,4 +71,4 @@ NSString * const JustNowStr = @"Just now";
 NSString * const YesterdayStr = @"Yesterday";
 
 NSString * const APPKEY = @"3367a80b768bfc766f8b273b";
-NSString * const CHANNEL = @"";
+//NSString * const CHANNEL = @"";

@@ -12,7 +12,8 @@
 #import "ZZInboxCell.h"
 #import "ZZLeaderboardModel.h"
 #import "ZZFriendModel.h"
-#import "ZZChatViewController.h"
+//#import "ZZChatViewController.h"
+//#import "JCHATConversationViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -113,13 +114,14 @@ static NSString *const ID = @"ID";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ZZChatViewController *chatVC = [[ZZChatViewController alloc] init];
+    //JCHATConversationViewController *chatVC = [[JCHATConversationViewController alloc] init];
+    //ZZChatViewController *chatVC = [[ZZChatViewController alloc] init];
     //chatVC.view.frame = CGRectMake(0, ZZNewNavH, self.view.gf_width, self.view.gf_height - GFTabBarH - ZZNewNavH);
-    chatVC.hidesBottomBarWhenPushed = YES;
+    //chatVC.hidesBottomBarWhenPushed = YES;
     ZZFriendModel *thisFriend = self.friendList[indexPath.row];
     //chatVC.title = thisRank.leaderboardMember.userUserName;
-    chatVC.title = thisFriend.friendInfo.userUserName;
-    [self.navigationController pushViewController:chatVC animated:YES];
+    //chatVC.title = thisFriend.friendInfo.userUserName;
+    //[self.navigationController pushViewController:chatVC animated:YES];
 }
 
 

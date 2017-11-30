@@ -12,7 +12,7 @@
 #import "HomePostTableViewController.h"
 #import "UserCheckinListChildTableViewController.h"
 #import "ZZUser.h"
-#import "ZZChatViewController.h"
+//#import "ZZChatViewController.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>
@@ -201,10 +201,10 @@
 }
 
 - (IBAction)messageButtonClicked:(id)sender {
-    ZZChatViewController *chatVC = [[ZZChatViewController alloc] init];
-    chatVC.hidesBottomBarWhenPushed = YES;
-    chatVC.title = _myProfile.userUserName;
-    [self.navigationController pushViewController:chatVC animated:YES];
+    //ZZChatViewController *chatVC = [[ZZChatViewController alloc] init];
+    //chatVC.hidesBottomBarWhenPushed = YES;
+    //chatVC.title = _myProfile.userUserName;
+    //[self.navigationController pushViewController:chatVC animated:YES];
 }
 - (IBAction)addFriendButtonClicked:(id)sender {
 

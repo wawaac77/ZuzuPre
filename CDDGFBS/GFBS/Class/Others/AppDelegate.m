@@ -8,16 +8,20 @@
 
 #import "AppDelegate.h"
 #import "ZBLocalized.h"
-#import <SDImageCache.h>
 #import "GFTabBarController.h"
 #import "GFAdViewController.h"
 #import "LoginViewController.h"
 #import "DHGuidePageHUD.h"
 #import "GFConst.h"
 
+#import "JCHATCustomFormatter.h"
+#import "JCHATStringUtils.h"
+#import "JCHATFileManager.h"
+
 #import <AFNetworking.h>
 #import <MJExtension.h>
 #import <SVProgressHUD.h>
+#import <SDImageCache.h>
 
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
@@ -45,16 +49,48 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //Fabric
+    /** Fabric */
     [Fabric with:@[[Crashlytics class]]];
     
-    //Firebase
+    /** Firebase */
     [FIRApp configure];
     [GIDSignIn sharedInstance].clientID = [FIRApp defaultApp].options.clientID;
     [GIDSignIn sharedInstance].delegate = self;
+    
+    /** JMessage */
+    [self initLogger];
+    //    NSLog(@"%@",@(INTERNAL_VERSION));
+    // init third-party SDK
+    [JMessage addDelegate:self withConversation:nil];
+    
+    //    [JMessage setLogOFF];
+    [JMessage setDebugMode];
+    [JMessage setupJMessage:launchOptions
+                     appKey:JMESSAGE_APPKEY
+                    channel:CHANNEL
+           apsForProduction:NO
+                   category:nil
+             messageRoaming:YES];
+    
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [JMessage registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                      UIUserNotificationTypeSound |
+                                                      UIUserNotificationTypeAlert)
+                                          categories:nil];
+    } else {
+        //categories 必须为nil
+        [JMessage registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                      UIRemoteNotificationTypeSound |
+                                                      UIRemoteNotificationTypeAlert)
+                                          categories:nil];
+    }
+    
+    [self registerJPushStatusNotification];
 
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
+    /** set NSUserDefault */
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSString *username = [userDefault objectForKey:@"KEY_USER_NAME"];
     NSString *userToken = [userDefault objectForKey:@"KEY_USER_TOKEN"];
@@ -73,6 +109,7 @@
     
     //[[InternationalControl sharedInstance]
     
+    /** if last login token saved in userDefault */
     if (userToken != nil && userToken != NULL) {
         
         user = [[ZZUser alloc] init];
@@ -98,10 +135,12 @@
             [[ZBLocalized sharedInstance]initLanguage];
         }
         
-        GFTabBarController *tabVC = [[GFTabBarController alloc] init];
-        self.window.rootViewController = tabVC;
-        
+        /** to main pages */
+        //GFTabBarController *tabVC = [[GFTabBarController alloc] init];
+        _tabBarCtl = [[GFTabBarController alloc] init];
+        self.window.rootViewController = _tabBarCtl;
         [self.window makeKeyAndVisible];
+        
         NSLog(@"userToken in default user %@", userToken);
         NSLog(@"userLang in default user %@", user.preferredLanguage);
         NSLog(@"googleUserID in default user %@", userToken);
@@ -115,9 +154,9 @@
     
     //GFTabBarController *tabVc = [[GFTabBarController alloc] init];
     
+    /** No userDefault, then go to loginVC */
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     self.window.rootViewController = loginVC;
-    
     [self.window makeKeyAndVisible];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:BOOLFORKEY]) {
@@ -153,6 +192,7 @@
     
     
     /******** JPush *********/
+    /*
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -178,6 +218,11 @@
                           channel:CHANNEL
                  apsForProduction:NO
             advertisingIdentifier:advertisingId];
+    */
+    
+    [JCHATFileManager initWithFilePath];//demo 初始化存储路径
+    
+    [JMessage resetBadge];
     
     return YES;
 }
@@ -198,15 +243,15 @@
     
     NSLog(@"application openURL");
     
-    /************************* Facebook ************************/
+    /** Facebook */
     if ([[FBSDKApplicationDelegate sharedInstance] application:application
                                                        openURL:url
                                              sourceApplication:sourceApplication
                                                     annotation:annotation]) {
         return YES;
     }
-    /************************* Google+ ************************/
     
+    /** Google+ */
     else if ([[GIDSignIn sharedInstance] handleURL:url
                                    sourceApplication:sourceApplication
                                           annotation:annotation]) {
@@ -248,7 +293,7 @@ didSignInForUser:(GIDGoogleUser *)user
      withError:(NSError *)error {
     
     if (error == nil) {
-        //from Firebase
+        /**from Firebase*/
         GIDAuthentication *authentication = user.authentication;
         FIRAuthCredential *credential =
         [FIRGoogleAuthProvider credentialWithIDToken:authentication.idToken
@@ -260,7 +305,7 @@ didSignInForUser:(GIDGoogleUser *)user
         }];
         
         
-        //Google signin
+        /**Google signin*/
         NSString *userId = user.userID;                  // For client-side use only!
         NSString *idToken = user.authentication.idToken; // Safe to send to the server
         NSString *fullName = user.profile.name;
@@ -427,6 +472,86 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     
 }
 
+//JPush
+- (void)registerJPushStatusNotification {
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidSetup:)
+                          name:kJMSGNetworkDidSetupNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkIsConnecting:)
+                          name:kJMSGNetworkIsConnectingNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidClose:)
+                          name:kJMSGNetworkDidCloseNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidRegister:)
+                          name:kJMSGNetworkDidRegisterNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidLogin:)
+                          name:kJMSGNetworkDidLoginNotification
+                        object:nil];
+    
+    [defaultCenter addObserver:self
+                      selector:@selector(receivePushMessage:)
+                          name:kJMSGNetworkDidReceiveMessageNotification
+                        object:nil];
+    
+}
+
+- (void)networkDidSetup:(NSNotification *)notification {
+    DDLogDebug(@"Event - networkDidSetup");
+}
+
+- (void)networkIsConnecting:(NSNotification *)notification {
+    DDLogDebug(@"Event - networkIsConnecting");
+}
+
+- (void)networkDidClose:(NSNotification *)notification {
+    DDLogDebug(@"Event - networkDidClose");
+}
+
+- (void)networkDidRegister:(NSNotification *)notification {
+    DDLogDebug(@"Event - networkDidRegister");
+}
+
+- (void)networkDidLogin:(NSNotification *)notification {
+    DDLogDebug(@"Event - networkDidLogin");
+}
+
+- (void)receivePushMessage:(NSNotification *)notification {
+    DDLogDebug(@"Event - receivePushMessage");
+    
+    NSDictionary *info = notification.userInfo;
+    if (info) {
+        DDLogDebug(@"The message - %@", info);
+    } else {
+        DDLogWarn(@"Unexpected - no user info in jpush mesasge");
+    }
+}
+
+//JPush
+- (void)initLogger {
+    JCHATCustomFormatter *formatter = [[JCHATCustomFormatter alloc] init];
+    
+    // XCode console
+    [[DDTTYLogger sharedInstance] setLogFormatter:formatter];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    // Apple System
+    [[DDASLLogger sharedInstance] setLogFormatter:formatter];
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+    fileLogger.rollingFrequency = 60 * 60 * 24; // 一个LogFile的有效期长，有效期内Log都会写入该LogFile
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;//最多LogFile的数量
+    [fileLogger setLogFormatter:formatter];
+    [DDLog addLogger:fileLogger];
+}
+
 //Jpush
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -477,7 +602,16 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
 
-
+- (void)setupMainTabBar {
+    NSLog(@"JMessage-setupMainTabBar worked");
+    _tabBarCtl = [[GFTabBarController alloc] init];
+     _tabBarCtl.loginIdentify = @"1";
+    if (_chatLogined == YES) {
+       
+    }
+    self.window.rootViewController = _tabBarCtl;
+    [self.window makeKeyAndVisible];
+}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -15,6 +15,7 @@
 #import "ZZCheckInViewController.h"
 #import "ZZInboxTableViewController.h"
 #import "JCHATConversationListViewController.h"
+#import "JCHATLoginViewController.h"
 #import "MyZuzuViewController.h"
 #import "GFEssenceViewController.h"
 #import "GFPublishView.h"
@@ -116,10 +117,23 @@
     GFNavigationController *nav1 = [[GFNavigationController alloc]initWithRootViewController:checkin];
     [self addChildViewController:nav1];
     
+    NSLog(@"_loginIdentify %@", _loginIdentify);
+    _loginIdentify = [[NSString alloc] init];
     /** Inbox */
-    JCHATConversationListViewController *inbox = [[JCHATConversationListViewController alloc] init];
-    GFNavigationController *nav2 = [[GFNavigationController alloc]initWithRootViewController:inbox];
-    [self addChildViewController:nav2];
+   // if ([_loginIdentify isEqualToString:@"1"]) {
+        JCHATConversationListViewController *inbox = [[JCHATConversationListViewController alloc] init];
+        GFNavigationController *nav2 = [[GFNavigationController alloc]initWithRootViewController:inbox];
+        [self addChildViewController:nav2];
+    //} else {
+    //    JCHATLoginViewController *inbox = [[JCHATLoginViewController alloc] init];
+    //    GFNavigationController *nav2 = [[GFNavigationController alloc]initWithRootViewController:inbox];
+    //    [self addChildViewController:nav2];
+    //}
+    
+    //JCHATConversationListViewController *inbox = [[JCHATConversationListViewController alloc] init];
+    //ZZInboxTableViewController *inbox = [[ZZInboxTableViewController alloc] init];
+    //GFNavigationController *nav2 = [[GFNavigationController alloc]initWithRootViewController:inbox];
+    //[self addChildViewController:nav2];
     
     /** My Zuzu */
     MyZuzuViewController *me = [[MyZuzuViewController alloc] init];

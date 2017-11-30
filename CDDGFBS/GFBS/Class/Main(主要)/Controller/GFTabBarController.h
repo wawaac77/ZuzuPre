@@ -10,4 +10,6 @@
 
 @interface GFTabBarController : UITabBarController
 
+@property (nonatomic,strong) NSString *loginIdentify;
+
 @end
