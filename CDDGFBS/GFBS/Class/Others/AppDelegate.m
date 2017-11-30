@@ -605,10 +605,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)setupMainTabBar {
     NSLog(@"JMessage-setupMainTabBar worked");
     _tabBarCtl = [[GFTabBarController alloc] init];
-     _tabBarCtl.loginIdentify = @"1";
-    if (_chatLogined == YES) {
-       
-    }
+    _tabBarCtl.loginIdentify = kFirstLogin;
     self.window.rootViewController = _tabBarCtl;
     [self.window makeKeyAndVisible];
 }

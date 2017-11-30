@@ -293,8 +293,10 @@
                       [self userLoginSave];
                       
                       UIWindow *window = [UIApplication sharedApplication].keyWindow;
+                      GFTabBarController *tabVC = [[GFTabBarController alloc]init];
+                      tabVC.loginIdentify = kFirstLogin;
                       NSLog(@"runned UIWindow *window = [UIApplication sharedApplication].keyWindow");
-                      window.rootViewController = [[GFTabBarController alloc]init];
+                      window.rootViewController = tabVC;
                       [window makeKeyWindow];
                       
                   } else {
