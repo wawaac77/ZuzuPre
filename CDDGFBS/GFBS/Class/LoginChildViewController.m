@@ -156,7 +156,6 @@
     NSLog(@"upcoming events parameters %@", parameters);
     
     [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
-        NSLog(@"run [GFHTTPSessionManager shareManager] ");
         
         ZZUser *thisUser = [[ZZUser alloc] init];
         thisUser = [ZZUser mj_objectWithKeyValues:data[@"data"]];
@@ -227,6 +226,7 @@
             [ZZUser shareUser].notificationNum = thisUser.notificationNum;
             
             [self loginJMessageWithUsername:email password:password];
+            
             /*
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
             NSLog(@"runned UIWindow *window = [UIApplication sharedApplication].keyWindow");
