@@ -11,6 +11,7 @@
 #import "HomePostTableViewController.h"
 #import "GFEventsCell.h"
 #import "ZZContentModel.h"
+#import "NotificationItem.h"
 //#import "ZZCommentsViewController.h"
 #import "GFCommentViewController.h"
 #import "RestaurantDetailViewController.h"
@@ -21,6 +22,8 @@
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
 #import <SDImageCache.h>
+
+#import <GoogleSignIn/GoogleSignIn.h>
 
 static NSString *const ID = @"ID";
 //@class ZZContentModel;
@@ -43,27 +46,18 @@ static NSString *const ID = @"ID";
 
 @property (strong, nonatomic) NSIndexPath *recordIndexPath;
 
+@property (strong, nonatomic) NotificationItem *prizeInfo;
+
 @end
 
 
 @implementation HomePostTableViewController
-
-//@synthesize receivingType;
-//@synthesize userID;
 
 #pragma mark - 消除警告
 -(MyPublishContentType)type
 {
     return 0;
 }
-
-/*
-#pragma mark - 消除警告
--(NSString *)restaurantID
-{
-    return @"";
-}
- */
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -81,14 +75,11 @@ static NSString *const ID = @"ID";
     // Dispose of any resources that can be recreated.
 }
 
+/**
+ tableView
+ */
 -(void)setUpTable
 {
-    //self.tableView.contentInset = UIEdgeInsetsMake(33, 0, GFTabBarH, 0);
-    //[self.tableView setFrame:self.view.bounds];
-    //NSLog(@"table width %f",self.view.gf_width);
-    //self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
-    //self.tableView.backgroundColor = [UIColor lightGrayColor];
-    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         // 如果tableView响应了setSeparatorInset: 这个方法,我们就将tableView分割线的内边距设为0.
@@ -102,52 +93,15 @@ static NSString *const ID = @"ID";
     //self.tableView.estimatedRowHeight = 400;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GFEventsCell class]) bundle:nil] forCellReuseIdentifier:ID];
     
-    CGFloat bannerH = 60;
     if (self.type == 0) {
-        UIView *bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, GFScreenWidth, bannerH)];
-        bannerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gold_background"]];
-        
-        UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, bannerH - 20, bannerH - 20)];
-        icon.image = [UIImage imageNamed:@"medal"];
-        [bannerView addSubview:icon];
-        
-        UILabel *bannerLabel = [[UILabel alloc] initWithFrame:CGRectMake(bannerH, 10, GFScreenWidth - bannerH + 10, bannerH - 20)];
-        bannerLabel.text = @"Prize of this month is iPhoneX !!!";
-        [bannerView addSubview:bannerLabel];
-        
-        self.tableView.tableHeaderView = bannerView;
+        [self getBannerInfo];
     }
-    
-    
-    //[self.tableView reloadData];
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //GFEventsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
     ZZContentModel *content = _contents[indexPath.row];
-    NSLog(@"content.cellHeight %f", content.cellHeight);
     return content.cellHeight;
-    
-    /*
-    if ([content.withImage isEqual:@1]) {
-        return content.cellHeight;
-    } else {
-        return content.cellHeight - 274.0f;
-    }
-     */
-    /*
-    contentCellHeightCount ++;
-    NSLog(@"contentCellHeightCount%zd", contentCellHeightCount);
-    if (content.listImage_UIImage == NULL || content.listImage_UIImage == nil) {
-        NSLog(@"contentCellHeightInPostVC without Image %f", content.cellHeight - 274.0f);
-        return content.cellHeight - 274.0f;
-    }
-     */
-    //NSLog(@"contentCellHeightInPostVC %f", content.cellHeight);
-    
 }
 
 #pragma mark - Table view data source
@@ -162,7 +116,7 @@ static NSString *const ID = @"ID";
     return self.contents.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GFEventsCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     //**** set up restaurant button **//
@@ -179,15 +133,13 @@ static NSString *const ID = @"ID";
     [cell.contentView addSubview:profileImageButton];
     
     if (self.type == 2) {
-        UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(GFScreenWidth - 60, 8, 20, 20)];
-        [deleteButton setImage:[UIImage imageNamed:@"ic_select_grey.png"] forState:UIControlStateNormal];
-        [deleteButton addTarget:self action:@selector(deleteButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        deleteButton.tag = indexPath.row;
-        [cell.contentView addSubview:deleteButton];
+        
     }
-    
-    
-    //ZZContentModel *thisContent = self.contents[indexPath.row];
+    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(GFScreenWidth - 60, 8, 20, 20)];
+    [deleteButton setImage:[UIImage imageNamed:@"ic_fa-ellipsis-h"] forState:UIControlStateNormal];
+    [deleteButton addTarget:self action:@selector(deleteButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    deleteButton.tag = indexPath.row;
+    [cell.contentView addSubview:deleteButton];
     
     cell.event = self.contents[indexPath.row];
     
@@ -203,8 +155,6 @@ static NSString *const ID = @"ID";
     
     GFCommentViewController *commentsVC = [[GFCommentViewController alloc] init];
     commentsVC.topic = [_contents objectAtIndex:indexPath.row];
-    NSLog(@" topic cell height in postList %f", self.contents[indexPath.row].cellHeightForComment);
-    NSLog(@" topic cell height in postList %f", self.contents[indexPath.row].cellHeight);
     if (self.contents[indexPath.row].listImage_UIImage == NULL) {
         NSLog(@"UIImage is null");
     }
@@ -213,23 +163,6 @@ static NSString *const ID = @"ID";
 
     [self.navigationController pushViewController:commentsVC animated:YES];
    
-}
-
-// Override to support conditional editing of the table view.
-// This only needs to be implemented if you are going to be returning NO
-// for some items. By default, all items are editable.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return YES if you want the specified item to be editable.
-    return NO;
-}
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    /*
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here for when you hit delete
-    }
-     */
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -242,63 +175,75 @@ static NSString *const ID = @"ID";
     }
 }
 
-- (void) restaurantButtonClicked: (UIButton *) sender {
+/**
+ button clicked
+ */
+#pragma mark - button clicked
+- (void)restaurantButtonClicked: (UIButton *) sender {
     ZZContentModel *thisContent = _contents[sender.tag];
     RestaurantDetailViewController *restaurantVC = [[RestaurantDetailViewController alloc] init];
     restaurantVC.thisRestaurant = thisContent.listEventRestaurant;
     [self.navigationController pushViewController:restaurantVC animated:YES];
 }
 
-- (void) profileImageButtonClicked: (UIButton *) sender {
+- (void)profileImageButtonClicked: (UIButton *) sender {
     ZZContentModel *thisContent = _contents[sender.tag];
     UserProfileCheckinViewController *userVC = [[UserProfileCheckinViewController alloc] init];
     userVC.myProfile = thisContent.listPublishUser;
     [self.navigationController pushViewController:userVC animated:YES];
 }
 
-- (void) deleteButtonClicked: (UIButton *) sender {
+- (void)deleteButtonClicked: (UIButton *) sender {
     //ZZContentModel *thisContent = _contents[sender.tag];
-    deleteIndex = sender.tag;
+    //deleteIndex = sender.tag;
+    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ZBLocalized(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:nil, nil];
-    //[actionSheet addButtonWithTitle:@"Some Action"];
-    [actionSheet addButtonWithTitle:ZBLocalized(@"Delete", nil)];
-    //actionSheet.cancelButtonIndex = actionSheet.numberOfButtons -1;
+    [actionSheet addButtonWithTitle:ZBLocalized(@"Share to Google", nil)]; //tag1
+    [actionSheet addButtonWithTitle:ZBLocalized(@"Share to Facebook", nil)]; //tag2
+    
+    if (self.type == 2) {
+        [actionSheet addButtonWithTitle:ZBLocalized(@"Delete", nil)];
+    }
 
     [actionSheet showInView:self.view];
 }
 
+- (void)shareToGoogleClicked {
+    id<GPPNativeShareBuilder> shareBuilder = [[GPPShare sharedInstance] nativeShareDialog];
+    [shareBuilder setURLToShare:[NSURL URLWithString:@"https://www.example.com/restaurant/sf/1234567/"]];
+    [shareBuilder open];
+}
+
+/**
+ action sheet
+ */
+#pragma mark - actionSheet
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    //**** delete function is buttonIndex == 1 *****//
-    if (buttonIndex == 1) {
+    if (buttonIndex == 3) {
         ZZContentModel *thisContent = _contents[deleteIndex];
         [self.contents removeObjectAtIndex:deleteIndex];
         [self.tableView reloadData];
-        
-        NSLog(@"loadNewEvents工作了");
-        //NSLog(@"receivingType %@",receivingType);
-        //NSLog(@"userID in HomePostVC %@", userID);
-        
-        
+    
         NSString *userToken = [AppDelegate APP].user.userToken;
         NSDictionary *inSubData = @{@"checkinId" : thisContent.listEventID};
-        
         NSDictionary *inData = @{@"action" : @"deleteMyCheckinPost", @"token" : userToken, @"data" : inSubData};
-        
         NSDictionary *parameters = @{@"data" : inData};
         
         [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
-            
   
         } failed:^(NSError *error) {
             [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
             [SVProgressHUD dismiss];
         }];
-        
+    } else if (buttonIndex == 1) {
+        NSLog(@"share to google");
+    } else if (buttonIndex == 2) {
+        NSLog(@"share to facebook");
     }
 }
 
-
+#pragma mark - refresh
 - (void)setupRefresh
 {
     self.tableView.mj_header = [GFRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewEvents)];
@@ -307,16 +252,15 @@ static NSString *const ID = @"ID";
     self.tableView.mj_footer = [GFRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
-/*************************Here is reloading data place************************/
+/**
+ api
+ */
 #pragma mark - 加载新数据
 -(void)loadNewEvents
 {
-    NSLog(@"loadNewEvents工作了");
     currentPage = 2;
     
     NSString *userToken = [ZZUser shareUser].userToken;
-    //NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
-    
     NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
     if ([userLang isEqualToString:@"zh-Hant"]) {
         userLang = @"tw";
@@ -340,16 +284,8 @@ static NSString *const ID = @"ID";
     } else if (self.type == 5) {
         inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     }
-    /*
-    else if ([receivingType isEqualToString:@"User checkin"]) {
-        inData = @{@"action" : @"getAllCheckinList", @"token" : userToken};
-        NSLog(@"getUserCheckinListworks");
-    }
-     */
     
     NSDictionary *parameters = @{@"data" : inData};
-    
-    NSLog(@"publish content parameters %@", parameters);
     
     [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
@@ -360,7 +296,6 @@ static NSString *const ID = @"ID";
                 self.contents[i].numOfLike = 0;
             }
             NSString *str = [self.contents[i].listImage.imageUrl pathExtension];
-            NSLog(@"str of pathExtension %@", str);
             
             if ([str isEqualToString:@"undefined"] || str == NULL) {
                 self.contents[i].withImage = @0;
@@ -371,24 +306,9 @@ static NSString *const ID = @"ID";
         
         self.selectedContents = [[NSMutableArray alloc] init];
         
-        /*
-         if (self.type == 5) {
-         NSLog(@"select process starts working");
-         for (int i = 0; i < _contents.count ; i++) {
-         if ([_contents[i].listPublishUser.userID isEqualToString:self.userID]) {
-         [_selectedContents addObject:_contents[i]];
-         }
-         }
-         
-         [_contents removeAllObjects];
-         [_contents addObjectsFromArray:_selectedContents];
-         }
-         */
-        
         [self passValueMethod];
         
         [self.tableView reloadData];
-        
         [self.tableView.mj_header endRefreshing];
         
     } failed:^(NSError *error) {
@@ -408,15 +328,10 @@ static NSString *const ID = @"ID";
     } // if no new data
     
     NSString *userToken = [AppDelegate APP].user.userToken;
-    //NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
-    
     NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
     if ([userLang isEqualToString:@"zh-Hant"]) {
         userLang = @"tw";
     }
-    NSLog(@"preferred language [AppDelegate APP].user.preferredLanguage %@", userLang);
-    
-    NSLog(@"user token %@", userToken);
     
     NSLog(@"current page %zd", currentPage);
     NSNumber *pageParameter = [[NSNumber alloc] initWithInt:currentPage];
@@ -454,8 +369,7 @@ static NSString *const ID = @"ID";
                     self.contents[i].numOfLike = 0;
                 }
                 NSString *str = [self.contents[i].listImage.imageUrl pathExtension];
-                NSLog(@"str of pathExtension %@", str);
-                
+               
                 if ([str isEqualToString:@"undefined"] || str == NULL) {
                     self.contents[i].withImage = @0;
                 } else {
@@ -474,9 +388,59 @@ static NSString *const ID = @"ID";
         [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
         [SVProgressHUD dismiss];
     }];
-    
 }
 
+- (void)getBannerInfo {
+
+    NSString *userToken = [AppDelegate APP].user.userToken;
+    NSString *userLang = [[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_USER_LANG"];
+    if ([userLang isEqualToString:@"zh-Hant"]) {
+        userLang = @"tw";
+    }
+    
+    NSDictionary *inData = @{@"action" : @"getPrizeInfo", @"token" : userToken, @"lang" : userLang};
+    
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
+        
+        self.prizeInfo = [NotificationItem mj_objectWithKeyValues:data[@"data"]];
+        NSLog(@"prize %@", self.prizeInfo.notificationText);
+        
+        [self setupBannerView];
+        [self.tableView reloadData];
+        [self.tableView.mj_footer endRefreshing];
+        
+    } failed:^(NSError *error) {
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        [SVProgressHUD dismiss];
+    }];
+}
+
+/**
+ setUp banner
+ */
+#pragma mark - setup bannerView
+- (void)setupBannerView {
+    
+    CGFloat bannerH = 60;
+    UIView *bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, GFScreenWidth, bannerH)];
+
+    NSURL *URL = [NSURL URLWithString:_prizeInfo.image.imageUrl];
+    NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
+    UIImage *image = [[UIImage alloc]initWithData:data];
+    bannerView.backgroundColor = [UIColor colorWithPatternImage:image];
+    
+    UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, bannerH - 20, bannerH - 20)];
+    icon.image = [UIImage imageNamed:@"medal"];
+    [bannerView addSubview:icon];
+    
+    UILabel *bannerLabel = [[UILabel alloc] initWithFrame:CGRectMake(bannerH, 10, GFScreenWidth - bannerH + 10, bannerH - 20)];
+    bannerLabel.text = _prizeInfo.notificationText;
+    [bannerView addSubview:bannerLabel];
+    
+    self.tableView.tableHeaderView = bannerView;
+}
 
 
 - (void)passValueMethod {
@@ -498,14 +462,10 @@ static NSString *const ID = @"ID";
     [SVProgressHUD dismiss];
 }
 
-
-
-
-//************************* update cell which is hearted in commentVC ******************************//
+/**
+ update cell which is hearted in commentVC
+ */
 -(void)viewWillAppear:(BOOL)animated{
-    NSLog(@"indexPathForSlectedRow in viewWillAppear %@", [self.tableView indexPathForSelectedRow]);
-    NSLog(@"indexPathForSlectedRow in viewWillAppear.row %ld", [self.tableView indexPathForSelectedRow].row);
-    
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow],nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 

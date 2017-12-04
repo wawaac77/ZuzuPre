@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class ZZUser;
+@class GFImage;
 
 @interface NotificationItem : NSObject
 
@@ -17,5 +18,10 @@
 @property (nonatomic, copy) NSString *notificationType;
 @property (nonatomic, copy) NSString *memberId;
 @property (nonatomic, copy) NSNumber *isRead;
+
+/**
+ for Prize Banner
+ */
+@property (nonatomic, strong) GFImage *image;
 
 @end
