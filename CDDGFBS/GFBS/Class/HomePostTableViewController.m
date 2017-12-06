@@ -24,11 +24,13 @@
 #import <SDImageCache.h>
 
 #import <GoogleSignIn/GoogleSignIn.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <Social/Social.h>
 
 static NSString *const ID = @"ID";
 //@class ZZContentModel;
 
-@interface HomePostTableViewController () {
+@interface HomePostTableViewController () <FBSDKSharingDelegate> {
     int contentCellHeightCount;
     int deleteIndex;
     
@@ -132,9 +134,6 @@ static NSString *const ID = @"ID";
     profileImageButton.tag = indexPath.row;
     [cell.contentView addSubview:profileImageButton];
     
-    if (self.type == 2) {
-        
-    }
     UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(GFScreenWidth - 60, 8, 20, 20)];
     [deleteButton setImage:[UIImage imageNamed:@"ic_fa-ellipsis-h"] forState:UIControlStateNormal];
     [deleteButton addTarget:self action:@selector(deleteButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -195,11 +194,12 @@ static NSString *const ID = @"ID";
 
 - (void)deleteButtonClicked: (UIButton *) sender {
     //ZZContentModel *thisContent = _contents[sender.tag];
-    //deleteIndex = sender.tag;
+    deleteIndex = sender.tag;
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ZBLocalized(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:nil, nil];
-    [actionSheet addButtonWithTitle:ZBLocalized(@"Share to Google", nil)]; //tag1
-    [actionSheet addButtonWithTitle:ZBLocalized(@"Share to Facebook", nil)]; //tag2
+    
+    [actionSheet addButtonWithTitle:ZBLocalized(@"Share to Facebook", nil)]; //tag1
+    //[actionSheet addButtonWithTitle:ZBLocalized(@"Share to Google", nil)]; //tag2
     
     if (self.type == 2) {
         [actionSheet addButtonWithTitle:ZBLocalized(@"Delete", nil)];
@@ -208,10 +208,40 @@ static NSString *const ID = @"ID";
     [actionSheet showInView:self.view];
 }
 
+/*
+ //Google+ deprecated
 - (void)shareToGoogleClicked {
     id<GPPNativeShareBuilder> shareBuilder = [[GPPShare sharedInstance] nativeShareDialog];
     [shareBuilder setURLToShare:[NSURL URLWithString:@"https://www.example.com/restaurant/sf/1234567/"]];
     [shareBuilder open];
+}
+*/
+
+- (void)shareToFacebookClicked {
+    ZZContentModel *thisContent = _contents[deleteIndex];
+    NSURL *URL = [NSURL URLWithString:thisContent.listImage.imageUrl];
+    NSData *data = [[NSData alloc]initWithContentsOfURL:URL];
+    UIImage *image = [[UIImage alloc]initWithData:data];
+    
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = image;
+    photo.userGenerated = YES;
+    
+    /*
+    FBSDKShareLinkContent *linkContent = [[FBSDKShareLinkContent alloc] init];
+    linkContent.quote = thisContent.listMessage;
+    */
+    
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
+    //content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"]; //could be the app's link
+    
+    //FBSDKShareMediaContent *content = [FBSDKShareMediaContent new];
+    //content.media = @[photo, linkContent];
+    
+    [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
+
+
 }
 
 /**
@@ -237,9 +267,10 @@ static NSString *const ID = @"ID";
             [SVProgressHUD dismiss];
         }];
     } else if (buttonIndex == 1) {
-        NSLog(@"share to google");
-    } else if (buttonIndex == 2) {
         NSLog(@"share to facebook");
+        [self shareToFacebookClicked];
+    } else if (buttonIndex == 2) {
+        NSLog(@"share to google");
     }
 }
 

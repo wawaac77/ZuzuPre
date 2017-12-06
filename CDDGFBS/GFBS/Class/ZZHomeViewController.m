@@ -22,6 +22,7 @@
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
 #import <SDImageCache.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 @interface ZZHomeViewController () <UIScrollViewDelegate>
 
@@ -355,4 +356,5 @@
     ZZAddFriendsViewController *addFriendsVC = [[ZZAddFriendsViewController alloc] init];
     [self.navigationController pushViewController:addFriendsVC animated:YES];
 }
+
 @end
