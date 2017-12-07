@@ -341,7 +341,7 @@
 
 }
 
-- (void)googleLogin {
+- (void)googleLoginWithZuzu {
    
     NSDictionary *inSubData = @ {@"googleId" : [ZZUser shareUser].userGoogleID};
     NSDictionary *inData = @{
@@ -594,8 +594,6 @@ dismissViewController:(UIViewController *)viewController {
              }
          }
      }];
-    
-    
 }
 //************************* End of Facebook signin part **************************//
 

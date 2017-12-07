@@ -254,27 +254,27 @@ static NSString *const ID = @"ID";
 #pragma mark - actionSheet
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 3) {
+    if (buttonIndex == 1) {
+
+        NSLog(@"share to facebook");
+        [self shareToFacebookClicked];
+        
+    } else if (buttonIndex == 2) {
         ZZContentModel *thisContent = _contents[deleteIndex];
         [self.contents removeObjectAtIndex:deleteIndex];
         [self.tableView reloadData];
-    
+        
         NSString *userToken = [AppDelegate APP].user.userToken;
         NSDictionary *inSubData = @{@"checkinId" : thisContent.listEventID};
         NSDictionary *inData = @{@"action" : @"deleteMyCheckinPost", @"token" : userToken, @"data" : inSubData};
         NSDictionary *parameters = @{@"data" : inData};
         
         [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
-  
+            
         } failed:^(NSError *error) {
             [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
             [SVProgressHUD dismiss];
         }];
-    } else if (buttonIndex == 1) {
-        NSLog(@"share to facebook");
-        [self shareToFacebookClicked];
-    } else if (buttonIndex == 2) {
-        NSLog(@"share to google");
     }
 }
 

@@ -65,6 +65,7 @@
     [[GIDSignIn sharedInstance] signInSilently];
    
     //**firebase**//
+    /*
     self.handle = [[FIRAuth auth]
                    addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user) {
                        if (user) {
@@ -72,6 +73,7 @@
                            [self performSegueWithIdentifier:@"SignInToFP" sender:nil];
                        }
                    }];
+     */
     
      // [START_EXCLUDE silent]
     [[NSNotificationCenter defaultCenter]
@@ -95,15 +97,19 @@
 }
 
 - (void)setupLayout {
+    //FB
     _signupWithFacebookButton.layer.cornerRadius = 5.0f;
     _signupWithFacebookButton.clipsToBounds = YES;
     _signupWithFacebookButton.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1];
     [_signupWithFacebookButton addTarget:self action:@selector(loginFBButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
+    //Google
     _signupWithGoogleButton.layer.cornerRadius = 5.0f;
     _signupWithGoogleButton.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:72.0/255.0 blue:54.0/255.0 alpha:1];
+    _signupWithGoogleButton.clipsToBounds = YES;
+    [_signupWithGoogleButton addTarget:self action:@selector(loginWithGoogleClicked) forControlEvents:UIControlEventTouchUpInside];
     
-    
+    //SignUp
     _signupButton.layer.cornerRadius = 5.0f;
     _signupButton.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:167.0/255.0 blue:78.0/255.0 alpha:1];
     
@@ -331,9 +337,49 @@
     [self.emailTextField becomeFirstResponder];
 }
  */
+#pragma mark - Google
+//************************* Google signin **************************//
 
-#pragma -Google+ part
-// [START toggle_auth]
+- (void)loginWithGoogleClicked {
+    [[GIDSignIn sharedInstance] signIn];
+}
+- (void)signIn:(GIDSignIn *)signIn
+didSignInForUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+    // Perform any operations on signed in user here.
+    NSString *userId = user.userID;                  // For client-side use only!
+    NSString *idToken = user.authentication.idToken; // Safe to send to the server
+    NSString *fullName = user.profile.name;
+    NSString *givenName = user.profile.givenName;
+    NSString *familyName = user.profile.familyName;
+    NSString *email = user.profile.email;
+    // ...
+    
+    NSLog(@"did signin in login for google %@", email);
+    NSLog(@"didSignInForUser works");
+}
+
+// Implement these methods only if the GIDSignInUIDelegate is not a subclass of
+// UIViewController.
+
+// Stop the UIActivityIndicatorView animation that was started when the user
+// pressed the Sign In button
+- (void)signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error {
+    //[myActivityIndicator stopAnimating];
+}
+
+// Present a view that prompts the user to sign in with Google
+- (void)signIn:(GIDSignIn *)signIn
+presentViewController:(UIViewController *)viewController {
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+// Dismiss the "Sign in with Google" view
+- (void)signIn:(GIDSignIn *)signIn
+dismissViewController:(UIViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)toggleAuthUI {
     if ([GIDSignIn sharedInstance].currentUser.authentication == nil) {
         // Not signed in
@@ -341,46 +387,115 @@
         //self.signInButton.hidden = NO;
         //self.signOutButton.hidden = YES;
         //self.disconnectButton.hidden = YES;
+        NSLog(@"toggleAuthUI not signed in works");
     } else {
         // Signed in
         //self.signInButton.hidden = YES;
         //self.signOutButton.hidden = NO;
         //self.disconnectButton.hidden = NO;
-    }
-}
-// [END toggle_auth]
-
-- (void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
-    // Perform any operations on signed in user here.
-    NSString *userId = user.userID;                  // For client-side use only!
-    NSString *idToken = user.authentication.idToken; // Safe to send to the server
-    NSString *name = user.profile.name;
-    NSString *email = user.profile.email;
-    NSLog(@"Customer details: %@ %@ %@ %@", userId, idToken, name, email);
-    // ...
-}
-
-- (void)dealloc {
-    
-    [[FIRAuth auth] removeAuthStateDidChangeListener:_handle];
-    
-    [[NSNotificationCenter defaultCenter]
-     removeObserver:self
-     name:@"ToggleAuthUINotification"
-     object:nil];
-    
-}
-
-- (void) receiveToggleAuthUINotification:(NSNotification *) notification {
-    if ([notification.name isEqualToString:@"ToggleAuthUINotification"]) {
-        [self toggleAuthUI];
-        //self.statusText.text = notification.userInfo[@"statusText"];
+        NSLog(@"toggleAuthUI works");
     }
 }
 
+- (IBAction)didTapSignOut:(id)sender {
+    NSLog(@"didTapSignOut works");
+    [[GIDSignIn sharedInstance] signOut];
+}
 
-- (IBAction)googleSignupButtonClicked:(id)sender {
-    //[self signIn:<#(GIDSignIn *)#> didSignInForUser:<#(GIDGoogleUser *)#> withError:nil];
+/**connect with zuzu*/
+- (void)googleLoginWithZuzu {
+    
+    NSDictionary *inSubData = @ {@"googleId" : [ZZUser shareUser].userGoogleID};
+    NSDictionary *inData = @{
+                             @"action" : @"googleLogin",
+                             @"data" : inSubData};
+    NSDictionary *parameters = @{@"data" : inData};
+    
+    NSLog(@"upcoming events parameters %@", parameters);
+    
+    [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
+        
+        ZZUser *thisUser = [[ZZUser alloc] init];
+        thisUser = [ZZUser mj_objectWithKeyValues:data[@"data"]];
+        
+        if (thisUser == nil) {
+            
+            [SVProgressHUD showWithStatus:@"Incorrect Email or password ><"];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+        } else {
+            
+            [AppDelegate APP].user = [[ZZUser alloc] init];
+            [AppDelegate APP].user = thisUser;
+            
+            NSLog(@"user token = %@", thisUser.userToken);
+            
+            
+            //*************** defualt user set even app is turned off *********//
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:thisUser.userUserName forKey:@"KEY_USER_NAME"];
+            [userDefaults setObject:thisUser.userToken forKey:@"KEY_USER_TOKEN"];
+            
+            if (thisUser.preferredLanguage == NULL) {
+                thisUser.preferredLanguage = @"en";
+            }
+            [userDefaults setObject:thisUser.preferredLanguage forKey:@"KEY_USER_LANG"];
+            [userDefaults synchronize];
+            
+            NSLog(@"this user %@", thisUser);
+            NSLog(@"this user. userName %@", thisUser.usertName);
+            NSLog(@"this user. memberId %@", thisUser.userID);
+            
+            //*************** user instance *********//
+            [ZZUser shareUser].userID = thisUser.userID;
+            [ZZUser shareUser].userUpdatedAt = thisUser.userUpdatedAt;
+            [ZZUser shareUser].userCreatedAt = thisUser.userCreatedAt;
+            [ZZUser shareUser].usertName = thisUser.usertName;
+            [ZZUser shareUser].userEmail = thisUser.userEmail;
+            //[ZZUser shareUser].usertPassword = thisUser.usertPassword;
+            [ZZUser shareUser].userUserName = thisUser.userUserName;
+            [ZZUser shareUser].userStatus = thisUser.userStatus;
+            [ZZUser shareUser].userToken = thisUser.userToken;
+            //[ZZUser shareUser].userFacebookID = thisUser.userFacebookID;
+            //[ZZUser shareUser].userGoogleID = thisUser.userGoogleID;
+            [ZZUser shareUser].userOrganizingExp = thisUser.userOrganizingExp;
+            [ZZUser shareUser].userOrganizingLevel = thisUser.userOrganizingLevel;
+            [ZZUser shareUser].socialExp = thisUser.socialExp;
+            [ZZUser shareUser].socialLevel = thisUser.socialLevel;
+            [ZZUser shareUser].checkinPoint = thisUser.checkinPoint;
+            [ZZUser shareUser].userInterests = [[NSMutableArray alloc] init];
+            [ZZUser shareUser].userInterests = thisUser.userInterests;
+            [ZZUser shareUser].userLastCheckIn = thisUser.userLastCheckIn;
+            [ZZUser shareUser].age = thisUser.age;
+            [ZZUser shareUser].gender = thisUser.gender;
+            [ZZUser shareUser].userIndustry = thisUser.userIndustry;
+            [ZZUser shareUser].userProfession = thisUser.userProfession;
+            [ZZUser shareUser].maxPrice = thisUser.maxPrice;
+            [ZZUser shareUser].minPrice = thisUser.minPrice;
+            [ZZUser shareUser].preferredLanguage = thisUser.preferredLanguage;
+            [ZZUser shareUser].numOfFollower = thisUser.numOfFollower;
+            [ZZUser shareUser].showOnLockScreen = thisUser.showOnLockScreen;
+            [ZZUser shareUser].sounds = thisUser.sounds;
+            [ZZUser shareUser].emailNotification = thisUser.emailNotification;
+            [ZZUser shareUser].allowNotification = thisUser.allowNotification;
+            [ZZUser shareUser].canSeeMyProfile = thisUser.canSeeMyProfile;
+            [ZZUser shareUser].canMessageMe = thisUser.canMessageMe;
+            [ZZUser shareUser].canMyFriendSeeMyEmail = thisUser.canMyFriendSeeMyEmail;
+            [ZZUser shareUser].notificationNum = thisUser.notificationNum;
+            
+            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+            window.rootViewController = [[GFTabBarController alloc]init];
+            [window makeKeyWindow];
+            
+        }
+        
+    } failed:^(NSError *error) {
+        [SVProgressHUD showWithStatus:@"Busy network, please try later~"];
+        [SVProgressHUD dismiss];
+    }];
+    
 }
 
 //************************ end of google signin *******************************//
