@@ -19,10 +19,11 @@
 #import <MJExtension.h>
 #import <SVProgressHUD.h>
 #import <UIImageView+WebCache.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 @class EventRestaurant;
 
-@interface ZZCheckInViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface ZZCheckInViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FBSDKSharingDelegate> {
     NSMutableArray *chooseArray;
     NSNumber *selectedInteger;
     
@@ -77,16 +78,6 @@
 @end
 
 @implementation ZZCheckInViewController 
-
-#pragma mark - 懒加载
--(GFHTTPSessionManager *)manager
-{
-    if (!_manager) {
-        _manager = [GFHTTPSessionManager manager];
-        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    }
-    return _manager;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -280,7 +271,7 @@
 //码率切换请求方法
 -(void) chooseAtSection:(NSInteger)section index:(NSInteger)index
 {
-    NSLog(@"童大爷选了section:%ld ,index:%ld",section,index);
+    NSLog(@"section:%ld ,index:%ld",section,index);
     if (index == 0) {
         NSLog(@"切换超清");
     }
@@ -326,7 +317,8 @@
     
     margin = 10.0f;
     
-    self.toolBarView = [[UIView alloc] initWithFrame:CGRectMake(0, GFScreenHeight - GFTabBarH - 80, GFScreenWidth, 80)];
+    self.toolBarView = [[UIView alloc] initWithFrame:CGRectMake(0, GFScreenHeight - GFTabBarH - 80, GFScreenWidth, 100)];
+    self.toolBarView.backgroundColor = [UIColor whiteColor];
     //self.toolBarView.frame = CGRectMake(0, GFScreenHeight - GFTabBarH - 80, GFScreenWidth, 80);
     [self.view addSubview:self.toolBarView];
     
@@ -339,10 +331,11 @@
     [_imagePickerButton addTarget:self action:@selector(imagePickerButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.toolBarView addSubview:_imagePickerButton];
     
-
-    [_twitterButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    self.facebookButton = [[UIButton alloc] initWithFrame:CGRectMake(GFScreenWidth - margin - buttonWidth, 10, buttonWidth, buttonWidth)];
+    [_facebookButton setImage:[UIImage imageNamed:@"ic_facebook"] forState:UIControlStateNormal];
     [_facebookButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-   
+    [_facebookButton addTarget:self action:@selector(shareToFacebookClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.toolBarView addSubview:_facebookButton];
     
     self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(margin, 40, (GFScreenWidth - margin * 3) /2, 30)];
     _cancelButton.layer.cornerRadius = 4.0f;
@@ -370,11 +363,27 @@
 
 
 - (void)setUpImageView {
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, GFScreenHeight - GFTabBarH - 80 - 274, GFScreenWidth, 274)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, GFScreenHeight - GFTabBarH - 80 - 300, GFScreenWidth, 274)];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.imageView = imageView;
-    [self.view addSubview:imageView];
+    [self.view insertSubview:imageView belowSubview:_toolBarView];
+    
+    /*
+     //Cancel button can do the same function with deleteButton, so this part is hidden;
+    UIButton *imageDeleteButton = [[UIButton alloc] initWithFrame:CGRectMake(10, GFScreenWidth - 10, 20, 20)];
+    imageDeleteButton.contentMode = UIViewContentModeScaleAspectFit;
+    [imageDeleteButton setImage:[UIImage imageNamed:@"ic_delete"] forState:UIControlStateNormal];
+    [imageDeleteButton addTarget:self action: @selector(imageDeleteButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.imageView addSubview:imageDeleteButton];
+    */
 }
+
+/*
+- (void)imageDeleteButtonClicked {
+    self.imageView.image = NULL;
+    _pickedImage = NULL;
+}
+ */
 
 /*
 - (void)setUpToolBar
@@ -410,6 +419,7 @@
     //textView.backgroundColor = [UIColor yellowColor];
     textView.delegate = self;
     [self.view addSubview:textView];
+    //[self.view insertSubview:textView atIndex:0];
     self.textView = textView;
     
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChageFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -433,6 +443,31 @@
 - (void)post
 {
     GFBSLog(@"点击发表");
+}
+/**
+ Share to Facebook
+ */
+- (void)shareToFacebookClicked {
+
+    if (_pickedImage == nil || _pickedImage == NULL) {
+        FBSDKShareLinkContent *linkContent = [[FBSDKShareLinkContent alloc] init];
+        linkContent.quote = self.textView.text;
+        //linkContent.quote = @"Share from Zuzu";
+        linkContent.contentURL = [NSURL URLWithString:@"https://www.bmgww.com/?gclid=EAIaIQobChMIrYjN-qz31wIVSla9Ch20CAsdEAAYASAAEgKWvPD_BwE"];
+        [FBSDKShareDialog showFromViewController:self withContent:linkContent delegate:nil];
+    } else {
+        FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+        photo.image = _pickedImage;
+        //photo.quote = @"Share from Zuzu";
+        //photo.caption = @"Share from Zuzu...";
+        [photo setCaption:self.textView.text];
+        photo.userGenerated = YES;
+        
+        FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+        content.photos = @[photo];
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:nil];
+    }
+    
 }
 
 #pragma mark - 监听文字改变
@@ -539,11 +574,6 @@
     self.pickedImage = nil;
 }
 
-- (IBAction)twitterButtonClicked:(id)sender {
-}
-
-- (IBAction)facebookButtonClicked:(id)sender {
-}
 
 
 //*************** checkin button *****************//
@@ -647,22 +677,19 @@
 //*************** keyboard *****************//
 - (void)keyBoardWillChageFrame:(NSNotification *)note
 {
-    NSLog(@"keyboard changed");
-    
     //键盘最终的Frame
     CGRect keyBoadrFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey]CGRectValue];
     //动画
     CGFloat animKey = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey]doubleValue];
     [UIView animateWithDuration:animKey animations:^{
-        NSLog(@"toolBarView.y before %f", self.toolBarView.gf_y);
-        NSLog(@"checkin button before %f", self.checkinButton.gf_y);
-        NSLog(@"keyboardframe before %f", keyBoadrFrame.origin.y);
-        self.toolBarView.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight);
-        //self.cancelButton.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight);
-        //self.checkinButton.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight);
-        NSLog(@"toolBarView.y after %f", self.toolBarView.gf_y);
-        NSLog(@"checkin button after %f", self.checkinButton.gf_y);
-        NSLog(@"keyboardframe after %f", keyBoadrFrame.origin.y);
+  
+        if (keyBoadrFrame.origin.y == GFScreenHeight) {
+            self.toolBarView.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight);
+        } else {
+            self.toolBarView.transform = CGAffineTransformMakeTranslation(0,keyBoadrFrame.origin.y - GFScreenHeight + 40);
+        }
+        
+
     }];
     
 }

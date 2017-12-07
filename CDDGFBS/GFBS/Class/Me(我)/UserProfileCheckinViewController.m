@@ -42,16 +42,6 @@
 
 @implementation UserProfileCheckinViewController
 
-#pragma mark - 懒加载
--(GFHTTPSessionManager *)manager
-{
-    if (!_manager) {
-        _manager = [GFHTTPSessionManager manager];
-        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    }
-    return _manager;
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -139,7 +129,7 @@
 
 
 - (void)setUpChildVC {
-    UIView *checkinListView = [[UIView alloc] initWithFrame:CGRectMake(0, 40 + ZZNewNavH, GFScreenWidth, GFScreenHeight - ZZNewNavH - 40 - GFTabBarH)];
+    UIView *checkinListView = [[UIView alloc] initWithFrame:CGRectMake(0, 40 + ZZNewNavH, GFScreenWidth, GFScreenHeight - ZZNewNavH - 40)];
     self.checkinListView = checkinListView;
     
     [self.view addSubview:_checkinListView];

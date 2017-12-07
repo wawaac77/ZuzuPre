@@ -354,6 +354,7 @@
 
 - (IBAction)addFriendsButtonClicked:(id)sender {
     ZZAddFriendsViewController *addFriendsVC = [[ZZAddFriendsViewController alloc] init];
+    addFriendsVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:addFriendsVC animated:YES];
 }
 

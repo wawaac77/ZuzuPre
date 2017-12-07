@@ -96,7 +96,7 @@ static NSString *const ID = @"ID";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GFEventsCell class]) bundle:nil] forCellReuseIdentifier:ID];
     
     if (self.type == 0) {
-        [self getBannerInfo];
+        [self getBannerInfo]; //Please unhide if real prize info is provided
     }
 }
 
@@ -182,6 +182,7 @@ static NSString *const ID = @"ID";
     ZZContentModel *thisContent = _contents[sender.tag];
     RestaurantDetailViewController *restaurantVC = [[RestaurantDetailViewController alloc] init];
     restaurantVC.thisRestaurant = thisContent.listEventRestaurant;
+    restaurantVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:restaurantVC animated:YES];
 }
 
@@ -189,6 +190,7 @@ static NSString *const ID = @"ID";
     ZZContentModel *thisContent = _contents[sender.tag];
     UserProfileCheckinViewController *userVC = [[UserProfileCheckinViewController alloc] init];
     userVC.myProfile = thisContent.listPublishUser;
+    userVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:userVC animated:YES];
 }
 
@@ -225,6 +227,8 @@ static NSString *const ID = @"ID";
     
     FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
     photo.image = image;
+    photo.caption = @"Share from Zuzu...";
+    //photo.quote = @"Share from Zuzu ...";
     photo.userGenerated = YES;
     
     /*
@@ -310,10 +314,15 @@ static NSString *const ID = @"ID";
     } else if (self.type == 2) {
         inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 4) {
-        NSDictionary *inSubData = @{@"restaurantId" : self.restaurantID};
+        NSDictionary *inSubData = @{@"restaurantId" : self.restaurantID,
+                                    @"page" : @1
+                                    };
         inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 5) {
-        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
+        NSDictionary *inSubData = @{@"memberId" : self.userID,
+                                    @"page" : @1
+                                    };
+        inData = @{@"action" : @"getMemberCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     }
     
     NSDictionary *parameters = @{@"data" : inData};
@@ -377,10 +386,15 @@ static NSString *const ID = @"ID";
     } else if (self.type == 2) {
         inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 4) {
-        NSDictionary *inSubData = @{@"restaurantId" : self.restaurantID};
+        NSDictionary *inSubData = @{@"restaurantId" : self.restaurantID,
+                                    @"page" : pageParameter
+                                    };
         inData = @{@"action" : @"getRestaurantCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     } else if (self.type == 5) {
-        inData = @{@"action" : @"getMyCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
+        NSDictionary *inSubData = @{@"memberId" : self.userID,
+                                    @"page" : pageParameter
+                                    };
+        inData = @{@"action" : @"getMemberCheckinList", @"token" : userToken, @"lang" : userLang, @"data":inSubData};
     }
     
     NSDictionary *parameters = @{@"data" : inData};

@@ -23,6 +23,7 @@
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "UIImage+ResizeMagick.h"
 
 @interface SignUpChildViewController () <GIDSignInUIDelegate>
 

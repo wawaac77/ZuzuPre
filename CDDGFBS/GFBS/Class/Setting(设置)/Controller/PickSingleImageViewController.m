@@ -15,6 +15,8 @@
 #import <SVProgressHUD.h>
 #import <SDImageCache.h>
 #import <UIImageView+WebCache.h>
+#import <JMessage/JMessage.h>
+#import "UIImage+ResizeMagick.h"
 
 @interface PickSingleImageViewController () <RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource, UIImagePickerControllerDelegate> {
     CGFloat imageViewWidth;
@@ -31,17 +33,6 @@
 @end
 
 @implementation PickSingleImageViewController
-
-#pragma mark - 懒加载
--(GFHTTPSessionManager *)manager
-{
-    if (!_manager) {
-        _manager = [GFHTTPSessionManager manager];
-        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    }
-    
-    return _manager;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -128,7 +119,7 @@
     [[GFHTTPSessionManager shareManager] POSTWithURLString:GetURL parameters:parameters success:^(id data) {
         
         //self.profileImageView.image = nil;
-        
+        [self uploadJMessageProfilePhoto:_pickedImage];
         [AppDelegate APP].user.userProfileImage_UIImage = _pickedImage;
         
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:ZBLocalized(@"Profile image uploaded!", nil)  delegate:self cancelButtonTitle:ZBLocalized(@"Ok", nil)  otherButtonTitles:nil, nil];
@@ -151,6 +142,33 @@
     }];
     
 }
+
+- (void)uploadJMessageProfilePhoto: (UIImage *)image {
+    image = [image resizedImageByWidth:upLoadImgWidth];
+    
+    [JMSGUser updateMyInfoWithParameter:UIImageJPEGRepresentation(image, 1) userFieldType:kJMSGUserFieldsAvatar completionHandler:^(id resultObject, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        if (error == nil) {
+            JMSGUser *user = [JMSGUser myInfo];
+            [user thumbAvatarData:^(NSData *data, NSString *objectId, NSError *error) {
+                if (error == nil) {
+                    //weakSelf.bgView.originImage = [UIImage imageWithData:data];
+                } else {
+                    DDLogDebug(@"Action -- largeAvatarData");
+                }
+            }];
+            //weakSelf.bgView.originImage = image;
+            DDLogDebug(@"update headView success");
+            [MBProgressHUD showMessage:@"上传成功" view:self.view];
+        } else {
+            DDLogDebug(@"update headView fail %@",error);
+            [MBProgressHUD showMessage:@"上传失败!" view:self.view];
+        }
+    }];
+    
+}
+
 
 
 - (void)chooseImage {

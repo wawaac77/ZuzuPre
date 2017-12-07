@@ -30,6 +30,7 @@
 "Menu" = "菜單";
 "Events" = "活動";
 "Other Information" = "其他資訊";
+"Share to Facebook" = "分享到臉書";
 
 "Comments" = "評論";
 "Send" = "發送";
@@ -43,6 +44,23 @@
 "Please select your check-in location" = "請選擇您的簽到地點";
 "What's in your mind" = "你在想什麼";
 "Check in" = "簽到";
+
+//*********** Inbox **************//
+"Add Contact" = "添加聯繫人";
+"Please input username or email" = "請輸入用戶名或电邮";
+"Confirm" = "確定";
+"New Chat" = "新聊天";
+"Group Chat" = "群組聊天";
+"The user does not exist" = "用戶不存在";
+"Connecting..." = "連接中...";
+"Receiving..." = "收取中...";
+"Updating database" = "正在升級數據庫";
+"Not Connected" = "未連接";
+"Clear chat history" = "清空聊天記錄";
+"Chat Detail" = "聊天詳情";
+"Add friend into group" = "添加朋友到群組";
+"Success" = "成功";
+"Quit chat" = "退出群組";
 
 //*********** My Zuzu **************//
 "Find friends on Facebook" = "尋找在Facebook上的朋友";
@@ -85,10 +103,16 @@
 "About Zuzu" = "關於Zuzu";
 "Message Admin" = "信息管理";
 "Version 1.0" = "版本1.0";
+"Version 0.5" = "版本0.5";
 
 "Busy network, please try later~" = "網絡繁忙，請稍後再試";
 "Your following is successful!" = "關注成功！";
 "Profile image uploaded!" = "頭像上傳成功！";
+
+"Welcome to join Zuzu" = "歡迎加入Zuzu";
+"Message" = "簡訊";
+"No SMS function" = "設備沒有簡訊服務";
+"Your friend invites you to download Zuzu" = "您的朋友邀請您下載Zuzu";
 
 //*********** Calendar **************//
 "hours ago" = "小時前";

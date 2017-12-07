@@ -35,6 +35,7 @@
 
 #import <MessageUI/MFMessageComposeViewController.h>
 #import <MessageUI/MessageUI.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 static NSString *const ID = @"ID";
 static NSInteger const cols = 2;
@@ -42,7 +43,7 @@ static CGFloat  const margin = 0;
 
 #define itemHW  (GFScreenWidth - (cols - 1) * margin ) / cols
 
-@interface MyZuzuViewController () <UICollectionViewDataSource,UICollectionViewDelegate,MFMessageComposeViewControllerDelegate>
+@interface MyZuzuViewController () <UICollectionViewDataSource,UICollectionViewDelegate,MFMessageComposeViewControllerDelegate,FBSDKSharingDelegate>
 
 /*所有button内容*/
 @property (strong , nonatomic)NSMutableArray<GFSquareItem *> *buttonItems;
@@ -239,6 +240,7 @@ static CGFloat  const margin = 0;
     UIButton *facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
     facebookButton.backgroundColor = [UIColor colorWithRed:59.0/255.0 green:89.0/255.0 blue:152.0/255.0 alpha:1];
     [facebookButton setTitle:ZBLocalized(@"Find friends on Facebook", nil) forState:UIControlStateNormal];
+    [facebookButton addTarget:self action:@selector(shareToFacebookClicked) forControlEvents:UIControlEventTouchUpInside];
     [alertView addCustomButton:facebookButton toIndex:0];
     
     UIButton *googlePlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -284,6 +286,14 @@ static CGFloat  const margin = 0;
 
     [alertView show];
     
+}
+
+- (void)shareToFacebookClicked {
+    
+    FBSDKShareLinkContent *linkContent = [[FBSDKShareLinkContent alloc] init];
+    linkContent.quote = ZBLocalized(@"Your friend invites you to download Zuzu", nil);
+    linkContent.contentURL = [NSURL URLWithString:@"https://www.bmgww.com/?gclid=EAIaIQobChMIrYjN-qz31wIVSla9Ch20CAsdEAAYASAAEgKWvPD_BwE"];
+    [FBSDKShareDialog showFromViewController:self withContent:linkContent delegate:nil];
 }
 
 - (void)settingClicked
@@ -430,15 +440,15 @@ static CGFloat  const margin = 0;
         MFMessageComposeViewController * controller = [[MFMessageComposeViewController alloc]init]; //autorelease];
         
         controller.recipients = [NSArray arrayWithObject:@""];
-        controller.body = @"测试发短信";
+        controller.body = ZBLocalized(@"Welcome to join Zuzu", nil);
         controller.messageComposeDelegate = self;
         
         [self presentModalViewController:controller animated:YES];
         
-        [[[[controller viewControllers] lastObject] navigationItem] setTitle:@"测试短信"];//修改短信界面标题
+        [[[[controller viewControllers] lastObject] navigationItem] setTitle:ZBLocalized(@"Message", nil)];//修改短信界面标题
     }else{
         
-        [self alertWithTitle:@"提示信息" msg:@"设备没有短信功能"];
+        [self alertWithTitle:ZBLocalized(@"Reminder", nil) msg:ZBLocalized(@"No SMS function", nil)];
     }
 }
 

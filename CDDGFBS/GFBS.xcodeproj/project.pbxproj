@@ -14,8 +14,6 @@
 		181EF73F1E0B5C8000C91928 /* GFPublishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181EF73D1E0B5C8000C91928 /* GFPublishView.xib */; };
 		181EF7421E0B5DA000C91928 /* GFPostWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181EF7411E0B5DA000C91928 /* GFPostWordViewController.m */; };
 		181EF7481E0B661200C91928 /* GFPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181EF7471E0B661200C91928 /* GFPlaceholderTextView.m */; };
-		181EF74B1E0BD27400C91928 /* GFAddToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 181EF74A1E0BD27400C91928 /* GFAddToolBar.m */; };
-		181EF74D1E0BD27B00C91928 /* GFAddToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181EF74C1E0BD27B00C91928 /* GFAddToolBar.xib */; };
 		182391461DEEC70500B88AE0 /* GFCommentHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182391451DEEC70500B88AE0 /* GFCommentHeaderFooterView.m */; };
 		1823914D1DEECDEB00B88AE0 /* GFCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823914B1DEECDEB00B88AE0 /* GFCommentCell.m */; };
 		1823914E1DEECDEB00B88AE0 /* GFCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823914C1DEECDEB00B88AE0 /* GFCommentCell.xib */; };
@@ -194,10 +192,6 @@
 		7800973D1ECAD9D6008F9F99 /* zuzu_App_Icon_1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 7800973B1ECAD9D6008F9F99 /* zuzu_App_Icon_1024x1024.png */; };
 		7800973F1ECADC7B008F9F99 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7800973E1ECADC7B008F9F99 /* icon.png */; };
 		7807917E1F1F542C00D24CB6 /* AddLLImagePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7807917D1F1F542C00D24CB6 /* AddLLImagePickerVC.m */; };
-		7813FE911F25EE820065D527 /* ZZAddFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7813FE8F1F25EE820065D527 /* ZZAddFriendsViewController.m */; };
-		7813FE921F25EE820065D527 /* ZZAddFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7813FE901F25EE820065D527 /* ZZAddFriendsViewController.xib */; };
-		7813FE961F25F18B0065D527 /* ZZAddFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7813FE941F25F18B0065D527 /* ZZAddFriendsCell.m */; };
-		7813FE971F25F18B0065D527 /* ZZAddFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7813FE951F25F18B0065D527 /* ZZAddFriendsCell.xib */; };
 		7813FE991F25F3E90065D527 /* ic_add-friend-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 7813FE981F25F3E90065D527 /* ic_add-friend-black.png */; };
 		7813FE9F1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 7813FE9E1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m */; };
 		7813FEC91F28C14B0065D527 /* AboutZZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7813FEC71F28C14B0065D527 /* AboutZZViewController.m */; };
@@ -267,11 +261,6 @@
 		783089451F1CD66200C31BFE /* ZZComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089441F1CD66200C31BFE /* ZZComment.m */; };
 		783089481F1D039800C31BFE /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089471F1D039800C31BFE /* CommentHeaderView.m */; };
 		7830894A1F1D0C6F00C31BFE /* CommentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089491F1D0C6F00C31BFE /* CommentHeaderView.xib */; };
-		7830895C1F1E1E4100C31BFE /* ZZFriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830895A1F1E1E4100C31BFE /* ZZFriendsTableViewController.m */; };
-		7830895D1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7830895B1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib */; };
-		783089601F1E1E7100C31BFE /* ZZFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830895F1F1E1E7100C31BFE /* ZZFriendModel.m */; };
-		783089641F1E220000C31BFE /* ZZFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089621F1E220000C31BFE /* ZZFriendCell.m */; };
-		783089651F1E220000C31BFE /* ZZFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783089631F1E220000C31BFE /* ZZFriendCell.xib */; };
 		7830896A1F1E371F00C31BFE /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089671F1E371E00C31BFE /* UIView+Position.m */; };
 		7830896B1F1E371F00C31BFE /* ZGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 783089691F1E371F00C31BFE /* ZGAlertView.m */; };
 		783F822D1F1713B800491529 /* LeaderboardHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 783F822C1F1713B800491529 /* LeaderboardHomeTableViewController.m */; };
@@ -769,6 +758,17 @@
 		78C126BD1F5047440087CCF6 /* HomePostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7830892F1F1C85A700C31BFE /* HomePostTableViewController.m */; };
 		78C126CD1F5409000087CCF6 /* ZBLocalized.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C126CC1F5408FF0087CCF6 /* ZBLocalized.m */; };
 		78C127781F56A7260087CCF6 /* ic_fa-heart-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 78C127771F56A7250087CCF6 /* ic_fa-heart-g.png */; };
+		78D1A7AE1FD8FD0E0002D51A /* ZZAddFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D1A7AC1FD8FD0D0002D51A /* ZZAddFriendsCell.m */; };
+		78D1A7AF1FD8FD0E0002D51A /* ZZAddFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78D1A7AD1FD8FD0D0002D51A /* ZZAddFriendsCell.xib */; };
+		78D1A7B31FD8FD390002D51A /* ZZFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78D1A7B01FD8FD380002D51A /* ZZFriendCell.xib */; };
+		78D1A7B41FD8FD390002D51A /* ZZFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D1A7B21FD8FD380002D51A /* ZZFriendCell.m */; };
+		78D1A7B71FD8FD4E0002D51A /* ZZFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D1A7B51FD8FD4D0002D51A /* ZZFriendModel.m */; };
+		78D1A7BE1FD8FD680002D51A /* ZZAddFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78D1A7B81FD8FD650002D51A /* ZZAddFriendsViewController.xib */; };
+		78D1A7BF1FD8FD680002D51A /* ZZFriendsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78D1A7BA1FD8FD660002D51A /* ZZFriendsTableViewController.xib */; };
+		78D1A7C01FD8FD680002D51A /* ZZAddFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D1A7BC1FD8FD670002D51A /* ZZAddFriendsViewController.m */; };
+		78D1A7C11FD8FD680002D51A /* ZZFriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D1A7BD1FD8FD680002D51A /* ZZFriendsTableViewController.m */; };
+		78D1A7C51FD8FE9F0002D51A /* GFAddToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78D1A7C21FD8FE9D0002D51A /* GFAddToolBar.xib */; };
+		78D1A7C61FD8FE9F0002D51A /* GFAddToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D1A7C31FD8FE9E0002D51A /* GFAddToolBar.m */; };
 		78D85BDE1F444875007E8112 /* ic_select_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 78D85BDD1F444875007E8112 /* ic_select_grey.png */; };
 		78F49F721EE6F37B00674130 /* EventListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F711EE6F37B00674130 /* EventListTableViewController.m */; };
 		78F49F801EE6F5A900674130 /* MyEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F49F7E1EE6F5A900674130 /* MyEventCell.m */; };
@@ -818,9 +818,6 @@
 		181EF7411E0B5DA000C91928 /* GFPostWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFPostWordViewController.m; sourceTree = "<group>"; };
 		181EF7461E0B661200C91928 /* GFPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFPlaceholderTextView.h; sourceTree = "<group>"; };
 		181EF7471E0B661200C91928 /* GFPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFPlaceholderTextView.m; sourceTree = "<group>"; };
-		181EF7491E0BD27400C91928 /* GFAddToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFAddToolBar.h; path = "Publish(发布)/View/GFAddToolBar.h"; sourceTree = "<group>"; };
-		181EF74A1E0BD27400C91928 /* GFAddToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFAddToolBar.m; path = "Publish(发布)/View/GFAddToolBar.m"; sourceTree = "<group>"; };
-		181EF74C1E0BD27B00C91928 /* GFAddToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GFAddToolBar.xib; path = "Publish(发布)/View/GFAddToolBar.xib"; sourceTree = "<group>"; };
 		182391441DEEC70500B88AE0 /* GFCommentHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCommentHeaderFooterView.h; sourceTree = "<group>"; };
 		182391451DEEC70500B88AE0 /* GFCommentHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFCommentHeaderFooterView.m; sourceTree = "<group>"; };
 		1823914A1DEECDEB00B88AE0 /* GFCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCommentCell.h; sourceTree = "<group>"; };
@@ -1061,12 +1058,6 @@
 		7800973E1ECADC7B008F9F99 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		7807917C1F1F542C00D24CB6 /* AddLLImagePickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLLImagePickerVC.h; sourceTree = "<group>"; };
 		7807917D1F1F542C00D24CB6 /* AddLLImagePickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLLImagePickerVC.m; sourceTree = "<group>"; };
-		7813FE8E1F25EE810065D527 /* ZZAddFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAddFriendsViewController.h; sourceTree = "<group>"; };
-		7813FE8F1F25EE820065D527 /* ZZAddFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAddFriendsViewController.m; sourceTree = "<group>"; };
-		7813FE901F25EE820065D527 /* ZZAddFriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZAddFriendsViewController.xib; sourceTree = "<group>"; };
-		7813FE931F25F18B0065D527 /* ZZAddFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAddFriendsCell.h; sourceTree = "<group>"; };
-		7813FE941F25F18B0065D527 /* ZZAddFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAddFriendsCell.m; sourceTree = "<group>"; };
-		7813FE951F25F18B0065D527 /* ZZAddFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZAddFriendsCell.xib; sourceTree = "<group>"; };
 		7813FE981F25F3E90065D527 /* ic_add-friend-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_add-friend-black.png"; sourceTree = "<group>"; };
 		7813FE9D1F26FC410065D527 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
 		7813FE9E1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
@@ -1158,14 +1149,6 @@
 		783089461F1D039800C31BFE /* CommentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentHeaderView.h; sourceTree = "<group>"; };
 		783089471F1D039800C31BFE /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentHeaderView.m; sourceTree = "<group>"; };
 		783089491F1D0C6F00C31BFE /* CommentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentHeaderView.xib; sourceTree = "<group>"; };
-		783089591F1E1E4100C31BFE /* ZZFriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZFriendsTableViewController.h; sourceTree = "<group>"; };
-		7830895A1F1E1E4100C31BFE /* ZZFriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZFriendsTableViewController.m; sourceTree = "<group>"; };
-		7830895B1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZFriendsTableViewController.xib; sourceTree = "<group>"; };
-		7830895E1F1E1E7100C31BFE /* ZZFriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZFriendModel.h; sourceTree = "<group>"; };
-		7830895F1F1E1E7100C31BFE /* ZZFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZFriendModel.m; sourceTree = "<group>"; };
-		783089611F1E220000C31BFE /* ZZFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZFriendCell.h; sourceTree = "<group>"; };
-		783089621F1E220000C31BFE /* ZZFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZFriendCell.m; sourceTree = "<group>"; };
-		783089631F1E220000C31BFE /* ZZFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZFriendCell.xib; sourceTree = "<group>"; };
 		783089661F1E371E00C31BFE /* UIView+Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Position.h"; sourceTree = "<group>"; };
 		783089671F1E371E00C31BFE /* UIView+Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Position.m"; sourceTree = "<group>"; };
 		783089681F1E371F00C31BFE /* ZGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGAlertView.h; sourceTree = "<group>"; };
@@ -1745,11 +1728,11 @@
 		7864EB5F1F28C5B500AA572E /* ZZMessageAdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZMessageAdminViewController.h; sourceTree = "<group>"; };
 		7864EB601F28C5B500AA572E /* ZZMessageAdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZMessageAdminViewController.m; sourceTree = "<group>"; };
 		7864EB611F28C5B500AA572E /* ZZMessageAdminViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZZMessageAdminViewController.xib; sourceTree = "<group>"; };
-		7864EB641F28ED6600AA572E /* NotificationButtonsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationButtonsCell.h; path = "GFBS/Class/Setting(设置)/Controller/NotificationButtonsCell.h"; sourceTree = SOURCE_ROOT; };
-		7864EB651F28ED6600AA572E /* NotificationButtonsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationButtonsCell.m; path = "GFBS/Class/Setting(设置)/Controller/NotificationButtonsCell.m"; sourceTree = SOURCE_ROOT; };
-		7864EB661F28ED6600AA572E /* NotificationButtonsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotificationButtonsCell.xib; path = "GFBS/Class/Setting(设置)/Controller/NotificationButtonsCell.xib"; sourceTree = SOURCE_ROOT; };
-		7864EB691F28F3DB00AA572E /* ZZFriendRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZFriendRequestModel.h; path = "GFBS/Class/Setting(设置)/Controller/ZZFriendRequestModel.h"; sourceTree = SOURCE_ROOT; };
-		7864EB6A1F28F3DB00AA572E /* ZZFriendRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZFriendRequestModel.m; path = "GFBS/Class/Setting(设置)/Controller/ZZFriendRequestModel.m"; sourceTree = SOURCE_ROOT; };
+		7864EB641F28ED6600AA572E /* NotificationButtonsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationButtonsCell.h; path = "GFBS/Class/Setting(设置)/View/NotificationButtonsCell.h"; sourceTree = SOURCE_ROOT; };
+		7864EB651F28ED6600AA572E /* NotificationButtonsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationButtonsCell.m; path = "GFBS/Class/Setting(设置)/View/NotificationButtonsCell.m"; sourceTree = SOURCE_ROOT; };
+		7864EB661F28ED6600AA572E /* NotificationButtonsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotificationButtonsCell.xib; path = "GFBS/Class/Setting(设置)/View/NotificationButtonsCell.xib"; sourceTree = SOURCE_ROOT; };
+		7864EB691F28F3DB00AA572E /* ZZFriendRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZFriendRequestModel.h; path = "GFBS/Class/Setting(设置)/Model/ZZFriendRequestModel.h"; sourceTree = SOURCE_ROOT; };
+		7864EB6A1F28F3DB00AA572E /* ZZFriendRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZFriendRequestModel.m; path = "GFBS/Class/Setting(设置)/Model/ZZFriendRequestModel.m"; sourceTree = SOURCE_ROOT; };
 		7864EB6C1F2B424400AA572E /* OverviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewCell.h; sourceTree = "<group>"; };
 		7864EB6D1F2B424400AA572E /* OverviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewCell.m; sourceTree = "<group>"; };
 		7864EB6E1F2B424400AA572E /* OverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverviewCell.xib; sourceTree = "<group>"; };
@@ -1800,11 +1783,11 @@
 		789CFF561F03A12A00EBA772 /* PassValueDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassValueDelegate.h; sourceTree = "<group>"; };
 		789CFF5D1F0B868200EBA772 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
 		789CFF5E1F0B868200EBA772 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
-		789CFF621F0B86A600EBA772 /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationCell.h; path = "GFBS/Class/Setting(设置)/Controller/NotificationCell.h"; sourceTree = SOURCE_ROOT; };
-		789CFF631F0B86A600EBA772 /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationCell.m; path = "GFBS/Class/Setting(设置)/Controller/NotificationCell.m"; sourceTree = SOURCE_ROOT; };
-		789CFF641F0B86A600EBA772 /* NotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotificationCell.xib; path = "GFBS/Class/Setting(设置)/Controller/NotificationCell.xib"; sourceTree = SOURCE_ROOT; };
-		789CFF6A1F0B897100EBA772 /* NotificationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationItem.h; path = "GFBS/Class/Setting(设置)/Controller/NotificationItem.h"; sourceTree = SOURCE_ROOT; };
-		789CFF6B1F0B897100EBA772 /* NotificationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationItem.m; path = "GFBS/Class/Setting(设置)/Controller/NotificationItem.m"; sourceTree = SOURCE_ROOT; };
+		789CFF621F0B86A600EBA772 /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationCell.h; path = "GFBS/Class/Setting(设置)/View/NotificationCell.h"; sourceTree = SOURCE_ROOT; };
+		789CFF631F0B86A600EBA772 /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationCell.m; path = "GFBS/Class/Setting(设置)/View/NotificationCell.m"; sourceTree = SOURCE_ROOT; };
+		789CFF641F0B86A600EBA772 /* NotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotificationCell.xib; path = "GFBS/Class/Setting(设置)/View/NotificationCell.xib"; sourceTree = SOURCE_ROOT; };
+		789CFF6A1F0B897100EBA772 /* NotificationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationItem.h; path = "GFBS/Class/Setting(设置)/Model/NotificationItem.h"; sourceTree = SOURCE_ROOT; };
+		789CFF6B1F0B897100EBA772 /* NotificationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationItem.m; path = "GFBS/Class/Setting(设置)/Model/NotificationItem.m"; sourceTree = SOURCE_ROOT; };
 		789CFF6D1F0C8DD600EBA772 /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
 		789CFF6E1F0C8DD600EBA772 /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
 		789CFF761F0CA5FB00EBA772 /* EventRestaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRestaurant.h; sourceTree = "<group>"; };
@@ -1834,6 +1817,23 @@
 		78C126CB1F5408FF0087CCF6 /* ZBLocalized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBLocalized.h; sourceTree = "<group>"; };
 		78C126CC1F5408FF0087CCF6 /* ZBLocalized.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBLocalized.m; sourceTree = "<group>"; };
 		78C127771F56A7250087CCF6 /* ic_fa-heart-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_fa-heart-g.png"; sourceTree = "<group>"; };
+		78D1A7AB1FD8FCFB0002D51A /* ZZAddFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZAddFriendsCell.h; path = GFBS/Class/Comment/ZZAddFriendsCell.h; sourceTree = SOURCE_ROOT; };
+		78D1A7AC1FD8FD0D0002D51A /* ZZAddFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZAddFriendsCell.m; path = GFBS/Class/Comment/ZZAddFriendsCell.m; sourceTree = SOURCE_ROOT; };
+		78D1A7AD1FD8FD0D0002D51A /* ZZAddFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ZZAddFriendsCell.xib; path = GFBS/Class/Comment/ZZAddFriendsCell.xib; sourceTree = SOURCE_ROOT; };
+		78D1A7B01FD8FD380002D51A /* ZZFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ZZFriendCell.xib; path = GFBS/Class/Comment/ZZFriendCell.xib; sourceTree = SOURCE_ROOT; };
+		78D1A7B11FD8FD380002D51A /* ZZFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZFriendCell.h; path = GFBS/Class/Comment/ZZFriendCell.h; sourceTree = SOURCE_ROOT; };
+		78D1A7B21FD8FD380002D51A /* ZZFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZFriendCell.m; path = GFBS/Class/Comment/ZZFriendCell.m; sourceTree = SOURCE_ROOT; };
+		78D1A7B51FD8FD4D0002D51A /* ZZFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZFriendModel.m; path = GFBS/Class/Comment/ZZFriendModel.m; sourceTree = SOURCE_ROOT; };
+		78D1A7B61FD8FD4E0002D51A /* ZZFriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZFriendModel.h; path = GFBS/Class/Comment/ZZFriendModel.h; sourceTree = SOURCE_ROOT; };
+		78D1A7B81FD8FD650002D51A /* ZZAddFriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ZZAddFriendsViewController.xib; path = GFBS/Class/Comment/ZZAddFriendsViewController.xib; sourceTree = SOURCE_ROOT; };
+		78D1A7B91FD8FD650002D51A /* ZZFriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZFriendsTableViewController.h; path = GFBS/Class/Comment/ZZFriendsTableViewController.h; sourceTree = SOURCE_ROOT; };
+		78D1A7BA1FD8FD660002D51A /* ZZFriendsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ZZFriendsTableViewController.xib; path = GFBS/Class/Comment/ZZFriendsTableViewController.xib; sourceTree = SOURCE_ROOT; };
+		78D1A7BB1FD8FD670002D51A /* ZZAddFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZAddFriendsViewController.h; path = GFBS/Class/Comment/ZZAddFriendsViewController.h; sourceTree = SOURCE_ROOT; };
+		78D1A7BC1FD8FD670002D51A /* ZZAddFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZAddFriendsViewController.m; path = GFBS/Class/Comment/ZZAddFriendsViewController.m; sourceTree = SOURCE_ROOT; };
+		78D1A7BD1FD8FD680002D51A /* ZZFriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZFriendsTableViewController.m; path = GFBS/Class/Comment/ZZFriendsTableViewController.m; sourceTree = SOURCE_ROOT; };
+		78D1A7C21FD8FE9D0002D51A /* GFAddToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GFAddToolBar.xib; path = Publish/View/GFAddToolBar.xib; sourceTree = "<group>"; };
+		78D1A7C31FD8FE9E0002D51A /* GFAddToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFAddToolBar.m; path = Publish/View/GFAddToolBar.m; sourceTree = "<group>"; };
+		78D1A7C41FD8FE9E0002D51A /* GFAddToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFAddToolBar.h; path = Publish/View/GFAddToolBar.h; sourceTree = "<group>"; };
 		78D85BDD1F444875007E8112 /* ic_select_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_select_grey.png; sourceTree = "<group>"; };
 		78F49F701EE6F37B00674130 /* EventListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListTableViewController.h; sourceTree = "<group>"; };
 		78F49F711EE6F37B00674130 /* EventListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListTableViewController.m; sourceTree = "<group>"; };
@@ -1927,13 +1927,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		184D492A1DED5D5800C7B03F /* Comment(评论) */ = {
+		184D492A1DED5D5800C7B03F /* Comment */ = {
 			isa = PBXGroup;
 			children = (
 				184D492B1DED5D5800C7B03F /* Controller */,
 				184D492D1DED5D5800C7B03F /* View */,
 			);
-			path = "Comment(评论)";
+			path = Comment;
 			sourceTree = "<group>";
 		};
 		184D492B1DED5D5800C7B03F /* Controller */ = {
@@ -1961,9 +1961,9 @@
 		185420811DF064F1004F6378 /* Setting & Notification */ = {
 			isa = PBXGroup;
 			children = (
+				78D1A7CA1FD8FFA70002D51A /* View */,
+				78D1A7C91FD8FFA00002D51A /* Model */,
 				185420821DF064F1004F6378 /* Controller */,
-				185420861DF064F1004F6378 /* Model */,
-				185420871DF064F1004F6378 /* View */,
 			);
 			name = "Setting & Notification";
 			path = "Setting(设置)";
@@ -1995,30 +1995,6 @@
 				7845F5171F94B14B00F18625 /* PickSingleImageViewController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		185420861DF064F1004F6378 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				789CFF6A1F0B897100EBA772 /* NotificationItem.h */,
-				789CFF6B1F0B897100EBA772 /* NotificationItem.m */,
-				7864EB691F28F3DB00AA572E /* ZZFriendRequestModel.h */,
-				7864EB6A1F28F3DB00AA572E /* ZZFriendRequestModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		185420871DF064F1004F6378 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				789CFF621F0B86A600EBA772 /* NotificationCell.h */,
-				789CFF631F0B86A600EBA772 /* NotificationCell.m */,
-				789CFF641F0B86A600EBA772 /* NotificationCell.xib */,
-				7864EB641F28ED6600AA572E /* NotificationButtonsCell.h */,
-				7864EB651F28ED6600AA572E /* NotificationButtonsCell.m */,
-				7864EB661F28ED6600AA572E /* NotificationButtonsCell.xib */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		189CA3171DDADBF6004D07EA = {
@@ -2095,34 +2071,34 @@
 		18BE026C1DDB497900D27893 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				18BE026D1DDB497900D27893 /* AD(广告) */,
-				18BE02791DDB497900D27893 /* Main(主要) */,
+				18BE026D1DDB497900D27893 /* AD */,
+				18BE02791DDB497900D27893 /* Main */,
 				7829FF9B1ED803D000C934C2 /* Login */,
-				784D3F5D1ECC67040058C63F /* Home */,
-				184D492A1DED5D5800C7B03F /* Comment(评论) */,
+				784D3F5D1ECC67040058C63F /* Home (TabBar) */,
+				184D492A1DED5D5800C7B03F /* Comment */,
 				783089551F1E1DF100C31BFE /* Friends */,
-				788333151F17779700967337 /* Check-in */,
-				789B23A11FB060F90023812F /* Inbox */,
+				788333151F17779700967337 /* Check-in (TabBar) */,
+				789B23A11FB060F90023812F /* Inbox (TabBar) */,
 				18BE02711DDB497900D27893 /* Social Calendar */,
 				78FFE5AD1ECDAD2C00F909A2 /* Restaurant */,
 				786B38181F2DDC310098A12F /* User Profile */,
-				18BE027D1DDB497900D27893 /* My Zuzu */,
+				18BE027D1DDB497900D27893 /* My Zuzu (TabBar) */,
 				185420811DF064F1004F6378 /* Setting & Notification */,
-				18BE02811DDB497900D27893 /* New(新帖) */,
-				18BE02751DDB497900D27893 /* FriendTrend(关注) */,
-				18BE02891DDB497A00D27893 /* Publish(发布) */,
+				18BE02811DDB497900D27893 /* New */,
+				18BE02751DDB497900D27893 /* FriendTrend */,
+				18BE02891DDB497A00D27893 /* Publish */,
 				18BE02851DDB497A00D27893 /* Others */,
 			);
 			path = Class;
 			sourceTree = "<group>";
 		};
-		18BE026D1DDB497900D27893 /* AD(广告) */ = {
+		18BE026D1DDB497900D27893 /* AD */ = {
 			isa = PBXGroup;
 			children = (
 				18BE026E1DDB497900D27893 /* Controller */,
 				18BE026F1DDB497900D27893 /* Model */,
 			);
-			path = "AD(广告)";
+			path = AD;
 			sourceTree = "<group>";
 		};
 		18BE026E1DDB497900D27893 /* Controller */ = {
@@ -2210,14 +2186,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		18BE02751DDB497900D27893 /* FriendTrend(关注) */ = {
+		18BE02751DDB497900D27893 /* FriendTrend */ = {
 			isa = PBXGroup;
 			children = (
 				18BE02761DDB497900D27893 /* Controller */,
 				18C6FEA31DFBD96F00ED1195 /* Model */,
 				18BE02781DDB497900D27893 /* View */,
 			);
-			path = "FriendTrend(关注)";
+			path = FriendTrend;
 			sourceTree = "<group>";
 		};
 		18BE02761DDB497900D27893 /* Controller */ = {
@@ -2253,13 +2229,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		18BE02791DDB497900D27893 /* Main(主要) */ = {
+		18BE02791DDB497900D27893 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				18BE027A1DDB497900D27893 /* Controller */,
 				18BE027C1DDB497900D27893 /* View */,
 			);
-			path = "Main(主要)";
+			path = Main;
 			sourceTree = "<group>";
 		};
 		18BE027A1DDB497900D27893 /* Controller */ = {
@@ -2282,30 +2258,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		18BE027D1DDB497900D27893 /* My Zuzu */ = {
+		18BE027D1DDB497900D27893 /* My Zuzu (TabBar) */ = {
 			isa = PBXGroup;
 			children = (
 				18BE027E1DDB497900D27893 /* Controller */,
 				18BE027F1DDB497900D27893 /* Model */,
 				18BE02801DDB497900D27893 /* View */,
 			);
-			name = "My Zuzu";
+			name = "My Zuzu (TabBar)";
 			path = "Me(我)";
 			sourceTree = "<group>";
 		};
 		18BE027E1DDB497900D27893 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				78D1A7C71FD8FF310002D51A /* Others */,
 				7824E3081EEFC79B00F85BFB /* MyZuzuViewController.h */,
 				7824E3091EEFC79B00F85BFB /* MyZuzuViewController.m */,
-				18BE02B01DDB4C3900D27893 /* GFMeViewController.h */,
-				18BE02B11DDB4C3900D27893 /* GFMeViewController.m */,
-				1841A7711DE16C1100FB54CC /* GFMeViewController.storyboard */,
-				1841A77B1DE17BE400FB54CC /* GFWebViewController.h */,
-				1841A77C1DE17BE400FB54CC /* GFWebViewController.m */,
-				1841A77D1DE17BE400FB54CC /* GFWebViewController.xib */,
-				7824E3391EF13F7600F85BFB /* BadgesCollectionViewController.h */,
-				7824E33A1EF13F7600F85BFB /* BadgesCollectionViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2324,25 +2293,22 @@
 		18BE02801DDB497900D27893 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				78D1A7C81FD8FF6E0002D51A /* Others */,
 				1841A7761DE1752E00FB54CC /* GFSquareCell.h */,
 				1841A7771DE1752E00FB54CC /* GFSquareCell.m */,
 				1841A7781DE1752E00FB54CC /* GFSquareCell.xib */,
-				7824E3561EF2201D00F85BFB /* BadgesSquareCell.h */,
-				7824E3571EF2201D00F85BFB /* BadgesSquareCell.m */,
-				7824E3581EF2201D00F85BFB /* BadgesSquareCell.xib */,
-				78FE02291EE930D200ABD5B9 /* ZBProgressView */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		18BE02811DDB497900D27893 /* New(新帖) */ = {
+		18BE02811DDB497900D27893 /* New */ = {
 			isa = PBXGroup;
 			children = (
 				18BE02821DDB497900D27893 /* Controller */,
 				18BE02831DDB497900D27893 /* Model */,
 				18BE02841DDB497900D27893 /* View */,
 			);
-			path = "New(新帖)";
+			path = New;
 			sourceTree = "<group>";
 		};
 		18BE02821DDB497900D27893 /* Controller */ = {
@@ -2419,14 +2385,14 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
-		18BE02891DDB497A00D27893 /* Publish(发布) */ = {
+		18BE02891DDB497A00D27893 /* Publish */ = {
 			isa = PBXGroup;
 			children = (
 				181EF7381E0B5C8000C91928 /* Controller */,
 				181EF7391E0B5C8000C91928 /* Model */,
 				181EF73A1E0B5C8000C91928 /* View */,
 			);
-			path = "Publish(发布)";
+			path = Publish;
 			sourceTree = "<group>";
 		};
 		18C6FEA31DFBD96F00ED1195 /* Model */ = {
@@ -2790,6 +2756,7 @@
 				786B381E1F2ECFEB0098A12F /* RestaurantCheckinViewController.h */,
 				786B381F1F2ECFEB0098A12F /* RestaurantCheckinViewController.m */,
 				786B38201F2ECFEB0098A12F /* RestaurantCheckinViewController.xib */,
+				7829FF891ED576C100C934C2 /* RestaurantPhotoViewController.h */,
 				7829FF8A1ED576C100C934C2 /* RestaurantPhotoViewController.m */,
 				7829FF8B1ED576C100C934C2 /* RestaurantPhotoViewController.xib */,
 				7829FF8E1ED576D700C934C2 /* RestaurantMenuViewController.h */,
@@ -2800,7 +2767,6 @@
 				7829FF951ED576F800C934C2 /* RestaurantEventViewController.xib */,
 				786B38151F2DC9AE0098A12F /* RestaurantCheckinTableViewController.h */,
 				786B38161F2DC9AE0098A12F /* RestaurantCheckinTableViewController.m */,
-				7829FF891ED576C100C934C2 /* RestaurantPhotoViewController.h */,
 			);
 			name = RestaurantDetailChildVCs;
 			sourceTree = "<group>";
@@ -2877,6 +2843,8 @@
 		783089371F1CA1D000C31BFE /* Previous */ = {
 			isa = PBXGroup;
 			children = (
+				789CFF911F1232E500EBA772 /* ZZEventImages.h */,
+				789CFF921F1232E500EBA772 /* ZZEventImages.m */,
 				7897E1061EF7766A0046D647 /* EventInList.h */,
 				7897E1071EF7766A0046D647 /* EventInList.m */,
 				78FFE5981ECD40F700F909A2 /* GFEvent.h */,
@@ -2919,12 +2887,12 @@
 		783089561F1E1E0900C31BFE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				783089591F1E1E4100C31BFE /* ZZFriendsTableViewController.h */,
-				7830895A1F1E1E4100C31BFE /* ZZFriendsTableViewController.m */,
-				7830895B1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib */,
-				7813FE8E1F25EE810065D527 /* ZZAddFriendsViewController.h */,
-				7813FE8F1F25EE820065D527 /* ZZAddFriendsViewController.m */,
-				7813FE901F25EE820065D527 /* ZZAddFriendsViewController.xib */,
+				78D1A7BB1FD8FD670002D51A /* ZZAddFriendsViewController.h */,
+				78D1A7BC1FD8FD670002D51A /* ZZAddFriendsViewController.m */,
+				78D1A7B81FD8FD650002D51A /* ZZAddFriendsViewController.xib */,
+				78D1A7B91FD8FD650002D51A /* ZZFriendsTableViewController.h */,
+				78D1A7BD1FD8FD680002D51A /* ZZFriendsTableViewController.m */,
+				78D1A7BA1FD8FD660002D51A /* ZZFriendsTableViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2932,8 +2900,8 @@
 		783089571F1E1E1800C31BFE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7830895E1F1E1E7100C31BFE /* ZZFriendModel.h */,
-				7830895F1F1E1E7100C31BFE /* ZZFriendModel.m */,
+				78D1A7B61FD8FD4E0002D51A /* ZZFriendModel.h */,
+				78D1A7B51FD8FD4D0002D51A /* ZZFriendModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2941,12 +2909,12 @@
 		783089581F1E1E2600C31BFE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				783089611F1E220000C31BFE /* ZZFriendCell.h */,
-				783089621F1E220000C31BFE /* ZZFriendCell.m */,
-				783089631F1E220000C31BFE /* ZZFriendCell.xib */,
-				7813FE931F25F18B0065D527 /* ZZAddFriendsCell.h */,
-				7813FE941F25F18B0065D527 /* ZZAddFriendsCell.m */,
-				7813FE951F25F18B0065D527 /* ZZAddFriendsCell.xib */,
+				78D1A7AB1FD8FCFB0002D51A /* ZZAddFriendsCell.h */,
+				78D1A7AC1FD8FD0D0002D51A /* ZZAddFriendsCell.m */,
+				78D1A7AD1FD8FD0D0002D51A /* ZZAddFriendsCell.xib */,
+				78D1A7B11FD8FD380002D51A /* ZZFriendCell.h */,
+				78D1A7B21FD8FD380002D51A /* ZZFriendCell.m */,
+				78D1A7B01FD8FD380002D51A /* ZZFriendCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2968,14 +2936,14 @@
 			name = childVCs;
 			sourceTree = "<group>";
 		};
-		784D3F5D1ECC67040058C63F /* Home */ = {
+		784D3F5D1ECC67040058C63F /* Home (TabBar) */ = {
 			isa = PBXGroup;
 			children = (
 				784D3F641ECC797E0058C63F /* Controller */,
 				784D3F631ECC79690058C63F /* Model */,
 				784D3F651ECC79870058C63F /* View */,
 			);
-			name = Home;
+			name = "Home (TabBar)";
 			sourceTree = "<group>";
 		};
 		784D3F631ECC79690058C63F /* Model */ = {
@@ -2984,8 +2952,6 @@
 				783089371F1CA1D000C31BFE /* Previous */,
 				783089331F1C913200C31BFE /* ZZContentModel.h */,
 				783089341F1C913200C31BFE /* ZZContentModel.m */,
-				789CFF911F1232E500EBA772 /* ZZEventImages.h */,
-				789CFF921F1232E500EBA772 /* ZZEventImages.m */,
 				7829FFB91EE50DEB00C934C2 /* GFImage.h */,
 				7829FFBA1EE50DEB00C934C2 /* GFImage.m */,
 				783089431F1CD66200C31BFE /* ZZComment.h */,
@@ -3900,14 +3866,14 @@
 			path = "Me(我)";
 			sourceTree = "<group>";
 		};
-		788333151F17779700967337 /* Check-in */ = {
+		788333151F17779700967337 /* Check-in (TabBar) */ = {
 			isa = PBXGroup;
 			children = (
 				788333161F1777BF00967337 /* Controller */,
 				788333171F1777C900967337 /* Model */,
 				788333181F1777D100967337 /* View */,
 			);
-			name = "Check-in";
+			name = "Check-in (TabBar)";
 			sourceTree = "<group>";
 		};
 		788333161F1777BF00967337 /* Controller */ = {
@@ -3934,9 +3900,9 @@
 			children = (
 				7817DF7F1F179F5800B4B02A /* DropDownListView */,
 				7883331E1F178F3000967337 /* DPSharePopView */,
-				181EF7491E0BD27400C91928 /* GFAddToolBar.h */,
-				181EF74A1E0BD27400C91928 /* GFAddToolBar.m */,
-				181EF74C1E0BD27B00C91928 /* GFAddToolBar.xib */,
+				78D1A7C41FD8FE9E0002D51A /* GFAddToolBar.h */,
+				78D1A7C31FD8FE9E0002D51A /* GFAddToolBar.m */,
+				78D1A7C21FD8FE9D0002D51A /* GFAddToolBar.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3952,7 +3918,7 @@
 			path = DPSharePopView;
 			sourceTree = "<group>";
 		};
-		789B23A11FB060F90023812F /* Inbox */ = {
+		789B23A11FB060F90023812F /* Inbox (TabBar) */ = {
 			isa = PBXGroup;
 			children = (
 				7857F7B21FCE95C40058C2A1 /* 3rd */,
@@ -3960,7 +3926,7 @@
 				789B23B11FB060F90023812F /* Model */,
 				789B23B41FB060F90023812F /* View */,
 			);
-			path = Inbox;
+			path = "Inbox (TabBar)";
 			sourceTree = "<group>";
 		};
 		789B23AB1FB060F90023812F /* Controller */ = {
@@ -4019,14 +3985,63 @@
 			path = ZBLocalized;
 			sourceTree = "<group>";
 		};
+		78D1A7C71FD8FF310002D51A /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				18BE02B01DDB4C3900D27893 /* GFMeViewController.h */,
+				18BE02B11DDB4C3900D27893 /* GFMeViewController.m */,
+				1841A7711DE16C1100FB54CC /* GFMeViewController.storyboard */,
+				1841A77B1DE17BE400FB54CC /* GFWebViewController.h */,
+				1841A77C1DE17BE400FB54CC /* GFWebViewController.m */,
+				1841A77D1DE17BE400FB54CC /* GFWebViewController.xib */,
+				7824E3391EF13F7600F85BFB /* BadgesCollectionViewController.h */,
+				7824E33A1EF13F7600F85BFB /* BadgesCollectionViewController.m */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		78D1A7C81FD8FF6E0002D51A /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				78FE02291EE930D200ABD5B9 /* ZBProgressView */,
+				7824E3561EF2201D00F85BFB /* BadgesSquareCell.h */,
+				7824E3571EF2201D00F85BFB /* BadgesSquareCell.m */,
+				7824E3581EF2201D00F85BFB /* BadgesSquareCell.xib */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		78D1A7C91FD8FFA00002D51A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				789CFF6A1F0B897100EBA772 /* NotificationItem.h */,
+				789CFF6B1F0B897100EBA772 /* NotificationItem.m */,
+				7864EB691F28F3DB00AA572E /* ZZFriendRequestModel.h */,
+				7864EB6A1F28F3DB00AA572E /* ZZFriendRequestModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		78D1A7CA1FD8FFA70002D51A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				789CFF621F0B86A600EBA772 /* NotificationCell.h */,
+				789CFF631F0B86A600EBA772 /* NotificationCell.m */,
+				789CFF641F0B86A600EBA772 /* NotificationCell.xib */,
+				7864EB641F28ED6600AA572E /* NotificationButtonsCell.h */,
+				7864EB651F28ED6600AA572E /* NotificationButtonsCell.m */,
+				7864EB661F28ED6600AA572E /* NotificationButtonsCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		78FE02291EE930D200ABD5B9 /* ZBProgressView */ = {
 			isa = PBXGroup;
 			children = (
 				78FE022A1EE930D200ABD5B9 /* ProgressView.h */,
 				78FE022B1EE930D200ABD5B9 /* ProgressView.m */,
 			);
-			name = ZBProgressView;
-			path = ../../ZBProgressView;
+			path = ZBProgressView;
 			sourceTree = "<group>";
 		};
 		78FFE5AD1ECDAD2C00F909A2 /* Restaurant */ = {
@@ -4232,6 +4247,7 @@
 				786069A71F15DB9B00A8AB88 /* ic_cancel-new-message.png in Resources */,
 				780096BF1EC9C1F5008F9F99 /* ic_ fa-map-o.png in Resources */,
 				780096CE1EC9C1F5008F9F99 /* ic_fa-search.png in Resources */,
+				78D1A7C51FD8FE9F0002D51A /* GFAddToolBar.xib in Resources */,
 				7857FAD11FCE96030058C2A1 /* login_17@3x.png in Resources */,
 				78C126B11F4EB5460087CCF6 /* imageplaceholder.png in Resources */,
 				7857FB101FCE96030058C2A1 /* talking_icon_c_@2x.png in Resources */,
@@ -4326,6 +4342,7 @@
 				780096E61EC9C1F5008F9F99 /* bg_login_page.png in Resources */,
 				7857FB181FCE96030058C2A1 /* loginOut_17@2x.png in Resources */,
 				7824E34F1EF1408E00F85BFB /* zuzu-frame-user-profile.jpg in Resources */,
+				78D1A7BE1FD8FD680002D51A /* ZZAddFriendsViewController.xib in Resources */,
 				7857FA571FCE96020058C2A1 /* JCHATMsgAlertSoundTableViewCell.xib in Resources */,
 				7857FA8C1FCE96030058C2A1 /* groupDetail@2x.png in Resources */,
 				780097321ECAD4FD008F9F99 /* zuzu-login-1080x1920-plain.png in Resources */,
@@ -4418,7 +4435,6 @@
 				7857FAB71FCE96030058C2A1 /* face@2x.png in Resources */,
 				7857FB221FCE96030058C2A1 /* wo_20@2x.png in Resources */,
 				7857FA881FCE96030058C2A1 /* file_message_bg.png in Resources */,
-				7813FE921F25EE820065D527 /* ZZAddFriendsViewController.xib in Resources */,
 				7857FA991FCE96030058C2A1 /* photo_24@2x.png in Resources */,
 				786069AD1F15DB9B00A8AB88 /* ic_facebook.png in Resources */,
 				7857FAB91FCE96030058C2A1 /* jiantou@2x.png in Resources */,
@@ -4446,7 +4462,6 @@
 				780096C61EC9C1F5008F9F99 /* ic_fa-commenting-o.png in Resources */,
 				780096F51EC9C1F5008F9F99 /* ic_camera_pop_up.png in Resources */,
 				786069CE1F15DB9B00A8AB88 /* zuzu-my-freinds.png in Resources */,
-				783089651F1E220000C31BFE /* ZZFriendCell.xib in Resources */,
 				189CA3301DDADBF6004D07EA /* Assets.xcassets in Resources */,
 				786069A61F15DB9B00A8AB88 /* ic_add-friend.png in Resources */,
 				7857FAA81FCE96030058C2A1 /* unselect@3x.png in Resources */,
@@ -4481,7 +4496,6 @@
 				7857FA9F1FCE96030058C2A1 /* search_47@2x.png in Resources */,
 				786069C81F15DB9B00A8AB88 /* ic_price.png in Resources */,
 				780097161EC9C1F5008F9F99 /* Thumbs.db in Resources */,
-				7830895D1F1E1E4100C31BFE /* ZZFriendsTableViewController.xib in Resources */,
 				7857FB041FCE96030058C2A1 /* SenderVoiceNodePlaying003@2x.png in Resources */,
 				785FF2411F7B923A002A42E9 /* tutorial-1242x2208-1.jpg in Resources */,
 				785FF2561F7D0134002A42E9 /* google-plus-2-512 copy.png in Resources */,
@@ -4568,7 +4582,6 @@
 				7857FB1C1FCE96030058C2A1 /* signature@2x.png in Resources */,
 				786069BD1F15DB9B00A8AB88 /* ic_sms.png in Resources */,
 				7857FAA61FCE96030058C2A1 /* talking_icon_group@3x.png in Resources */,
-				181EF74D1E0BD27B00C91928 /* GFAddToolBar.xib in Resources */,
 				7857FAAC1FCE96030058C2A1 /* video_40@3x.png in Resources */,
 				780097351ECAD4FD008F9F99 /* zuzu-login-640x1136-text.png in Resources */,
 				7857FB131FCE96030058C2A1 /* voice_time-short@2x.png in Resources */,
@@ -4606,6 +4619,7 @@
 				7857FAC11FCE96030058C2A1 /* login_03@3x.png in Resources */,
 				7857FA2A1FCE96020058C2A1 /* JCHATFootTableViewCell.xib in Resources */,
 				780096C11EC9C1F5008F9F99 /* ic_ fa-star-half-o.png in Resources */,
+				78D1A7B31FD8FD390002D51A /* ZZFriendCell.xib in Resources */,
 				7857FAAD1FCE96030058C2A1 /* voice_toolbar@2x.png in Resources */,
 				7857FA861FCE96030058C2A1 /* fail05@2x.png in Resources */,
 				18E8D3771DE9EA8E00ED4EE1 /* GFTopicVideoView.xib in Resources */,
@@ -4615,6 +4629,7 @@
 				780096CA1EC9C1F5008F9F99 /* ic_fa-filter.png in Resources */,
 				7857FA661FCE96030058C2A1 /* JCHATSetDetailViewController.xib in Resources */,
 				7857FAA01FCE96030058C2A1 /* search_47@3x.png in Resources */,
+				78D1A7BF1FD8FD680002D51A /* ZZFriendsTableViewController.xib in Resources */,
 				780096D41EC9C1F5008F9F99 /* ic_fa-users-on.png in Resources */,
 				7857FB241FCE96030058C2A1 /* yuyin@2x.png in Resources */,
 				780096FE1EC9C1F5008F9F99 /* Ic_fa-star.png in Resources */,
@@ -4672,7 +4687,6 @@
 				184D49371DED5DC400C7B03F /* GFCommentViewController.xib in Resources */,
 				780096F41EC9C1F5008F9F99 /* ic_camera_47x39.png in Resources */,
 				7824E3491EF1408E00F85BFB /* ic_badges_338x338-03.png in Resources */,
-				7813FE971F25F18B0065D527 /* ZZAddFriendsCell.xib in Resources */,
 				786069D01F15DB9B00A8AB88 /* check-in-image-713x288.jpg in Resources */,
 				7857FAC61FCE96030058C2A1 /* login_10@2x.png in Resources */,
 				7857FAAB1FCE96030058C2A1 /* video_40@2x.png in Resources */,
@@ -4702,6 +4716,7 @@
 				7800970D1EC9C1F5008F9F99 /* ic_pen.png in Resources */,
 				7857FA8D1FCE96030058C2A1 /* groupDetail@3x.png in Resources */,
 				780096C21EC9C1F5008F9F99 /* ic_fa-angle-right.png in Resources */,
+				78D1A7AF1FD8FD0E0002D51A /* ZZAddFriendsCell.xib in Resources */,
 				7857FB001FCE96030058C2A1 /* saoyisao@2x.png in Resources */,
 				780096BA1EC9C1F5008F9F99 /* ic_ fa-check-square-o.png in Resources */,
 				7857FAE51FCE96030058C2A1 /* menu_22@2x.png in Resources */,
@@ -4805,6 +4820,7 @@
 				7857FA421FCE96020058C2A1 /* JCHATLoginViewController.m in Sources */,
 				789CFF781F0CA5FB00EBA772 /* EventRestaurant.m in Sources */,
 				7857FA481FCE96020058C2A1 /* JCHATDebugViewController.m in Sources */,
+				78D1A7B71FD8FD4E0002D51A /* ZZFriendModel.m in Sources */,
 				7897E1041EF3E6A00046D647 /* EventListCell.m in Sources */,
 				7857FA681FCE96030058C2A1 /* NSObject+TimeConvert.m in Sources */,
 				78919F971F5D219000654C37 /* ForgetPasswordViewController.m in Sources */,
@@ -4863,7 +4879,6 @@
 				1823914D1DEECDEB00B88AE0 /* GFCommentCell.m in Sources */,
 				7857FB5D1FCEA24B0058C2A1 /* JCHATAlbumTableViewCell.m in Sources */,
 				7857FB4D1FCEA24B0058C2A1 /* JCHATAlbumViewController.m in Sources */,
-				7830895C1F1E1E4100C31BFE /* ZZFriendsTableViewController.m in Sources */,
 				7882B4441FAAB00F0090C2C7 /* GFHTTPSessionManager.m in Sources */,
 				7857FB5F1FCEA24B0058C2A1 /* JCHATPhotoBrowserCollectionViewCell.m in Sources */,
 				786227521EFBB3DB006F731F /* KCAnnotation.m in Sources */,
@@ -4892,7 +4907,6 @@
 				786B38251F2F13AF0098A12F /* UserCheckinListChildTableViewController.m in Sources */,
 				1841A7791DE1752E00FB54CC /* GFSquareCell.m in Sources */,
 				7829FFA51ED807D900C934C2 /* LoginChildViewController.m in Sources */,
-				7813FE961F25F18B0065D527 /* ZZAddFriendsCell.m in Sources */,
 				18C6FEA61DFBD96F00ED1195 /* GFRecommendCategory.m in Sources */,
 				7829FF8C1ED576C100C934C2 /* RestaurantPhotoViewController.m in Sources */,
 				78FFE5B51ECDAD8300F909A2 /* RestaurantViewController.m in Sources */,
@@ -4911,6 +4925,7 @@
 				7824E3591EF2201D00F85BFB /* BadgesSquareCell.m in Sources */,
 				18B7C72A1DE07501004BD781 /* GFLoginRegisterView.m in Sources */,
 				7857FA131FCE96020058C2A1 /* JCHATConversationListCell.m in Sources */,
+				78D1A7C61FD8FE9F0002D51A /* GFAddToolBar.m in Sources */,
 				783089481F1D039800C31BFE /* CommentHeaderView.m in Sources */,
 				783089351F1C913200C31BFE /* ZZContentModel.m in Sources */,
 				7883331C1F17781100967337 /* ZZCheckInViewController.m in Sources */,
@@ -4954,6 +4969,7 @@
 				7857FB561FCEA24B0058C2A1 /* JCHATPhotoModel.m in Sources */,
 				18388AD01DFAAB1D004E1DF9 /* GFSubTagViewCell.m in Sources */,
 				7857FA261FCE96020058C2A1 /* JCHATChatTable.m in Sources */,
+				78D1A7B41FD8FD390002D51A /* ZZFriendCell.m in Sources */,
 				7857FA211FCE96020058C2A1 /* JCHATSetDisturbTableViewCell.m in Sources */,
 				7857F9E51FCE96020058C2A1 /* MASViewConstraint.m in Sources */,
 				7857FA1D1FCE96020058C2A1 /* JCHATLoadMessageTableViewCell.m in Sources */,
@@ -4987,13 +5003,11 @@
 				182391461DEEC70500B88AE0 /* GFCommentHeaderFooterView.m in Sources */,
 				7857FA0E1FCE96020058C2A1 /* JCHATGroupSettingCtl.m in Sources */,
 				783089451F1CD66200C31BFE /* ZZComment.m in Sources */,
-				783089641F1E220000C31BFE /* ZZFriendCell.m in Sources */,
 				185420881DF064F1004F6378 /* GFSettingViewController.m in Sources */,
 				18BE02B21DDB4C3900D27893 /* GFMeViewController.m in Sources */,
 				7857F9DE1FCE96020058C2A1 /* JCHATCustomFormatter.m in Sources */,
 				7857F9C11FCE96020058C2A1 /* JCHATSendMsgManager.m in Sources */,
 				7857FA041FCE96020058C2A1 /* JCHATConversationListViewController.m in Sources */,
-				783089601F1E1E7100C31BFE /* ZZFriendModel.m in Sources */,
 				7857F9C51FCE96020058C2A1 /* ChatImageBubble.m in Sources */,
 				789CFF971F12399100EBA772 /* ZZImageCollectionCell.m in Sources */,
 				7857F9EF1FCE96020058C2A1 /* MJPhotoBrowser.m in Sources */,
@@ -5009,11 +5023,12 @@
 				7817DF7E1F179EFF00B4B02A /* DropDownListView.m in Sources */,
 				7857FA081FCE96020058C2A1 /* JCHATDetailsInfoViewController.m in Sources */,
 				786069641F15D98100A8AB88 /* DHGuidePageHUD.m in Sources */,
+				78D1A7AE1FD8FD0E0002D51A /* ZZAddFriendsCell.m in Sources */,
 				7857FB611FCEA24B0058C2A1 /* JCHATSelectImgCollectionView.m in Sources */,
 				7857FB531FCEA24B0058C2A1 /* JCHATPhotoSelectViewController.m in Sources */,
 				18C826291DE72630007341E3 /* GFTitleButton.m in Sources */,
 				785FF35A1F949B46002A42E9 /* TZTestCell.m in Sources */,
-				181EF74B1E0BD27400C91928 /* GFAddToolBar.m in Sources */,
+				78D1A7C11FD8FD680002D51A /* ZZFriendsTableViewController.m in Sources */,
 				789B23BE1FB060FA0023812F /* ZZInboxTableViewController.m in Sources */,
 				785FF2511F7CDFBD002A42E9 /* CuisineTableViewController.m in Sources */,
 				7857FA581FCE96030058C2A1 /* JCHATMsgAlertStateTableViewCell.m in Sources */,
@@ -5024,6 +5039,7 @@
 				7857FA501FCE96020058C2A1 /* JCHATUpdatePasswordCtl.m in Sources */,
 				7857FA0F1FCE96020058C2A1 /* JCHATSelectFriendsCtl.m in Sources */,
 				7857FB4F1FCEA24B0058C2A1 /* JCHATPhotoBrowserViewController.m in Sources */,
+				78D1A7C01FD8FD680002D51A /* ZZAddFriendsViewController.m in Sources */,
 				7857FA671FCE96030058C2A1 /* NSDate+Utilities.m in Sources */,
 				7829FFAA1ED807F300C934C2 /* SignUpChildViewController.m in Sources */,
 				784D3F691ECC79EE0058C63F /* GFEventsCell.m in Sources */,
@@ -5040,7 +5056,6 @@
 				78FFE59A1ECD40F700F909A2 /* GFEvent.m in Sources */,
 				7829FF821ED5768F00C934C2 /* RestaurantOverviewViewController.m in Sources */,
 				7813FE9F1F26FC410065D527 /* UILabel+LabelHeightAndWidth.m in Sources */,
-				7813FE911F25EE820065D527 /* ZZAddFriendsViewController.m in Sources */,
 				7857FA231FCE96020058C2A1 /* JCHATShowTimeCell.m in Sources */,
 				189980501DDBF6B4009071F4 /* GFAdViewController.m in Sources */,
 				18B7C73D1DE08620004BD781 /* GFSubTagViewController.m in Sources */,

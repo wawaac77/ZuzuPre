@@ -685,6 +685,7 @@
             CuisineTableViewController *cuisineVC = [[CuisineTableViewController alloc] init];
             cuisineVC.tableType = @"Industry";
             cuisineVC.delegate = self;
+            cuisineVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:cuisineVC animated:YES];
 
             
@@ -694,6 +695,7 @@
             CuisineTableViewController *cuisineVC = [[CuisineTableViewController alloc] init];
             cuisineVC.tableType = @"Profession";
             cuisineVC.delegate = self;
+            cuisineVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:cuisineVC animated:YES];
         }
         else if (indexPath.row == 5) {
@@ -701,6 +703,7 @@
             CuisineTableViewController *cuisineVC = [[CuisineTableViewController alloc] init];
             cuisineVC.tableType = @"Interests";
             cuisineVC.delegate = self;
+            cuisineVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:cuisineVC animated:YES];
         }
     }
@@ -747,10 +750,12 @@
     else if (indexPath.section == 5) {
         if (indexPath.row == 0) {
             AboutZZViewController *aboutZZVC = [[AboutZZViewController alloc] init];
+            aboutZZVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:aboutZZVC animated:YES];
         }
         else if (indexPath.row == 1) {
             ZZMessageAdminViewController *adminVC = [[ZZMessageAdminViewController alloc] init];
+            adminVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:adminVC animated:YES];
         }
     }
@@ -1047,6 +1052,7 @@ dismissViewController:(UIViewController *)viewController {
      */
     
     PickSingleImageViewController *pickVC = [[PickSingleImageViewController alloc] init];
+    pickVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pickVC animated:YES];
     
 }
