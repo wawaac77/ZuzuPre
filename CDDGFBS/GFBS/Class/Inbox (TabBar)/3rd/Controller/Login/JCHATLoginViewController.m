@@ -115,7 +115,7 @@
   
   if ([self checkValidUsername:username AndPassword:password]) {
     _logging = YES;
-    [MBProgressHUD showMessage:@"正在登陆" toView:self.view];
+    [MBProgressHUD showMessage:@"Logging ints" toView:self.view];
     [[JCHATTimeOutManager ins] startTimerWithVC:self];
     [JMSGUser loginWithUsername:username
                        password:password

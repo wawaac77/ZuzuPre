@@ -273,7 +273,7 @@
  */
 - (void)loginJMessageWithUsername:(NSString *)username password:(NSString *)password {
     _logging = YES;
-    [MBProgressHUD showMessage:@"正在登陆" toView:self.view];
+    //[MBProgressHUD showMessage:@"Logging in" toView:self.view];
     [[JCHATTimeOutManager ins] startTimerWithVC:self];
     [JMSGUser loginWithUsername:username
                        password:password
